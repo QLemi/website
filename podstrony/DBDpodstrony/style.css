@@ -1,0 +1,34 @@
+#apteczki{
+    border: 2px solid black;
+    width: 650px;
+}
+#opis{
+    text-align: center;
+    
+}
+.pozycja{
+    float: left;
+    margin-left: 40px;
+    text-align: center;
+}
+.pozycja2{
+    float: left;
+    margin-left: 40px;
+    text-align: center;
+    margin-left: 80px;
+}
+.pozycja3{
+    float: left;
+    margin-left: 40px;
+    text-align: center;
+    margin-left: 130px;
+}
+.clear{
+    clear: both;
+}
+.napis{
+    font-family: 'Roboto';
+}
+img{
+    width: 110px;
+}

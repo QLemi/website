@@ -1,34 +1,159 @@
-#apteczki{
+:root{
+    --apteczkiszerokosc: 650px;
+}
+
+#apteczki {
     border: 2px solid black;
-    width: 650px;
+    width: var(--apteczkiszerokosc);
+    position: relative;
+    margin: auto;
 }
-#opis{
+
+#opis {
     text-align: center;
-    
+    transform: rotate(-4deg);
+    margin-top: 30px;
+    font-size: 100px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px rgb(214, 207, 5);
+    color: rgb(169, 90, 21);
+    font-weight: bold;
+    font-family: 'Roboto';
+    position: relative;
+    z-index: 2;
 }
-.pozycja{
+
+.pozycja {
     float: left;
     margin-left: 40px;
     text-align: center;
 }
-.pozycja2{
+
+.pozycja2 {
     float: left;
-    margin-left: 40px;
     text-align: center;
     margin-left: 80px;
 }
-.pozycja3{
+.pozycja2-5{
     float: left;
-    margin-left: 40px;
+    margin-left: 140px;
     text-align: center;
-    margin-left: 130px;
 }
-.clear{
+
+.pozycja3 {
+    float: left;
+    text-align: center;
+    margin-left: 80px;
+}
+.pozycja3-5 {
+    float: left;
+    text-align: center;
+    margin-left: 40px;
+}
+
+.clear {
     clear: both;
 }
-.napis{
+
+.napis {
     font-family: 'Roboto';
+    color: rgb(232, 214, 109);
 }
-img{
+
+img {
     width: 110px;
+}
+
+#apteczki {
+    background-image: linear-gradient(#4c4c4c, #000000 150%);
+    margin: 0 auto;
+}
+
+body {
+    margin: auto;
+    background-image: url(./graphic/bgi.png);
+}
+
+#head {
+    height: 170px;
+    position: absolute;
+    width: 100%;
+    margin-left: 0;
+    background-image: linear-gradient(#2d2d2d 0%,#4c4c4c  150%);
+    border-bottom: 5px dotted rgb(41, 41, 41);
+    z-index: 1;
+    
+}
+
+.polecenie {
+    color: rgb(229, 117, 20);
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Roboto';
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+input[type='radio'] {
+    width: 70px;
+    height: 15px;
+    transition: all ease-in 0.2s;
+}
+#szara{
+    border: 2px solid gray;
+    appearance: none;
+    box-shadow: 0 0 0 1px gray  ;
+    border-radius: 50%;
+    visibility: hidden;
+}
+#zielona{
+    border: 2px solid green;
+    appearance: none;
+    box-shadow: 0 0 0 1px green;
+    border-radius: 50%;
+    visibility: hidden;
+}
+#zolta{
+    border: 2px solid rgb(202, 202, 89);
+    appearance: none;
+    box-shadow: 0 0 0 1px rgb(202, 202, 89);
+    border-radius: 50%;
+    visibility: hidden;
+}
+#fioletowa{
+    border: 2px solid purple;
+    appearance: none;
+    box-shadow: 0 0 0 1px purple;
+    border-radius: 50%;
+    visibility: hidden;
+}
+#szara:checked{
+    background-color: gray;
+    visibility: visible;
+}
+#zielona:checked{
+    background-color: green;
+    visibility: visible;
+}
+#zolta:checked{
+    background-color: yellow;
+    visibility: visible;
+}
+#fioletowa:checked{
+    background-color: purple;
+    visibility: visible;
+}
+#wynika{
+    color: rgb(207, 207, 207);
+    margin: 40px;
+    text-align: center;
+}
+.zmiennak{
+    color: red;
+}
+.d[type='radio']{
+    width: 15px;
+    height: 15px;
+    display: inline;
+    word-spacing: 1px;
 }

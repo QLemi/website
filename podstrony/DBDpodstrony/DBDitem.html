@@ -12,14 +12,15 @@
 
 <body>
     <div id="head"></div>
-    <section class="main-sec">
+    <section class="main-apteczki">
         <div id="apteczki">
 
             <div id="opis"> APTECZKI</div>
-            <br>
+            <br><br>
             <div class="polecenie"> Select One Med-Kit</div><br>
+            <div id="grid0">
             <!-- szara -->
-            <div class="pozycja">
+            <div class="pa">
 
                 <label for="szara">
                     <img src="./graphic/szara.png"><br>
@@ -28,7 +29,7 @@
                 <input type="radio" name="apteczka" id="szara">
             </div>
             <!-- zolta -->
-            <div class="pozycja">
+            <div class="pb">
                 <label for="zolta">
                     <img src="./graphic/zolta.png"><br>
                     <span class="napis">24 Charges</span><br>
@@ -36,7 +37,7 @@
                 <input type="radio" name="apteczka" id="zolta">
             </div>
             <!-- zielona -->
-            <div class="pozycja">
+            <div class="pc">
 
                 <label for="zielona">
                     <img src="./graphic/zielona.png"><br>
@@ -45,7 +46,7 @@
                 <input type="radio" name="apteczka" id="zielona">
             </div>
             <!-- fioletowa -->
-            <div class="pozycja">
+            <div class="pd">
 
                 <label for="fioletowa">
                     <img src="./graphic/fioletowa.png"><br>
@@ -53,15 +54,16 @@
                 </label>
                 <input type="radio" name="apteczka" id="fioletowa">
             </div>
-            <div class="clear"></div><br>
+            </div><br>
 
 
 
 
 
             <div class="polecenie">Select Med-Kit Add-ons</div><br>
+            <div id="grid1">
             <!-- Rubber Gloves -->
-            <div class="pozycja2">
+            <div class="p1">
                 <label for="Rubber-Gloves">
                     <img src="./graphic/rubberGloves.png"><br>
                     <span class="napis">Bonus <br>progress +3%</span><br>
@@ -69,7 +71,7 @@
                 <input type="checkbox" name="addon" id="Rubber-Gloves">
             </div>
             <!-- Butterfly Tape -->
-            <div class="pozycja2">
+            <div class="p2">
                 <label for="Butterfly-Tape">
                     <img src="./graphic/butterflyTape.png"><br>
                     <span class="napis">speed +5%</span><br>
@@ -77,25 +79,25 @@
                 <input type="checkbox" name="addon" id="Butterfly-Tape">
             </div>
             <!-- Bandages -->
-            <div class="pozycja2">
+            <div class="p3">
                 <label for="Bandages">
                     <img src="./graphic/bandages.png"><br>
                     <span class="napis">charges +8</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Bandages">
-            </div><br><br><br><br><br><br><br><br><br><br>
+            </div>
 
 
              <!-- Sponge -->
-             <div class="pozycja2">
+             <div class="p4">
                 <label for="Sponge">
                     <img src="./graphic/sponge.png"><br>
-                    <span class="napis">charges +8</span><br>
+                    <span class="napis">Bonus <br>progress +5%</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Sponge">
             </div>
             <!-- Self Adherent Wrap -->
-            <div class="pozycja2">
+            <div class="p5">
                 <label for="Self-Adherent-Wrap">
                     <img src="./graphic/selfAdherentWrap.png"><br>
                     <span class="napis">speed +5% <br>charges +8</span><br>
@@ -103,15 +105,15 @@
                 <input type="checkbox" name="addon" id="Self-Adherent-Wrap">
             </div>
             <!-- Needle & Thread -->
-            <div class="pozycja2">
+            <div class="p6">
                 <label for="Needle">
                     <img src="./graphic/needle&Thread.png"><br>
-                    <span class="napis">speed +15%</span><br>
+                    <span class="napis">speed +15%<br>100% BP skill check</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Needle">
-            </div><br><br><br><br><br><br><br><br><br><br>
+            </div>
             <!-- Medical Scissors -->
-            <div class="pozycja2">
+            <div class="p7">
                 <label for="Medical-Scissors">
                     <img src="./graphic/medicalScissors.png"><br>
                     <span class="napis">speed +15%</span><br>
@@ -119,7 +121,7 @@
                 <input type="checkbox" name="addon" id="Medical-Scissors">
             </div>
             <!-- Gauze Roll -->
-            <div class="pozycja2">
+            <div class="p8">
                 <label for="Gauze-Roll">
                     <img src="./graphic//gauzeRoll.png"><br>
                     <span class="napis">charges +12</span><br>
@@ -129,15 +131,15 @@
 
             
             <!-- Surgical Suture -->
-            <div class="pozycja2">
+            <div class="p9">
                 <label for="Surgical-Suture">
                     <img src="./graphic/surgicalSuture.png"><br>
-                    <span class="napis">speed +15%</span><br>
+                    <span class="napis">speed +15%<br>150% BP skill check</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Surgical-Suture">
             </div>
             <!-- Gel Dressings -->
-            <div class="pozycja2">
+            <div class="p10">
                 <label for="Gel-Dressings">
                     <img src="./graphic/gelDressings.png"><br>
                     <span class="napis">charges +16</span><br>
@@ -145,7 +147,7 @@
                 <input type="checkbox" name="addon" id="Gel-Dressings">
             </div>
             <!-- Abdominal Dressing -->
-            <div class="pozycja2">
+            <div class="p11">
                 <label for="Abdominal-Dressing">
                     <img src="./graphic/abdominalDressing.png"><br>
                     <span class="napis">speed +25%<br>charges -8</span><br>
@@ -153,40 +155,41 @@
                 <input type="checkbox" name="addon" id="Abdominal-Dressing">
             </div>
             <!-- Anti-Haemorrhagic Syringe -->
-            <div class="pozycja2">
+            <div class="p12">
                 <label for="Anti-Haemorrhagic-Syringe">
                     <img src="./graphic/anti-haemorrhagicSyringe.png"><br>
-                    <span class="napis">speed +25%<br>charges -8</span><br>
+                    <span class="napis"> 16 seconds heal<br>one health state</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Anti-Haemorrhagic-Syringe">
             </div>
+        </div>
+        <div id="grid2">
             <!-- Styptic Agent -->
-            <div class="pozycja2-5">
+            <div class="p13">
                 <label for="Styptic-Agent">
                     <img src="./graphic/stypticAgent.png"><br>
-                    <span class="napis">speed +25%<br>charges -8</span><br>
+                    <span class="napis">Endurance<br>for 8 seconds</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Styptic-Agent">
             </div>
             <!-- Refined Serum -->
-            <div class="pozycja2-5">
+            <div class="p14">
                 <label for="Refined-Serum">
                     <img src="./graphic/refinedSerum.png"><br>
-                    <span class="napis">speed +25%<br>charges -8</span><br>
+                    <span class="napis">speed +5% for<br>16 seconds</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="Refined-Serum">
             </div>
-            
-            <div class="clear"></div><br>
-            
+        </div>
 
 
 
 
 
             <div class="polecenie">Select Efficiency & Speed Perks</div><br>
+            <div id="grid3">
             <!-- botanyKnowledge -->
-            <div class="pozycja3">
+            <div class="po1">
                 <label for="botanyKnowledge">
                     <img src="./graphic/botanyKnowledge.png"><br>
                     <span class="napis">speed +50%<br>efficiency -20%</span><br>
@@ -194,7 +197,7 @@
                 <input type="checkbox" name="addon" id="botanyKnowledge">
             </div>
              <!-- resilience -->
-             <div class="pozycja3">
+             <div class="po2">
                 <label for="resilience">
                     <img src="./graphic/resilience.png"><br>
                     <span class="napis">speed +9%</span><br>
@@ -202,7 +205,7 @@
                 <input type="checkbox" name="addon" id="resilience">
             </div>
              <!-- Desperate Measures -->
-             <div class="pozycja3">
+             <div class="po3">
                 <label for="Desperate-Measures">
                     <img src="./graphic/desperateMeasures.png"><br>
                     <span class="napis">speed +14%<br>for each (+56%)</span><br>
@@ -214,10 +217,11 @@
                 3<input type="radio" name="des" id="d3" class="d">
                 4<input type="radio" name="des" id="d4" class="d">
             </div>
-            <br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
             <div class="polecenie">Select Other Stackable Perks</div><br>
+           <div id="grid4">
             <!-- leader -->
-            <div class="pozycja3-5">
+            <div class="poz1">
                 <label for="leader">
                     <img src="./graphic/leader.png"><br>
                     <span class="napis">speed +25%</span><br>
@@ -225,7 +229,7 @@
                 <input type="checkbox" name="addon" id="leader">
             </div>
              <!-- streetwise -->
-             <div class="pozycja3-5">
+             <div class="poz2">
                 <label for="streetwise">
                     <img src="./graphic/streetwise.png"><br>
                     <span class="napis">efficiency +25%</span><br>
@@ -238,7 +242,7 @@
                 4<input type="radio" name="str" id="s4" class="d">
             </div>
              <!-- better than new -->
-             <div class="pozycja3-5">
+             <div class="poz3">
                 <label for="better-than-new">
                     <img src="./graphic/betterThanNew.png"><br>
                     <span class="napis">speed +16%</span><br>
@@ -246,17 +250,20 @@
                 <input type="checkbox" name="addon" id="better-than-new">
             </div>
              <!-- BOON -->
-             <div class="pozycja3-5">
+             <div class="poz4">
                 <label for="boon">
                     <img src="./graphic/BoonCircleOfHealing.png"><br>
                     <span class="napis">speed +50%</span><br>
                 </label>
                 <input type="checkbox" name="addon" id="boon">
             </div>
-            <div class="clear"></div><br>
+        </div>
+        <div class="polecenie">WYNIKI</div><br><br>
             <div id="wynika"></div>
         </div>
+        
     </section>
+    <br><br><br><br><br><br><br><br>
 </body>
 
 </html>

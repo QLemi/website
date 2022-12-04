@@ -1,0 +1,74 @@
+body {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1vh 800px 1vh;
+    grid-template-rows: 90px 1780px;
+    justify-content: center;
+    background-image: url("bck.png");
+    backdrop-filter: grayscale(100%) blur(2px);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(3, 50px);
+    max-width: 700px;
+    margin-left: 50px;
+}
+span {
+    max-width: 100%;
+    max-height: 50px;
+    border: 3px solid rgb(97, 76, 46);
+    border-radius: 15px;
+    padding: 5px;
+    text-align: center;
+    color: white
+}
+
+.Strona {
+    font-size: 40px;
+    color: rgb(43, 119, 177);
+    text-align: center;
+}
+
+#killer,
+#surv {
+    font-size: 45px;
+    color: rgb(43, 119, 177);
+    text-align: center;
+}
+#grid2{
+    grid-area: 1 / 2 / 2 / 3;
+    text-align: center;
+    align-self: center;
+}
+#k1 {
+    display: none;
+    grid-area: 2 / 2 / 3 / 3;
+}
+#s1 {
+    display: block;
+    grid-area: 2 / 2 / 3 / 3;
+}
+button {
+    width: 110px;
+    height: 35px;
+    padding: 5px;
+    color: rgb(43, 119, 177);
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 45px 112px 0 rgba(255, 255, 255, 0.3);
+}
+#search {
+    width: 180px;
+    height: 38px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+#tlo{
+    grid-area: 1 / 2 / 3 / 3;
+    border: 5px ridge rgba(164,164,164,0.34);
+    border-radius: 18px;
+    background-color: #1d1d1d;
+    box-shadow: 0 45px 112px 0 rgba(255, 255, 255, 0.3);
+}

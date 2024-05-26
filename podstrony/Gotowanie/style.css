@@ -1,78 +1,110 @@
-
- @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 
 body {
-  font-family:'Roboto', Helvetica, Arial, sans-serif;
-  font-weight:300;
-  background:#333;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  background: #333;
 }
-.category{
-    border: #9f9b9b solid;
-    padding: 25px;
-    margin: 18px;
-    font-family:'Roboto', Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    font-size: 1.6em;
-    width: fit-content;
-    color: rgb(101, 220, 46);
-    border-radius: 0.3em;
-    transform: scale(100%);
-    transition: 500ms;
-    cursor: pointer;
+
+.category {
+  border: #9f9b9b solid;
+  padding: 25px;
+  margin: 18px;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.6em;
+  width: fit-content;
+  color: rgb(101, 220, 46);
+  border-radius: 0.3em;
+  transform: scale(100%);
+  transition: 500ms;
+  cursor: pointer;
 }
-.category:hover{
-    transform: scale(110%);
-    transition: 500ms;
+
+.category:hover {
+  transform: scale(110%);
+  transition: 500ms;
 }
-#c1{
-    background-image: url("./image/sik.png");
-    text-shadow: 2px 2px rgb(0, 0, 0);
+
+#c1 {
+  background-image: url("./image/sik.png");
+  text-shadow: 2px 2px rgb(0, 0, 0);
 }
-#menuB{
-    font-family:'Roboto', Helvetica, Arial, sans-serif;
-    font-size: 2em;
-    position: fixed;
-    padding: 0.15em;
-    z-index: 1;
-    border-radius: 1em;
-    right: 10px;
-    top: 30px;
-    cursor: pointer;
-    border: 2px solid rgb(86, 80, 80, 0.6);
-    background-color: #d8d8d8;
+
+#menuB {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 2em;
+  position: fixed;
+  padding: 0.15em;
+  z-index: 1;
+  border-radius: 1em;
+  right: 10px;
+  top: 30px;
+  cursor: pointer;
+  border: 2px solid rgb(86, 80, 80, 0.6);
+  background-color: #d8d8d8;
 }
-#menuG{
-    font-family:'Roboto', Helvetica, Arial, sans-serif;
-    font-size: 1.3em;
-    line-height: 1.6em;
-    color: #b6e1dc;
-    text-shadow: 2px 2px #000;
-    position: fixed;
-    right: 0;
-    top: 100px;
-    z-index: 1;
-    border: 4px solid rgb(86, 80, 80, 0.6);
-    border-right:  none;
-    border-radius: 15px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    background-color: rgb(51, 51, 51, 0.6);
-    padding-right: 1.4em;
-    display: none;
-    cursor: pointer;
+
+#menuG {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 1.3em;
+  line-height: 1.6em;
+  color: #b6e1dc;
+  text-shadow: 2px 2px #000;
+  position: fixed;
+  right: 0;
+  top: 100px;
+  z-index: 1;
+  border: 4px solid rgb(86, 80, 80, 0.6);
+  border-right: none;
+  border-radius: 15px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: rgb(51, 51, 51, 0.6);
+  padding-right: 1.4em;
+  display: none;
+  cursor: pointer;
 }
+
 h3 {
   font-size: 1.3em;
-  margin:0;
+  margin: 0;
 }
-p{
-  font-size:0.9em;
+
+p {
+  font-size: 0.9em;
 }
-.font2{
+
+.font2 {
   font-weight: 400;
   color: #de4141;
 }
 
+#searchInput {
+  background-color: rgb(51, 51, 51, 0.6);
+  color: #b6e1dc;
+  border-radius: 8px;
+  border: 2px solid rgb(86, 80, 80, 0.6);
+  width: 140px;
+  margin-right: 5px;
+  padding: 3px;
+}
+
+#buttonsearch {
+  color: #b6e1dc;
+  cursor: pointer;
+  background-color: rgb(51, 51, 51, 0.6);
+  border: 2px solid rgb(86, 80, 80, 0.6);
+  border-radius: 8px;
+  padding: 3px;
+}
+::placeholder {
+  color: #b6e1dc;
+  opacity: 1; /* Firefox */
+}
+.highlight {
+  background-color: yellow;
+}
 
 
 /* Card 
@@ -89,12 +121,15 @@ div.catCard {
   padding: 10px;
   border-radius: 10px;
 }
-div.catCard>h3{
+
+div.catCard>h3 {
   text-align: center;
 }
-.catCardList{
+
+.catCardList {
   vertical-align: top;
 }
+
 li.catCardList {
   width: 280px;
   display: inline-block;
@@ -119,10 +154,6 @@ ul.catCardList {
   -webkit-transition: all 0.6s ease;
   -moz-transition: all 0.6s ease;
   -o-transition: all 0.6s ease;
-}
-
-.highlight {
-  background-color: yellow;
 }
 
 /* Button 

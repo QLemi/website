@@ -121,6 +121,9 @@ ul.catCardList {
   -o-transition: all 0.6s ease;
 }
 
+.highlight {
+  background-color: yellow;
+}
 
 /* Button 
 .......................................................................*/

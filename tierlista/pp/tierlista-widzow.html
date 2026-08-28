@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tierlista Widzów</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.4;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #a0a0b0;
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+
+    .tiers-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 1100px;
+      margin: 0 auto 36px;
+    }
+
+    .tier {
+      display: flex;
+      min-height: 90px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.2s;
+    }
+
+    .tier:hover {
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
+    }
+
+    .tier-header {
+      width: 160px;
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-align: center;
+      padding: 12px 10px;
+      color: #111;
+      writing-mode: horizontal-tb;
+      flex-shrink: 0;
+    }
+
+    .tier-content {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: flex-start;
+      min-height: 90px;
+      transition: background 0.2s, min-height 0.2s;
+    }
+
+    .tier-content.drag-over {
+      background: rgba(255, 255, 255, 0.12);
+      outline: 2px dashed #48dbfb;
+      outline-offset: -4px;
+    }
+
+    .tier:nth-child(1) .tier-header { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+    .tier:nth-child(2) .tier-header { background: linear-gradient(135deg, #feca57, #ff9f43); }
+    .tier:nth-child(3) .tier-header { background: linear-gradient(135deg, #48dbfb, #0abde3); }
+    .tier:nth-child(4) .tier-header { background: linear-gradient(135deg, #1dd1a1, #10ac84); }
+    .tier:nth-child(5) .tier-header { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+    .tier:nth-child(6) .tier-header { background: linear-gradient(135deg, #fd79a8, #e84393); }
+
+    .pool-section {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pool-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pool-title {
+      font-size: 1.15rem;
+      color: #c0c0d0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pool-title::before {
+      content: "📦";
+    }
+
+    .reset-btn {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 12px rgba(238, 90, 90, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    }
+
+    .reset-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 16px rgba(238, 90, 90, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .reset-btn:active {
+      transform: translateY(0);
+    }
+
+    .pool {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 18px;
+      min-height: 140px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-content: flex-start;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .pool.drag-over {
+      background: rgba(72, 219, 251, 0.08);
+      border-color: #48dbfb;
+    }
+
+    .viewer-card {
+      width: 92px;
+      background: #2a2a3d;
+      border-radius: 10px;
+      padding: 8px 6px 10px;
+      text-align: center;
+      cursor: grab;
+      user-select: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .viewer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .viewer-card:active,
+    .viewer-card.dragging {
+      cursor: grabbing;
+      opacity: 0.55;
+      transform: scale(0.95);
+    }
+
+    .viewer-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      margin: 0 auto 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #3a3a4d; /* fallback gdy brak zdjęcia */
+    }
+
+    .viewer-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;       
+      object-position: center;
+      display: block;
+      border-radius: 50%;
+    }
+
+    .viewer-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #e8e8f0;
+      word-break: break-word;
+      line-height: 1.25;
+      max-height: 2.5em;
+      overflow: hidden;
+    }
+
+    /* Puste stany */
+    .tier-content:empty::after,
+    .pool:empty::after {
+      content: "Upuść tu widzów";
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 0.9rem;
+      font-style: italic;
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
+      pointer-events: none;
+    }
+
+    .pool:empty::after {
+      content: "Wszyscy widzowie są już w tierach 🎉";
+    }
+
+    @media (max-width: 700px) {
+      .tier {
+        flex-direction: column;
+      }
+      .tier-header {
+        width: 100%;
+        min-width: auto;
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tierlista Widzów</h1>
+  <br>
+
+  <div class="tiers-container" id="tiers">
+  </div>
+
+  <div class="pool-section">
+    <div class="pool-header">
+      <div class="pool-title">Pula widzów</div>
+      <button class="reset-btn" id="resetBtn" title="Wyczyść zapisane pozycje i przenieś wszystkich do puli">
+        🔄 Resetuj wszystko
+      </button>
+    </div>
+    <div class="pool" id="pool"></div>
+  </div>
+
+
+  <script>
+
+
+    const CATEGORIES = [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ];
+
+
+    const VIEWERS = [
+      { name: "De_Destru",    color: "#e74c3c", img: "pp/viewer1.jpg" },
+      { name: "QLemii",    color: "#e74c3c", img: "pp/viewer2.jpg" }
+    ];
+
+
+    const STORAGE_KEY = "tierlista-widzow-state";
+
+
+    const tiersEl = document.getElementById('tiers');
+    const poolEl = document.getElementById('pool');
+    const resetBtn = document.getElementById('resetBtn');
+
+    CATEGORIES.forEach((name, index) => {
+      const tier = document.createElement('div');
+      tier.className = 'tier';
+      tier.innerHTML = `
+        <div class="tier-header">${name}</div>
+        <div class="tier-content" data-tier="${index}"></div>
+      `;
+      tiersEl.appendChild(tier);
+    });
+
+    function createViewerCard(viewer) {
+      const card = document.createElement('div');
+      card.className = 'viewer-card';
+      card.draggable = true;
+      card.dataset.name = viewer.name;
+
+      const initials = viewer.name
+        .split(/[\s_]+/)
+        .map(w => w[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase();
+
+      let avatarHTML;
+      if (viewer.img) {
+        avatarHTML = `<div class="viewer-avatar">
+          <img src="${viewer.img}" alt="${viewer.name}" loading="lazy"
+               onerror="this.style.display='none'; this.parentElement.textContent='${initials}'; this.parentElement.style.background='${viewer.color}'">
+        </div>`;
+      } else {
+        avatarHTML = `<div class="viewer-avatar" style="background: ${viewer.color}">${initials}</div>`;
+      }
+
+      card.innerHTML = `
+        ${avatarHTML}
+        <div class="viewer-name">${viewer.name}</div>
+      `;
+
+      card.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', viewer.name);
+        e.dataTransfer.effectAllowed = 'move';
+        card.classList.add('dragging');
+        setTimeout(() => card.style.opacity = '0.4', 0);
+      });
+
+      card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+        card.style.opacity = '';
+        document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+      });
+
+      return card;
+    }
+
+    const cards = {};
+
+    VIEWERS.forEach(v => {
+      const card = createViewerCard(v);
+      cards[v.name] = card;
+      poolEl.appendChild(card); 
+    });
+
+
+    function getCurrentState() {
+      const state = {}; 
+      
+      poolEl.querySelectorAll('.viewer-card').forEach(card => {
+        state[card.dataset.name] = 'pool';
+      });
+      
+      document.querySelectorAll('.tier-content').forEach(zone => {
+        const tierId = zone.dataset.tier;
+        zone.querySelectorAll('.viewer-card').forEach(card => {
+          state[card.dataset.name] = tierId;
+        });
+      });
+      return state;
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(getCurrentState()));
+      } catch (e) {
+        console.warn('Nie udało się zapisać stanu:', e);
+      }
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function applyState(state) {
+      if (!state) return;
+
+
+      Object.entries(state).forEach(([name, location]) => {
+        const card = cards[name];
+        if (!card) return; 
+
+        if (location === 'pool') {
+          poolEl.appendChild(card);
+        } else {
+          const zone = document.querySelector(`.tier-content[data-tier="${location}"]`);
+          if (zone) zone.appendChild(card);
+          else poolEl.appendChild(card); 
+        }
+      });
+    }
+
+    applyState(loadState());
+
+
+    const dropZones = [
+      ...document.querySelectorAll('.tier-content'),
+      poolEl
+    ];
+
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        zone.classList.add('drag-over');
+      });
+
+      zone.addEventListener('dragleave', (e) => {
+        if (!zone.contains(e.relatedTarget)) {
+          zone.classList.remove('drag-over');
+        }
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+
+        const name = e.dataTransfer.getData('text/plain');
+        const card = cards[name];
+
+        if (card && zone !== card.parentElement) {
+          zone.appendChild(card);
+          saveState(); 
+        }
+      });
+    });
+
+    document.addEventListener('dblclick', (e) => {
+      const card = e.target.closest('.viewer-card');
+      if (card && !poolEl.contains(card)) {
+        poolEl.appendChild(card);
+        saveState();
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if (!confirm('Na pewno zresetować? Wszystkie karty wrócą do puli i zapisany układ zostanie usunięty.')) {
+        return;
+      }
+
+
+      VIEWERS.forEach(v => {
+        if (cards[v.name]) {
+          poolEl.appendChild(cards[v.name]);
+        }
+      });
+
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+
+
+      resetBtn.textContent = '✓ Zresetowano!';
+      setTimeout(() => {
+        resetBtn.innerHTML = '🔄 Resetuj wszystko';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

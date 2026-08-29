@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,18 +61,31 @@
     }
 
     .tier-header {
-      width: 160px;
-      min-width: 160px;
+      width: 170px;
+      min-width: 170px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      padding: 12px 8px;
+      color: #111;
+      flex-shrink: 0;
+      gap: 3px;
+    }
+
+    .tier-header .tier-main {
       font-weight: 700;
       font-size: 1.05rem;
-      text-align: center;
-      padding: 12px 10px;
-      color: #111;
-      writing-mode: horizontal-tb;
-      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .tier-header .tier-sub {
+      font-weight: 500;
+      font-size: 0.68rem;
+      line-height: 1.25;
+      opacity: 0.85;
+      max-width: 100%;
     }
 
     .tier-content {
@@ -92,12 +106,33 @@
       outline-offset: -4px;
     }
 
-    .tier:nth-child(1) .tier-header { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
-    .tier:nth-child(2) .tier-header { background: linear-gradient(135deg, #feca57, #ff9f43); }
-    .tier:nth-child(3) .tier-header { background: linear-gradient(135deg, #48dbfb, #0abde3); }
-    .tier:nth-child(4) .tier-header { background: linear-gradient(135deg, #1dd1a1, #10ac84); }
-    .tier:nth-child(5) .tier-header { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
-    .tier:nth-child(6) .tier-header { background: linear-gradient(135deg, #fd79a8, #e84393); }
+    .tier:nth-child(1) .tier-header {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+    }
+
+    .tier:nth-child(2) .tier-header {
+      background: linear-gradient(135deg, #feca57, #ff9f43);
+    }
+
+    .tier:nth-child(3) .tier-header {
+      background: linear-gradient(135deg, #48dbfb, #0abde3);
+    }
+
+    .tier:nth-child(4) .tier-header {
+      background: linear-gradient(135deg, #ac76e1, #ac76e1);
+    }
+
+    .tier:nth-child(5) .tier-header {
+      background: linear-gradient(135deg, #1dd1a1, #10ac84);
+    }
+
+    .tier:nth-child(6) .tier-header {
+      background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    }
+
+    .tier:nth-child(7) .tier-header {
+      background: linear-gradient(135deg, #fd79a8, #e84393);
+    }
 
     .pool-section {
       max-width: 1100px;
@@ -194,6 +229,14 @@
       transform: scale(0.95);
     }
 
+    .viewer-card.drag-before {
+      box-shadow: -4px 0 0 0 #48dbfb, 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .viewer-card.drag-after {
+      box-shadow: 4px 0 0 0 #48dbfb, 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
     .viewer-avatar {
       width: 54px;
       height: 54px;
@@ -205,17 +248,17 @@
       font-weight: 700;
       font-size: 1.15rem;
       color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.15);
       overflow: hidden;
       flex-shrink: 0;
-      background: #3a3a4d; /* fallback gdy brak zdjęcia */
+      background: #3a3a4d;
     }
 
     .viewer-avatar img {
       width: 100%;
       height: 100%;
-      object-fit: cover;       
+      object-fit: cover;
       object-position: center;
       display: block;
       border-radius: 50%;
@@ -231,10 +274,8 @@
       overflow: hidden;
     }
 
-    /* Puste stany */
     .tier-content:empty::after,
     .pool:empty::after {
-      content: "Upuść tu widzów";
       color: rgba(255, 255, 255, 0.25);
       font-size: 0.9rem;
       font-style: italic;
@@ -244,20 +285,18 @@
       pointer-events: none;
     }
 
-    .pool:empty::after {
-      content: "Wszyscy widzowie są już w tierach 🎉";
-    }
-
     @media (max-width: 700px) {
       .tier {
         flex-direction: column;
       }
+
       .tier-header {
         width: 100%;
         min-width: auto;
         padding: 10px;
         font-size: 0.95rem;
       }
+
       h1 {
         font-size: 1.7rem;
       }
@@ -271,6 +310,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <h1>Tierlista Widzów</h1>
@@ -289,38 +329,67 @@
     <div class="pool" id="pool"></div>
   </div>
 
-
   <script>
-
-
     const CATEGORIES = [
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      ["Totalna Sigiemka", "albo prawie"],
+      ["Miłośnicy", "bardziej strimera niż streama"],
+      ["Widzowie Premium", "jak są, to średnia czatu idzie w górę"],
+      ["Średnia półka", "ani nie irytują, ani nie zachwycają"],
+      ["Marudy", "raz na rok napisze coś sensownego a tak to marudzi"],
+      ["NPC Brainrot", "czy to na pewno człowiek? czy już chat gpt"],
+      ["Lurker", "więcej śpi niż ogląda"]
     ];
-
 
     const VIEWERS = [
-      { name: "De_Destru",    color: "#e74c3c", img: "pp/viewer1.jpg" },
-      { name: "QLemii",    color: "#e74c3c", img: "pp/viewer2.jpg" }
+      {name: "De_Destru", color: "#e74c3c", img: "pp/viewer1.jpg"},
+      {name: "YouBaited", img: "pp/youbait.png"},
+      {name: "Veximei", img: "pp/vexy.png"},
+      {name: "Mairisaun", img: "pp/mairi.png"},
+      {name: "Dantee_z", img: "pp/dante.png"},
+      {name: "Hvsk103sa", img: "pp/hvsk.png"},
+      {name: "Nosti103sa", img: "pp/nosti.png"},
+      {name: "laufiq", img: "pp/lauf.png"},
+      {name: "Himcia", img: "pp/himcia.png"},
+      {name: "Palladyn654", img: "pp/paladyn.png"},
+      {name: "Amelciabot", img: "pp/amelka.png"},
+      {name: "Nesstim1", img: "pp/nestim.png"},
+      {name: "Szpyciooo", img: "pp/szypycio.png"},
+      {name: "Astrid", img: "pp/astrid.png"},
+      {name: "ferdinandfe", img: "pp/ferdek.png"},
+      {name: "Dosiek1402", img: "pp/dosiek.png"},
+      {name: "Matiksonnnnn103sa", img: "pp/mati.png"},
+      {name: "Merstive", img: "pp/merstiv.png"},
+      {name: "Smifdbd", img: "pp/smif.png"},
+      {name: "Martella", img: "pp/martela.png"},
+      {name: "QLemii", color: "#e74c3c", img: "pp/viewer2.jpg"},
+      {name: "Arvena", img: "pp/arvena.png"},
+      {name: "Izolski", img: "pp/izo.png"},
+      {name: "Davesonek", img: "pp/davso.png"},
+      {name: "Audiocostamm", img: "pp/audio.png"},
+      {name: "Starsiicle", img: "pp/star.png"},
+      {name: "ooFatimaoo", img: "pp/fatima.png"},
+      {name: "povJesieniara", img: "pp/jesieniara.png"},
+      {name: "TickerSloth", img: "pp/ticker.png"},
+      {name: "BezRobotnyWojtek", img: "pp/szpont.png"},
+      {name: "Brokatowy", img: "pp/brokat.png"},
+      {name: "AdamrePL", img: "pp/adam.png"},
+      {name: "M4rtin3k", img: "pp/mart.png"}
     ];
 
-
     const STORAGE_KEY = "tierlista-widzow-state";
-
 
     const tiersEl = document.getElementById('tiers');
     const poolEl = document.getElementById('pool');
     const resetBtn = document.getElementById('resetBtn');
 
-    CATEGORIES.forEach((name, index) => {
+    CATEGORIES.forEach(([main, sub], index) => {
       const tier = document.createElement('div');
       tier.className = 'tier';
       tier.innerHTML = `
-        <div class="tier-header">${name}</div>
+        <div class="tier-header">
+          <span class="tier-main">${main}</span>
+          <span class="tier-sub">${sub}</span>
+        </div>
         <div class="tier-content" data-tier="${index}"></div>
       `;
       tiersEl.appendChild(tier);
@@ -343,10 +412,10 @@
       if (viewer.img) {
         avatarHTML = `<div class="viewer-avatar">
           <img src="${viewer.img}" alt="${viewer.name}" loading="lazy"
-               onerror="this.style.display='none'; this.parentElement.textContent='${initials}'; this.parentElement.style.background='${viewer.color}'">
+               onerror="this.style.display='none'; this.parentElement.textContent='${initials}'; this.parentElement.style.background='${viewer.color || '#3a3a4d'}'">
         </div>`;
       } else {
-        avatarHTML = `<div class="viewer-avatar" style="background: ${viewer.color}">${initials}</div>`;
+        avatarHTML = `<div class="viewer-avatar" style="background: ${viewer.color || '#3a3a4d'}">${initials}</div>`;
       }
 
       card.innerHTML = `
@@ -364,6 +433,7 @@
       card.addEventListener('dragend', () => {
         card.classList.remove('dragging');
         card.style.opacity = '';
+        clearDropIndicators();
         document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
       });
 
@@ -375,32 +445,74 @@
     VIEWERS.forEach(v => {
       const card = createViewerCard(v);
       cards[v.name] = card;
-      poolEl.appendChild(card); 
+      poolEl.appendChild(card);
     });
 
+    function clearDropIndicators() {
+      document.querySelectorAll('.viewer-card.drag-before, .viewer-card.drag-after').forEach(el => {
+        el.classList.remove('drag-before', 'drag-after');
+      });
+    }
+
+    function getDropTarget(zone, clientX, clientY) {
+      const cardEls = [...zone.querySelectorAll('.viewer-card:not(.dragging)')];
+      if (cardEls.length === 0) return { target: null, place: 'end' };
+
+      for (const el of cardEls) {
+        const rect = el.getBoundingClientRect();
+        if (clientX >= rect.left && clientX <= rect.right &&
+            clientY >= rect.top && clientY <= rect.bottom) {
+          const midX = rect.left + rect.width / 2;
+          return { target: el, place: clientX < midX ? 'before' : 'after' };
+        }
+      }
+
+      let best = null;
+      let bestScore = Infinity;
+      for (const el of cardEls) {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = clientX - cx;
+        const dy = clientY - cy;
+        const score = dx * dx + dy * dy * 4;
+        if (score < bestScore) {
+          bestScore = score;
+          best = el;
+        }
+      }
+
+      if (!best) return { target: null, place: 'end' };
+
+      const rect = best.getBoundingClientRect();
+      if (clientX < rect.left) return { target: best, place: 'before' };
+      if (clientX > rect.right) return { target: best, place: 'after' };
+      const midX = rect.left + rect.width / 2;
+      return { target: best, place: clientX < midX ? 'before' : 'after' };
+    }
 
     function getCurrentState() {
-      const state = {}; 
-      
+      const state = { pool: [], tiers: {} };
+
       poolEl.querySelectorAll('.viewer-card').forEach(card => {
-        state[card.dataset.name] = 'pool';
+        state.pool.push(card.dataset.name);
       });
-      
+
       document.querySelectorAll('.tier-content').forEach(zone => {
         const tierId = zone.dataset.tier;
+        state.tiers[tierId] = [];
         zone.querySelectorAll('.viewer-card').forEach(card => {
-          state[card.dataset.name] = tierId;
+          state.tiers[tierId].push(card.dataset.name);
         });
       });
+
       return state;
     }
 
     function saveState() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(getCurrentState()));
-      } catch (e) {
-        console.warn('Nie udało się zapisać stanu:', e);
-      }
+      } catch (e) {}
     }
 
     function loadState() {
@@ -416,23 +528,38 @@
     function applyState(state) {
       if (!state) return;
 
+      if (Array.isArray(state.pool) || state.tiers) {
+        if (Array.isArray(state.pool)) {
+          state.pool.forEach(name => {
+            if (cards[name]) poolEl.appendChild(cards[name]);
+          });
+        }
+        if (state.tiers) {
+          Object.entries(state.tiers).forEach(([tierId, names]) => {
+            const zone = document.querySelector('.tier-content[data-tier="' + tierId + '"]');
+            if (!zone || !Array.isArray(names)) return;
+            names.forEach(name => {
+              if (cards[name]) zone.appendChild(cards[name]);
+            });
+          });
+        }
+        return;
+      }
 
       Object.entries(state).forEach(([name, location]) => {
         const card = cards[name];
-        if (!card) return; 
-
+        if (!card) return;
         if (location === 'pool') {
           poolEl.appendChild(card);
         } else {
-          const zone = document.querySelector(`.tier-content[data-tier="${location}"]`);
+          const zone = document.querySelector('.tier-content[data-tier="' + location + '"]');
           if (zone) zone.appendChild(card);
-          else poolEl.appendChild(card); 
+          else poolEl.appendChild(card);
         }
       });
     }
 
     applyState(loadState());
-
 
     const dropZones = [
       ...document.querySelectorAll('.tier-content'),
@@ -444,25 +571,45 @@
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
         zone.classList.add('drag-over');
+
+        clearDropIndicators();
+        const info = getDropTarget(zone, e.clientX, e.clientY);
+        if (info.target) {
+          info.target.classList.add(info.place === 'before' ? 'drag-before' : 'drag-after');
+        }
       });
 
       zone.addEventListener('dragleave', (e) => {
         if (!zone.contains(e.relatedTarget)) {
           zone.classList.remove('drag-over');
+          clearDropIndicators();
         }
       });
 
       zone.addEventListener('drop', (e) => {
         e.preventDefault();
         zone.classList.remove('drag-over');
+        clearDropIndicators();
 
         const name = e.dataTransfer.getData('text/plain');
         const card = cards[name];
+        if (!card) return;
 
-        if (card && zone !== card.parentElement) {
+        const info = getDropTarget(zone, e.clientX, e.clientY);
+
+        if (info.target && info.target !== card) {
+          if (info.place === 'before') {
+            zone.insertBefore(card, info.target);
+          } else {
+            zone.insertBefore(card, info.target.nextSibling);
+          }
+        } else if (!info.target) {
           zone.appendChild(card);
-          saveState(); 
+        } else if (card.parentElement !== zone) {
+          zone.appendChild(card);
         }
+
+        saveState();
       });
     });
 
@@ -479,7 +626,6 @@
         return;
       }
 
-
       VIEWERS.forEach(v => {
         if (cards[v.name]) {
           poolEl.appendChild(cards[v.name]);
@@ -490,7 +636,6 @@
         localStorage.removeItem(STORAGE_KEY);
       } catch (e) {}
 
-
       resetBtn.textContent = '✓ Zresetowano!';
       setTimeout(() => {
         resetBtn.innerHTML = '🔄 Resetuj wszystko';
@@ -498,4 +643,5 @@
     });
   </script>
 </body>
+
 </html>

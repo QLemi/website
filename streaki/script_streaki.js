@@ -1,18 +1,8 @@
-/**
- * dbd-streaks.js
- * ---------------
- * Cała logika strony: pobieranie z Google Sheets + renderowanie kart
- */
 
-// ============================================================
-//  ★  KONFIGURACJA
-// ============================================================
 const SHEET_ID = '1WrJPj5Pdms2lFV59NCVPm7eU5eLz2-eSp55MFk4qNGg';
-const SHEET_GID = '0';
+const SHEET_MAIN_GID = '0';         
+const SHEET_INNE_GID = '2135936810'; 
 
-// ============================================================
-//  ★  MAPA PORTRETÓW
-// ============================================================
 const PORTRAIT_MAP = {
   'The Trapper':          'https://deadbydaylight.wiki.gg/images/K01_TheTrapper_Portrait.png',
   'The Wraith':           'https://deadbydaylight.wiki.gg/images/K02_TheWraith_Portrait.png',
@@ -58,89 +48,12 @@ const PORTRAIT_MAP = {
   'The First':            'https://deadbydaylight.wiki.gg/images/K42_TheFirst_Portrait.png',
   'The Slasher':          'https://deadbydaylight.wiki.gg/images/K43_TheSlasher_Portrait.png',
 
-  // Survivors / challenges
+ 
   'Copycat':              'https://deadbydaylight.wiki.gg/images/S03_ClaudetteMorel_Portrait.png',
   'Solo Escape':          'https://deadbydaylight.wiki.gg/images/S02_MegThomas_Portrait.png',
   'Team Escape':          'https://deadbydaylight.wiki.gg/images/S01_DwightFairfield_Portrait.png',
 };
 
-// ============================================================
-//  POBIERANIE Z GOOGLE SHEETS
-// ============================================================
-async function loadCharactersFromSheet() {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Nie udało się pobrać arkusza (HTTP ${response.status}). Upewnij się, że arkusz jest udostępniony jako „Każdy z linkiem”.`);
-  }
-
-  const csvText = await response.text();
-  const rows = parseCSV(csvText);
-
-  if (rows.length < 2) throw new Error('Arkusz jest pusty lub ma za mało wierszy.');
-
-  // Szukamy wiersza z nazwami killerów
-  let headerRowIndex = -1;
-  for (let i = 0; i < Math.min(rows.length, 15); i++) {
-    const names = rows[i].filter(c => c && c.trim().length > 2);
-    if (names.length >= 3) {
-      headerRowIndex = i;
-      break;
-    }
-  }
-  if (headerRowIndex === -1) throw new Error('Nie znaleziono wiersza z nazwami killerów.');
-
-  const header = rows[headerRowIndex];
-  const dataStart = headerRowIndex + 1;
-
-  const killerPositions = [];
-  for (let col = 0; col < header.length; col++) {
-    const name = (header[col] || '').trim();
-    if (name) killerPositions.push({ col, name });
-  }
-
-  const characters = [];
-
-  for (const { col, name } of killerPositions) {
-    const streaks = [];
-
-    for (let r = dataStart; r < rows.length; r++) {
-      const row = rows[r];
-      while (row.length <= col + 2) row.push('');
-
-      const category = (row[col] || '').trim();
-      const valueRaw = (row[col + 1] || '').trim();
-      const checkRaw = (row[col + 2] || '').trim().toUpperCase();
-
-      if (!valueRaw) continue;
-
-      const value = parseInt(valueRaw, 10);
-      if (isNaN(value)) continue;
-
-      // TRUE = ukończony → active = false
-      const isFinished = (checkRaw === 'TRUE' || checkRaw === 'CHECKED' || checkRaw === '✓' || checkRaw === 'YES');
-      const active = !isFinished;
-
-      streaks.push({
-        category: category || 'Streak',
-        value,
-        active
-      });
-    }
-
-    if (streaks.length > 0) {
-      characters.push({
-        image: PORTRAIT_MAP[name] || '',
-        name,
-        type: 'killer',
-        streaks
-      });
-    }
-  }
-
-  return characters;
-}
 
 function parseCSV(text) {
   const rows = [];
@@ -171,18 +84,111 @@ function parseCSV(text) {
   return rows;
 }
 
-// ============================================================
-//  RENDEROWANIE
-// ============================================================
+
+async function loadSheet(gid, mode) {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Nie udało się pobrać arkusza gid=${gid} (HTTP ${response.status})`);
+  }
+
+  const rows = parseCSV(await response.text());
+  if (rows.length < 2) return [];
+
+
+  let headerRowIndex = -1;
+  for (let i = 0; i < Math.min(rows.length, 15); i++) {
+    const names = rows[i].filter(c => c && c.trim().length > 2);
+    if (names.length >= 2) {
+      headerRowIndex = i;
+      break;
+    }
+  }
+  if (headerRowIndex === -1) return [];
+
+  const header = rows[headerRowIndex];
+  const dataStart = headerRowIndex + 1;
+
+  const positions = [];
+  for (let col = 0; col < header.length; col++) {
+    const name = (header[col] || '').trim();
+    if (name) positions.push({ col, name });
+  }
+
+  const characters = [];
+
+  for (const { col, name } of positions) {
+    const streaks = [];
+    let role = 'killer';
+
+    for (let r = dataStart; r < rows.length; r++) {
+      const row = rows[r];
+      while (row.length <= col + 2) row.push('');
+
+      let category, valueRaw, checkRaw;
+
+      if (mode === 'inne') {
+   
+        const roleRaw = (row[col] || '').trim().toLowerCase();
+        if (roleRaw === 's' || roleRaw === 'survivor') role = 'survivor';
+        if (roleRaw === 'k' || roleRaw === 'killer') role = 'killer';
+
+        category = name;
+        valueRaw = (row[col + 1] || '').trim();
+        checkRaw = (row[col + 2] || '').trim().toUpperCase();
+      } else {
+   
+        category = (row[col] || '').trim();
+        valueRaw = (row[col + 1] || '').trim();
+        checkRaw = (row[col + 2] || '').trim().toUpperCase();
+      }
+
+      if (!valueRaw) continue;
+
+      const value = parseInt(valueRaw, 10);
+      if (isNaN(value)) continue;
+
+      const isFinished = (checkRaw === 'TRUE' || checkRaw === 'CHECKED' || checkRaw === '✓' || checkRaw === 'YES');
+      const active = !isFinished;
+
+      streaks.push({
+        category: category || 'Streak',
+        value,
+        active
+      });
+    }
+
+    if (streaks.length > 0) {
+      characters.push({
+        image: PORTRAIT_MAP[name] || '',
+        name,
+        type: role,
+        streaks
+      });
+    }
+  }
+
+  return characters;
+}
+
+
+async function loadCharactersFromSheet() {
+  const [main, inne] = await Promise.all([
+    loadSheet(SHEET_MAIN_GID, 'main'),
+    loadSheet(SHEET_INNE_GID, 'inne')
+  ]);
+
+  return [...main, ...inne];
+}
+
+
 function renderCharacters(characters) {
-  // Sortowanie
   characters.forEach(c => {
     c.best = Math.max(...c.streaks.map(s => s.value));
     c.streaks.sort((a, b) => b.value - a.value);
   });
   characters.sort((a, b) => b.best - a.best);
 
-  // Statystyki
   const totalStreaks = characters.reduce((sum, c) => sum + c.streaks.length, 0);
   const activeCount = characters.reduce((sum, c) => sum + c.streaks.filter(s => s.active).length, 0);
 
@@ -191,7 +197,6 @@ function renderCharacters(characters) {
   document.getElementById('best-streak').textContent = characters.length ? characters[0].best : 0;
   document.getElementById('active-count').textContent = activeCount;
 
-  // Karty
   const grid = document.getElementById('streak-grid');
   grid.innerHTML = '';
 
@@ -230,10 +235,6 @@ function renderCharacters(characters) {
     grid.appendChild(card);
   });
 }
-
-// ============================================================
-//  GŁÓWNA FUNKCJA + START
-// ============================================================
 async function refreshData() {
   const grid = document.getElementById('streak-grid');
   if (grid) {
@@ -251,8 +252,5 @@ async function refreshData() {
   }
 }
 
-// Start po załadowaniu strony
 document.addEventListener('DOMContentLoaded', refreshData);
-
-// Udostępnienie globalnie (np. do przycisku Odśwież)
 window.refreshData = refreshData;

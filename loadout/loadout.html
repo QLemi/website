@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBD Inventory Reader</title>
+  <link rel="stylesheet" href="style_loadout.css">
+</head>
+<body>
+  <main class="container">
+    <h1>DBD Inventory Reader</h1>
+    <p class="subtitle">Wgraj screenshot ekwipunku Dead by Daylight.</p>
+
+    <section id="dropZone" class="drop-zone">
+      <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp">
+      <div class="drop-title">Przeciągnij screenshot tutaj</div>
+      <div class="drop-subtitle">albo kliknij, aby wybrać plik</div>
+    </section>
+
+    <div id="status" class="status">Gotowe.</div>
+
+    <section id="result" class="result hidden">
+      <div class="info-grid">
+        <div class="info-card">
+          <span>Killer</span>
+          <strong id="killerName">—</strong>
+        </div>
+        <div class="info-card">
+          <span>Ekwipunek</span>
+          <strong id="pageName">—</strong>
+        </div>
+      </div>
+
+      <div class="inventory-card">
+        <div class="card-header">
+          <h2>Ilości addonów</h2>
+          <button id="copyButton">Kopiuj</button>
+        </div>
+        <div id="inventory" class="inventory"></div>
+      </div>
+
+      <details class="debug">
+        <summary>Podgląd obszarów rozpoznawania</summary>
+        <canvas id="debugCanvas"></canvas>
+      </details>
+    </section>
+  </main>
+
+  <!-- OCR działa w przeglądarce. Nie trzeba instalować Tesseracta. -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="script_loadout.js"></script>
+</body>
+</html>

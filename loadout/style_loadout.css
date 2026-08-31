@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #101318;
+  color: #f0f2f4;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: min(1000px, calc(100% - 32px));
+  margin: 40px auto;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.subtitle {
+  margin: 8px 0 28px;
+  color: #9da6b0;
+}
+
+.drop-zone {
+  min-height: 180px;
+  border: 2px dashed #596572;
+  border-radius: 14px;
+  background: #181d24;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+  background: #202731;
+  border-color: #aab6c2;
+}
+
+#fileInput {
+  display: none;
+}
+
+.drop-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.drop-subtitle {
+  margin-top: 8px;
+  color: #8e98a3;
+}
+
+.status {
+  margin: 18px 0;
+  min-height: 22px;
+  color: #aeb7c0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.info-card,
+.inventory-card,
+.debug {
+  background: #181d24;
+  border: 1px solid #2c3540;
+  border-radius: 12px;
+}
+
+.info-card {
+  padding: 18px;
+}
+
+.info-card span {
+  display: block;
+  color: #89949f;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 7px;
+}
+
+.info-card strong {
+  font-size: 22px;
+}
+
+.inventory-card {
+  margin-top: 16px;
+  padding: 18px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.slot {
+  background: #0f1318;
+  border: 1px solid #303a45;
+  border-radius: 9px;
+  padding: 13px;
+  text-align: center;
+}
+
+.slot-number {
+  color: #7f8b96;
+  font-size: 11px;
+}
+
+.slot-value {
+  margin-top: 4px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.slot input {
+  width: 100%;
+  background: #0b0e12;
+  color: white;
+  border: 1px solid #46515a;
+  border-radius: 6px;
+  padding: 6px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.debug {
+  margin-top: 16px;
+  padding: 14px;
+}
+
+.debug canvas {
+  display: block;
+  max-width: 100%;
+  margin-top: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

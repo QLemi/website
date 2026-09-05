@@ -418,7 +418,7 @@ function switchView(view) {
 async function refreshData() {
   const grid = document.getElementById('streak-grid');
   if (grid) {
-    grid.innerHTML = '<p class="loading-msg">Ładowanie danych z Google Sheets...</p>';
+    grid.innerHTML = '<p class="loading-msg">Loading data from Google Sheets...</p>';
   }
 
   try {

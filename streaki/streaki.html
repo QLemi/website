@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dead by Daylight Streaks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style_streaki.css">
+  <script src="config_streaki.js"></script>
   <script src="script_streaki.js" defer></script>
 </head>
-
 <body>
   <div class="bg-layer"></div>
   <div class="fog"></div>
@@ -39,36 +36,19 @@
         <div class="stat-label">Active</div>
       </div>
     </div>
-<div style="text-align:center;margin-top:1.5rem;">
-      <button onclick="refreshData()" style="
-        background: linear-gradient(135deg, #8b0000, #c41e3a);
-        color: #fff;
-        border: 1px solid rgba(255,80,80,0.4);
-        border-radius: 6px;
-        padding: 0.55rem 1.4rem;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        cursor: pointer;
-        box-shadow: 0 0 16px rgba(196,30,58,0.35);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 24px rgba(196,30,58,0.55)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 0 16px rgba(196,30,58,0.35)'">
-        Refresh Data
-      </button>
+    <div class="controls">
+      <button class="view-btn active" data-view="default">Default</button>
+      <button class="view-btn" data-view="neon">Neon</button>
+      <button class="view-btn" data-view="timeline">Timeline</button>
+      <button class="view-btn" data-view="split">Split</button>
+      <button class="view-btn" data-view="lanes">Lanes</button>
+      <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
     </div>
-    
   </header>
 
   <main>
     <div class="section-title">All Streaks</div>
     <div class="grid" id="streak-grid"></div>
-
   </main>
-
-
-
 </body>
-
 </html>

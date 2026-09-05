@@ -1,59 +1,11 @@
+const SHEET_ID = STREAKI_CONFIG.SHEET_ID;
+const SHEET_MAIN_GID = STREAKI_CONFIG.SHEET_MAIN_GID;
+const SHEET_INNE_GID = STREAKI_CONFIG.SHEET_INNE_GID;
+const PORTRAIT_MAP = STREAKI_CONFIG.PORTRAIT_MAP;
+const PLACEHOLDER_IMG = STREAKI_CONFIG.PLACEHOLDER_IMG;
 
-const SHEET_ID = '1WrJPj5Pdms2lFV59NCVPm7eU5eLz2-eSp55MFk4qNGg';
-const SHEET_MAIN_GID = '0';         
-const SHEET_INNE_GID = '2135936810'; 
-
-const PORTRAIT_MAP = {
-  'The Trapper':          'https://deadbydaylight.wiki.gg/images/K01_TheTrapper_Portrait.png',
-  'The Wraith':           'https://deadbydaylight.wiki.gg/images/K02_TheWraith_Portrait.png',
-  'The Hillbilly':        'https://deadbydaylight.wiki.gg/images/K03_TheHillbilly_Portrait.png',
-  'The Nurse':            'https://deadbydaylight.wiki.gg/images/K04_TheNurse_Portrait.png',
-  'The Shape':            'https://deadbydaylight.wiki.gg/images/K05_TheShape_Portrait.png',
-  'The Hag':              'https://deadbydaylight.wiki.gg/images/K06_TheHag_Portrait.png',
-  'The Doctor':           'https://deadbydaylight.wiki.gg/images/K07_TheDoctor_Portrait.png',
-  'The Huntress':         'https://deadbydaylight.wiki.gg/images/K08_TheHuntress_Portrait.png',
-  'The Cannibal':         'https://deadbydaylight.wiki.gg/images/K09_TheCannibal_Portrait.png',
-  'The Nightmare':        'https://deadbydaylight.wiki.gg/images/K10_TheNightmare_Portrait.png',
-  'The Pig':              'https://deadbydaylight.wiki.gg/images/K11_ThePig_Portrait.png',
-  'The Clown':            'https://deadbydaylight.wiki.gg/images/K12_TheClown_Portrait.png',
-  'The Spirit':           'https://deadbydaylight.wiki.gg/images/K13_TheSpirit_Portrait.png',
-  'The Legion':           'https://deadbydaylight.wiki.gg/images/K14_TheLegion_Portrait.png',
-  'The Plague':           'https://deadbydaylight.wiki.gg/images/K15_ThePlague_Portrait.png',
-  'The Ghost Face':       'https://deadbydaylight.wiki.gg/images/K16_TheGhostFace_Portrait.png',
-  'The Demogorgon':       'https://deadbydaylight.wiki.gg/images/K17_TheDemogorgon_Portrait.png',
-  'The Oni':              'https://deadbydaylight.wiki.gg/images/K18_TheOni_Portrait.png',
-  'The Deathslinger':     'https://deadbydaylight.wiki.gg/images/K19_TheDeathslinger_Portrait.png',
-  'The Executioner':      'https://deadbydaylight.wiki.gg/images/K20_TheExecutioner_Portrait.png',
-  'The Blight':           'https://deadbydaylight.wiki.gg/images/K21_TheBlight_Portrait.png',
-  'The Twins':            'https://deadbydaylight.wiki.gg/images/K22_TheTwins_Portrait.png',
-  'The Trickster':        'https://deadbydaylight.wiki.gg/images/K23_TheTrickster_Portrait.png',
-  'The Nemesis':          'https://deadbydaylight.wiki.gg/images/K24_TheNemesis_Portrait.png',
-  'The Cenobite':         'https://deadbydaylight.wiki.gg/images/K25_TheCenobite_Portrait.png',
-  'The Artist':           'https://deadbydaylight.wiki.gg/images/K26_TheArtist_Portrait.png',
-  'The Onryo':            'https://deadbydaylight.wiki.gg/images/K27_TheOnryo_Portrait.png',
-  'The Dredge':           'https://deadbydaylight.wiki.gg/images/K28_TheDredge_Portrait.png',
-  'The Mastermind':       'https://deadbydaylight.wiki.gg/images/K29_TheMastermind_Portrait.png',
-  'The Knight':           'https://deadbydaylight.wiki.gg/images/K30_TheKnight_Portrait.png',
-  'The Skull Merchant':   'https://deadbydaylight.wiki.gg/images/K31_TheSkullMerchant_Portrait.png',
-  'The Singularity':      'https://deadbydaylight.wiki.gg/images/K32_TheSingularity_Portrait.png',
-  'The Xenomorph':        'https://deadbydaylight.wiki.gg/images/K33_TheXenomorph_Portrait.png',
-  'The Good Guy':         'https://deadbydaylight.wiki.gg/images/K34_TheGoodGuy_Portrait.png',
-  'The Unknown':          'https://deadbydaylight.wiki.gg/images/K35_TheUnknown_Portrait.png',
-  'The Lich':             'https://deadbydaylight.wiki.gg/images/K36_TheLich_Portrait.png',
-  'The Dark Lord':        'https://deadbydaylight.wiki.gg/images/K37_TheDarkLord_Portrait.png',
-  'The Houndmaster':      'https://deadbydaylight.wiki.gg/images/K38_TheHoundmaster_Portrait.png',
-  'The Ghoul':            'https://deadbydaylight.wiki.gg/images/K39_TheGhoul_Portrait.png',
-  'The Animatronic':      'https://deadbydaylight.wiki.gg/images/K40_TheAnimatronic_Portrait.png',
-  'The Krasue':           'https://deadbydaylight.wiki.gg/images/K41_TheKrasue_Portrait.png',
-  'The First':            'https://deadbydaylight.wiki.gg/images/K42_TheFirst_Portrait.png',
-  'The Slasher':          'https://deadbydaylight.wiki.gg/images/K43_TheSlasher_Portrait.png',
-
- 
-  'Copycat':              'https://deadbydaylight.wiki.gg/images/S03_ClaudetteMorel_Portrait.png',
-  'Solo Escape':          'https://deadbydaylight.wiki.gg/images/S02_MegThomas_Portrait.png',
-  'Team Escape':          'https://deadbydaylight.wiki.gg/images/S01_DwightFairfield_Portrait.png',
-};
-
+let currentView = STREAKI_CONFIG.DEFAULT_VIEW || 'default';
+let cachedCharacters = null;
 
 function parseCSV(text) {
   const rows = [];
@@ -84,7 +36,6 @@ function parseCSV(text) {
   return rows;
 }
 
-
 async function loadSheet(gid, mode) {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
   const response = await fetch(url);
@@ -94,7 +45,6 @@ async function loadSheet(gid, mode) {
 
   const rows = parseCSV(await response.text());
   if (rows.length < 2) return [];
-
 
   let headerRowIndex = -1;
   for (let i = 0; i < Math.min(rows.length, 15); i++) {
@@ -128,7 +78,6 @@ async function loadSheet(gid, mode) {
       let category, valueRaw, checkRaw;
 
       if (mode === 'inne') {
-   
         const roleRaw = (row[col] || '').trim().toLowerCase();
         if (roleRaw === 's' || roleRaw === 'survivor') role = 'survivor';
         if (roleRaw === 'k' || roleRaw === 'killer') role = 'killer';
@@ -137,7 +86,6 @@ async function loadSheet(gid, mode) {
         valueRaw = (row[col + 1] || '').trim();
         checkRaw = (row[col + 2] || '').trim().toUpperCase();
       } else {
-   
         category = (row[col] || '').trim();
         valueRaw = (row[col + 1] || '').trim();
         checkRaw = (row[col + 2] || '').trim().toUpperCase();
@@ -171,33 +119,46 @@ async function loadSheet(gid, mode) {
   return characters;
 }
 
-
 async function loadCharactersFromSheet() {
   const [main, inne] = await Promise.all([
     loadSheet(SHEET_MAIN_GID, 'main'),
     loadSheet(SHEET_INNE_GID, 'inne')
   ]);
-
   return [...main, ...inne];
 }
 
-
-function renderCharacters(characters) {
+function prepareCharacters(characters) {
   characters.forEach(c => {
     c.best = Math.max(...c.streaks.map(s => s.value));
     c.streaks.sort((a, b) => b.value - a.value);
   });
   characters.sort((a, b) => b.best - a.best);
+  return characters;
+}
 
+function updateStats(characters) {
   const totalStreaks = characters.reduce((sum, c) => sum + c.streaks.length, 0);
   const activeCount = characters.reduce((sum, c) => sum + c.streaks.filter(s => s.active).length, 0);
 
-  document.getElementById('total-characters').textContent = characters.length;
-  document.getElementById('total-streaks').textContent = totalStreaks;
-  document.getElementById('best-streak').textContent = characters.length ? characters[0].best : 0;
-  document.getElementById('active-count').textContent = activeCount;
+  const elChars = document.getElementById('total-characters');
+  const elStreaks = document.getElementById('total-streaks');
+  const elBest = document.getElementById('best-streak');
+  const elActive = document.getElementById('active-count');
 
+  if (elChars) elChars.textContent = characters.length;
+  if (elStreaks) elStreaks.textContent = totalStreaks;
+  if (elBest) elBest.textContent = characters.length ? characters[0].best : 0;
+  if (elActive) elActive.textContent = activeCount;
+}
+
+function pctOfBest(val, best) {
+  if (!best || best <= 0) return 0;
+  return Math.min(100, Math.round((val / best) * 100));
+}
+
+function renderDefault(characters) {
   const grid = document.getElementById('streak-grid');
+  grid.className = 'grid view-default';
   grid.innerHTML = '';
 
   characters.forEach((c, i) => {
@@ -219,7 +180,7 @@ function renderCharacters(characters) {
       <div class="card-top">
         <div class="portrait">
           <img src="${c.image}" alt="${c.name}" loading="lazy"
-               onerror="this.src='https://via.placeholder.com/120x120/1a0a0c/8b0000?text=?'">
+               onerror="this.src='${PLACEHOLDER_IMG}'">
         </div>
         <div class="card-info">
           <div class="killer-name">${c.name}</div>
@@ -235,10 +196,229 @@ function renderCharacters(characters) {
     grid.appendChild(card);
   });
 }
+
+function renderNeon(characters) {
+  const grid = document.getElementById('streak-grid');
+  grid.className = 'grid view-neon';
+  grid.innerHTML = '';
+
+  characters.forEach((c, i) => {
+    const hasActive = c.streaks.some(s => s.active);
+    const card = document.createElement('article');
+    card.className = 'neon-card' + (c.type === 'survivor' ? ' survivor' : '') + (hasActive ? ' has-active' : '');
+    card.style.animationDelay = `${i * 0.04}s`;
+
+    const ringPct = pctOfBest(c.best, c.best);
+    const circ = 2 * Math.PI * 28;
+    const offset = circ * (1 - ringPct / 100);
+
+    card.innerHTML = `
+      <div class="neon-head">
+        <div class="neon-ring">
+          <svg viewBox="0 0 72 72">
+            <circle class="track" cx="36" cy="36" r="28"/>
+            <circle class="progress" cx="36" cy="36" r="28"
+              stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+          </svg>
+          <div class="neon-img">
+            <img src="${c.image}" alt="${c.name}" loading="lazy"
+                 onerror="this.src='${PLACEHOLDER_IMG}'">
+          </div>
+        </div>
+        <div class="neon-meta">
+          <div class="neon-name">${c.name}</div>
+          <div class="neon-type">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+        </div>
+        <div class="neon-best">
+          <div class="neon-best-num">${c.best}</div>
+          <div class="neon-best-lab">BEST</div>
+        </div>
+      </div>
+      <div class="neon-streaks">
+        ${c.streaks.map((s, idx) => `
+          <div class="neon-node ${s.active ? 'active' : ''} ${idx === 0 ? 'best' : ''}">
+            <div class="neon-dot">${idx + 1}</div>
+            <div class="neon-body">
+              <div class="neon-cat">${s.category}</div>
+              <div class="neon-bar"><div class="neon-fill" style="width:${pctOfBest(s.value, c.best)}%"></div></div>
+            </div>
+            <div class="neon-val">${s.value}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderTimeline(characters) {
+  const grid = document.getElementById('streak-grid');
+  grid.className = 'grid view-timeline';
+  grid.innerHTML = '';
+
+  characters.forEach((c, i) => {
+    const block = document.createElement('div');
+    block.className = 'tl-block' + (c.type === 'survivor' ? ' survivor' : '');
+    block.style.animationDelay = `${i * 0.05}s`;
+
+    block.innerHTML = `
+      <div class="tl-side">
+        <div class="tl-portrait">
+          <img src="${c.image}" alt="${c.name}" loading="lazy"
+               onerror="this.src='${PLACEHOLDER_IMG}'">
+        </div>
+        <div class="tl-name">${c.name}</div>
+        <div class="tl-type">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+        <div class="tl-best">${c.best}<span>BEST</span></div>
+      </div>
+      <div class="tl-col">
+        ${c.streaks.map(s => `
+          <div class="tl-row ${s.active ? 'active' : ''}">
+            <div>
+              <div class="tl-cat">${s.category}</div>
+              <div class="tl-meta">${s.active ? '<span class="tl-pill">ACTIVE</span>' : ''}</div>
+              <div class="tl-bar"><div class="tl-fill" style="width:${pctOfBest(s.value, c.best)}%"></div></div>
+            </div>
+            <div class="tl-val">${s.value}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    grid.appendChild(block);
+  });
+}
+
+function renderSplit(characters) {
+  const grid = document.getElementById('streak-grid');
+  grid.className = 'grid view-split';
+  grid.innerHTML = '';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'split-wrap';
+
+  const side = document.createElement('div');
+  side.className = 'split-side';
+  side.id = 'split-side';
+
+  const detail = document.createElement('div');
+  detail.className = 'split-detail';
+  detail.id = 'split-detail';
+  detail.innerHTML = '<div class="split-empty">SELECT A CHARACTER</div>';
+
+  characters.forEach((c, i) => {
+    const item = document.createElement('div');
+    item.className = 'split-item' + (c.streaks.some(s => s.active) ? ' has-active' : '') + (i === 0 ? ' active' : '') + (c.type === 'survivor' ? ' survivor' : '');
+    item.innerHTML = `
+      <img src="${c.image}" alt="${c.name}" loading="lazy"
+           onerror="this.src='${PLACEHOLDER_IMG}'">
+      <div class="split-item-name">${c.name}</div>
+      <div class="split-item-best">${c.best}</div>
+    `;
+    item.onclick = () => {
+      side.querySelectorAll('.split-item').forEach(x => x.classList.remove('active'));
+      item.classList.add('active');
+      showSplitDetail(c, detail);
+    };
+    side.appendChild(item);
+  });
+
+  wrap.appendChild(side);
+  wrap.appendChild(detail);
+  grid.appendChild(wrap);
+
+  if (characters.length) showSplitDetail(characters[0], detail);
+}
+
+function showSplitDetail(c, detail) {
+  detail.innerHTML = `
+    <div class="split-dhead">
+      <div class="split-dport">
+        <img src="${c.image}" alt="${c.name}" loading="lazy"
+             onerror="this.src='${PLACEHOLDER_IMG}'">
+      </div>
+      <div>
+        <div class="split-dname">${c.name}</div>
+        <div class="split-dtype">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+        <div class="split-dbest">${c.best}<span>BEST STREAK</span></div>
+      </div>
+    </div>
+    <div class="split-streaks">
+      ${c.streaks.map(s => `
+        <div class="split-row ${s.active ? 'active' : ''}">
+          <div>
+            <div class="split-cat">${s.category}${s.active ? '<span class="split-pill">ACTIVE</span>' : ''}</div>
+            <div class="split-bar"><div class="split-fill" style="width:${pctOfBest(s.value, c.best)}%"></div></div>
+          </div>
+          <div class="split-val">${s.value}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderLanes(characters) {
+  const grid = document.getElementById('streak-grid');
+  grid.className = 'grid view-lanes';
+  grid.innerHTML = '';
+
+  characters.forEach((c, i) => {
+    const lane = document.createElement('div');
+    lane.className = 'lane' + (c.type === 'survivor' ? ' survivor' : '');
+    lane.style.animationDelay = `${i * 0.05}s`;
+
+    lane.innerHTML = `
+      <div class="lane-head">
+        <img src="${c.image}" alt="${c.name}" loading="lazy"
+             onerror="this.src='${PLACEHOLDER_IMG}'">
+        <div>
+          <div class="lane-name">${c.name}</div>
+          <div class="lane-type">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+        </div>
+        <div class="lane-best">${c.best}</div>
+      </div>
+      <div class="lane-track">
+        ${c.streaks.map(s => `
+          <div class="lane-chip ${s.active ? 'active' : ''}">
+            <div class="lane-chip-cat">${s.category}</div>
+            <div class="lane-chip-val">${s.value}</div>
+            <div class="lane-chip-bar"><div class="lane-chip-fill" style="width:${pctOfBest(s.value, c.best)}%"></div></div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    grid.appendChild(lane);
+  });
+}
+
+function renderCharacters(characters) {
+  prepareCharacters(characters);
+  updateStats(characters);
+  cachedCharacters = characters;
+
+  if (currentView === 'neon') renderNeon(characters);
+  else if (currentView === 'timeline') renderTimeline(characters);
+  else if (currentView === 'split') renderSplit(characters);
+  else if (currentView === 'lanes') renderLanes(characters);
+  else renderDefault(characters);
+
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.view === currentView);
+  });
+
+  document.body.className = 'view-' + currentView;
+}
+
+function switchView(view) {
+  currentView = view;
+  if (cachedCharacters) {
+    renderCharacters(cachedCharacters);
+  }
+}
+
 async function refreshData() {
   const grid = document.getElementById('streak-grid');
   if (grid) {
-    grid.innerHTML = '<p style="color:#9a9088;text-align:center;padding:2rem;grid-column:1/-1;">Ładowanie danych z Google Sheets...</p>';
+    grid.innerHTML = '<p class="loading-msg">Ładowanie danych z Google Sheets...</p>';
   }
 
   try {
@@ -246,11 +426,18 @@ async function refreshData() {
     renderCharacters(characters);
   } catch (err) {
     if (grid) {
-      grid.innerHTML = `<p style="color:#ff6b6b;text-align:center;padding:2rem;grid-column:1/-1;">Błąd: ${err.message}</p>`;
+      grid.innerHTML = `<p class="error-msg">Błąd: ${err.message}</p>`;
     }
     console.error(err);
   }
 }
 
-document.addEventListener('DOMContentLoaded', refreshData);
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchView(btn.dataset.view));
+  });
+  refreshData();
+});
+
 window.refreshData = refreshData;
+window.switchView = switchView;

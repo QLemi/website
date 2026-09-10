@@ -55,8 +55,6 @@ body {
   text-shadow: 0 2px 8px rgba(0,0,0,0.8);
   z-index: 1;
 }
-
-/* Na bardzo małych ekranach trochę ciaśniej */
 @media (max-width: 480px) {
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

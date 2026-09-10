@@ -1,12 +1,9 @@
-// =====================================================
-// TUTAJ DODAJESZ / USUWASZ KAFELKI
-// Każdy obiekt = jeden kafelek
-// =====================================================
+
 const tiles = [
   {
     title: "Killer Loadout Checker",
-    image: "./main_image/loadout.jpg",   // link do zdjęcia tła
-    link:  "./loadout/loadout.html"                              // ścieżka do podstrony
+    image: "./main_image/loadout.jpg",   
+    link:  "./loadout/loadout.html"                            
   },
   {
     title: "Tierlista Widzów - De_Destru",
@@ -17,13 +14,15 @@ const tiles = [
     title: "Streaki",
     image: "./main_image/streaki.png",
     link:  "./streaki/streaki.html"
+  },
+  {
+    title: "Statystyki",
+    image: "./main_image/streaki.png",
+    link:  "./streaki/stats.html"
   }
-  // dodaj kolejne obiekty tutaj...
 ];
 
-// =====================================================
-// Kod generujący kafelki (nie musisz go ruszać)
-// =====================================================
+// generacja
 const container = document.getElementById("tiles");
 
 tiles.forEach(tile => {

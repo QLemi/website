@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBD Account Stats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style_stats.css">
+  <script src="config_stats.js"></script>
+  <script>
+    STATS_CONFIG.SHOW_CATEGORY_ICONS = true;
+  </script>
+  <script src="script_stats.js" defer></script>
+</head>
+<body class="mode-killers show-icons">
+  <div class="bg-layer"></div>
+
+  <header>
+    <div class="logo-mark">ACCOUNT STATS</div>
+    <div class="subtitle">Dead by Daylight</div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="stat-chars">0</div>
+        <div class="stat-label">Characters</div>
+      </div>
+      <div class="stat stat-prestige">
+        <div class="stat-value" id="stat-avg-prestige">0 / 0</div>
+        <div class="stat-label-stack">
+          <span>avg prestige</span>
+          <span>median</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-p100">0</div>
+        <div class="stat-label">P100</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-total-prestige">0</div>
+        <div class="stat-label">Total prestige</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-mode">KILLERS</div>
+        <div class="stat-label">Mode</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-title">Character Stats</div>
+    <div class="split-wrap">
+      <div class="split-side" id="split-side"></div>
+      <div class="split-detail" id="split-detail">
+        <div class="split-empty">Loading...</div>
+      </div>
+    </div>
+
+    <div class="section-title">Category Totals</div>
+    <div class="footer-totals" id="footer-totals"></div>
+  </main>
+
+  <div class="demand-dock">
+    <button class="demand-btn" id="demand-toggle-btn" onclick="toggleDemandMode()">Demand <span class="badge" id="demand-count-badge" style="display:none"></span></button>
+    <button class="demand-btn" id="demand-list-btn" onclick="openDemandModal()">Changes</button>
+  </div>
+
+  <div class="demand-modal-overlay hidden" id="demand-modal-overlay">
+    <div class="demand-modal">
+      <div class="demand-modal-head">
+        <div class="demand-modal-title">DEMAND CHANGES</div>
+        <button class="demand-modal-close" onclick="closeDemandModal()">×</button>
+      </div>
+      <div class="demand-modal-body" id="demand-modal-body"></div>
+    </div>
+  </div>
+</body>
+</html>

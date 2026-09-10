@@ -18,7 +18,7 @@ const tiles = [
   {
     title: "Statystyki",
     image: "./main_image/streaki.png",
-    link:  "./streaki/stats.html"
+    link:  "./stats/stats.html"
   }
 ];
 

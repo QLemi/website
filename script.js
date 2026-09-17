@@ -19,6 +19,11 @@ const tiles = [
     title: "Statystyki",
     image: "./main_image/streaki.png",
     link:  "./stats/stats.html"
+  },
+  {
+    title: "Kalendarz",
+    image: "./main_image/kalendarz.png",
+    link:  "./kalendarz/kalendarz.html"
   }
 ];
 

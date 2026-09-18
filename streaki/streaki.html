@@ -37,12 +37,22 @@
       </div>
     </div>
     <div class="controls">
-      <button class="view-btn active" data-view="default">Default</button>
-      <button class="view-btn" data-view="neon">Neon</button>
-      <button class="view-btn" data-view="timeline">Timeline</button>
-      <button class="view-btn" data-view="split">Split</button>
-      <button class="view-btn" data-view="lanes">Lanes</button>
+      <select id="view-select" class="view-select" aria-label="Layout">
+        <option value="default">Default</option>
+        <option value="split">Split</option>
+        <option value="neon">Neon (abandoned)</option>
+        <option value="timeline">Timeline (abandoned)</option>
+        <option value="lanes">Lanes (abandoned)</option>
+      </select>
+      <input type="search" id="streak-search" class="streak-search" placeholder="Search..." autocomplete="off">
       <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
+    </div>
+    <div class="tag-filters">
+      <button class="tag-filter active" data-tag="K">Killer</button>
+      <button class="tag-filter active" data-tag="S">Survivor</button>
+      <button class="tag-filter active" data-tag="O">Both</button>
+      <button class="tag-filter" data-tag="P">Playthrough</button>
+      <button class="tag-filter min-filter active" id="min-streak-filter" type="button">10+</button>
     </div>
   </header>
 

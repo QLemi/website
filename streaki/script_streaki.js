@@ -3,9 +3,13 @@ const SHEET_MAIN_GID = STREAKI_CONFIG.SHEET_MAIN_GID;
 const SHEET_INNE_GID = STREAKI_CONFIG.SHEET_INNE_GID;
 const PORTRAIT_MAP = STREAKI_CONFIG.PORTRAIT_MAP;
 const PLACEHOLDER_IMG = STREAKI_CONFIG.PLACEHOLDER_IMG;
+const TAG_LABELS = STREAKI_CONFIG.TAG_LABELS || { K: 'Killer', S: 'Survivor', O: 'Both', P: 'Playthrough' };
 
 let currentView = STREAKI_CONFIG.DEFAULT_VIEW || 'default';
 let cachedCharacters = null;
+let enabledTags = { K: true, S: true, O: true, P: false };
+let minStreakOnly = true;
+let searchQuery = '';
 
 function parseCSV(text) {
   const rows = [];
@@ -36,11 +40,58 @@ function parseCSV(text) {
   return rows;
 }
 
+function parseTags(raw) {
+  const up = (raw || '').toUpperCase();
+  const tags = [];
+  const seen = new Set();
+  for (let i = 0; i < up.length; i++) {
+    const ch = up[i];
+    if ((ch === 'K' || ch === 'S' || ch === 'O' || ch === 'P') && !seen.has(ch)) {
+      seen.add(ch);
+      tags.push(ch);
+    }
+  }
+  return tags;
+}
+
+function typeFromTags(tags) {
+  if (!tags || !tags.length) return 'killer';
+  const first = tags[0];
+  if (first === 'S') return 'survivor';
+  if (first === 'O') return 'other';
+  if (first === 'P') return 'playthrough';
+  return 'killer';
+}
+
+function mergeTagsOrdered(streaks) {
+  const seen = new Set();
+  const out = [];
+  streaks.forEach(s => {
+    (s.tags || []).forEach(t => {
+      if (!seen.has(t)) { seen.add(t); out.push(t); }
+    });
+  });
+  return out;
+}
+
+function roleLabel(type) {
+  if (type === 'survivor') return 'Survivor';
+  if (type === 'other') return 'Both';
+  if (type === 'playthrough') return 'Playthrough';
+  return 'Killer';
+}
+
+function tagsHtml(tags) {
+  return (tags || []).map(t =>
+    `<span class="tag-chip tag-${t}">${TAG_LABELS[t] || t}</span>`
+  ).join('');
+}
+
 async function loadSheet(gid, mode) {
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Nie udało się pobrać arkusza gid=${gid} (HTTP ${response.status})`);
+    throw new Error(`Failed to load sheet gid=${gid} (HTTP ${response.status})`);
   }
 
   const rows = parseCSV(await response.text());
@@ -58,6 +109,7 @@ async function loadSheet(gid, mode) {
 
   const header = rows[headerRowIndex];
   const dataStart = headerRowIndex + 1;
+  const step = mode === 'inne' ? 4 : 3;
 
   const positions = [];
   for (let col = 0; col < header.length; col++) {
@@ -69,23 +121,22 @@ async function loadSheet(gid, mode) {
 
   for (const { col, name } of positions) {
     const streaks = [];
-    let role = 'killer';
 
     for (let r = dataStart; r < rows.length; r++) {
       const row = rows[r];
-      while (row.length <= col + 2) row.push('');
+      while (row.length <= col + step) row.push('');
 
-      let category, valueRaw, checkRaw;
+      let category, valueRaw, checkRaw, tags;
 
       if (mode === 'inne') {
-        const roleRaw = (row[col] || '').trim().toLowerCase();
-        if (roleRaw === 's' || roleRaw === 'survivor') role = 'survivor';
-        if (roleRaw === 'k' || roleRaw === 'killer') role = 'killer';
-
-        category = name;
-        valueRaw = (row[col + 1] || '').trim();
-        checkRaw = (row[col + 2] || '').trim().toUpperCase();
+        tags = parseTags(row[col]);
+        const wincon = (row[col + 1] || '').trim();
+        category = wincon || name;
+        valueRaw = (row[col + 2] || '').trim();
+        checkRaw = (row[col + 3] || '').trim().toUpperCase();
+        if (!tags.length) tags = ['S'];
       } else {
+        tags = ['K'];
         category = (row[col] || '').trim();
         valueRaw = (row[col + 1] || '').trim();
         checkRaw = (row[col + 2] || '').trim().toUpperCase();
@@ -96,21 +147,25 @@ async function loadSheet(gid, mode) {
       const value = parseInt(valueRaw, 10);
       if (isNaN(value)) continue;
 
-      const isFinished = (checkRaw === 'TRUE' || checkRaw === 'CHECKED' || checkRaw === '✓' || checkRaw === 'YES');
+      const isFinished = (checkRaw === 'TRUE' || checkRaw === 'CHECKED' || checkRaw === '\u2713' || checkRaw === 'YES');
       const active = !isFinished;
 
       streaks.push({
         category: category || 'Streak',
         value,
-        active
+        active,
+        tags
       });
     }
 
     if (streaks.length > 0) {
+      const charTags = mode === 'inne' ? mergeTagsOrdered(streaks) : ['K'];
+      const type = typeFromTags(charTags);
       characters.push({
         image: PORTRAIT_MAP[name] || '',
         name,
-        type: role,
+        type,
+        tags: charTags,
         streaks
       });
     }
@@ -136,6 +191,23 @@ function prepareCharacters(characters) {
   return characters;
 }
 
+function filterCharacters(characters) {
+  const q = searchQuery.trim().toLowerCase();
+  return characters.map(c => {
+    const nameMatch = !q || c.name.toLowerCase().includes(q);
+    const streaks = c.streaks.filter(s => {
+      const tags = (s.tags && s.tags.length) ? s.tags : ['K'];
+      if (!tags.some(t => enabledTags[t])) return false;
+      if (minStreakOnly && s.value < 10) return false;
+      if (nameMatch) return true;
+      return s.category.toLowerCase().includes(q);
+    });
+    if (!streaks.length) return null;
+    const best = Math.max(...streaks.map(s => s.value));
+    return Object.assign({}, c, { streaks, best });
+  }).filter(Boolean);
+}
+
 function updateStats(characters) {
   const totalStreaks = characters.reduce((sum, c) => sum + c.streaks.length, 0);
   const activeCount = characters.reduce((sum, c) => sum + c.streaks.filter(s => s.active).length, 0);
@@ -156,6 +228,13 @@ function pctOfBest(val, best) {
   return Math.min(100, Math.round((val / best) * 100));
 }
 
+function typeClass(type) {
+  if (type === 'survivor') return ' survivor';
+  if (type === 'other') return ' other';
+  if (type === 'playthrough') return ' playthrough';
+  return '';
+}
+
 function renderDefault(characters) {
   const grid = document.getElementById('streak-grid');
   grid.className = 'grid view-default';
@@ -163,7 +242,7 @@ function renderDefault(characters) {
 
   characters.forEach((c, i) => {
     const card = document.createElement('article');
-    card.className = 'card' + (c.type === 'survivor' ? ' survivor' : '');
+    card.className = 'card' + typeClass(c.type);
     card.style.animationDelay = `${i * 0.05}s`;
 
     const streaksHtml = c.streaks.map((s, idx) => `
@@ -177,6 +256,10 @@ function renderDefault(characters) {
     `).join('');
 
     card.innerHTML = `
+      <span class="card-corner tl"></span>
+      <span class="card-corner tr"></span>
+      <span class="card-corner bl"></span>
+      <span class="card-corner br"></span>
       <div class="card-top">
         <div class="portrait">
           <img src="${c.image}" alt="${c.name}" loading="lazy"
@@ -184,7 +267,7 @@ function renderDefault(characters) {
         </div>
         <div class="card-info">
           <div class="killer-name">${c.name}</div>
-          <span class="type-tag type-${c.type}">${c.type === 'killer' ? 'Killer' : 'Survivor'}</span>
+          <div class="card-tags">${tagsHtml(c.tags || [])}</div>
         </div>
         <div class="best-badge">
           <div class="best-label">Best</div>
@@ -205,12 +288,10 @@ function renderNeon(characters) {
   characters.forEach((c, i) => {
     const hasActive = c.streaks.some(s => s.active);
     const card = document.createElement('article');
-    card.className = 'neon-card' + (c.type === 'survivor' ? ' survivor' : '') + (hasActive ? ' has-active' : '');
+    card.className = 'neon-card' + typeClass(c.type) + (hasActive ? ' has-active' : '');
     card.style.animationDelay = `${i * 0.04}s`;
 
-    const ringPct = pctOfBest(c.best, c.best);
     const circ = 2 * Math.PI * 28;
-    const offset = circ * (1 - ringPct / 100);
 
     card.innerHTML = `
       <div class="neon-head">
@@ -218,7 +299,7 @@ function renderNeon(characters) {
           <svg viewBox="0 0 72 72">
             <circle class="track" cx="36" cy="36" r="28"/>
             <circle class="progress" cx="36" cy="36" r="28"
-              stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+              stroke-dasharray="${circ}" stroke-dashoffset="0"/>
           </svg>
           <div class="neon-img">
             <img src="${c.image}" alt="${c.name}" loading="lazy"
@@ -227,7 +308,7 @@ function renderNeon(characters) {
         </div>
         <div class="neon-meta">
           <div class="neon-name">${c.name}</div>
-          <div class="neon-type">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+          <div class="neon-type">${roleLabel(c.type).toUpperCase()}</div>
         </div>
         <div class="neon-best">
           <div class="neon-best-num">${c.best}</div>
@@ -258,7 +339,7 @@ function renderTimeline(characters) {
 
   characters.forEach((c, i) => {
     const block = document.createElement('div');
-    block.className = 'tl-block' + (c.type === 'survivor' ? ' survivor' : '');
+    block.className = 'tl-block' + typeClass(c.type);
     block.style.animationDelay = `${i * 0.05}s`;
 
     block.innerHTML = `
@@ -268,7 +349,7 @@ function renderTimeline(characters) {
                onerror="this.src='${PLACEHOLDER_IMG}'">
         </div>
         <div class="tl-name">${c.name}</div>
-        <div class="tl-type">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+        <div class="tl-type">${roleLabel(c.type).toUpperCase()}</div>
         <div class="tl-best">${c.best}<span>BEST</span></div>
       </div>
       <div class="tl-col">
@@ -307,7 +388,7 @@ function renderSplit(characters) {
 
   characters.forEach((c, i) => {
     const item = document.createElement('div');
-    item.className = 'split-item' + (c.streaks.some(s => s.active) ? ' has-active' : '') + (i === 0 ? ' active' : '') + (c.type === 'survivor' ? ' survivor' : '');
+    item.className = 'split-item' + (c.streaks.some(s => s.active) ? ' has-active' : '') + (i === 0 ? ' active' : '') + typeClass(c.type);
     item.innerHTML = `
       <img src="${c.image}" alt="${c.name}" loading="lazy"
            onerror="this.src='${PLACEHOLDER_IMG}'">
@@ -338,7 +419,7 @@ function showSplitDetail(c, detail) {
       </div>
       <div>
         <div class="split-dname">${c.name}</div>
-        <div class="split-dtype">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+        <div class="card-tags">${tagsHtml(c.tags || [])}</div>
         <div class="split-dbest">${c.best}<span>BEST STREAK</span></div>
       </div>
     </div>
@@ -363,7 +444,7 @@ function renderLanes(characters) {
 
   characters.forEach((c, i) => {
     const lane = document.createElement('div');
-    lane.className = 'lane' + (c.type === 'survivor' ? ' survivor' : '');
+    lane.className = 'lane' + typeClass(c.type);
     lane.style.animationDelay = `${i * 0.05}s`;
 
     lane.innerHTML = `
@@ -372,7 +453,7 @@ function renderLanes(characters) {
              onerror="this.src='${PLACEHOLDER_IMG}'">
         <div>
           <div class="lane-name">${c.name}</div>
-          <div class="lane-type">${c.type === 'killer' ? 'KILLER' : 'SURVIVOR'}</div>
+          <div class="lane-type">${roleLabel(c.type).toUpperCase()}</div>
         </div>
         <div class="lane-best">${c.best}</div>
       </div>
@@ -390,29 +471,59 @@ function renderLanes(characters) {
   });
 }
 
+function getVisibleCharacters() {
+  if (!cachedCharacters) return [];
+  const prepared = prepareCharacters(cachedCharacters.map(c => Object.assign({}, c, { streaks: c.streaks.slice() })));
+  return filterCharacters(prepared);
+}
+
 function renderCharacters(characters) {
-  prepareCharacters(characters);
-  updateStats(characters);
-  cachedCharacters = characters;
+  if (characters) {
+    cachedCharacters = characters;
+  }
+  const visible = getVisibleCharacters();
+  updateStats(visible);
 
-  if (currentView === 'neon') renderNeon(characters);
-  else if (currentView === 'timeline') renderTimeline(characters);
-  else if (currentView === 'split') renderSplit(characters);
-  else if (currentView === 'lanes') renderLanes(characters);
-  else renderDefault(characters);
+  if (currentView === 'neon') renderNeon(visible);
+  else if (currentView === 'timeline') renderTimeline(visible);
+  else if (currentView === 'split') renderSplit(visible);
+  else if (currentView === 'lanes') renderLanes(visible);
+  else renderDefault(visible);
 
-  document.querySelectorAll('.view-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.view === currentView);
-  });
+  const sel = document.getElementById('view-select');
+  if (sel) sel.value = currentView;
 
   document.body.className = 'view-' + currentView;
+  updateFilterButtons();
 }
 
 function switchView(view) {
   currentView = view;
-  if (cachedCharacters) {
-    renderCharacters(cachedCharacters);
-  }
+  renderCharacters();
+}
+
+function toggleTag(tag) {
+  enabledTags[tag] = !enabledTags[tag];
+  renderCharacters();
+}
+
+function toggleMinStreak() {
+  minStreakOnly = !minStreakOnly;
+  renderCharacters();
+}
+
+function updateFilterButtons() {
+  document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
+    const tg = btn.dataset.tag;
+    btn.classList.toggle('active', !!enabledTags[tg]);
+  });
+  const minBtn = document.getElementById('min-streak-filter');
+  if (minBtn) minBtn.classList.toggle('active', minStreakOnly);
+}
+
+function setSearch(q) {
+  searchQuery = q || '';
+  renderCharacters();
 }
 
 async function refreshData() {
@@ -426,18 +537,30 @@ async function refreshData() {
     renderCharacters(characters);
   } catch (err) {
     if (grid) {
-      grid.innerHTML = `<p class="error-msg">Błąd: ${err.message}</p>`;
+      grid.innerHTML = `<p class="error-msg">Error: ${err.message}</p>`;
     }
     console.error(err);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.view-btn').forEach(btn => {
-    btn.addEventListener('click', () => switchView(btn.dataset.view));
+  const sel = document.getElementById('view-select');
+  if (sel) {
+    sel.addEventListener('change', () => switchView(sel.value));
+  }
+  document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
+    btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
   });
+  const minBtn = document.getElementById('min-streak-filter');
+  if (minBtn) minBtn.addEventListener('click', toggleMinStreak);
+  const search = document.getElementById('streak-search');
+  if (search) {
+    search.addEventListener('input', () => setSearch(search.value));
+  }
   refreshData();
 });
 
 window.refreshData = refreshData;
 window.switchView = switchView;
+window.toggleTag = toggleTag;
+window.toggleMinStreak = toggleMinStreak;

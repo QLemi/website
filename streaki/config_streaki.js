@@ -55,5 +55,19 @@ const STREAKI_CONFIG = {
 
   PLACEHOLDER_IMG: 'https://via.placeholder.com/120x120/1a0a0c/8b0000?text=?',
 
-  DEFAULT_VIEW: 'default'
+  DEFAULT_VIEW: 'default',
+
+  ROLE_COLORS: {
+    K: '#c41e3a',
+    S: '#14b8a6',
+    O: '#a855f7',
+    P: '#f59e0b'
+  },
+
+  TAG_LABELS: {
+    K: 'Killer',
+    S: 'Survivor',
+    O: 'Both',
+    P: 'Playthrough'
+  }
 };

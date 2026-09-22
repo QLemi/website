@@ -24,6 +24,11 @@ const tiles = [
     title: "Kalendarz",
     image: "./main_image/kalendarz.png",
     link:  "./kalendarz/kalendarz.html"
+  },
+  {
+    title: "DBD Killers Info",
+    image: "./main_image/unknown.png",
+    link:  "./kalendarz/DBDKillersInfo.html"
   }
 ];
 

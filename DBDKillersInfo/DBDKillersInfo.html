@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBD Killer Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar">
+      <div class="nav-brand">🩸 DBD Killer Hub</div>
+      <div class="nav-links nav-primary">
+        <button class="nav-btn active" data-tab="killers">Killers</button>
+        <button class="nav-btn" data-tab="builds">Builds</button>
+      </div>
+      <div class="nav-links nav-admin">
+        <button class="nav-btn nav-btn-muted" data-tab="editor" title="Data Editor">⚙ Editor</button>
+        <button class="nav-btn nav-btn-muted" data-tab="settings" title="Settings">⚙ Settings</button>
+      </div>
+    </nav>
+
+    <main id="main-content">
+      <!-- KILLERS -->
+      <section id="tab-killers" class="tab active">
+        <div id="killers-list-view">
+          <div class="section-header">
+            <h1>Killers</h1>
+            <div class="filters">
+              <input type="text" id="killer-search" placeholder="Search killers..." oninput="renderKillers()">
+              <select id="filter-difficulty" onchange="renderKillers()">
+                <option value="">Difficulty</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+                <option value="Very Hard">Very Hard</option>
+                <option value="Extremely Hard">Extremely Hard</option>
+              </select>
+              <select id="filter-fun" onchange="renderKillers()">
+                <option value="">Fun to Play</option>
+                <option value="9+">≥ 9</option>
+                <option value="7+">≥ 7</option>
+                <option value="5+">≥ 5</option>
+                <option value="7-10">7 – 10</option>
+                <option value="5-6.9">5 – 6.9</option>
+                <option value="3-4.9">3 – 4.9</option>
+                <option value="0-2.9">0 – 2.9</option>
+              </select>
+              <select id="filter-skill" onchange="renderKillers()">
+                <option value="">Skill</option>
+                <option value="ceil9+">Ceiling ≥ 9</option>
+                <option value="ceil8+">Ceiling ≥ 8</option>
+                <option value="ceil7+">Ceiling ≥ 7</option>
+                <option value="ceil5+">Ceiling ≥ 5</option>
+                <option value="ceil3-6">Ceiling 3–6</option>
+                <option value="floor7+">Floor ≥ 7</option>
+                <option value="floor5+">Floor ≥ 5</option>
+                <option value="floor3+">Floor ≥ 3</option>
+                <option value="easy-entry">Floor ≤ 4 (easier entry)</option>
+                <option value="high-skill">High skill (ceil ≥ 8)</option>
+                <option value="wide-range">Wide range (ceil−floor ≥ 4)</option>
+                <option value="narrow">Narrow range (≤ 2)</option>
+              </select>
+              <div class="filter-dropdown" id="filter-tags-wrap">
+                <button type="button" class="btn filter-drop-btn" onclick="toggleKillerTagsPanel(event)">Tags <span id="filter-tags-count" class="filter-count"></span> ▾</button>
+                <div class="filter-drop-panel" id="filter-tags-panel" hidden></div>
+              </div>
+              <button type="button" class="btn" id="btn-show-all-tags" onclick="toggleShowAllTags()" title="Show every tag on each killer card">All tags: Off</button>
+              <select id="sort-by" onchange="renderKillers()">
+                <option value="releaseDate">Release date (oldest)</option>
+                <option value="releaseDesc">Release date (newest)</option>
+                <option value="name">Name A–Z</option>
+                <option value="nameDesc">Name Z–A</option>
+                <option value="tier">Tier rank</option>
+                <option value="skillCeiling">Skill ceiling (high)</option>
+                <option value="skillFloor">Skill floor (high)</option>
+                <option value="fun2play">Fun to Play (high)</option>
+                <option value="funAsc">Fun to Play (low)</option>
+                <option value="difficulty">Difficulty (easy first)</option>
+                <option value="difficultyDesc">Difficulty (hard first)</option>
+                <option value="chapter">Chapter</option>
+              </select>
+              <button type="button" class="btn btn-sm" onclick="resetKillerFilters()" title="Reset filters">↺ Reset</button>
+            </div>
+          </div>
+          <div id="killers-container" class="killers-grid"></div>
+        </div>
+
+        <!-- Detail view (zamiast modala) -->
+        <div id="killer-detail-view" class="killer-detail-view" hidden>
+          <button class="btn back-btn" onclick="closeKillerDetail()">← Back to list</button>
+          <div id="killer-detail-content"></div>
+        </div>
+      </section>
+
+      <!-- BUILDY -->
+      <section id="tab-builds" class="tab">
+        <div class="section-header">
+          <h1>Build library</h1>
+          <div class="filters">
+            <input type="text" id="build-search" placeholder="Search builds, perks, tags..." oninput="renderBuilds()">
+            <select id="build-killer-filter" onchange="renderBuilds()">
+              <option value="">All killers</option>
+            </select>
+            <div class="filter-dropdown" id="build-filter-tags-wrap">
+              <button type="button" class="btn filter-drop-btn" onclick="toggleBuildTagsPanel(event)">Tags <span id="build-filter-tags-count" class="filter-count"></span> ▾</button>
+              <div class="filter-drop-panel" id="build-filter-tags-panel" hidden></div>
+            </div>
+            <div class="patch-filter-group" title="Filter by build patch">
+              <select id="build-patch-op" onchange="renderBuilds()">
+                <option value="=">=</option>
+                <option value=">">&gt;</option>
+                <option value=">=">&gt;=</option>
+                <option value="<">&lt;</option>
+                <option value="<=">&lt;=</option>
+              </select>
+              <select id="build-patch-value" onchange="renderBuilds()">
+                <option value="">Patch</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-sm" onclick="resetBuildFilters()" title="Reset filters">↺ Reset</button>
+          </div>
+        </div>
+        <!-- BEZ przycisku + New build -->
+        <div id="builds-container" class="builds-list"></div>
+        
+      </section>
+
+      <!-- DATA EDITOR -->
+      <section id="tab-editor" class="tab">
+        <h1>Data Editor</h1>
+        <div id="editor-unsaved-banner" class="editor-unsaved-banner" hidden></div>
+        <p class="hint">
+          Edit data, then generate code for <code>data.js</code>.
+          New perks: “Quick add” + snippet for <code>config.js</code>.
+          Addons come from Otz tierlist (no local addon images).
+        </p>
+        <div class="editor-tabs">
+          <button class="editor-tab active" data-editor="killers">Killers</button>
+          <button class="editor-tab" data-editor="builds">Builds</button>
+          <button class="editor-tab" data-editor="killer-tags">Killer tags</button>
+          <button class="editor-tab" data-editor="build-tags">Build tags</button>
+          <button class="editor-tab" data-editor="perks">Perks</button>
+          
+        </div>
+        <div id="editor-killers" class="editor-panel active">
+          <div class="editor-toolbar">
+            <button class="btn btn-primary" onclick="openDetailedKillerForm()">+ Add killer</button>
+          </div>
+          <div id="editor-killers-list"></div>
+        </div>
+        <div id="editor-builds" class="editor-panel">
+          <div class="editor-toolbar">
+            <button class="btn btn-primary" onclick="openBuildModal()">+ New build</button>
+            <p class="hint-inline">Addons optional (build can target multiple killers).</p>
+          </div>
+          <div id="editor-builds-list"></div>
+        </div>
+        <div id="editor-killer-tags" class="editor-panel">
+          <div class="editor-toolbar"><button class="btn" onclick="addEditorTag('killer')">+ Add killer tag</button></div>
+          <div id="editor-killer-tags-list"></div>
+        </div>
+        <div id="editor-build-tags" class="editor-panel">
+          <div class="editor-toolbar"><button class="btn" onclick="addEditorTag('build')">+ Add build tag</button></div>
+          <div id="editor-build-tags-list"></div>
+        </div>
+        <div id="editor-perks" class="editor-panel">
+          <div class="editor-toolbar">
+            <button class="btn" onclick="quickAddPerk()">+ Add perk</button>
+          </div>
+          <div id="perk-add-form" class="inline-add-form" hidden>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Perk name (exact in-game)</label>
+                <input id="new-perk-name" placeholder="">
+              </div>
+              <div class="form-group">
+                <label>Icon URL (wiki.gg)</label>
+                <input id="new-perk-url" placeholder="">
+              </div>
+            </div>
+            <div class="modal-actions" style="justify-content:flex-start;margin-top:0.5rem">
+              <button class="btn btn-primary" type="button" onclick="submitNewPerk()">Add perk</button>
+              <button class="btn" type="button" onclick="cancelNewPerk()">Cancel</button>
+            </div>
+            <div id="perk-config-snippet" hidden style="margin-top:0.75rem">
+              <p class="hint">Paste into <code>config.js</code> → <code>perkIcons</code>:</p>
+              <textarea rows="2" style="width:100%;font-family:monospace;background:#0d0d0d;color:#8f8;padding:0.5rem;border-radius:6px;border:1px solid #333"></textarea>
+              <button class="btn btn-sm" type="button" onclick="copyPerkSnippet()" style="margin-top:0.35rem">Copy snippet</button>
+            </div>
+          </div>
+          <div id="editor-perks-list"></div>
+        </div>
+        <div class="editor-actions">
+          <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js code</button>
+          <button class="btn" onclick="document.getElementById('import-file').click()">⬆ Import data (.js / .json)</button>
+          <input type="file" id="import-file" accept=".js,.json,text/javascript,application/json" style="display:none" onchange="importJSON(event)">
+        </div>
+        <textarea id="generated-code" rows="14" placeholder=""></textarea>
+        <button class="btn" onclick="copyGeneratedCode()">Copy code</button>
+      </section>
+
+      <section id="tab-settings" class="tab">
+        <h1>Settings</h1>
+
+        <div class="settings-grid">
+          <div class="settings-box">
+            <h3>Import / reset</h3>
+            <p class="hint">Import accepts <code>data.js</code> or JSON.</p>
+            <div class="settings-actions">
+              <button class="btn" type="button" onclick="document.getElementById('import-file2').click()">Import (.js / .json)</button>
+              <input type="file" id="import-file2" accept=".js,.json,text/javascript,application/json" style="display:none" onchange="importJSON(event)">
+              <button class="btn btn-danger" type="button" onclick="resetAllData()">Reset to starter data</button>
+            </div>
+          </div>
+          <div class="settings-box">
+            <h3>Where to save</h3>
+            <ul class="settings-list">
+              <li>Killers, builds, tags → Editor → Generate → <code>data/data.js</code></li>
+              <li>Portraits & perk icons → <code>data/config.js</code></li>
+              <li>Otz addons → form below → <code>data/otz-addons.js</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="settings-box">
+          <h3>Merge two data files</h3>
+          <p class="hint">Same <code>id</code> → fields merged (non-empty fills gaps; B wins on conflict).</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>File A</label>
+              <input type="file" id="merge-file-a" accept=".js,.json,text/javascript,application/json">
+            </div>
+            <div class="form-group">
+              <label>File B</label>
+              <input type="file" id="merge-file-b" accept=".js,.json,text/javascript,application/json">
+            </div>
+          </div>
+          <label class="hint merge-live-label">
+            <input type="checkbox" id="merge-include-live" checked>
+            Also merge current page data
+          </label>
+          <div class="settings-actions">
+            <button type="button" class="btn btn-primary" onclick="runDataMerge()">Merge</button>
+            <button type="button" class="btn" onclick="applyMergedToLive()" id="btn-apply-merge" disabled>Apply to page</button>
+            <button type="button" class="btn" onclick="copyMergedDataJs()" id="btn-copy-merge" disabled>Copy as data.js</button>
+            <button type="button" class="btn" onclick="toggleMergeChanges()" id="btn-merge-changes" disabled>Show changes</button>
+          </div>
+          <p id="merge-status" class="hint"></p>
+          <div id="merge-changes" class="merge-changes" hidden></div>
+          <textarea id="merge-result" rows="8" class="code-area" placeholder="Merged INITIAL_DATA…" readonly></textarea>
+        </div>
+
+        <div class="settings-box">
+          <h3>Otz addons</h3>
+          <p class="hint">
+            Otz folder ID = png name on
+            <a href="https://otz-addon-tierlist.pages.dev/" target="_blank" rel="noopener">otz-addon-tierlist</a>
+            (e.g. <code>chucky</code>). File key = your <code>killer.id</code>.
+            Fetch → Copy → paste into <code>OTZ_ADDONS</code> in <code>data/otz-addons.js</code>.
+          </p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Otz folder ID</label>
+              <input id="otz-fetch-id" placeholder="chucky" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label>File key = killer.id</label>
+              <input id="otz-fetch-mapname" placeholder="optional" autocomplete="off">
+            </div>
+          </div>
+          <div class="settings-actions">
+            <button type="button" class="btn btn-primary" onclick="fetchOtzKillerSnippet()">Fetch</button>
+            <button type="button" class="btn" onclick="copyOtzSnippet()">Copy</button>
+          </div>
+          <p id="otz-update-status" class="hint"></p>
+          <textarea id="otz-snippet-out" rows="8" class="code-area" placeholder="Snippet for OTZ_ADDONS…"></textarea>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal" id="modal-content" onclick="event.stopPropagation()"></div>
+  </div>
+
+  <script src="data/config.js"></script>
+  <script src="data/otz-addons.js"></script>
+  <script src="data/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

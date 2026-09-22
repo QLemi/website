@@ -1,6 +1,6 @@
 // ============================================
 // DBD KILLER HUB - START DATA
-// Wygenerowano: 22.09.2026, 20:40:40
+// Wygenerowano: 22.09.2026, 20:59:10
 // ============================================
 
 const INITIAL_DATA = {
@@ -75,7 +75,7 @@ const INITIAL_DATA = {
     {
       "id": "hillbilly",
       "name": "The Hillbilly",
-      "difficulty": "Very Hard",
+      "difficulty": "Extremely Hard",
       "skillFloor": 7.5,
       "skillCeiling": 10,
       "personalRank": 0,
@@ -384,11 +384,11 @@ const INITIAL_DATA = {
       "id": "spirit",
       "name": "The Spirit",
       "difficulty": "Hard",
-      "skillFloor": 0,
-      "skillCeiling": 0,
+      "skillFloor": 6.2,
+      "skillCeiling": 9.5,
       "personalRank": 0,
-      "tier": "",
-      "fun2play": 0,
+      "tier": "A-",
+      "fun2play": 5.5,
       "tags": [
         "HighSkill",
         "Snowball",
@@ -402,13 +402,24 @@ const INITIAL_DATA = {
       "guide": "placeholder",
       "vsNotes": "placeholder",
       "addonNotes": "placeholder",
-      "recommendedAddons": [],
+      "recommendedAddons": [
+        "Rusty Flute",
+        "Muddy Sports Day Cap"
+      ],
       "patch": "10.1.2",
       "releaseDate": "2018-09-18",
       "releaseOrder": 13,
       "chapter": "Chapter 9: Shattered Bloodline",
       "update": "2.2.0",
-      "recommendedCombos": []
+      "recommendedCombos": [
+        {
+          "name": "Best Combo",
+          "addons": [
+            "Rusty Flute",
+            "Muddy Sports Day Cap"
+          ]
+        }
+      ]
     },
     {
       "id": "legion",
@@ -913,7 +924,7 @@ const INITIAL_DATA = {
     {
       "id": "skullmerchant",
       "name": "The Skull Merchant",
-      "difficulty": "Easy",
+      "difficulty": "Beginner",
       "skillFloor": 1,
       "skillCeiling": 5.5,
       "personalRank": 0,
@@ -943,11 +954,11 @@ const INITIAL_DATA = {
       "id": "singularity",
       "name": "The Singularity",
       "difficulty": "Very Hard",
-      "skillFloor": 0,
-      "skillCeiling": 0,
+      "skillFloor": 7.2,
+      "skillCeiling": 8.5,
       "personalRank": 0,
-      "tier": "",
-      "fun2play": 0,
+      "tier": "B+",
+      "fun2play": 6.8,
       "tags": [
         "HighSkill",
         "AreaControl",
@@ -964,7 +975,7 @@ const INITIAL_DATA = {
       "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
-      "patch": "",
+      "patch": "10.1.2",
       "releaseDate": "2023-06-13",
       "releaseOrder": 32,
       "chapter": "Chapter 28: End Transmission",
@@ -1109,13 +1120,24 @@ const INITIAL_DATA = {
       "guide": "placeholder",
       "vsNotes": "placeholder",
       "addonNotes": "placeholder",
-      "recommendedAddons": [],
+      "recommendedAddons": [
+        "Medusa's Hair",
+        "Lapis Lazuli"
+      ],
       "patch": "10.1.2",
       "releaseDate": "2024-08-27",
       "releaseOrder": 37,
       "chapter": "Chapter 33: Castlevania",
       "update": "8.2.0",
-      "recommendedCombos": []
+      "recommendedCombos": [
+        {
+          "name": "",
+          "addons": [
+            "Medusa's Hair",
+            "Lapis Lazuli"
+          ]
+        }
+      ]
     },
     {
       "id": "houndmaster",

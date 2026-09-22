@@ -1,6 +1,6 @@
 // ============================================
 // DBD KILLER HUB - START DATA
-// Wygenerowano: 22.09.2026, 20:59:10
+// Wygenerowano: 22.09.2026, 23:15:42
 // ============================================
 
 const INITIAL_DATA = {
@@ -12,7 +12,7 @@ const INITIAL_DATA = {
       "skillFloor": 1,
       "skillCeiling": 4,
       "personalRank": 0,
-      "tier": "",
+      "tier": "F+",
       "fun2play": 7.3,
       "tags": [
         "M1",
@@ -50,7 +50,7 @@ const INITIAL_DATA = {
       "skillFloor": 1,
       "skillCeiling": 5,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D-",
       "fun2play": 7,
       "tags": [
         "HighMobility",
@@ -153,7 +153,7 @@ const INITIAL_DATA = {
       "skillFloor": 2,
       "skillCeiling": 5,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D+",
       "fun2play": 8,
       "tags": [
         "Stealth",
@@ -186,7 +186,7 @@ const INITIAL_DATA = {
       "skillFloor": 4,
       "skillCeiling": 6,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E-",
       "fun2play": 2,
       "tags": [
         "AreaControl",
@@ -215,7 +215,7 @@ const INITIAL_DATA = {
       "skillFloor": 2,
       "skillCeiling": 5,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E+",
       "fun2play": 6,
       "tags": [
         "M1",
@@ -243,7 +243,7 @@ const INITIAL_DATA = {
       "skillFloor": 2,
       "skillCeiling": 6,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D",
       "fun2play": 6,
       "tags": [
         "BeginnerFriendly",
@@ -272,7 +272,7 @@ const INITIAL_DATA = {
       "skillFloor": 3,
       "skillCeiling": 6,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E",
       "fun2play": 8,
       "tags": [
         "CampingPotential ",
@@ -299,7 +299,7 @@ const INITIAL_DATA = {
       "skillFloor": 2,
       "skillCeiling": 6.2,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C",
       "fun2play": 8,
       "tags": [
         "BeginnerFriendly",
@@ -329,7 +329,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E",
       "fun2play": 0,
       "tags": [
         "Stealth",
@@ -358,7 +358,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D",
       "fun2play": 0,
       "tags": [
         "BeginnerFriendly",
@@ -428,7 +428,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E+",
       "fun2play": 0,
       "tags": [
         "BeginnerFriendly",
@@ -455,7 +455,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "B-",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -486,7 +486,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "F+",
       "fun2play": 0,
       "tags": [
         "Stealth",
@@ -516,7 +516,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D-",
       "fun2play": 0,
       "tags": [
         "2TapPotential ",
@@ -545,7 +545,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C+",
       "fun2play": 0,
       "tags": [
         "Snowball",
@@ -574,7 +574,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -603,7 +603,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C-",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -665,7 +665,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "B-",
       "fun2play": 0,
       "tags": [
         "HighMobility",
@@ -697,7 +697,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D-",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -727,7 +727,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E+",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -753,7 +753,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E+",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -782,7 +782,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C+",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -809,7 +809,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E-",
       "fun2play": 0,
       "tags": [
         "Stealth",
@@ -840,7 +840,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E",
       "fun2play": 0,
       "tags": [
         "Snowball",
@@ -870,7 +870,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C",
       "fun2play": 0,
       "tags": [
         "BeginnerFriendly",
@@ -900,7 +900,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E+",
       "fun2play": 0,
       "tags": [
         "AreaControl",
@@ -989,7 +989,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -1018,7 +1018,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C",
       "fun2play": 0,
       "tags": [
         "Stealth",
@@ -1047,7 +1047,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C-",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -1078,7 +1078,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D+",
       "fun2play": 0,
       "tags": [
         "HighMobility",
@@ -1146,7 +1146,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "E-",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -1204,7 +1204,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "D",
       "fun2play": 0,
       "tags": [
         "Stealth",
@@ -1235,7 +1235,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "C-",
       "fun2play": 0,
       "tags": [
         "HighMobility",
@@ -1265,7 +1265,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "B",
       "fun2play": 0,
       "tags": [
         "Range",
@@ -1295,7 +1295,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "",
+      "tier": "B+",
       "fun2play": 0,
       "tags": [
         "HighMobility",

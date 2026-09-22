@@ -2,7 +2,7 @@
 // DBD KILLER HUB - MAIN SCRIPT v4
 // ============================================
 
-const STORAGE_KEY = "dbd_killer_hub_v46";
+const STORAGE_KEY = "dbd_killer_hub_v47";
 
 let state = { killers: [], builds: [], tags: [], perks: [], addons: [] };
 
@@ -870,30 +870,45 @@ function setComboName(ci, val) {
   if (formSelectedCombos[ci]) formSelectedCombos[ci].name = val;
 }
 
+function getComboOtzList() {
+  if (typeof getOtzAddonsForKiller !== "function") return [];
+  const name = document.getElementById("k-name")?.value?.trim() || "";
+  const id = document.getElementById("k-id")?.value?.trim() || window._editingKillerId || "";
+  // Prefer full object so id-based Otz keys work (chucky, jason, …)
+  if (id || name) {
+    const list = getOtzAddonsForKiller({ id, name }) || [];
+    if (list.length) return list;
+  }
+  if (name) return getOtzAddonsForKiller(name) || [];
+  if (id) return getOtzAddonsForKiller(id) || [];
+  return [];
+}
+
 function renderComboBoxes(killerName) {
   ensureComboBoxes();
   const container = document.getElementById("combo-boxes-container");
   const hint = document.getElementById("k-combo-hint");
   if (!container) return;
-  const list = (typeof getOtzAddonsForKiller === "function" && killerName)
-    ? getOtzAddonsForKiller(killerName) : [];
+  const list = getComboOtzList();
+  // Keep pool for click handler (avoid fragile inline JS with special chars in names)
+  window._comboOtzPool = list;
   if (hint) {
     hint.textContent = list.length
-      ? "Name each combo and pick up to 2 addons."
-      : "Enter a known killer name to load Otz addons";
+      ? "Name each combo and pick up to 2 addons (click again to remove)."
+      : "No Otz addons for this killer — check killer.id matches OTZ_ADDONS key.";
   }
   container.innerHTML = formSelectedCombos.map((combo, ci) => {
     const selected = (combo.addons || []).map(x => String(x).toLowerCase());
     const chips = (combo.addons || []).map((name, ai) => `
       <span class="chip" style="background:#1a1520;border-color:#5a4a6a;color:#d0c0e0">
         ${escapeHtml(name)}
-        <button type="button" class="chip-x" onclick='toggleComboAddon(${ci}, ${JSON.stringify(name)})'>×</button>
+        <button type="button" class="chip-x" data-combo-ci="${ci}" data-combo-ai="${ai}" title="Remove">×</button>
       </span>`).join("");
-    const grid = list.map((a) => {
-      const on = selected.includes(a.name.toLowerCase());
-      return `<button type="button" class="addon-pick-btn ${on ? "on" : ""}" onclick='toggleComboAddon(${ci}, ${JSON.stringify(a.name)})'>
-        ${a.img ? `<img src="${a.img}" alt="">` : ""}
-        <span class="tier">${a.tier || ""}</span>
+    const grid = list.map((a, ai) => {
+      const on = selected.includes(String(a.name).toLowerCase());
+      return `<button type="button" class="addon-pick-btn ${on ? "on" : ""}" data-combo-ci="${ci}" data-otz-ai="${ai}" title="${escapeAttr(a.name)}">
+        ${a.img ? `<img src="${escapeAttr(a.img)}" alt="" loading="lazy">` : ""}
+        <span class="tier">${escapeHtml(a.tier || "")}</span>
         <span class="aname">${escapeHtml(a.name)}</span>
       </button>`;
     }).join("");
@@ -907,9 +922,35 @@ function renderComboBoxes(killerName) {
           <button type="button" class="btn btn-sm btn-danger" onclick="removeComboBox(${ci})">Remove</button>
         </div>
         <div class="chip-list">${chips || '<span style="color:var(--text-dim);font-size:0.8rem">No addons</span>'}</div>
-        <div class="addon-picker-grid">${grid || ""}</div>
+        <div class="addon-picker-grid">${grid || (list.length ? "" : '<span style="color:var(--text-dim);font-size:0.8rem">No list</span>')}</div>
       </div>`;
   }).join("");
+
+  // Event delegation — works with any characters in addon names
+  container.querySelectorAll(".addon-pick-btn[data-otz-ai]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const ci = +btn.dataset.comboCi;
+      const ai = +btn.dataset.otzAi;
+      const pool = window._comboOtzPool || [];
+      const a = pool[ai];
+      if (!a || !a.name) return;
+      toggleComboAddon(ci, a.name);
+    });
+  });
+  container.querySelectorAll(".chip-x[data-combo-ci]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const ci = +btn.dataset.comboCi;
+      const ai = +btn.dataset.comboAi;
+      ensureComboBoxes();
+      if (!formSelectedCombos[ci]) return;
+      formSelectedCombos[ci].addons.splice(ai, 1);
+      renderComboBoxes();
+    });
+  });
 }
 
 function toggleComboAddon(ci, name) {
@@ -922,7 +963,7 @@ function toggleComboAddon(ci, name) {
     if (arr.length >= 2) { showToast("Max 2 addons per combo"); return; }
     arr.push(name);
   }
-  renderComboBoxes(document.getElementById("k-name")?.value);
+  renderComboBoxes();
 }
 
 function setupKillerComboPicker(killerName) {
@@ -1051,7 +1092,7 @@ function findOtzAddonImg(addonName, killerIds) {
   for (const kid of ids) {
     const killer = state.killers.find(k => k.id === kid);
     if (!killer) continue;
-    const list = getOtzAddonsForKiller(killer.name) || [];
+    const list = getOtzAddonsForKiller(killer) || getOtzAddonsForKiller(killer.name) || [];
     const found = list.find(a => a.name.toLowerCase() === String(addonName).toLowerCase());
     if (found) return found.img;
   }
@@ -1205,7 +1246,7 @@ function refreshBuildAddonPool() {
   if (checked.length === 1) {
     const killer = state.killers.find(k => k.id === checked[0]);
     if (killer && typeof getOtzAddonsForKiller === "function") {
-      const list = getOtzAddonsForKiller(killer.name) || [];
+      const list = getOtzAddonsForKiller(killer) || getOtzAddonsForKiller(killer.name) || [];
       formAddonPool = list.map(a => ({ name: a.name, img: a.img, tier: a.tier }));
     }
   }
@@ -1234,7 +1275,7 @@ function renderAddonPickerGrid() {
     return;
   }
   grid.innerHTML = formAddonPool.map((a, idx) => {
-    const on = selectedNames.includes(a.name);
+    const on = selectedNames.some(n => String(n).toLowerCase() === String(a.name).toLowerCase());
     return `<button type="button" class="addon-pick-btn ${on ? "on" : ""}" data-addon-idx="${idx}" title="${escapeAttr(a.name)} (${a.tier || "?"})">
       ${a.img ? `<img src="${a.img}" alt="">` : ""}
       <span class="tier">${a.tier || ""}</span>
@@ -1246,9 +1287,9 @@ function renderAddonPickerGrid() {
       const a = formAddonPool[+btn.dataset.addonIdx];
       if (!a) return;
       const selectedNames = formSelectedAddons.map(x => typeof x === "string" ? x : x.name);
-      if (selectedNames.includes(a.name)) {
-        const i = formSelectedAddons.findIndex(x => (typeof x === "string" ? x : x.name) === a.name);
-        if (i >= 0) formSelectedAddons.splice(i, 1);
+      const hit = selectedNames.findIndex(n => String(n).toLowerCase() === String(a.name).toLowerCase());
+      if (hit >= 0) {
+        formSelectedAddons.splice(hit, 1);
       } else {
         addFormAddon(a);
         return;
@@ -1310,7 +1351,8 @@ function setupAddonSearch(inputId, dropdownId) {
 
 function addFormAddon(addon) {
   if (typeof addon === "string") addon = { name: addon, img: null, tier: null };
-  if (formSelectedAddons.some(x => (typeof x === "string" ? x : x.name) === addon.name)) return;
+  if (!addon || !addon.name) return;
+  if (formSelectedAddons.some(x => String(typeof x === "string" ? x : x.name).toLowerCase() === String(addon.name).toLowerCase())) return;
   if (formSelectedAddons.length >= 2) { showToast("Max 2 addons"); return; }
   formSelectedAddons.push(addon);
   renderChipList("form-addon-chips", formSelectedAddons.map(x => typeof x === "string" ? x : x.name), "addon");

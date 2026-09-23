@@ -1,6 +1,7 @@
 // ============================================
 // DBD KILLER HUB - START DATA
-// Wygenerowano: 23.09.2026, 10:47:25
+// Generated: 23.09.2026, 12:37:57
+// Paste this entire file as data/data.js
 // ============================================
 
 const INITIAL_DATA = {
@@ -20,8 +21,8 @@ const INITIAL_DATA = {
         "BeginnerFriendly",
         "Setup"
       ],
-      "notes": "Trapper czyli Evan największa sigiemka jaką można sobie wyobrazić, pomimo tego, że jest to niemal harmless killer sprawia naprawdę dużo funu w pub meczach gdzie ludzie zazwyczaj rąk nie mają. W comp dbd killer nigdy nie grany ze względu na jego względnie nudny gameplay i totalny brak mocy",
-      "guide": "Podnoszenie swojej mocy z ziemi to nie najlepszy design killera. Dlatego niesamowicie pomocny jest trapper sack, niestetny ma ogromny downsite w postaci braku podnoszenia trapów.\nCore perkiem na Evanie to oczywiście Corrupt.\nMożna grać buildy typowo pod gen slowdown jednak trapper potrzebuje tych chase perków, na pubie nie jest to aż tak wymagane no chyba, że spotkamy dobry team.",
+      "notes": "Trapper czyli Evan największa sigiemka jaką można sobie wyobrazić, pomimo tego, że jest to niemal harmless killer sprawia naprawdę dużo funu w pub meczach gdzie ludzie zazwyczaj rąk nie mają. W comp dbd killer nigdy nie grany ze względu na jego względnie nudny gameplay i totalny brak mocy.",
+      "guide": "Podnoszenie swojej mocy z ziemi to nie najlepszy design killera. \nDlatego niesamowicie pomocny jest trapper sack, niestetny ma ogromny downsite w postaci braku podnoszenia trapów.\n> Core perkiem na Evanie to oczywiście Corrupt.\nMożna grać buildy typowo pod gen slowdown jednak trapper potrzebuje tych chase perków, na pubie nie jest to aż tak wymagane no chyba, że spotkamy dobry team.\nGłupie też nie jest w większości używanie chase perków, skłaniałbym sie bardziej do tych skracajacych cooldown m1 lub haste niż np bamboozle (który tez nie jest złym wyborem). Rapid może być kuszącym wyborem ale brak bloodlusta to zbyt potęzna kara dla tego killera aby używać tego perka.",
       "vsNotes": "placeholder",
       "addonNotes": "Klasyczne połączenie Honing Stone z Iri Stonem daje ogrom zaoszczędzonego czasu i marnowania czasu surwów poprzez wymaganie 2 surwa do ratunku.",
       "recommendedAddons": [
@@ -35,11 +36,51 @@ const INITIAL_DATA = {
       "update": "1.0.0",
       "recommendedCombos": [
         {
-          "name": "Best Combo",
+          "name": "1st Best Combo",
           "addons": [
             "Honing Stone",
             "Iridescent Stone"
           ]
+        },
+        {
+          "name": "2nd Best Combo",
+          "addons": [
+            "Iridescent Stone",
+            "Bloody Coil"
+          ]
+        },
+        {
+          "name": "Good Value",
+          "addons": [
+            "Trapper Bag",
+            "Fastening Tools"
+          ]
+        }
+      ],
+      "contentSections": [
+        {
+          "key": "notes",
+          "title": "Short Note",
+          "body": "Trapper czyli Evan największa sigiemka jaką można sobie wyobrazić, pomimo tego, że jest to niemal harmless killer sprawia naprawdę dużo funu w pub meczach gdzie ludzie zazwyczaj rąk nie mają. W comp dbd killer nigdy nie grany ze względu na jego względnie nudny gameplay i totalny brak mocy.",
+          "builtin": true
+        },
+        {
+          "key": "guide",
+          "title": "Guide / How to Play",
+          "body": "Podnoszenie swojej mocy z ziemi to nie najlepszy design killera. \nDlatego niesamowicie pomocny jest trapper sack, niestetny ma ogromny downsite w postaci braku podnoszenia trapów.\n> Core perkiem na Evanie to oczywiście Corrupt.\nMożna grać buildy typowo pod gen slowdown jednak trapper potrzebuje tych chase perków, na pubie nie jest to aż tak wymagane no chyba, że spotkamy dobry team.\nGłupie też nie jest w większości używanie chase perków, skłaniałbym sie bardziej do tych skracajacych cooldown m1 lub haste niż np bamboozle (który tez nie jest złym wyborem). Rapid może być kuszącym wyborem ale brak bloodlusta to zbyt potęzna kara dla tego killera aby używać tego perka.",
+          "builtin": true
+        },
+        {
+          "key": "custom_1790158660399",
+          "title": "In Game",
+          "body": "> Początek meczu Evanem wygląda bardzo standardowo, stawia się trapy, które ma sie w ręce i przestawia te najbliższe w miejsca, w których mogą być usefull.\nBardziej doświadczone surwy w tym czasie już mogą chodzić za tobą i baitować cie w chase, biegać za tobą i rozbrajać ci trapy, jako traper nie możesz zrobić z tym nic XD Dlatego tak ważnym addonem jest iri stone. Jednak pub mecz zazwyczaj wygląda dosyć standardowo czyli surwy robią swoje rzeczy, i tutaj wchodzi w gre corrupt, który pozwala kupić trochę tego mega cennego czasu na początku i jednocześnie sprowadzić surwy w twoim kierunku i w miejsca, w których już można grać wokół wcześniej postawionych trapów.\nJeśli jest taka okazja to warto wieszać surwa w piwnicy, użyć 7s czasu braku anty kampy aby zablokować trapami wejścia do piwnicy (w przypadku bloody coila, surw taki jest martwy chyba, że mu oddasz antykampe).\nZazwyczaj lepszym pomysłem jest stawianie trapów w miejsach mniej oczywistych tzn. nie na palecie a na tej loopie gdzieś za rogiem w trawie lub cieniu. Trapowanie samych okien i palet też nie jest błędem jednak taki trap nikogo nie złapie a bardziej nie pozwoli mu tego resource użyć, co również korzystne, no chyba że grany jest iri stone to playstyle sie zmienia i trapowanie palet i okien jest lepszym rozwiązaniem",
+          "builtin": false
+        },
+        {
+          "key": "custom_1790159030241",
+          "title": "Mechanics",
+          "body": "> Trapy staraj sie stawiać w pozycji, w której jej boczne podłużne elementy są skierowane do ściany.\n> Jest to killer który w głównej mierze wymaga dobrego m1 chase \n> Hook positioning z agitation może odratować mecz zwłaszcza gdy mamy zatrapowany ten obszar mapy",
+          "builtin": false
         }
       ]
     },

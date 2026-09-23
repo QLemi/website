@@ -1,6 +1,6 @@
 // ============================================
 // DBD KILLER HUB - START DATA
-// Wygenerowano: 22.09.2026, 23:43:02
+// Wygenerowano: 23.09.2026, 10:47:25
 // ============================================
 
 const INITIAL_DATA = {
@@ -358,7 +358,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "D+",
+      "tier": "D",
       "fun2play": 0,
       "tags": [
         "BeginnerFriendly",
@@ -840,7 +840,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "E-",
+      "tier": "E",
       "fun2play": 0,
       "tags": [
         "Snowball",
@@ -1146,7 +1146,7 @@ const INITIAL_DATA = {
       "skillFloor": 0,
       "skillCeiling": 0,
       "personalRank": 0,
-      "tier": "E",
+      "tier": "E-",
       "fun2play": 0,
       "tags": [
         "Range",

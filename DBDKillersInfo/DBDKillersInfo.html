@@ -147,27 +147,51 @@
         <div id="editor-killers" class="editor-panel active">
           <div class="editor-toolbar">
             <button class="btn btn-primary" onclick="openDetailedKillerForm()">+ Add killer</button>
+            <input type="text" id="ed-killer-search" placeholder="Search killers…" oninput="renderEditor()" class="editor-search">
+            <select id="ed-killer-sort" onchange="renderEditor()">
+              <option value="name">Name A–Z</option>
+              <option value="nameDesc">Name Z–A</option>
+              <option value="tier">Tier (S+ first)</option>
+              <option value="difficulty">Difficulty (easy first)</option>
+              <option value="difficultyDesc">Difficulty (hard first)</option>
+              <option value="fun2play">Fun to Play (high)</option>
+              <option value="skillCeiling">Skill ceiling</option>
+              <option value="release">Release date</option>
+            </select>
           </div>
           <div id="editor-killers-list"></div>
         </div>
         <div id="editor-builds" class="editor-panel">
           <div class="editor-toolbar">
             <button class="btn btn-primary" onclick="openBuildModal()">+ New build</button>
-            <p class="hint-inline">Addons optional (build can target multiple killers).</p>
+            <input type="text" id="ed-build-search" placeholder="Search builds…" oninput="renderEditor()" class="editor-search">
+            <select id="ed-build-sort" onchange="renderEditor()">
+              <option value="name">Name A–Z</option>
+              <option value="nameDesc">Name Z–A</option>
+              <option value="patch">Patch</option>
+              <option value="killer">Killer name</option>
+            </select>
           </div>
           <div id="editor-builds-list"></div>
         </div>
         <div id="editor-killer-tags" class="editor-panel">
-          <div class="editor-toolbar"><button class="btn" onclick="addEditorTag('killer')">+ Add killer tag</button></div>
+          <div class="editor-toolbar">
+            <button class="btn" onclick="addEditorTag('killer')">+ Add killer tag</button>
+            <input type="text" id="ed-ktag-search" placeholder="Search tags…" oninput="renderEditor()" class="editor-search">
+          </div>
           <div id="editor-killer-tags-list"></div>
         </div>
         <div id="editor-build-tags" class="editor-panel">
-          <div class="editor-toolbar"><button class="btn" onclick="addEditorTag('build')">+ Add build tag</button></div>
+          <div class="editor-toolbar">
+            <button class="btn" onclick="addEditorTag('build')">+ Add build tag</button>
+            <input type="text" id="ed-btag-search" placeholder="Search tags…" oninput="renderEditor()" class="editor-search">
+          </div>
           <div id="editor-build-tags-list"></div>
         </div>
         <div id="editor-perks" class="editor-panel">
           <div class="editor-toolbar">
             <button class="btn" onclick="quickAddPerk()">+ Add perk</button>
+            <input type="text" id="ed-perk-search" placeholder="Search perks…" oninput="renderEditor()" class="editor-search">
           </div>
           <div id="perk-add-form" class="inline-add-form" hidden>
             <div class="form-row">
@@ -193,12 +217,16 @@
           <div id="editor-perks-list"></div>
         </div>
         <div class="editor-actions">
-          <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js code</button>
+          <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js</button>
+          <button class="btn btn-primary" onclick="downloadGeneratedDataJs()">⬇ Download data.js</button>
           <button class="btn" onclick="document.getElementById('import-file').click()">⬆ Import data (.js / .json)</button>
           <input type="file" id="import-file" accept=".js,.json,text/javascript,application/json" style="display:none" onchange="importJSON(event)">
         </div>
-        <textarea id="generated-code" rows="14" placeholder=""></textarea>
-        <button class="btn" onclick="copyGeneratedCode()">Copy code</button>
+        <textarea id="generated-code" rows="14" placeholder="Generated data.js appears here…"></textarea>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:0.45rem">
+          <button class="btn" onclick="copyGeneratedCode()">Copy code</button>
+          <button class="btn btn-primary" onclick="downloadGeneratedDataJs()">⬇ Download data.js</button>
+        </div>
       </section>
 
       <section id="tab-settings" class="tab">
@@ -225,24 +253,28 @@
         </div>
 
         <div class="settings-box">
-          <h3>Merge two data files</h3>
-          <p class="hint">Same <code>id</code> → fields merged (non-empty fills gaps; B wins on conflict).</p>
+          <h3>Merge data files</h3>
+          <p class="hint">
+            Select one or two files. Same <code>id</code> → fields merged (non-empty fills gaps; later source wins on conflict).<br>
+            <strong>One file + “current page data”</strong> = merge that file into what you have open now.
+          </p>
           <div class="form-row">
             <div class="form-group">
-              <label>File A</label>
+              <label>File A (optional)</label>
               <input type="file" id="merge-file-a" accept=".js,.json,text/javascript,application/json">
             </div>
             <div class="form-group">
-              <label>File B</label>
+              <label>File B (optional)</label>
               <input type="file" id="merge-file-b" accept=".js,.json,text/javascript,application/json">
             </div>
           </div>
           <label class="hint merge-live-label">
             <input type="checkbox" id="merge-include-live" checked>
-            Also merge current page data
+            Also merge current page data (needed if you only pick one file)
           </label>
           <div class="settings-actions">
             <button type="button" class="btn btn-primary" onclick="runDataMerge()">Merge</button>
+            <button type="button" class="btn btn-primary" onclick="mergeAndDownload()" id="btn-merge-download">Merge and download</button>
             <button type="button" class="btn" onclick="applyMergedToLive()" id="btn-apply-merge" disabled>Apply to page</button>
             <button type="button" class="btn" onclick="copyMergedDataJs()" id="btn-copy-merge" disabled>Copy as data.js</button>
             <button type="button" class="btn" onclick="toggleMergeChanges()" id="btn-merge-changes" disabled>Show changes</button>

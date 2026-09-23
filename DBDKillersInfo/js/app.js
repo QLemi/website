@@ -2,7 +2,8 @@
 // DBD KILLER HUB - MAIN SCRIPT v4
 // ============================================
 
-const STORAGE_KEY = "dbd_killer_hub_v47";
+const STORAGE_KEY = "dbd_killer_hub_v56";
+
 
 let state = { killers: [], builds: [], tags: [], perks: [], addons: [] };
 
@@ -10,7 +11,8 @@ let state = { killers: [], builds: [], tags: [], perks: [], addons: [] };
 let formSelectedTags = [];
 let formSelectedPerks = [];
 let formSelectedAddons = [];
-let formSelectedCombos = []; // array of arrays, each 1-2 addon names
+let formSelectedCombos = [];
+let formContentSections = null; // array of arrays, each 1-2 addon names
 
 // Otz lookup: data/otz-addons.js (getOtzStore, getOtzAddonsForKiller)
 
@@ -134,8 +136,13 @@ function wrapFmt(id, before, after) {
   const next = el.value.slice(0, start) + before + sel + after + el.value.slice(end);
   el.value = next;
   el.focus();
-  const pos = start + before.length + sel.length + after.length;
   el.setSelectionRange(start + before.length, start + before.length + sel.length);
+  // sync section body if this is a section textarea
+  if (id && id.startsWith("k-sec-")) {
+    const i = +id.replace("k-sec-", "");
+    if (formContentSections && formContentSections[i]) formContentSections[i].body = el.value;
+  }
+  schedulePreviewRefresh();
 }
 
 function insertLinkFmt(id) {
@@ -338,7 +345,7 @@ function isDirtyKiller(k) {
   const pick = (x) => JSON.stringify({
     name: x.name, difficulty: x.difficulty, skillFloor: x.skillFloor, skillCeiling: x.skillCeiling,
     fun2play: x.fun2play, tier: x.tier || "", tags: x.tags || [], notes: x.notes, guide: x.guide,
-    vsNotes: x.vsNotes, addonNotes: x.addonNotes, patch: x.patch || ""
+    vsNotes: x.vsNotes, addonNotes: x.addonNotes, patch: x.patch || "", contentSections: x.contentSections || []
   });
   return pick(k) !== pick(base);
 }
@@ -613,7 +620,7 @@ function renderKillers() {
   const diff = document.getElementById("filter-difficulty")?.value || "";
   const funF = document.getElementById("filter-fun")?.value || "";
   
-  const sortBy = document.getElementById("sort-by")?.value || "releaseDate";
+    const sortBy = document.getElementById("sort-by")?.value || "releaseDate";
 
   let list = [...state.killers];
   if (search) list = list.filter(k => k.name.toLowerCase().includes(search));
@@ -822,14 +829,22 @@ function openKillerDetail(id) {
       })()}
     </div>
 
-    <div class="detail-section">
-      <h3>Short Note</h3>
-      <div class="md-body">${k.notes && k.notes !== "placeholder" ? renderMarkdown(k.notes) : "<em style='color:var(--text-dim)'>—</em>"}</div>
-    </div>
-    <div class="detail-section">
-      <h3>Guide / How to Play</h3>
-      <div class="md-body">${k.guide && k.guide !== "placeholder" ? renderMarkdown(k.guide) : "<em style='color:var(--text-dim)'>—</em>"}</div>
-    </div>
+    ${(() => {
+      const secs = (k.contentSections && k.contentSections.length)
+        ? k.contentSections.filter(s => s.key !== "addonNotes")
+        : [
+            { key: "notes", title: "Short Note", body: k.notes },
+            { key: "guide", title: "Guide / How to Play", body: k.guide }
+          ];
+      return secs.map(sec => {
+        const body = sec.body;
+        if (!body || body === "placeholder") return "";
+        return `<div class="detail-section">
+          <h3>${escapeHtml(sec.title || sec.key)}</h3>
+          <div class="md-body">${renderMarkdown(body)}</div>
+        </div>`;
+      }).join("");
+    })()}
     <div class="detail-section">
       <h3>Builds (${killerBuilds.length})</h3>
       <div class="profile-builds">
@@ -868,6 +883,7 @@ function removeComboBox(ci) {
 function setComboName(ci, val) {
   ensureComboBoxes();
   if (formSelectedCombos[ci]) formSelectedCombos[ci].name = val;
+  schedulePreviewRefresh();
 }
 
 function getComboOtzList() {
@@ -949,6 +965,7 @@ function renderComboBoxes(killerName) {
       if (!formSelectedCombos[ci]) return;
       formSelectedCombos[ci].addons.splice(ai, 1);
       renderComboBoxes();
+      schedulePreviewRefresh();
     });
   });
 }
@@ -964,6 +981,7 @@ function toggleComboAddon(ci, name) {
     arr.push(name);
   }
   renderComboBoxes();
+  schedulePreviewRefresh();
 }
 
 function setupKillerComboPicker(killerName) {
@@ -1227,6 +1245,7 @@ function renderChipList(containerId, items, type, kind) {
 
 function removeFormAddon(i) {
   formSelectedAddons.splice(i, 1);
+  schedulePreviewRefresh();
   renderChipList("form-addon-chips", formSelectedAddons.map(x => typeof x === "string" ? x : x.name), "addon");
 }
 
@@ -1357,6 +1376,8 @@ function addFormAddon(addon) {
   formSelectedAddons.push(addon);
   renderChipList("form-addon-chips", formSelectedAddons.map(x => typeof x === "string" ? x : x.name), "addon");
   renderAddonPickerGrid();
+  schedulePreviewRefresh();
+  schedulePreviewRefresh();
   const input = document.getElementById("addon-search-input");
   const drop = document.getElementById("addon-search-dropdown");
   if (input) input.value = "";
@@ -1369,10 +1390,13 @@ function removeFormTag(i) {
   formSelectedTags.splice(i, 1);
   renderChipList("form-tag-chips", formSelectedTags, "tag", formTagKind);
   setupTagPicker(formTagKind);
+  schedulePreviewRefresh();
 }
 
 function removeFormPerk(i) {
   formSelectedPerks.splice(i, 1);
+  try { refreshBuildEditPreview(); } catch (_) {}
+  schedulePreviewRefresh();
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
 }
 
@@ -1396,6 +1420,7 @@ function setupTagPicker(kind) {
       else formSelectedTags.push(name);
       renderChipList("form-tag-chips", formSelectedTags, "tag", kind);
       setupTagPicker(kind);
+      schedulePreviewRefresh();
     };
   });
 }
@@ -1448,7 +1473,7 @@ function setupPerkSearch(inputId, dropdownId) {
 }
 
 function addFormPerk(name) {
-  if (formSelectedPerks.includes(name)) return;
+  if (!name || formSelectedPerks.includes(name)) return;
   if (formSelectedPerks.length >= 4) { showToast("Max 4 perks"); return; }
   formSelectedPerks.push(name);
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
@@ -1456,9 +1481,54 @@ function addFormPerk(name) {
   const drop = document.getElementById("perk-search-dropdown");
   if (input) input.value = "";
   if (drop) { drop.classList.remove("open"); drop.innerHTML = ""; }
+  // immediate preview (no debounce delay)
+  try { refreshBuildEditPreview(); } catch (_) {}
+  schedulePreviewRefresh();
 }
 
 // ---------- BUILD MODAL ----------
+function refreshBuildEditPreview() {
+  const box = document.getElementById("build-edit-preview-body");
+  if (!box) return;
+  const name = document.getElementById("b-name")?.value?.trim() || "Build name";
+  const patch = document.getElementById("b-patch")?.value?.trim() || "";
+  const desc = document.getElementById("b-desc")?.value?.trim() || "";
+  const killerIds = [...document.querySelectorAll("#b-killers input:checked")].map(el => el.value);
+  const killerNames = killerIds.map(id => state.killers.find(k => k.id === id)?.name || id);
+  const perks = formSelectedPerks || [];
+  const addons = (formSelectedAddons || []).map(x => typeof x === "string" ? x : x.name);
+  const tags = (formSelectedTags || []).map(t => {
+    const tg = findTagMeta(t, getBuildTags());
+    const col = (tg && tg.color) || "#9b59b6";
+    return `<span class="tag-dot" style="--tc:${col}">${escapeHtml(t)}</span>`;
+  }).join("");
+  const perkDiamond = perks.length
+    ? perkDiamondHTML(perks, false)
+    : `<p style="color:#666;font-size:0.85rem">No perks yet</p>`;
+  const addonRow = addons.length ? `
+    <div class="addon-row addon-row-icons" style="margin-top:0.5rem">
+      ${addons.map((a, i) => {
+        const img = (formSelectedAddons[i] && formSelectedAddons[i].img) || findOtzAddonImg(a, killerIds);
+        return `<div class="addon-icon-block" title="${escapeAttr(a)}">
+          ${img ? `<img src="${img}" alt="">` : ""}
+          <span>${escapeHtml(a)}</span>
+        </div>`;
+      }).join("")}
+    </div>` : `<p style="color:#666;font-size:0.8rem;margin-top:0.4rem">${killerIds.length ? "Universal (no specific addons)" : "No specific killer selected"}</p>`;
+  box.innerHTML = `
+    <div class="build-card-preview">
+      <strong style="font-size:1.05rem">${escapeHtml(name)}</strong>
+      <div style="font-size:0.8rem;color:#b0a0a8;margin:0.35rem 0">
+        ${killerNames.length ? escapeHtml(killerNames.join(", ")) : "<em>No killers</em>"}
+        ${patch ? " · " + escapeHtml(patch) : ""}
+      </div>
+      <div class="card-tags">${tags}</div>
+      ${perkDiamond}
+      ${addonRow}
+      ${desc ? `<div class="md-body" style="margin-top:0.6rem;font-size:0.85rem">${escapeHtml(desc)}</div>` : ""}
+    </div>`;
+}
+
 function openBuildModal(editId = null) {
   const b = editId ? state.builds.find(x => x.id === editId) : null;
   formSelectedTags = [...(b?.tags || [])];
@@ -1471,77 +1541,83 @@ function openBuildModal(editId = null) {
   const selectedKillers = new Set(b?.killerIds || []);
 
   const html = `
-    <div class="modal-actions modal-actions-top">
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="saveBuild('${editId || ""}')">Save</button>
-    </div>
-    <h2>${b ? "Edit build" : "New build"}</h2>
-    <div class="form-group">
-      <label>Name</label>
-      <input id="b-name" value="${escapeAttr(b?.name || "")}" placeholder="">
-    </div>
-    <div class="form-group">
-      <label>Assign to killers
-        <button type="button" class="btn btn-sm" style="margin-left:0.4rem" onclick="toggleAllKillers(true)">Select all</button>
-        <button type="button" class="btn btn-sm" onclick="toggleAllKillers(false)">Clear</button>
-      </label>
-      <div class="multi-killers" id="b-killers">
-        ${state.killers.map(k => `
-          <label><input type="checkbox" value="${k.id}" ${selectedKillers.has(k.id) ? "checked" : ""}> ${escapeHtml(k.name)}</label>
-        `).join("")}
+    <div class="edit-modal-topbar">
+      <h2 style="margin:0">${b ? "Edit build" : "New build"}</h2>
+      <div class="edit-modal-actions">
+        <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" type="button" onclick="saveBuild('${editId || ""}')">Save</button>
       </div>
     </div>
-
-    <div class="form-group">
-      <label>Perki (max 4) – wyszukaj i dodaj z listy</label>
-      <div class="chip-input-wrap">
-        <div class="chip-list" id="form-perk-chips"></div>
-        <div class="chip-search-row">
-          <input id="perk-search-input" placeholder="Search perk..." autocomplete="off">
+    <div class="killer-edit-layout">
+      <div class="edit-form-panel">
+        <div class="edit-block">
+          <h3 class="edit-block-title">Basics</h3>
+          <div class="form-group"><label>Name</label>
+            <input id="b-name" value="${escapeAttr(b?.name || "")}" oninput="schedulePreviewRefresh()">
+          </div>
+          <div class="form-group"><label>Patch / update</label>
+            <input id="b-patch" value="${escapeAttr(b?.patch || "")}" oninput="schedulePreviewRefresh()">
+          </div>
+          <div class="form-group"><label>Description</label>
+            <textarea id="b-desc" rows="3" oninput="schedulePreviewRefresh()">${escapeHtml(b?.description || "")}</textarea>
+          </div>
         </div>
-        <div class="chip-dropdown" id="perk-search-dropdown"></div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Build tags</label>
-      <div class="tag-picker">
-        <div class="chip-list" id="form-tag-chips"></div>
-        <div class="tag-picker-grid" id="form-tag-grid"></div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Addons (optional)</label>
-      <p id="addon-picker-hint" class="hint" style="margin:0 0 0.4rem">Select exactly 1 killer to load Otz addons</p>
-      <div class="chip-list" id="form-addon-chips"></div>
-      <div class="addon-picker-grid" id="form-addon-grid"></div>
-      <div class="chip-input-wrap" style="margin-top:0.5rem">
-        <div class="chip-search-row">
-          <input id="addon-search-input" placeholder="Or search addon..." autocomplete="off">
+        <div class="edit-block">
+          <h3 class="edit-block-title">Killers
+            <button type="button" class="btn btn-sm" onclick="toggleAllKillers(true); schedulePreviewRefresh();">All</button>
+            <button type="button" class="btn btn-sm" onclick="toggleAllKillers(false); schedulePreviewRefresh();">Clear</button>
+          </h3>
+          <div class="multi-killers" id="b-killers">
+            ${state.killers.map(k => `
+              <label><input type="checkbox" value="${k.id}" ${selectedKillers.has(k.id) ? "checked" : ""} onchange="refreshBuildAddonPool(); schedulePreviewRefresh();"> ${escapeHtml(k.name)}</label>
+            `).join("")}
+          </div>
         </div>
-        <div class="chip-dropdown" id="addon-search-dropdown"></div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Perks (max 4)</h3>
+          <div class="chip-input-wrap">
+            <div class="chip-list" id="form-perk-chips"></div>
+            <div class="chip-search-row">
+              <input id="perk-search-input" placeholder="Search perk…" autocomplete="off">
+            </div>
+            <div class="chip-dropdown" id="perk-search-dropdown"></div>
+          </div>
+        </div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Tags</h3>
+          <div class="tag-picker">
+            <div class="chip-list" id="form-tag-chips"></div>
+            <div class="tag-picker-grid" id="form-tag-grid"></div>
+          </div>
+        </div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Addons (optional)</h3>
+          <p id="addon-picker-hint" class="hint" style="margin:0 0 0.4rem">Select exactly 1 killer for Otz list</p>
+          <div class="chip-list" id="form-addon-chips"></div>
+          <div class="addon-picker-grid" id="form-addon-grid"></div>
+          <div class="chip-input-wrap" style="margin-top:0.5rem">
+            <div class="chip-search-row">
+              <input id="addon-search-input" placeholder="Search addon…" autocomplete="off">
+            </div>
+            <div class="chip-dropdown" id="addon-search-dropdown"></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" type="button" onclick="saveBuild('${editId || ""}')">Save</button>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Opis</label>
-      <textarea id="b-desc">${escapeHtml(b?.description || "")}</textarea>
-    </div>
-    <div class="form-group">
-      <label>Current for patch / update</label>
-      <input id="b-patch" value="${escapeAttr(b?.patch || "")}" placeholder="">
-    </div>
-    <div class="modal-actions">
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="saveBuild('${editId || ""}')">Save</button>
+      <div class="killer-edit-preview">
+        <div class="preview-top-actions">
+          <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" type="button" onclick="saveBuild('${editId || ""}')">Save</button>
+        </div>
+        <h3 class="preview-label">Live preview</h3>
+        <div id="build-edit-preview-body"></div>
+      </div>
     </div>
   `;
-  showModal(html);
-  formSelectedAddons = (b?.addons || []).map((name, i) => ({
-    name,
-    img: (b.addonImages && b.addonImages[i]) || null,
-    tier: null
-  }));
+  showModal(html, { wide: true });
   formTagKind = "build";
   renderChipList("form-tag-chips", formSelectedTags, "tag", "build");
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
@@ -1549,6 +1625,7 @@ function openBuildModal(editId = null) {
   setupTagPicker("build");
   setupPerkSearch("perk-search-input", "perk-search-dropdown");
   setupAddonSearch("addon-search-input", "addon-search-dropdown");
+  refreshBuildEditPreview();
 }
 
 function saveBuild(editId) {
@@ -1586,69 +1663,201 @@ function saveBuild(editId) {
 }
 
 // ---------- KILLER FORM ----------
+const DEFAULT_CONTENT_SECTIONS = [
+  { key: "notes", title: "Short Note", builtin: true },
+  { key: "guide", title: "Guide / How to Play", builtin: true }
+];
+
+function loadKillerSections(k) {
+  if (k && Array.isArray(k.contentSections) && k.contentSections.length) {
+    return k.contentSections
+      .filter(s => s.key !== "addonNotes")
+      .map(s => ({
+        key: s.key,
+        title: s.title || s.key,
+        body: s.body === "placeholder" ? "" : (s.body || ""),
+        builtin: !!s.builtin || ["notes", "guide"].includes(s.key)
+      }));
+  }
+  return DEFAULT_CONTENT_SECTIONS.map(d => ({
+    key: d.key,
+    title: d.title,
+    builtin: true,
+    body: (() => {
+      const v = k && k[d.key];
+      return (!v || v === "placeholder") ? "" : String(v);
+    })()
+  }));
+}
+
+function renderContentSectionsEditor() {
+  const wrap = document.getElementById("content-sections-editor");
+  if (!wrap || !formContentSections) return;
+  const presentKeys = new Set(formContentSections.map(s => s.key));
+  const missingBuiltins = DEFAULT_CONTENT_SECTIONS.filter(d => !presentKeys.has(d.key));
+  wrap.innerHTML =
+    (missingBuiltins.length
+      ? `<div class="restored-builtins">${missingBuiltins.map(d =>
+          `<button type="button" class="btn btn-sm" onclick="restoreBuiltinSection('${d.key}')">↩ Restore ${escapeHtml(d.title)}</button>`
+        ).join("")}</div>`
+      : "") +
+    formContentSections.map((sec, i) => `
+      <div class="section-edit-block" data-sec-i="${i}">
+        <div class="section-edit-head">
+          <div class="section-order-btns">
+            <button type="button" class="btn btn-sm" onclick="moveContentSection(${i}, -1)" title="Move up" ${i === 0 ? "disabled" : ""}>↑</button>
+            <button type="button" class="btn btn-sm" onclick="moveContentSection(${i}, 1)" title="Move down" ${i >= formContentSections.length - 1 ? "disabled" : ""}>↓</button>
+          </div>
+          <input type="text" class="section-title-input" value="${escapeAttr(sec.title)}"
+            ${sec.builtin ? "readonly" : ""}
+            oninput="updateSectionTitle(${i}, this.value)"
+            placeholder="Section title">
+          <button type="button" class="btn btn-sm btn-danger" onclick="removeContentSection(${i})">Remove</button>
+        </div>
+        ${formatToolbarHTML("k-sec-" + i)}
+        <textarea id="k-sec-${i}" rows="4" oninput="updateSectionBody(${i}, this.value)">${escapeHtml(sec.body || "")}</textarea>
+      </div>
+    `).join("");
+}
+
+function moveContentSection(i, dir) {
+  if (!formContentSections) return;
+  const j = i + dir;
+  if (j < 0 || j >= formContentSections.length) return;
+  const tmp = formContentSections[i];
+  formContentSections[i] = formContentSections[j];
+  formContentSections[j] = tmp;
+  renderContentSectionsEditor();
+  refreshKillerEditPreview();
+}
+
+function updateSectionTitle(i, val) {
+  if (!formContentSections || !formContentSections[i]) return;
+  formContentSections[i].title = val;
+  refreshKillerEditPreview();
+}
+function updateSectionBody(i, val) {
+  if (!formContentSections || !formContentSections[i]) return;
+  formContentSections[i].body = val;
+  refreshKillerEditPreview();
+}
+function removeContentSection(i) {
+  if (!formContentSections) return;
+  formContentSections.splice(i, 1);
+  renderContentSectionsEditor();
+  refreshKillerEditPreview();
+}
+function restoreBuiltinSection(key) {
+  const def = DEFAULT_CONTENT_SECTIONS.find(d => d.key === key);
+  if (!def || !formContentSections) return;
+  if (formContentSections.some(s => s.key === key)) return;
+  formContentSections.push({ key: def.key, title: def.title, body: "", builtin: true });
+  renderContentSectionsEditor();
+  refreshKillerEditPreview();
+}
+function addCustomContentSection() {
+  if (!formContentSections) formContentSections = [];
+  formContentSections.push({ key: "custom_" + Date.now(), title: "New section", body: "", builtin: false });
+  renderContentSectionsEditor();
+  refreshKillerEditPreview();
+}
+
+function refreshKillerEditPreview() {
+  const box = document.getElementById("killer-edit-preview-body");
+  if (!box) return;
+  const name = document.getElementById("k-name")?.value?.trim() || "Killer name";
+  const difficulty = document.getElementById("k-difficulty")?.value || "—";
+  const tier = document.getElementById("k-tier")?.value || "";
+  const sf = document.getElementById("k-skill-floor")?.value || "0";
+  const sc = document.getElementById("k-skill-ceiling")?.value || "0";
+  const fun = document.getElementById("k-fun")?.value || "0";
+  const patch = document.getElementById("k-patch")?.value || "";
+  const release = document.getElementById("k-release")?.value || "";
+  const chapter = document.getElementById("k-chapter")?.value || "";
+  const src = getKillerPortrait(name);
+  const tags = (formSelectedTags || []).map(t => {
+    const tg = findTagMeta(t, getKillerTags());
+    const col = (tg && tg.color) || "#666";
+    return `<span class="tag-dot" style="--tc:${col}">${escapeHtml(t)}</span>`;
+  }).join("");
+  // Sync section bodies from live textareas before paint
+  if (formContentSections) {
+    formContentSections.forEach((sec, i) => {
+      const ta = document.getElementById("k-sec-" + i);
+      if (ta) sec.body = ta.value;
+    });
+  }
+  const addonNotesEl = document.getElementById("k-addon-notes");
+  const addonNotes = addonNotesEl ? String(addonNotesEl.value || "").trim() : "";
+  const killerId = window._editingKillerId || "";
+  const comboHtml = (formSelectedCombos || []).filter(c => (c.addons || []).length || (c.name || "").trim()).map((combo, ci) => {
+    const items = (combo.addons || []).map(n => {
+      const img = findOtzAddonImg(n, killerId ? [killerId] : []) || findOtzAddonImg(n, []);
+      return `<div class="my-combo-item" title="${escapeAttr(n)}">
+        ${img ? `<img src="${escapeAttr(img)}" alt="">` : ""}
+        <span>${escapeHtml(n)}</span>
+      </div>`;
+    }).join("");
+    return `<div class="my-combo-box"><h4>${escapeHtml(combo.name || ("Combo " + (ci + 1)))}</h4><div class="my-combo-row">${items || "—"}</div></div>`;
+  }).join("");
+  const sections = (formContentSections || []).map(sec => {
+    const body = (sec.body || "").trim();
+    return `<div class="detail-section" style="margin-top:0.65rem">
+      <h3 style="font-size:0.95rem;margin-bottom:0.3rem">${escapeHtml(sec.title)}</h3>
+      <div class="md-body">${body ? renderMarkdown(body) : "<em style='color:var(--text-dim)'>—</em>"}</div>
+    </div>`;
+  }).join("");
+  box.innerHTML = `
+    <div style="display:flex;gap:0.75rem;align-items:flex-start">
+      <img src="${src}" alt="" style="width:72px;height:96px;object-fit:cover;border-radius:8px;border:1px solid #333"
+        onerror="this.src=CONFIG.placeholderPortrait">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;margin-bottom:0.35rem">
+          <strong style="font-size:1.05rem">${escapeHtml(name)}</strong>
+          ${tierBadgeHTML(tier)}
+        </div>
+        <div style="font-size:0.8rem;color:#b0a0a8">
+          ${escapeHtml(difficulty)} · Skill ${escapeHtml(sf)}–${escapeHtml(sc)} · Fun ${escapeHtml(fun)}
+          ${patch ? " · Patch " + escapeHtml(patch) : ""}
+          ${release ? " · " + escapeHtml(formatReleaseDate(release) || release) : ""}
+          ${chapter ? " · Ch. " + escapeHtml(chapter) : ""}
+        </div>
+        <div class="card-tags" style="margin-top:0.4rem">${tags || "<span style='color:#666;font-size:0.75rem'>No tags</span>"}</div>
+      </div>
+    </div>
+    ${comboHtml ? `<div class="my-combos-wrap" style="margin-top:0.75rem">${comboHtml}</div>` : ""}
+    <div class="detail-section" style="margin-top:0.75rem">
+      <h3 style="font-size:0.95rem">Addon notes</h3>
+      <div class="md-body">${addonNotes ? renderMarkdown(addonNotes) : "<em style='color:var(--text-dim)'>—</em>"}</div>
+    </div>
+    ${sections}`;
+}
+
+function schedulePreviewRefresh(immediate) {
+  const run = () => {
+    try { refreshKillerEditPreview(); } catch (_) {}
+    try { refreshBuildEditPreview(); } catch (_) {}
+  };
+  // Always run once immediately so chips/perks appear at once
+  run();
+  // Light debounce only for rapid typing in textareas
+  if (immediate === false) {
+    clearTimeout(window._previewRefreshT);
+    window._previewRefreshT = setTimeout(run, 80);
+  }
+}
+
+
+
 function openDetailedKillerForm(editId = null) {
   try {
   if (!state.addons) state.addons = [];
   if (!state.killerTags) state.killerTags = [];
   const k = editId ? state.killers.find(x => x.id === editId) : null;
   formSelectedTags = [...(k?.tags || [])];
+  window._editingKillerId = k?.id || "";
+  formContentSections = loadKillerSections(k);
 
-  const html = `
-    <h2>${k ? "Edit killer" : "Nowy killer"}</h2>
-    <div class="form-group"><label>Nazwa *</label><input id="k-name" value="${escapeAttr(k?.name || "")}" placeholder=""></div>
-    <div class="form-row-3">
-      <div class="form-group">
-        <label>Trudność</label>
-        <select id="k-difficulty">
-          ${["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"].map(d =>
-            `<option value="${d}" ${k?.difficulty === d ? "selected" : ""}>${d}</option>`).join("")}
-        </select>
-      </div>
-      <div class="form-group"><label>Skill floor (0–10)</label><input type="number" id="k-skill-floor" min="0" max="10" step="0.1" value="${k?.skillFloor ?? 0}"></div>
-      <div class="form-group"><label>Skill ceiling (0–10)</label><input type="number" id="k-skill-ceiling" min="0" max="10" step="0.1" value="${k?.skillCeiling ?? 0}"></div>
-    </div>
-    <div class="form-row-3">
-      <div class="form-group"><label>Fun to Play (0–10)</label><input type="number" id="k-fun" min="0" max="10" step="0.1" value="${k?.fun2play ?? 0}"></div>
-      <div class="form-group"><label>Tier rank</label>
-        <select id="k-tier">
-          ${TIER_RANKS.map(t => `<option value="${t}" ${(k?.tier || "") === t ? "selected" : ""}>${t || "— unranked"}</option>`).join("")}
-        </select>
-      </div>
-      <div class="form-group"><label>Notes for patch</label><input id="k-patch" value="${escapeAttr(k?.patch || "")}" placeholder=""></div>
-    </div>
-    <div class="form-group">
-      <label>Killer tags</label>
-      <div class="tag-picker" id="form-tag-picker">
-        <div class="chip-list" id="form-tag-chips"></div>
-        <div class="tag-picker-grid" id="form-tag-grid"></div>
-      </div>
-    </div>
-    <div class="form-group"><label>Short note</label>
-      ${formatToolbarHTML("k-notes")}
-      <textarea id="k-notes" rows="3">${escapeHtml(k?.notes === "placeholder" ? "" : (k?.notes || ""))}</textarea>
-    </div>
-    <div class="form-group"><label>Guide / How to Play</label>
-      ${formatToolbarHTML("k-guide")}
-      <textarea id="k-guide" rows="5">${escapeHtml(k?.guide === "placeholder" ? "" : (k?.guide || ""))}</textarea>
-    </div>
-    <div class="form-group"><label>Addon notes</label>
-      ${formatToolbarHTML("k-addon-notes")}
-      <textarea id="k-addon-notes" rows="3">${escapeHtml(k?.addonNotes === "placeholder" ? "" : (k?.addonNotes || ""))}</textarea>
-    </div>
-    <div class="form-group">
-      <label>My addon combos</label>
-      <p class="hint" id="k-combo-hint" style="margin:0 0 0.4rem">Each box = one combo (1–2 addons). Add more boxes as needed.</p>
-      <div id="combo-boxes-container"></div>
-      <button type="button" class="btn btn-sm" style="margin-top:0.5rem" onclick="addComboBox()">+ Add combo box</button>
-    </div>
-    <div class="modal-actions">
-      ${k ? `<button class="btn btn-danger" style="margin-right:auto" onclick="deleteKiller('${k.id}')">Usuń</button>` : ""}
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="saveKiller('${editId || ""}')">Save</button>
-    </div>
-  `;
-  showModal(html);
-  formTagKind = "killer";
   if (k?.recommendedCombos && k.recommendedCombos.length) {
     formSelectedCombos = k.recommendedCombos.map(c => {
       if (Array.isArray(c)) return { name: "", addons: [...c] };
@@ -1659,15 +1868,115 @@ function openDetailedKillerForm(editId = null) {
   } else {
     formSelectedCombos = [{ name: "", addons: [] }];
   }
+
+  const addonNotesVal = (k?.addonNotes && k.addonNotes !== "placeholder") ? k.addonNotes : "";
+
+  const html = `
+    <div class="edit-modal-topbar">
+      <h2 style="margin:0">${k ? "Edit killer" : "New killer"}</h2>
+      <div class="edit-modal-actions">
+        ${k ? `<button class="btn btn-danger" type="button" onclick="deleteKiller('${k.id}')">Delete</button>` : ""}
+        <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" type="button" onclick="saveKiller('${editId || ""}')">Save</button>
+      </div>
+    </div>
+    <div class="killer-edit-layout">
+      <div class="killer-edit-form edit-form-panel">
+        <div class="edit-block">
+          <h3 class="edit-block-title">Identity</h3>
+          <div class="form-group"><label>Name *</label>
+            <input id="k-name" value="${escapeAttr(k?.name || "")}" oninput="schedulePreviewRefresh()">
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>Release date</label>
+              <input type="date" id="k-release" value="${escapeAttr((k?.releaseDate || "").slice(0,10))}" oninput="schedulePreviewRefresh()">
+            </div>
+            <div class="form-group"><label>Chapter</label>
+              <input id="k-chapter" value="${escapeAttr(k?.chapter != null ? String(k.chapter) : "")}" placeholder="e.g. 1 or 32" oninput="schedulePreviewRefresh()">
+            </div>
+            <div class="form-group"><label>Release order</label>
+              <input type="number" id="k-release-order" value="${k?.releaseOrder ?? 9999}" min="0" step="1" title="Same date: lower = earlier (Trapper=1)">
+            </div>
+          </div>
+        </div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Ratings</h3>
+          <div class="form-row-3">
+            <div class="form-group"><label>Difficulty</label>
+              <select id="k-difficulty" onchange="schedulePreviewRefresh()">
+                ${["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"].map(d =>
+                  `<option value="${d}" ${k?.difficulty === d ? "selected" : ""}>${d}</option>`).join("")}
+              </select>
+            </div>
+            <div class="form-group"><label>Skill floor</label>
+              <input type="number" id="k-skill-floor" min="0" max="10" step="0.1" value="${k?.skillFloor ?? 0}" oninput="schedulePreviewRefresh()">
+            </div>
+            <div class="form-group"><label>Skill ceiling</label>
+              <input type="number" id="k-skill-ceiling" min="0" max="10" step="0.1" value="${k?.skillCeiling ?? 0}" oninput="schedulePreviewRefresh()">
+            </div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>Fun to Play</label>
+              <input type="number" id="k-fun" min="0" max="10" step="0.1" value="${k?.fun2play ?? 0}" oninput="schedulePreviewRefresh()">
+            </div>
+            <div class="form-group"><label>Tier</label>
+              <select id="k-tier" onchange="schedulePreviewRefresh()">
+                ${TIER_RANKS.map(t => `<option value="${t}" ${(k?.tier || "") === t ? "selected" : ""}>${t || "— unranked"}</option>`).join("")}
+              </select>
+            </div>
+            <div class="form-group"><label>Notes for patch</label>
+              <input id="k-patch" value="${escapeAttr(k?.patch || "")}" oninput="schedulePreviewRefresh()">
+            </div>
+          </div>
+        </div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Tags</h3>
+          <div class="tag-picker" id="form-tag-picker">
+            <div class="chip-list" id="form-tag-chips"></div>
+            <div class="tag-picker-grid" id="form-tag-grid"></div>
+          </div>
+        </div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Addon combos & notes</h3>
+          <p class="hint" id="k-combo-hint" style="margin:0 0 0.4rem">Up to 2 addons per combo. Addon notes stay fixed under Otz on the profile.</p>
+          <div id="combo-boxes-container"></div>
+          <button type="button" class="btn btn-sm" style="margin-top:0.5rem" onclick="addComboBox(); schedulePreviewRefresh();">+ Add combo box</button>
+          <div class="form-group" style="margin-top:0.85rem">
+            <label>Addon notes <span class="hint">(always visible with Otz addons)</span></label>
+            ${formatToolbarHTML("k-addon-notes")}
+            <textarea id="k-addon-notes" rows="3" oninput="schedulePreviewRefresh()">${escapeHtml(addonNotesVal)}</textarea>
+          </div>
+        </div>
+        <div class="edit-block">
+          <h3 class="edit-block-title">Text sections</h3>
+          <p class="hint" style="margin:0 0 0.4rem">Reorder with ↑↓. Remove / restore defaults, or add custom sections.</p>
+          <div id="content-sections-editor"></div>
+          <button type="button" class="btn btn-sm" onclick="addCustomContentSection()">+ New section</button>
+        </div>
+        <div class="modal-actions">
+          ${k ? `<button class="btn btn-danger" style="margin-right:auto" type="button" onclick="deleteKiller('${k.id}')">Delete</button>` : ""}
+          <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" type="button" onclick="saveKiller('${editId || ""}')">Save</button>
+        </div>
+      </div>
+      <div class="killer-edit-preview">
+        <div class="preview-top-actions">
+          <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" type="button" onclick="saveKiller('${editId || ""}')">Save</button>
+        </div>
+        <h3 class="preview-label">Live preview</h3>
+        <div id="killer-edit-preview-body"></div>
+      </div>
+    </div>
+  `;
+  showModal(html, { wide: true });
+  formTagKind = "killer";
   renderChipList("form-tag-chips", formSelectedTags, "tag", "killer");
   setupTagPicker("killer");
-  setupKillerComboPicker(k?.name || document.getElementById("k-name")?.value);
-  document.getElementById("k-name")?.addEventListener("change", () => {
-    setupKillerComboPicker(document.getElementById("k-name").value);
-  });
-  document.getElementById("k-name")?.addEventListener("input", () => {
-    setupKillerComboPicker(document.getElementById("k-name").value);
-  });
+  setupKillerComboPicker(k?.name || "");
+  renderContentSectionsEditor();
+  refreshKillerEditPreview();
+  document.getElementById("k-name")?.addEventListener("change", () => setupKillerComboPicker(document.getElementById("k-name").value));
   } catch (err) {
     console.error(err);
     showToast("Could not open editor: " + err.message);
@@ -1680,6 +1989,24 @@ function saveKiller(editId) {
   let id = editId || name.toLowerCase().replace(/^the\s+/i, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (!editId && state.killers.some(k => k.id === id)) id = id + "-" + Date.now();
 
+  if (formContentSections) {
+    formContentSections.forEach((sec, i) => {
+      const ta = document.getElementById("k-sec-" + i);
+      if (ta) sec.body = ta.value;
+      const titleEl = document.querySelector('.section-edit-block[data-sec-i="' + i + '"] .section-title-input');
+      if (titleEl && !sec.builtin) sec.title = titleEl.value;
+    });
+  }
+  const sections = (formContentSections || []).map(sec => ({
+    key: sec.key,
+    title: sec.title || sec.key,
+    body: (sec.body || "").trim() || "placeholder",
+    builtin: !!sec.builtin
+  }));
+  const byKey = Object.fromEntries(sections.map(s => [s.key, s.body]));
+  const prev = editId ? state.killers.find(x => x.id === editId) : null;
+  const addonNotes = (document.getElementById("k-addon-notes")?.value || "").trim() || "placeholder";
+
   const data = {
     id, name,
     difficulty: document.getElementById("k-difficulty")?.value || "Medium",
@@ -1687,44 +2014,31 @@ function saveKiller(editId) {
     skillCeiling: Math.round((+document.getElementById("k-skill-ceiling")?.value || 0) * 10) / 10,
     fun2play: Math.round((+document.getElementById("k-fun")?.value || 0) * 10) / 10,
     tier: document.getElementById("k-tier")?.value || "",
-    personalRank: 0,
-    patch: document.getElementById("k-patch")?.value.trim() || "",
     tags: [...formSelectedTags],
-    notes: document.getElementById("k-notes")?.value.trim() || "placeholder",
-    guide: document.getElementById("k-guide")?.value.trim() || "placeholder",
-    vsNotes: "placeholder",
-    addonNotes: document.getElementById("k-addon-notes")?.value.trim() || "placeholder",
-    recommendedCombos: formSelectedCombos
-      .map(c => Array.isArray(c)
-        ? { name: "", addons: c.slice(0, 2) }
-        : { name: (c.name || "").trim(), addons: (c.addons || []).slice(0, 2) })
-      .filter(c => c.addons && c.addons.length),
-    recommendedAddons: (formSelectedCombos[0] && formSelectedCombos[0].addons)
-      ? formSelectedCombos[0].addons.slice(0, 2) : []
+    notes: byKey.notes || "placeholder",
+    guide: byKey.guide || "placeholder",
+    vsNotes: prev?.vsNotes || "placeholder",
+    addonNotes,
+    contentSections: sections,
+    recommendedCombos: (formSelectedCombos || [])
+      .map(c => ({ name: (c.name || "").trim(), addons: [...(c.addons || [])] }))
+      .filter(c => c.addons.length || c.name),
+    patch: document.getElementById("k-patch")?.value.trim() || "",
+    releaseDate: document.getElementById("k-release")?.value || "",
+    chapter: document.getElementById("k-chapter")?.value.trim() || "",
+    releaseOrder: Math.max(0, parseInt(document.getElementById("k-release-order")?.value, 10) || 0)
   };
 
-  // preserve release fields if editing
   if (editId) {
-    data.id = editId;
     const idx = state.killers.findIndex(x => x.id === editId);
-    if (idx >= 0) {
-      const prev = state.killers[idx];
-      state.killers[idx] = {
-        ...prev,
-        ...data,
-        releaseDate: prev.releaseDate,
-        releaseOrder: prev.releaseOrder,
-        chapter: prev.chapter,
-        update: prev.update
-      };
-    } else {
-      state.killers.push(data);
-    }
-  } else state.killers.push(data);
-
+    if (idx >= 0) state.killers[idx] = { ...state.killers[idx], ...data };
+  } else {
+    state.killers.push(data);
+  }
   saveData();
   closeModal();
-  renderAll();
+  renderKillers();
+  populateFilterSelects();
   if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
   showToast("Killer saved");
 }
@@ -1813,11 +2127,43 @@ function setupEditorTabs() {
 function renderEditor() {
   const kList = document.getElementById("editor-killers-list");
   if (kList) {
-    kList.innerHTML = state.killers.map(k => `
+    const q = (document.getElementById("ed-killer-search")?.value || "").trim().toLowerCase();
+    const sort = document.getElementById("ed-killer-sort")?.value || "name";
+    let list = state.killers.slice();
+    if (q) {
+      list = list.filter(k =>
+        (k.name || "").toLowerCase().includes(q) ||
+        (k.id || "").toLowerCase().includes(q) ||
+        (k.difficulty || "").toLowerCase().includes(q) ||
+        (k.tier || "").toLowerCase().includes(q) ||
+        (k.tags || []).some(t => String(t).toLowerCase().includes(q))
+      );
+    }
+    list.sort((a, b) => {
+      if (sort === "nameDesc") return b.name.localeCompare(a.name);
+      if (sort === "tier") {
+        const d = tierRankValue(a.tier) - tierRankValue(b.tier);
+        return d !== 0 ? d : a.name.localeCompare(b.name);
+      }
+      if (sort === "difficulty" || sort === "difficultyDesc") {
+        const order = ["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"];
+        const d = order.indexOf(a.difficulty) - order.indexOf(b.difficulty);
+        return sort === "difficultyDesc" ? -d : d;
+      }
+      if (sort === "fun2play") return (b.fun2play || 0) - (a.fun2play || 0);
+      if (sort === "skillCeiling") return (b.skillCeiling || 0) - (a.skillCeiling || 0);
+      if (sort === "release") {
+        const da = a.releaseDate || "", db = b.releaseDate || "";
+        if (da !== db) return da.localeCompare(db);
+        return (a.releaseOrder || 0) - (b.releaseOrder || 0);
+      }
+      return a.name.localeCompare(b.name);
+    });
+    kList.innerHTML = list.map(k => `
       <div class="editor-item">
         <img src="${getKillerPortrait(k.name)}" style="width:40px;height:40px;border-radius:6px;object-fit:cover" onerror="this.src=CONFIG.placeholderPortrait">
         <strong style="min-width:140px">${escapeHtml(k.name)}</strong>
-        <span style="font-size:0.78rem;color:var(--text-dim)">${k.difficulty} • ${k.skillFloor ?? 0}–${k.skillCeiling ?? 0} • Fun ${k.fun2play ?? 0} • ${k.tier || "—"}</span>
+        <span style="font-size:0.78rem;color:var(--text-dim)">${k.difficulty} • ${k.skillFloor ?? 0}–${k.skillCeiling ?? 0} • Fun ${k.fun2play ?? 0} • ${tierBadgeHTML(k.tier)}</span>
         ${isLocalOnlyKiller(k) ? unsavedBadge("New killer — not in data.js") : (isDirtyKiller(k) ? dirtyBadge("Edited — export to data.js") : "")}
         <button class="btn btn-sm" style="margin-left:auto" onclick="openDetailedKillerForm('${k.id}')">Edit</button>
       </div>
@@ -1826,12 +2172,34 @@ function renderEditor() {
 
   const bList = document.getElementById("editor-builds-list");
   if (bList) {
-    bList.innerHTML = state.builds.map(b => {
+    const q = (document.getElementById("ed-build-search")?.value || "").trim().toLowerCase();
+    const sort = document.getElementById("ed-build-sort")?.value || "name";
+    let list = state.builds.slice();
+    if (q) {
+      list = list.filter(b => {
+        const names = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(" ").toLowerCase();
+        return (b.name || "").toLowerCase().includes(q) || names.includes(q) ||
+          (b.patch || "").toLowerCase().includes(q) ||
+          (b.tags || []).some(t => String(t).toLowerCase().includes(q)) ||
+          (b.perks || []).some(p => String(p).toLowerCase().includes(q));
+      });
+    }
+    list.sort((a, b) => {
+      if (sort === "nameDesc") return b.name.localeCompare(a.name);
+      if (sort === "patch") return String(a.patch || "").localeCompare(String(b.patch || ""), undefined, { numeric: true });
+      if (sort === "killer") {
+        const na = (a.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(",");
+        const nb = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(",");
+        return na.localeCompare(nb);
+      }
+      return a.name.localeCompare(b.name);
+    });
+    bList.innerHTML = list.map(b => {
       const names = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(", ");
       return `
         <div class="editor-item">
           <strong style="min-width:140px">${escapeHtml(b.name)}</strong>
-          <span style="font-size:0.78rem;color:var(--text-dim)">${escapeHtml(names) || "—"}</span>
+          <span style="font-size:0.78rem;color:var(--text-dim)">${escapeHtml(names) || "—"} ${b.patch ? "· " + escapeHtml(b.patch) : ""}</span>
           ${isLocalOnlyBuild(b) ? unsavedBadge("New build — not in data.js") : (isDirtyBuild(b) ? dirtyBadge("Edited — export to data.js") : "")}
           <button class="btn btn-sm" style="margin-left:auto" onclick="openBuildModal('${b.id}')">Edit</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBuild('${b.id}')">X</button>
@@ -1842,32 +2210,36 @@ function renderEditor() {
 
   const ktList = document.getElementById("editor-killer-tags-list");
   if (ktList) {
-    ktList.innerHTML = getKillerTags().map((t, i) => tagEditRowHTML("killer", t, i)).join("") || "<p style='color:var(--text-dim)'>No killer tags</p>";
+    const q = (document.getElementById("ed-ktag-search")?.value || "").trim().toLowerCase();
+    const tags = getKillerTags().map((t, i) => ({ t, i })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
+    ktList.innerHTML = tags.map(({ t, i }) => tagEditRowHTML("killer", t, i)).join("") || "<p style='color:var(--text-dim)'>No killer tags</p>";
   }
   const btList = document.getElementById("editor-build-tags-list");
   if (btList) {
-    btList.innerHTML = getBuildTags().map((t, i) => tagEditRowHTML("build", t, i)).join("") || "<p style='color:var(--text-dim)'>No build tags</p>";
+    const q = (document.getElementById("ed-btag-search")?.value || "").trim().toLowerCase();
+    const tags = getBuildTags().map((t, i) => ({ t, i })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
+    btList.innerHTML = tags.map(({ t, i }) => tagEditRowHTML("build", t, i)).join("") || "<p style='color:var(--text-dim)'>No build tags</p>";
   }
   const pList = document.getElementById("editor-perks-list");
   if (pList) {
-    pList.innerHTML = state.perks.map((p, i) => `
+    const q = (document.getElementById("ed-perk-search")?.value || "").trim().toLowerCase();
+    const rows = state.perks.map((p, i) => ({ p, i })).filter(x => {
+      const name = typeof x.p === "string" ? x.p : (x.p && x.p.name);
+      return !q || String(name || "").toLowerCase().includes(q);
+    });
+    pList.innerHTML = rows.map(({ p, i }) => {
+      const name = typeof p === "string" ? p : (p && p.name) || "";
+      return `
       <div class="editor-item">
-        <img src="${getPerkIcon(p)}" style="width:28px;height:28px;border-radius:4px" onerror="this.src=CONFIG.placeholderPerk">
-        <span style="flex:1">${escapeHtml(p)}</span>
-        ${isLocalOnlyPerk(p) ? unsavedBadge("New perk — add icon line to config.js") : ""}
-        <button class="btn btn-sm btn-danger" onclick="state.perks.splice(${i},1);saveData();renderEditor()">X</button>
-      </div>
-    `).join("") || "<p style='color:var(--text-dim)'>None</p>";
+        <img src="${getPerkIcon(name)}" style="width:36px;height:36px;border-radius:4px" onerror="this.style.opacity=0.3">
+        <strong>${escapeHtml(name)}</strong>
+        ${isLocalOnlyPerk(name) ? unsavedBadge("New perk") : ""}
+      </div>`;
+    }).join("") || "<p style='color:var(--text-dim)'>No perks</p>";
   }
   updateEditorUnsavedBanner();
 }
 
-function updateTag(i, field, value) {
-  if (!state.tags[i]) return;
-  state.tags[i][field] = value;
-  if (field === "name") state.tags[i].id = value.toLowerCase().replace(/\s+/g, "-");
-  saveData();
-}
 
 function tagEditRowHTML(kind, t, i) {
   const locked = t._locked !== false;
@@ -2083,12 +2455,45 @@ function recordFingerprint(obj, keys) {
   return JSON.stringify(o);
 }
 
-const KILLER_DIFF_KEYS = ["name","tier","difficulty","skillFloor","skillCeiling","fun2play","notes","guide","addonNotes","patch","tags","chapter","releaseDate","recommendedCombos"];
+const KILLER_DIFF_KEYS = ["name","tier","difficulty","skillFloor","skillCeiling","fun2play","notes","guide","addonNotes","patch","tags","chapter","releaseDate","releaseOrder","recommendedCombos","contentSections"];
 const BUILD_DIFF_KEYS = ["name","description","perks","addons","tags","patch","killerIds"];
 
+
+function shortVal(v) {
+  if (v == null) return "—";
+  if (typeof v === "string") {
+    const t = v.trim();
+    if (!t || t === "placeholder") return "—";
+    return t.length > 80 ? t.slice(0, 77) + "…" : t;
+  }
+  if (typeof v === "number" || typeof v === "boolean") return String(v);
+  if (Array.isArray(v)) {
+    if (!v.length) return "[]";
+    if (v.every(x => typeof x === "string" || typeof x === "number")) {
+      const s = v.join(", ");
+      return s.length > 90 ? s.slice(0, 87) + "…" : s;
+    }
+    return "[" + v.length + " items]";
+  }
+  if (typeof v === "object") {
+    try { return JSON.stringify(v).slice(0, 90); } catch (_) { return "{…}"; }
+  }
+  return String(v);
+}
+
+function fieldDiffs(a, b, keys) {
+  const out = [];
+  for (const key of keys) {
+    const av = a ? a[key] : undefined;
+    const bv = b ? b[key] : undefined;
+    if (JSON.stringify(av ?? null) === JSON.stringify(bv ?? null)) continue;
+    out.push({ key, from: shortVal(av), to: shortVal(bv) });
+  }
+  return out;
+}
+
 function buildMergeReport(sources, merged) {
-  // sources: [{label, data}]
-  const byKiller = new Map(); // id -> {sources: [], versions: []}
+  const byKiller = new Map();
   const byBuild = new Map();
   for (const src of sources) {
     for (const k of src.data.killers || []) {
@@ -2097,7 +2502,7 @@ function buildMergeReport(sources, merged) {
       if (!byKiller.has(id)) byKiller.set(id, { sources: [], items: [] });
       const e = byKiller.get(id);
       e.sources.push(src.label);
-      e.items.push(k);
+      e.items.push({ label: src.label, item: k });
     }
     for (const b of src.data.builds || []) {
       if (!b || !b.id) continue;
@@ -2105,59 +2510,65 @@ function buildMergeReport(sources, merged) {
       if (!byBuild.has(id)) byBuild.set(id, { sources: [], items: [] });
       const e = byBuild.get(id);
       e.sources.push(src.label);
-      e.items.push(b);
+      e.items.push({ label: src.label, item: b });
     }
   }
   const killersAdded = [];
   const killersModified = [];
-  const killersSame = [];
   for (const [id, info] of byKiller) {
-    const name = (info.items[0] && info.items[0].name) || id;
+    const name = (info.items[0] && info.items[0].item.name) || id;
     const uniqSrc = [...new Set(info.sources)];
     if (info.items.length === 1) {
       killersAdded.push({ id, name, from: uniqSrc[0] });
     } else {
-      const fps = info.items.map(it => recordFingerprint(it, KILLER_DIFF_KEYS));
-      const allSame = fps.every(f => f === fps[0]);
-      if (allSame) killersSame.push({ id, name, from: uniqSrc.join(", ") });
-      else {
-        const fields = new Set();
-        for (let i = 1; i < info.items.length; i++) {
-          for (const key of KILLER_DIFF_KEYS) {
-            const a = JSON.stringify(info.items[0][key] ?? null);
-            const b = JSON.stringify(info.items[i][key] ?? null);
-            if (a !== b) fields.add(key);
-          }
+      // pairwise diffs against first source as baseline, also list all sources
+      const base = info.items[0].item;
+      const allDiffs = [];
+      for (let i = 1; i < info.items.length; i++) {
+        const d = fieldDiffs(base, info.items[i].item, KILLER_DIFF_KEYS);
+        for (const x of d) {
+          allDiffs.push({
+            key: x.key,
+            from: x.from,
+            to: x.to,
+            fromSrc: info.items[0].label,
+            toSrc: info.items[i].label
+          });
         }
-        killersModified.push({ id, name, from: uniqSrc.join(" + "), fields: [...fields] });
+      }
+      // unique by key keeping last
+      const map = new Map();
+      for (const d of allDiffs) map.set(d.key, d);
+      const diffs = [...map.values()];
+      if (diffs.length) {
+        killersModified.push({ id, name, from: uniqSrc.join(" + "), diffs });
       }
     }
   }
   const buildsAdded = [];
   const buildsModified = [];
   for (const [id, info] of byBuild) {
-    const name = (info.items[0] && info.items[0].name) || id;
+    const name = (info.items[0] && info.items[0].item.name) || id;
     const uniqSrc = [...new Set(info.sources)];
     if (info.items.length === 1) {
       buildsAdded.push({ id, name, from: uniqSrc[0] });
     } else {
-      const fps = info.items.map(it => recordFingerprint(it, BUILD_DIFF_KEYS));
-      if (!fps.every(f => f === fps[0])) {
-        const fields = new Set();
-        for (let i = 1; i < info.items.length; i++) {
-          for (const key of BUILD_DIFF_KEYS) {
-            if (JSON.stringify(info.items[0][key] ?? null) !== JSON.stringify(info.items[i][key] ?? null))
-              fields.add(key);
-          }
+      const base = info.items[0].item;
+      const map = new Map();
+      for (let i = 1; i < info.items.length; i++) {
+        for (const x of fieldDiffs(base, info.items[i].item, BUILD_DIFF_KEYS)) {
+          map.set(x.key, {
+            key: x.key, from: x.from, to: x.to,
+            fromSrc: info.items[0].label, toSrc: info.items[i].label
+          });
         }
-        buildsModified.push({ id, name, from: uniqSrc.join(" + "), fields: [...fields] });
       }
+      const diffs = [...map.values()];
+      if (diffs.length) buildsModified.push({ id, name, from: uniqSrc.join(" + "), diffs });
     }
   }
-  // tags / perks only in one side
-  const tagMaps = sources.map(s => new Set((s.data.killerTags || []).map(t => String(t.name).toLowerCase())));
   const allTagNames = new Map();
-  sources.forEach((s, i) => {
+  sources.forEach(s => {
     (s.data.killerTags || []).forEach(t => {
       const k = String(t.name).toLowerCase();
       if (!allTagNames.has(k)) allTagNames.set(k, { name: t.name, src: [] });
@@ -2187,61 +2598,64 @@ function buildMergeReport(sources, merged) {
   const perksNew = [...perkMaps.values()].filter(t => t.src.length === 1);
 
   return {
-    killersAdded, killersModified, killersSame,
+    killersAdded, killersModified,
     buildsAdded, buildsModified,
     tagsNew, buildTagsNew, perksNew,
-    sources: sources.map(s => s.label)
+    sources: sources.map(s => s.label),
+    totals: {
+      killers: (merged && merged.killers || []).length,
+      builds: (merged && merged.builds || []).length
+    }
   };
 }
 
 function renderMergeReportHTML(r) {
   if (!r) return "<p>No report</p>";
-  const li = (cls, text) => `<li class="${cls}">${text}</li>`;
-  let html = "";
-  html += `<h4>Killers added (${r.killersAdded.length})</h4>`;
-  if (!r.killersAdded.length) html += `<p class="ch-same">—</p>`;
+  const li = (cls, html) => `<li class="${cls}">${html}</li>`;
+  let html = `<div class="merge-summary">Sources: <strong>${(r.sources || []).map(escapeHtml).join(" · ")}</strong></div>`;
+
+  html += `<h4>Killers added <span class="merge-count">${r.killersAdded.length}</span></h4>`;
+  if (!r.killersAdded.length) html += `<p class="ch-same">None</p>`;
   else html += "<ul>" + r.killersAdded.map(x =>
-    li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">(${escapeHtml(x.id)} · from ${escapeHtml(x.from)})</span>`)
+    li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <code>${escapeHtml(x.id)}</code> <span class="ch-src">from ${escapeHtml(x.from)}</span>`)
   ).join("") + "</ul>";
 
-  html += `<h4>Killers merged / changed fields (${r.killersModified.length})</h4>`;
-  if (!r.killersModified.length) html += `<p class="ch-same">—</p>`;
-  else html += "<ul>" + r.killersModified.map(x =>
-    li("ch-mod", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">(${escapeHtml(x.from)})</span>` +
-      (x.fields.length ? ` → <code>${x.fields.map(escapeHtml).join(", ")}</code>` : ""))
-  ).join("") + "</ul>";
+  html += `<h4>Killers changed <span class="merge-count">${r.killersModified.length}</span></h4>`;
+  if (!r.killersModified.length) html += `<p class="ch-same">None</p>`;
+  else html += "<ul>" + r.killersModified.map(x => {
+    const diffs = (x.diffs || []).map(d =>
+      `<div class="merge-diff-row"><code>${escapeHtml(d.key)}</code>
+        <span class="diff-from" title="${escapeAttr(d.fromSrc || "")}">${escapeHtml(d.from)}</span>
+        <span class="diff-arrow">→</span>
+        <span class="diff-to" title="${escapeAttr(d.toSrc || "")}">${escapeHtml(d.to)}</span></div>`
+    ).join("");
+    return li("ch-mod", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">${escapeHtml(x.from)}</span>${diffs ? `<div class="merge-diff-list">${diffs}</div>` : ""}`);
+  }).join("") + "</ul>";
 
-  html += `<h4>Builds added (${r.buildsAdded.length})</h4>`;
-  if (!r.buildsAdded.length) html += `<p class="ch-same">—</p>`;
+  html += `<h4>Builds added <span class="merge-count">${r.buildsAdded.length}</span></h4>`;
+  if (!r.buildsAdded.length) html += `<p class="ch-same">None</p>`;
   else html += "<ul>" + r.buildsAdded.map(x =>
-    li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">(${escapeHtml(x.id)} · from ${escapeHtml(x.from)})</span>`)
+    li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <code>${escapeHtml(x.id)}</code> <span class="ch-src">from ${escapeHtml(x.from)}</span>`)
   ).join("") + "</ul>";
 
-  html += `<h4>Builds changed (${r.buildsModified.length})</h4>`;
-  if (!r.buildsModified.length) html += `<p class="ch-same">—</p>`;
-  else html += "<ul>" + r.buildsModified.map(x =>
-    li("ch-mod", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">(${escapeHtml(x.from)})</span>` +
-      (x.fields.length ? ` → <code>${x.fields.map(escapeHtml).join(", ")}</code>` : ""))
-  ).join("") + "</ul>";
+  html += `<h4>Builds changed <span class="merge-count">${r.buildsModified.length}</span></h4>`;
+  if (!r.buildsModified.length) html += `<p class="ch-same">None</p>`;
+  else html += "<ul>" + r.buildsModified.map(x => {
+    const diffs = (x.diffs || []).map(d =>
+      `<div class="merge-diff-row"><code>${escapeHtml(d.key)}</code>
+        <span class="diff-from">${escapeHtml(d.from)}</span>
+        <span class="diff-arrow">→</span>
+        <span class="diff-to">${escapeHtml(d.to)}</span></div>`
+    ).join("");
+    return li("ch-mod", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">${escapeHtml(x.from)}</span>${diffs ? `<div class="merge-diff-list">${diffs}</div>` : ""}`);
+  }).join("") + "</ul>";
 
-  html += `<h4>Killer tags only in one source (${r.tagsNew.length})</h4>`;
-  if (!r.tagsNew.length) html += `<p class="ch-same">—</p>`;
-  else html += "<ul>" + r.tagsNew.map(x =>
-    li("ch-add", `${escapeHtml(x.name)} <span class="ch-src">(${escapeHtml(x.src.join(", "))})</span>`)
-  ).join("") + "</ul>";
-
-  html += `<h4>Build tags only in one source (${r.buildTagsNew.length})</h4>`;
-  if (!r.buildTagsNew.length) html += `<p class="ch-same">—</p>`;
-  else html += "<ul>" + r.buildTagsNew.map(x =>
-    li("ch-add", `${escapeHtml(x.name)} <span class="ch-src">(${escapeHtml(x.src.join(", "))})</span>`)
-  ).join("") + "</ul>";
-
-  html += `<h4>Perks only in one source (${r.perksNew.length})</h4>`;
-  if (!r.perksNew.length) html += `<p class="ch-same">—</p>`;
-  else html += "<ul>" + r.perksNew.map(x =>
-    li("ch-add", `${escapeHtml(x.name)} <span class="ch-src">(${escapeHtml(x.src.join(", "))})</span>`)
-  ).join("") + "</ul>";
-
+  html += `<h4>Tags / perks only in one source</h4>`;
+  html += `<ul class="merge-side">`;
+  html += `<li><strong>Killer tags:</strong> ${r.tagsNew.length ? r.tagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
+  html += `<li><strong>Build tags:</strong> ${r.buildTagsNew.length ? r.buildTagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
+  html += `<li><strong>Perks:</strong> ${r.perksNew.length ? r.perksNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
+  html += `</ul>`;
   return html;
 }
 
@@ -2270,14 +2684,19 @@ async function runDataMerge() {
   const chBox = document.getElementById("merge-changes");
   if (btnApply) btnApply.disabled = true;
   if (btnCopy) btnCopy.disabled = true;
+  const btnDl0 = document.getElementById("btn-merge-download");
+  if (btnDl0) btnDl0.disabled = true;
   if (btnCh) { btnCh.disabled = true; btnCh.textContent = "Show changes"; }
   if (chBox) { chBox.hidden = true; chBox.innerHTML = ""; }
   _lastMergedData = null;
   _lastMergeReport = null;
   try {
     if (!fa && !fb) {
-      setMergeStatus("Select File A and/or File B.");
+      setMergeStatus("Select at least one file (A and/or B). With one file, enable “Also merge current page data” to combine with the live page.");
       return;
+    }
+    if ((fa && !fb && !includeLive) || (fb && !fa && !includeLive)) {
+      // single file without live is fine — just normalizes/outputs that file
     }
     setMergeStatus("Reading…");
     let merged = { killers: [], builds: [], killerTags: [], buildTags: [], perks: [] };
@@ -2313,6 +2732,8 @@ async function runDataMerge() {
     if (btnApply) btnApply.disabled = false;
     if (btnCopy) btnCopy.disabled = false;
     if (btnCh) btnCh.disabled = false;
+    const btnDl = document.getElementById("btn-merge-download");
+    if (btnDl) btnDl.disabled = false;
     const r = _lastMergeReport;
     setMergeStatus(
       notes.join("<br>") +
@@ -2357,27 +2778,66 @@ function copyMergedDataJs() {
   });
 }
 
+async function mergeAndDownload() {
+  await runDataMerge();
+  if (!_lastMergedData) return;
+  const text = (document.getElementById("merge-result") && document.getElementById("merge-result").value)
+    || ("const INITIAL_DATA = " + JSON.stringify(_lastMergedData, null, 2) + ";\n");
+  const blob = new Blob([text], { type: "application/javascript;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "data.js";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  showToast("Merged + downloaded data.js");
+}
+
+
+function buildDataJsText() {
+  return `// ============================================
+// DBD KILLER HUB - START DATA
+// Generated: ${new Date().toLocaleString("pl-PL")}
+// Paste this entire file as data/data.js
+// ============================================
+
+const INITIAL_DATA = ${JSON.stringify(state, null, 2)};
+`;
+}
 
 function generateConfigCode() {
   saveData();
   const ta = document.getElementById("generated-code");
   if (!ta) { showToast("Open Data Editor tab first"); return; }
-  ta.value =
-`// ============================================
-// DBD KILLER HUB - START DATA
-// Wygenerowano: ${new Date().toLocaleString("pl-PL")}
-// ============================================
-
-const INITIAL_DATA = ${JSON.stringify(state, null, 2)};
-`;
+  ta.value = buildDataJsText();
   ta.scrollIntoView({ behavior: "smooth", block: "center" });
-  showToast("Code generated — scroll down / Copy code");
+  showToast("Code generated — Copy or Download");
 }
 
 function copyGeneratedCode() {
   const ta = document.getElementById("generated-code");
-  ta.select();
-  navigator.clipboard.writeText(ta.value).then(() => showToast("Copied!")).catch(() => prompt("Skopiuj:", ta.value));
+  if (!ta) return;
+  if (!ta.value) generateConfigCode();
+  navigator.clipboard.writeText(ta.value).then(() => showToast("Copied!")).catch(() => {
+    ta.select();
+    showToast("Select all → Ctrl+C");
+  });
+}
+
+function downloadGeneratedDataJs() {
+  // Always regenerate from current state first, then download
+  if (typeof generateConfigCode === "function") generateConfigCode();
+  else saveData();
+  const text = (document.getElementById("generated-code") && document.getElementById("generated-code").value)
+    || buildDataJsText();
+  const blob = new Blob([text], { type: "application/javascript;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "data.js";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  showToast("Generated + downloaded data.js");
 }
 
 function exportJSON() {
@@ -2515,12 +2975,31 @@ function resolveOtzKey(killerOrName) {
   return null;
 }
 
+
+function decodeHtmlEntities(str) {
+  if (str == null || str === "") return "";
+  let s = String(str);
+  if (!/[&][#a-zA-Z0-9]+;/.test(s)) return s;
+  s = s.replace(/&#34;|&quot;/gi, '"')
+       .replace(/&#39;|&apos;/gi, "'")
+       .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n))
+       .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
+       .replace(/&lt;/gi, "<")
+       .replace(/&gt;/gi, ">")
+       .replace(/&amp;/gi, "&");
+  return s;
+}
+
 function getOtzAddonsForKiller(killerOrName) {
   const store = getOtzStore();
   if (!store) return [];
   const key = resolveOtzKey(killerOrName);
   if (!key || !store[key]) return [];
-  return store[key].addons || [];
+  return (store[key].addons || []).map(a => ({
+    ...a,
+    name: decodeHtmlEntities(a.name),
+    comment: decodeHtmlEntities(a.comment || "")
+  }));
 }
 
 // Back-compat aliases used elsewhere in app
@@ -2673,18 +3152,24 @@ function resetAllData() {
   });
 }
 
-function showModal(html) {
-  document.getElementById("modal-content").innerHTML = html;
-  document.getElementById("modal-overlay").classList.add("show");
+function showModal(html, opts) {
+  opts = opts || {};
+  const mc = document.getElementById("modal-content");
+  const ov = document.getElementById("modal-overlay");
+  if (mc) {
+    mc.innerHTML = html;
+    mc.classList.toggle("modal-wide", !!opts.wide);
+  }
+  if (ov) ov.classList.add("show");
 }
 function closeModal(e) {
-  // Only close when called programmatically (Save/Cancel), NOT when clicking the dimmed backdrop
-  if (e && e.target === document.getElementById("modal-overlay")) {
-    return; // ignore backdrop click — protects edit progress
-  }
-  document.getElementById("modal-overlay").classList.remove("show");
+  if (e && e.target === document.getElementById("modal-overlay")) return;
+  const ov = document.getElementById("modal-overlay");
   const mc = document.getElementById("modal-content");
-  if (mc) mc.innerHTML = "";
+  if (ov) ov.classList.remove("show");
+  if (mc) { mc.innerHTML = ""; mc.classList.remove("modal-wide"); }
+  window._editingKillerId = "";
+  formContentSections = null;
 }
 
 function escapeHtml(str) {
@@ -2706,9 +3191,21 @@ window.toggleKillerTagsPanel = toggleKillerTagsPanel;
 window.toggleBuildTagsPanel = toggleBuildTagsPanel;
 window.resetBuildFilters = resetBuildFilters;
 window.runDataMerge = runDataMerge;
+window.mergeAndDownload = mergeAndDownload;
 window.toggleMergeChanges = toggleMergeChanges;
 window.applyMergedToLive = applyMergedToLive;
 window.copyMergedDataJs = copyMergedDataJs;
+
+window.addCustomContentSection = addCustomContentSection;
+window.removeContentSection = removeContentSection;
+window.restoreBuiltinSection = restoreBuiltinSection;
+window.updateSectionTitle = updateSectionTitle;
+window.updateSectionBody = updateSectionBody;
+window.refreshKillerEditPreview = refreshKillerEditPreview;
+window.refreshBuildEditPreview = refreshBuildEditPreview;
+window.schedulePreviewRefresh = schedulePreviewRefresh;
+window.moveContentSection = moveContentSection;
+
 window.openDetailedKillerForm = openDetailedKillerForm;
 window.getOtzAddonsForKiller = getOtzAddonsForKiller;
 window.getOtzStore = getOtzStore;

@@ -3240,3 +3240,40 @@ body {
 .play-card.is-survivor .play-note-item {
   border-left-color: rgba(45, 212, 191, 0.45);
 }
+
+
+/* wins / escapes label under score — larger */
+.play-score-lab {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #b8b0a8 !important;
+  margin-top: 0.25rem !important;
+}
+
+/* Note + relative timestamp in top-right */
+.play-patch {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 0.15rem !important;
+  max-width: 60% !important;
+  text-align: right !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+.play-patch-note {
+  font-size: 0.78rem !important;
+  color: #b0a8a0 !important;
+  line-height: 1.2;
+}
+.play-patch-ago {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  color: #fbbf24 !important;
+}
+.play-card.is-session .play-patch-ago { color: #38bdf8 !important; }
+.play-card.is-survivor .play-patch-ago { color: #2dd4bf !important; }

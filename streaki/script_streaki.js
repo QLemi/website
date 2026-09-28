@@ -227,7 +227,8 @@ async function loadPlaythroughSheet() {
       k2: cell(10, col),
       k1: cell(11, col),
       k0: cell(12, col),
-      note: cell(13, col)
+      note: cell(13, col),
+      noteDate: cell(13, col + 1)  // C14 / E14 / … date next to Note
     };
 
     // Notes from row 15 (idx 14) down: [value, caption] pairs
@@ -270,6 +271,7 @@ function buildPlayEntry(name, fields, extras, details, isDone, num) {
   let a4 = num(fields.k4), a3 = num(fields.k3), a2 = num(fields.k2), a1 = num(fields.k1), a0 = num(fields.k0);
   let avg = num(fields.avg);
   const note = (fields.note || '').trim();
+  const noteDate = (fields.noteDate || '').trim();
 
   // Survivor: row 4k slot = Escape, 3k slot = Death
   const isSurv = playType === 'survivor';
@@ -297,6 +299,7 @@ function buildPlayEntry(name, fields, extras, details, isDone, num) {
       deaths,
       avg,
       note,
+      noteDate,
       extras: extras || [],
       details
     },
@@ -510,6 +513,56 @@ function parseResultTone(result) {
   return 'fail';
 }
 
+
+function parsePlayDate(raw) {
+  if (!raw) return null;
+  const s = String(raw).trim();
+  // DD.MM.YYYY or DD.MM.YY or DD.MM
+  let m = s.match(/^(\d{1,2})[./-](\d{1,2})(?:[./-](\d{2,4}))?$/);
+  if (m) {
+    let d = parseInt(m[1], 10), mo = parseInt(m[2], 10) - 1, y = m[3] ? parseInt(m[3], 10) : null;
+    if (y === null) y = new Date().getFullYear();
+    else if (y < 100) y += 2000;
+    const dt = new Date(y, mo, d);
+    return isNaN(dt.getTime()) ? null : dt;
+  }
+  // YYYY-MM-DD
+  m = s.match(/^(\d{4})[./-](\d{1,2})[./-](\d{1,2})$/);
+  if (m) {
+    const dt = new Date(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10));
+    return isNaN(dt.getTime()) ? null : dt;
+  }
+  const t = Date.parse(s);
+  return isNaN(t) ? null : new Date(t);
+}
+
+function formatTimeAgo(date) {
+  if (!date) return '';
+  const now = new Date();
+  // compare calendar days roughly
+  const ms = now.getTime() - date.getTime();
+  if (ms < 0) return 'w przyszłości';
+  const days = Math.floor(ms / 86400000);
+  if (days === 0) return 'dziś';
+  if (days === 1) return '1 dzień temu';
+  if (days < 7) return days + ' dni temu';
+  const weeks = Math.floor(days / 7);
+  if (days < 30) {
+    if (weeks === 1) return '1 tydzień temu';
+    return weeks + ' tyg. temu';
+  }
+  const months = Math.floor(days / 30.44);
+  if (days < 365) {
+    if (months <= 1) return '1 miesiąc temu';
+    if (months < 5) return months + ' miesiące temu';
+    return months + ' miesięcy temu';
+  }
+  const years = Math.floor(days / 365.25);
+  if (years === 1) return '1 rok temu';
+  if (years < 5) return years + ' lata temu';
+  return years + ' lat temu';
+}
+
 function renderPlayCard(p, i) {
   const play = p.play || {};
   const details = play.details || [];
@@ -569,7 +622,7 @@ function renderPlayCard(p, i) {
   card.innerHTML = `
     <div class="play-top">
       <div class="play-type-badge">${play.playType === 'survivor' ? 'SURVIVOR' : (play.playType === 'session' ? 'SESSION' : 'CHALLENGE')}</div>
-      ${play.note ? `<div class="play-patch">${escapeHtml(play.note)}</div>` : ''}
+      ${play.note || play.noteDate ? `<div class="play-patch">${play.note ? `<span class="play-patch-note">${escapeHtml(play.note)}</span>` : ''}${(() => { const ago = formatTimeAgo(parsePlayDate(play.noteDate)); return ago ? `<span class="play-patch-ago">${escapeHtml(ago)}</span>` : (play.noteDate ? `<span class="play-patch-ago">${escapeHtml(play.noteDate)}</span>` : ''); })()}</div>` : ''}
     </div>
     <div class="play-title">${escapeHtml(p.name)}</div>
     <div class="play-score-row">

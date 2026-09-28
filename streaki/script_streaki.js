@@ -1,6 +1,7 @@
 const SHEET_ID = STREAKI_CONFIG.SHEET_ID;
 const SHEET_MAIN_GID = STREAKI_CONFIG.SHEET_MAIN_GID;
 const SHEET_INNE_GID = STREAKI_CONFIG.SHEET_INNE_GID;
+const SHEET_PLAY_GID = STREAKI_CONFIG.SHEET_PLAY_GID || '821403985';
 const PORTRAIT_MAP = STREAKI_CONFIG.PORTRAIT_MAP;
 const PLACEHOLDER_IMG = STREAKI_CONFIG.PLACEHOLDER_IMG;
 const TAG_LABELS = STREAKI_CONFIG.TAG_LABELS || { K: 'Killer', S: 'Survivor', O: 'Both', P: 'Playthrough' };
@@ -173,12 +174,153 @@ async function loadSheet(gid, mode) {
   return characters;
 }
 
+
+async function loadPlaythroughSheet() {
+  if (!SHEET_PLAY_GID) return [];
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_PLAY_GID}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.warn('Playthrough sheet failed', response.status);
+    return [];
+  }
+  const rows = parseCSV(await response.text());
+  if (!rows.length) return [];
+
+  const cell = (r, c) => {
+    if (r < 0 || r >= rows.length) return '';
+    const row = rows[r] || [];
+    return (row[c] || '').trim();
+  };
+  const isDone = () => false;
+  const num = (v) => {
+    const n = parseFloat(String(v || '').replace(',', '.'));
+    return isNaN(n) ? 0 : n;
+  };
+
+  /**
+   * Layout (Excel 1-based → 0-based):
+   *   Boxes grow RIGHT: cols B-C (1-2), D-E (3-4), F-G (5-6), ...
+   *   Row 6  name
+   *   Row 7  type
+   *   Row 8  games
+   *   Row 9  4k
+   *   Row 10 3k
+   *   Row 11 2k
+   *   Row 12 1k
+   *   Row 13 0k
+   *   Row 14 note/patch
+   *   Row 15+  value in box col | caption in box col+1  (dates, numbers + labels)
+   * Column A is only human labels — ignored by parser.
+   */
+  const out = [];
+  const maxCols = Math.max(0, ...rows.map(r => r.length));
+
+  for (let col = 1; col < maxCols; col += 2) {
+    const name = cell(5, col);
+    if (!name) continue;
+
+    const fields = {
+      type: cell(6, col),
+      games: cell(7, col),
+      k4: cell(8, col),
+      k3: cell(9, col),
+      k2: cell(10, col),
+      k1: cell(11, col),
+      k0: cell(12, col),
+      note: cell(13, col)
+    };
+
+    // Notes from row 15 (idx 14) down: [value, caption] pairs
+    const notes = [];
+    for (let r = 14; r < rows.length; r++) {
+      const value = cell(r, col);
+      const caption = cell(r, col + 1);
+      if (!value && !caption) {
+        // end this box notes if both empty (allow single gap)
+        const nVal = cell(r + 1, col);
+        const nCap = cell(r + 1, col + 1);
+        if (!nVal && !nCap) break;
+        continue;
+      }
+      notes.push({
+        kind: 'note',
+        date: value,
+        title: '',
+        note: caption || value,
+        text: caption || value,
+        value,
+        caption
+      });
+    }
+
+    out.push(buildPlayEntry(name, fields, [], notes, isDone, num));
+  }
+
+  return out;
+}
+
+function buildPlayEntry(name, fields, extras, details, isDone, num) {
+  const typeRaw = normSafe(fields.type);
+  let playType = 'challenge';
+  if (typeRaw === 'session' || typeRaw === 'sesja' || typeRaw === 'log') playType = 'session';
+  if (typeRaw === 'survivor' || typeRaw === 'surv' || typeRaw === 'surw') playType = 'survivor';
+
+  const finished = isDone(fields.done);
+  let g = num(fields.games);
+  let a4 = num(fields.k4), a3 = num(fields.k3), a2 = num(fields.k2), a1 = num(fields.k1), a0 = num(fields.k0);
+  let avg = num(fields.avg);
+  const note = (fields.note || '').trim();
+
+  // Survivor: row 4k slot = Escape, 3k slot = Death
+  const isSurv = playType === 'survivor';
+  const escapes = isSurv ? a4 : 0;
+  const deaths = isSurv ? a3 : 0;
+
+  const sortVal = isSurv ? (escapes || g) : (a4 || g || details.length);
+  return {
+    image: '',
+    name,
+    type: 'playthrough',
+    playType,
+    tags: ['P'],
+    play: {
+      playType,
+      finished,
+      active: !finished,
+      games: g,
+      k4: isSurv ? 0 : a4,
+      k3: isSurv ? 0 : a3,
+      k2: isSurv ? 0 : a2,
+      k1: isSurv ? 0 : a1,
+      k0: isSurv ? 0 : a0,
+      escapes,
+      deaths,
+      avg,
+      note,
+      extras: extras || [],
+      details
+    },
+    streaks: [{ category: note || playType, value: sortVal, active: !finished, tags: ['P'] }],
+    best: sortVal
+  };
+}
+
+function normSafe(s) {
+  return (s || '').trim().toLowerCase();
+}
+
 async function loadCharactersFromSheet() {
-  const [main, inne] = await Promise.all([
+  const [main, inne, play] = await Promise.all([
     loadSheet(SHEET_MAIN_GID, 'main'),
-    loadSheet(SHEET_INNE_GID, 'inne')
+    loadSheet(SHEET_INNE_GID, 'inne'),
+    loadPlaythroughSheet()
   ]);
-  return [...main, ...inne];
+  // Drop old P-tagged entries from inne if dedicated play sheet has data
+  let inneFiltered = inne;
+  if (play.length) {
+    inneFiltered = inne.filter(c => !(c.tags && c.tags.length === 1 && c.tags[0] === 'P'));
+  }
+  return [...main, ...inneFiltered, ...play];
 }
 
 /**
@@ -226,6 +368,11 @@ function groupStreaksByCategory(streaks) {
 
 function prepareCharacters(characters) {
   characters.forEach(c => {
+    if (c.play) {
+      c.groups = groupStreaksByCategory(c.streaks || []);
+      c.best = c.best || (c.groups[0] && c.groups[0].best) || 0;
+      return;
+    }
     c.groups = groupStreaksByCategory(c.streaks);
     c.best = c.groups.length ? c.groups[0].best : 0;
   });
@@ -351,15 +498,140 @@ function bindExpanders(root) {
 }
 
 /* ---------- DEFAULT VIEW ---------- */
+
+function parseResultTone(result) {
+  const m = String(result || '').toLowerCase().match(/(\d)\s*k/);
+  if (!m) return 'neutral';
+  const k = parseInt(m[1], 10);
+  if (k >= 4) return 'great';
+  if (k === 3) return 'good';
+  if (k === 2) return 'ok';
+  if (k === 1) return 'bad';
+  return 'fail';
+}
+
+function renderPlayCard(p, i) {
+  const play = p.play || {};
+  const details = play.details || [];
+  const hasDetails = details.length > 0;
+  const id = 'play-' + Math.random().toString(36).slice(2, 9);
+  const isSurv = play.playType === 'survivor';
+
+  const total = play.games || 0;
+  const wins = isSurv
+    ? (play.escapes || 0)
+    : ((play.k4 || 0) + (play.k3 || 0));
+  const winPct = total ? Math.round((wins / total) * 100) : 0;
+  const k4Pct = total ? Math.round(((play.k4 || 0) / total) * 100) : 0;
+  const escPct = total ? Math.round(((play.escapes || 0) / total) * 100) : 0;
+
+  const chips = [];
+  const addChip = (count, cls, label) => {
+    if (!count) return;
+    chips.push(`<span class="play-chip ${cls}"><b>${count}</b><span>${label}</span></span>`);
+  };
+  if (isSurv) {
+    addChip(play.escapes, 'c4', 'escape');
+    addChip(play.deaths, 'c0', 'death');
+  } else {
+    addChip(play.k4, 'c4', '4k');
+    addChip(play.k3, 'c3', '3k');
+    addChip(play.k2, 'c2', '2k');
+    addChip(play.k1, 'c1', '1k');
+    addChip(play.k0, 'c0', '0k');
+  }
+  (play.extras || []).forEach(ex => {
+    const lab = (ex.label || '').trim();
+    if (/^best\s*map$/i.test(lab)) return;
+    chips.push(`<span class="play-chip cextra"><span>${escapeHtml(lab)}</span><b>${escapeHtml(ex.value)}</b></span>`);
+  });
+
+  let detailHtml = '';
+  if (hasDetails) {
+    detailHtml = `
+      <div class="play-details" id="${id}" hidden>
+        <ul class="play-notes">
+          ${details.map(d => {
+            const val = d.value || d.date || '';
+            const cap = d.caption || d.note || d.text || '';
+            return `
+            <li class="play-note-item">
+              ${val ? `<span class="play-note-date">${escapeHtml(val)}</span>` : ''}
+              <span class="play-note-text">${escapeHtml(cap)}</span>
+            </li>`;
+          }).join('')}
+        </ul>
+      </div>`;
+  }
+
+  const card = document.createElement('article');
+  card.className = 'play-card' + (play.playType === 'survivor' ? ' is-survivor' : (play.playType === 'session' ? ' is-session' : ' is-challenge'));
+  card.innerHTML = `
+    <div class="play-top">
+      <div class="play-type-badge">${play.playType === 'survivor' ? 'SURVIVOR' : (play.playType === 'session' ? 'SESSION' : 'CHALLENGE')}</div>
+      ${play.note ? `<div class="play-patch">${escapeHtml(play.note)}</div>` : ''}
+    </div>
+    <div class="play-title">${escapeHtml(p.name)}</div>
+    <div class="play-score-row">
+      <div class="play-score">
+        <span class="play-score-num">${wins}</span><span class="play-score-sep">/</span><span class="play-score-den">${total || '—'}</span>
+        <span class="play-score-lab">${isSurv ? 'escapes' : 'wins'}</span>
+      </div>
+      <div class="play-score-sub">
+        ${total ? `<div><b>${isSurv ? escPct : winPct}%</b> ${isSurv ? 'escape rate' : 'win rate'}</div>` : ''}
+        ${(!isSurv && total) ? `<div><b>${k4Pct}%</b> 4k rate</div>` : ''}
+        ${play.highlight && play.highlight.value ? `<div class="play-hl"><b>${escapeHtml(play.highlight.value)}</b>${play.highlight.label ? ` <span>${escapeHtml(play.highlight.label)}</span>` : ''}</div>` : ''}
+      </div>
+    </div>
+    ${total ? `<div class="play-bar"><div class="play-bar-fill" style="width:${winPct}%"></div></div>` : ''}
+    <div class="play-chips">${chips.join('')}</div>
+    ${hasDetails ? `
+      <button type="button" class="play-expand wc-expand" aria-expanded="false" data-play-expand="${id}">
+        <span class="wc-expand-ico" aria-hidden="true"></span>
+        <span class="wc-expand-count">${details.length}</span>
+        <span class="play-expand-lab">notes</span>
+      </button>` : ''}
+    ${detailHtml}
+  `;
+  return card;
+}
+
+function bindPlayExpanders(root) {
+  root.querySelectorAll('[data-play-expand]').forEach(btn => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = btn.getAttribute('data-play-expand');
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      const open = panel.hasAttribute('hidden');
+      if (open) panel.removeAttribute('hidden');
+      else panel.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.classList.toggle('open', open);
+    });
+  });
+}
+
 function renderDefault(characters) {
   const grid = document.getElementById('streak-grid');
   grid.className = 'grid view-default';
   grid.innerHTML = '';
 
-  characters.forEach((c, i) => {
+  const play = characters.filter(c => c.type === 'playthrough' && c.play);
+  const rest = characters.filter(c => !(c.type === 'playthrough' && c.play));
+
+  play.forEach((c, i) => {
+    const card = renderPlayCard(c, i);
+    grid.appendChild(card);
+  });
+  if (play.length) bindPlayExpanders(grid);
+
+  rest.forEach((c, i) => {
     const card = document.createElement('article');
     card.className = 'card' + typeClass(c.type);
-    card.style.animationDelay = `${Math.min(i, 12) * 0.04}s`;
 
     const groups = c.groups || [];
     const body = groups.map((g, idx) => renderWinconBlock(g, idx, c.best, c.type)).join('');
@@ -387,36 +659,12 @@ function renderDefault(characters) {
 
 /* ---------- NEON VIEW ---------- */
 function renderNeon(characters) {
+  // Same layout as default; neon only changes colors via CSS
+  renderDefault(characters);
   const grid = document.getElementById('streak-grid');
-  grid.className = 'grid view-neon';
-  grid.innerHTML = '';
-
-  characters.forEach((c, i) => {
-    const card = document.createElement('article');
-    card.className = 'neon-card card' + typeClass(c.type);
-    card.style.animationDelay = `${Math.min(i, 12) * 0.04}s`;
-
-    const groups = c.groups || [];
-    const body = groups.map((g, idx) => renderWinconBlock(g, idx, c.best, c.type)).join('');
-
-    card.innerHTML = `
-      <div class="card-top">
-        <div class="portrait">
-          <img src="${c.image}" alt="${escapeHtml(c.name)}" loading="lazy" onerror="this.src='${PLACEHOLDER_IMG}'">
-        </div>
-        <div class="card-info">
-          <div class="killer-name">${escapeHtml(c.name)}</div>
-          <div class="card-tags">${tagsHtml(c.tags || [])}</div>
-        </div>
-        <div class="best-badge">
-          <div class="best-label">Best</div>
-          <div class="best-value">${c.best}</div>
-        </div>
-      </div>
-      <div class="streaks-list">${body}</div>
-    `;
-    grid.appendChild(card);
-    bindExpanders(card);
+  if (grid) grid.className = 'grid view-neon';
+  document.querySelectorAll('.grid .card').forEach(el => {
+    if (!el.classList.contains('play-card')) el.classList.add('neon-card');
   });
 }
 

@@ -2542,3 +2542,701 @@ body {
 .view-split .wc-block.role-other .wc-hist-state.is-best { color: #c084fc !important; }
 .view-default .wc-block.role-playthrough .wc-hist-state.is-best,
 .view-split .wc-block.role-playthrough .wc-hist-state.is-best { color: #fbbf24 !important; }
+
+
+/* ================================================================
+   PERFORMANCE — less paint/composite cost (esp. mobile)
+   ================================================================ */
+
+/* Kill infinite background motion */
+.fog {
+  animation: none !important;
+  opacity: 0.5;
+}
+.bg-layer::after {
+  opacity: 0.15;
+}
+
+/* No staggered entrance delays — instant paint */
+.card,
+.neon-card,
+.wc-block,
+.lane,
+.tl-card,
+.split-item {
+  animation: none !important;
+  animation-delay: 0s !important;
+}
+
+/* Drop expensive blur on cards (main mobile killer) */
+.grid.view-default .card,
+.grid.view-neon .neon-card,
+.view-neon .neon-card.card,
+.split-detail,
+.view-select,
+.streak-search {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Softer, cheaper transitions */
+.card,
+.neon-card,
+.split-item,
+.wc-expand,
+.tag-filter,
+.refresh-btn {
+  transition: border-color 0.15s ease, background-color 0.15s ease !important;
+}
+.card:hover,
+.neon-card:hover {
+  transform: none !important; /* translateY causes layout thrash on many cards */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35) !important;
+}
+.portrait img {
+  transition: none !important;
+}
+.card:hover .portrait img {
+  transform: none !important;
+}
+
+/* No infinite pulse / shine */
+.wc-current-dot,
+.current-badge,
+.active-badge,
+.wc-badge.active {
+  animation: none !important;
+}
+.card-progress-fill {
+  animation: none !important;
+}
+
+/* Prefer reduced motion / touch devices */
+@media (hover: none), (pointer: coarse) {
+  .fog { display: none !important; }
+  .bg-layer::after { display: none !important; }
+  * {
+    scroll-behavior: auto !important;
+  }
+  .card:hover,
+  .neon-card:hover,
+  .split-item:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Contain paint for long grids */
+.grid {
+  content-visibility: auto;
+  contain: layout style;
+}
+.card,
+.neon-card {
+  contain: layout style paint;
+}
+
+
+/* ================================================================
+   PLAYTHROUGH CARDS — summary style (not streak-heavy)
+   ================================================================ */
+.card.playthrough,
+.neon-card.playthrough {
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+.card.playthrough .best-label {
+  content: none;
+}
+.card.playthrough .best-label {
+  font-size: 0.42rem;
+}
+.card.playthrough .best-label::after {
+  /* keep "Best" or we could leave — score is main metric */
+}
+.card.playthrough .portrait {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  background: rgba(245, 158, 11, 0.06);
+}
+.card.playthrough .portrait img[src=""],
+.card.playthrough .portrait img:not([src]),
+.neon-card.playthrough .portrait img {
+  object-fit: contain;
+}
+.wc-block.role-playthrough .wc-name {
+  white-space: normal;
+  line-height: 1.25;
+  font-size: 0.78rem;
+}
+.split-item.playthrough .split-item-meta::before {
+  content: none;
+}
+
+
+/* ================================================================
+   PLAYTHROUGH — distinct cards (not streak layout)
+   ================================================================ */
+.play-card {
+  background: linear-gradient(160deg, rgba(28, 22, 12, 0.95), rgba(14, 14, 18, 0.95));
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: 16px;
+  padding: 1rem 1.1rem 1.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.play-card.is-session {
+  background: linear-gradient(160deg, rgba(12, 22, 28, 0.95), rgba(14, 14, 18, 0.95));
+  border-color: rgba(56, 189, 248, 0.22);
+}
+.play-card.is-active {
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.12);
+}
+.play-card:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+.play-card.is-session:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.play-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.play-type-badge {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.play-card.is-session .play-type-badge {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+.play-active {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.16rem 0.4rem;
+  border-radius: 4px;
+  background: #34d399;
+  color: #022c22;
+}
+.play-done {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #6b6570;
+}
+
+.play-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #f0ebe3;
+}
+.play-note {
+  font-size: 0.72rem;
+  color: #9a9088;
+  line-height: 1.3;
+}
+
+.play-score-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: 0.15rem;
+}
+.play-score-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fbbf24;
+  line-height: 1;
+}
+.play-card.is-session .play-score-num { color: #38bdf8; }
+.play-score-lab {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: #8a8490;
+  margin-left: 0.25rem;
+}
+.play-score-sub {
+  font-size: 0.7rem;
+  color: #8a8490;
+  line-height: 1.4;
+}
+
+.play-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.play-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  border-radius: 2px;
+}
+.play-card.is-session .play-bar-fill {
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+}
+
+.play-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.play-chip {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #c8c4bc;
+}
+.play-chip.c4 { color: #4ade80; border-color: rgba(74, 222, 128, 0.3); background: rgba(74, 222, 128, 0.08); }
+.play-chip.c3 { color: #a3e635; border-color: rgba(163, 230, 53, 0.25); }
+.play-chip.c2 { color: #fbbf24; border-color: rgba(251, 191, 36, 0.25); }
+.play-chip.c1 { color: #fb923c; border-color: rgba(251, 146, 60, 0.25); }
+.play-chip.c0 { color: #f87171; border-color: rgba(248, 113, 113, 0.3); background: rgba(248, 113, 113, 0.08); }
+.play-chip.cavg { color: #94a3b8; }
+
+.play-expand {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+.play-expand-lab {
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  opacity: 0.8;
+}
+
+.play-details {
+  margin-top: 0.35rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.play-details[hidden] { display: none !important; }
+
+.play-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.4rem;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.play-detail-item {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 0.45rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-left: 3px solid #555;
+}
+.play-detail-item.tone-great { border-left-color: #22c55e; }
+.play-detail-item.tone-good { border-left-color: #84cc16; }
+.play-detail-item.tone-ok { border-left-color: #eab308; }
+.play-detail-item.tone-bad { border-left-color: #f97316; }
+.play-detail-item.tone-fail { border-left-color: #ef4444; }
+
+.play-detail-kill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #ddd;
+  min-width: 0;
+}
+.play-detail-kill img {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.play-detail-kill span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.play-detail-res {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #f0ebe3;
+}
+.play-detail-map {
+  font-size: 0.6rem;
+  color: #7a7480;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.view-neon .play-card {
+  border-color: rgba(0, 240, 255, 0.2);
+  background: linear-gradient(160deg, rgba(8, 18, 28, 0.95), rgba(8, 12, 22, 0.95));
+}
+.view-neon .play-score-num { color: #00f0ff; }
+.view-neon .play-type-badge {
+  background: rgba(0, 240, 255, 0.1);
+  color: #00f0ff;
+  border-color: rgba(0, 240, 255, 0.3);
+}
+.view-neon .play-bar-fill {
+  background: linear-gradient(90deg, #00f0ff, #67e8f9);
+}
+
+.play-chip.cextra {
+  color: #c4b5fd;
+  border-color: rgba(196, 181, 253, 0.3);
+  background: rgba(196, 181, 253, 0.08);
+}
+
+
+/* Playthrough score + chips refresh */
+.play-score-num {
+  font-size: 1.85rem !important;
+}
+.play-score-sep {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6b6570;
+  margin: 0 0.1rem;
+}
+.play-score-den {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #9a9088;
+}
+.play-score-lab {
+  display: block;
+  margin-left: 0 !important;
+  margin-top: 0.15rem;
+  font-size: 0.55rem !important;
+  letter-spacing: 0.12em;
+}
+.play-patch {
+  font-size: 0.65rem;
+  color: #9a9088;
+  letter-spacing: 0.04em;
+  max-width: 55%;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.play-score-sub b {
+  color: #e8e0d8;
+  font-weight: 700;
+}
+
+.play-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem !important;
+  margin-top: 0.15rem;
+}
+.play-chip {
+  display: inline-flex !important;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.35rem 0.55rem !important;
+  border-radius: 8px !important;
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+}
+.play-chip b {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.play-chip span {
+  opacity: 0.75;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.play-detail-item.agg {
+  border-left-color: rgba(245, 158, 11, 0.4);
+}
+.play-detail-agg-score {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #f0ebe3;
+}
+.play-detail-agg-score span {
+  color: #7a7480;
+  font-size: 0.8rem;
+}
+.play-detail-agg-chips {
+  display: flex;
+  gap: 0.25rem;
+}
+.play-detail-agg-chips .mini {
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+}
+.play-detail-agg-chips .mini.c4 { color: #4ade80; }
+.play-detail-agg-chips .mini.c3 { color: #a3e635; }
+.play-detail-agg-chips .mini.c0 { color: #f87171; }
+
+/* remove old active/done if residual */
+.play-active, .play-done { display: none !important; }
+
+
+/* Playthrough — larger small text + notes list */
+.play-type-badge {
+  font-size: 0.62rem !important;
+  padding: 0.22rem 0.5rem !important;
+}
+.play-patch {
+  font-size: 0.78rem !important;
+  color: #b0a8a0 !important;
+}
+.play-title {
+  font-size: 1.15rem !important;
+}
+.play-score-num {
+  font-size: 2.15rem !important;
+}
+.play-score-sep {
+  font-size: 1.55rem !important;
+}
+.play-score-den {
+  font-size: 1.55rem !important;
+}
+.play-score-lab {
+  font-size: 0.68rem !important;
+}
+.play-score-sub {
+  font-size: 0.82rem !important;
+  line-height: 1.45 !important;
+}
+.play-score-sub b {
+  font-size: 0.9rem;
+}
+.play-chip {
+  padding: 0.42rem 0.65rem !important;
+  font-size: 0.78rem !important;
+  gap: 0.35rem !important;
+}
+.play-chip b {
+  font-size: 0.95rem !important;
+}
+.play-chip span {
+  font-size: 0.72rem !important;
+}
+.play-expand {
+  height: 30px !important;
+  font-size: 0.78rem !important;
+}
+.play-expand-count {
+  font-size: 0.8rem !important;
+}
+.play-expand-lab {
+  font-size: 0.72rem !important;
+}
+
+/* Notes under playthrough */
+.play-notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.play-note-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.65rem;
+  padding: 0.55rem 0.65rem;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  border-left: 3px solid rgba(245, 158, 11, 0.45);
+}
+.play-card.is-session .play-note-item {
+  border-left-color: rgba(56, 189, 248, 0.45);
+}
+.play-note-date {
+  grid-row: 1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.play-card.is-session .play-note-date { color: #38bdf8; }
+.play-note-title {
+  grid-column: 2;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ddd;
+}
+.play-note-text {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: #c8c4bc;
+  line-height: 1.35;
+}
+.play-note-item:has(.play-note-date) .play-note-text {
+  grid-column: 2;
+}
+
+
+/* Stronger chip labels (4k more visible) */
+.play-chip {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 3.2rem;
+  padding: 0.45rem 0.55rem !important;
+  gap: 0.15rem !important;
+}
+.play-chip b {
+  font-size: 1.05rem !important;
+  line-height: 1;
+  order: 1;
+}
+.play-chip span {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+  order: 2;
+  color: inherit !important;
+}
+.play-chip.c4 span { color: #86efac !important; }
+.play-chip.c3 span { color: #bef264 !important; }
+.play-chip.c2 span { color: #fde68a !important; }
+.play-chip.c1 span { color: #fdba74 !important; }
+.play-chip.c0 span { color: #fca5a5 !important; }
+.play-chip.cextra {
+  flex-direction: column !important;
+}
+.play-chip.cextra span { order: 2; opacity: 0.85 !important; }
+.play-chip.cextra b { order: 1; }
+
+/* Row 15 highlight */
+.play-hl {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+}
+.play-hl b {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: #fbbf24 !important;
+}
+.play-card.is-session .play-hl b { color: #38bdf8 !important; }
+.play-hl span {
+  color: #9a9088;
+  font-size: 0.75rem;
+}
+
+.play-note-item {
+  grid-template-columns: auto 1fr !important;
+  align-items: baseline;
+}
+.play-note-date {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #fbbf24 !important;
+  min-width: 2.8rem;
+}
+.play-card.is-session .play-note-date {
+  color: #38bdf8 !important;
+}
+.play-note-text {
+  grid-column: auto !important;
+  font-size: 0.88rem !important;
+}
+
+
+/* Notes scrollbar */
+.play-notes {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 158, 11, 0.45) rgba(255,255,255,0.06);
+}
+.play-notes::-webkit-scrollbar {
+  width: 6px;
+}
+.play-notes::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+}
+.play-notes::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.45);
+  border-radius: 6px;
+}
+.play-notes::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.7);
+}
+.play-card.is-session .play-notes {
+  scrollbar-color: rgba(56, 189, 248, 0.5) rgba(255,255,255,0.06);
+}
+.play-card.is-session .play-notes::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.5);
+}
+.play-card.is-survivor .play-notes {
+  scrollbar-color: rgba(45, 212, 191, 0.5) rgba(255,255,255,0.06);
+}
+.play-card.is-survivor .play-notes::-webkit-scrollbar-thumb {
+  background: rgba(45, 212, 191, 0.5);
+}
+
+/* Survivor playthrough card */
+.play-card.is-survivor {
+  background: linear-gradient(160deg, rgba(12, 28, 26, 0.95), rgba(14, 14, 18, 0.95));
+  border-color: rgba(45, 212, 191, 0.28);
+}
+.play-card.is-survivor:hover {
+  border-color: rgba(45, 212, 191, 0.45);
+}
+.play-card.is-survivor .play-type-badge {
+  background: rgba(45, 212, 191, 0.12);
+  color: #2dd4bf;
+  border-color: rgba(45, 212, 191, 0.35);
+}
+.play-card.is-survivor .play-score-num { color: #2dd4bf; }
+.play-card.is-survivor .play-bar-fill {
+  background: linear-gradient(90deg, #14b8a6, #2dd4bf);
+}
+.play-card.is-survivor .play-note-date { color: #2dd4bf !important; }
+.play-card.is-survivor .play-note-item {
+  border-left-color: rgba(45, 212, 191, 0.45);
+}

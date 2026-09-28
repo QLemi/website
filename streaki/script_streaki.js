@@ -263,8 +263,18 @@ async function loadPlaythroughSheet() {
 function buildPlayEntry(name, fields, extras, details, isDone, num) {
   const typeRaw = normSafe(fields.type);
   let playType = 'challenge';
-  if (typeRaw === 'session' || typeRaw === 'sesja' || typeRaw === 'log') playType = 'session';
-  if (typeRaw === 'survivor' || typeRaw === 'surv' || typeRaw === 'surw') playType = 'survivor';
+  // session / session-killer / killer-session → session (Session-Killer badge)
+  if (
+    typeRaw === 'session' || typeRaw === 'sesja' || typeRaw === 'log' ||
+    typeRaw === 'session-killer' || typeRaw === 'session killer' ||
+    typeRaw === 'killer-session' || typeRaw === 'killer session'
+  ) playType = 'session';
+  // survivor / session-survivor → survivor (Session-Survivor badge)
+  if (
+    typeRaw === 'survivor' || typeRaw === 'surv' || typeRaw === 'surw' ||
+    typeRaw === 'session-survivor' || typeRaw === 'session survivor' ||
+    typeRaw === 'survivor-session' || typeRaw === 'survivor session'
+  ) playType = 'survivor';
 
   const finished = isDone(fields.done);
   let g = num(fields.games);
@@ -401,19 +411,22 @@ function filterCharacters(characters) {
 }
 
 function updateStats(characters) {
-  const totalGroups = characters.reduce((sum, c) => sum + (c.groups ? c.groups.length : 0), 0);
-  const activeCount = characters.reduce((sum, c) => {
+  // Playthrough entries never count toward header stats
+  const streakChars = characters.filter(c => c.type !== 'playthrough' && !c.play);
+  const totalGroups = streakChars.reduce((sum, c) => sum + (c.groups ? c.groups.length : 0), 0);
+  const activeCount = streakChars.reduce((sum, c) => {
     if (!c.groups) return sum;
     return sum + c.groups.filter(g => g.isBestActive || g.activeAttempt).length;
   }, 0);
+  const best = streakChars.length ? Math.max(...streakChars.map(c => c.best || 0)) : 0;
 
   const elChars = document.getElementById('total-characters');
   const elStreaks = document.getElementById('total-streaks');
   const elBest = document.getElementById('best-streak');
   const elActive = document.getElementById('active-count');
-  if (elChars) elChars.textContent = characters.length;
+  if (elChars) elChars.textContent = streakChars.length;
   if (elStreaks) elStreaks.textContent = totalGroups;
-  if (elBest) elBest.textContent = characters.length ? characters[0].best : 0;
+  if (elBest) elBest.textContent = best;
   if (elActive) elActive.textContent = activeCount;
 }
 
@@ -539,28 +552,25 @@ function parsePlayDate(raw) {
 function formatTimeAgo(date) {
   if (!date) return '';
   const now = new Date();
-  // compare calendar days roughly
   const ms = now.getTime() - date.getTime();
-  if (ms < 0) return 'w przyszłości';
+  if (ms < 0) return 'in the future';
   const days = Math.floor(ms / 86400000);
-  if (days === 0) return 'dziś';
-  if (days === 1) return '1 dzień temu';
-  if (days < 7) return days + ' dni temu';
+  if (days === 0) return 'today';
+  if (days === 1) return '1 day ago';
+  if (days < 7) return days + ' days ago';
   const weeks = Math.floor(days / 7);
   if (days < 30) {
-    if (weeks === 1) return '1 tydzień temu';
-    return weeks + ' tyg. temu';
+    if (weeks === 1) return '1 week ago';
+    return weeks + ' weeks ago';
   }
   const months = Math.floor(days / 30.44);
   if (days < 365) {
-    if (months <= 1) return '1 miesiąc temu';
-    if (months < 5) return months + ' miesiące temu';
-    return months + ' miesięcy temu';
+    if (months <= 1) return '1 month ago';
+    return months + ' months ago';
   }
   const years = Math.floor(days / 365.25);
-  if (years === 1) return '1 rok temu';
-  if (years < 5) return years + ' lata temu';
-  return years + ' lat temu';
+  if (years === 1) return '1 year ago';
+  return years + ' years ago';
 }
 
 function renderPlayCard(p, i) {
@@ -621,7 +631,7 @@ function renderPlayCard(p, i) {
   card.className = 'play-card' + (play.playType === 'survivor' ? ' is-survivor' : (play.playType === 'session' ? ' is-session' : ' is-challenge'));
   card.innerHTML = `
     <div class="play-top">
-      <div class="play-type-badge">${play.playType === 'survivor' ? 'SURVIVOR' : (play.playType === 'session' ? 'SESSION' : 'CHALLENGE')}</div>
+      <div class="play-type-badge">${play.playType === 'survivor' ? 'SESSION-SURVIVOR' : (play.playType === 'session' ? 'SESSION-KILLER' : 'CHALLENGE')}</div>
       ${play.note || play.noteDate ? `<div class="play-patch">${play.note ? `<span class="play-patch-note">${escapeHtml(play.note)}</span>` : ''}${(() => { const ago = formatTimeAgo(parsePlayDate(play.noteDate)); return ago ? `<span class="play-patch-ago">${escapeHtml(ago)}</span>` : (play.noteDate ? `<span class="play-patch-ago">${escapeHtml(play.noteDate)}</span>` : ''); })()}</div>` : ''}
     </div>
     <div class="play-title">${escapeHtml(p.name)}</div>

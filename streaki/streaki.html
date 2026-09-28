@@ -43,13 +43,20 @@
         <option value="split">Split</option>
       </select>
       <input type="search" id="streak-search" class="streak-search" placeholder="Search..." autocomplete="off">
+      <a class="steam-chip" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" title="Steam — Lemi">
+        <span class="steam-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.962 20.518 6.495 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.304 1.25 1.297.554 2.792-.046 3.346-1.342.263-.606.264-1.284.01-1.887a2.417 2.417 0 00-1.342-1.348 2.41 2.41 0 00-1.88-.009l1.523.63a1.775 1.775 0 01-1.488 3.316zm9.191-7.226c-1.405 0-2.548-1.143-2.548-2.548 0-1.404 1.143-2.546 2.548-2.546 1.403 0 2.546 1.142 2.546 2.546 0 1.405-1.143 2.548-2.546 2.548zm0-3.887c-.742 0-1.343.602-1.343 1.34 0 .74.601 1.342 1.343 1.342.739 0 1.34-.602 1.34-1.342 0-.738-.601-1.34-1.34-1.34z"/></svg></span>
+        <span class="steam-chip-txt">Lemi</span>
+      </a>
       <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
     </div>
     <div class="tag-filters">
       <button class="tag-filter active" data-tag="K">Killer</button>
       <button class="tag-filter active" data-tag="S">Survivor</button>
       <button class="tag-filter active" data-tag="O">Both</button>
-      <button class="tag-filter" data-tag="P">Playthrough</button>
+      <button class="tag-filter tag-filter-p" data-tag="P">
+        Playthrough
+        <span class="mc-splash" aria-hidden="true">NEW!</span>
+      </button>
     </div>
   </header>
 

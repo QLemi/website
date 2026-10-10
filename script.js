@@ -2,12 +2,12 @@
 const tiles = [
   {
     title: "Killer Loadout Checker",
-    image: "./main_image/loadout.jpg",   
+    image: "./main_image/loadout-checker.png",   
     link:  "./loadout/loadout.html"                            
   },
   {
     title: "Tierlista Widzów - De_Destru",
-    image: "./main_image/Tierlista_widzów.jpg",
+    image: "./main_image/tierlista-widzow.png",
     link:  "./tierlista_widzów/tierlista_widzów.html"
   },
   {
@@ -17,7 +17,7 @@ const tiles = [
   },
   {
     title: "Statystyki",
-    image: "./main_image/streaki.png",
+    image: "./main_image/statystyki.png",
     link:  "./stats/stats.html"
   },
   {
@@ -27,7 +27,7 @@ const tiles = [
   },
   {
     title: "DBD Killers Info",
-    image: "./main_image/unknown.png",
+    image: "./main_image/dbd-killers-info.png",
     link:  "./DBDKillersInfo/DBDKillersInfo.html"
   }
 ];

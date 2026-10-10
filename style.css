@@ -5,7 +5,14 @@
 }
 
 body {
-  background: #0f0f0f;
+  background-color: #080a12;
+  background-image:
+    linear-gradient(rgba(8, 10, 18, 0.28), rgba(8, 10, 18, 0.28)),
+    url("./main_image/tlo-strony.png");
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   min-height: 100vh;
   font-family: system-ui, -apple-system, sans-serif;
   color: #fff;

@@ -1,6 +1,6 @@
 // ============================================
 // DBD KILLER HUB - START DATA
-// Generated: 23.09.2026, 12:37:57
+// Generated: 10.10.2026, 14:45:57
 // Paste this entire file as data/data.js
 // ============================================
 
@@ -21,10 +21,7 @@ const INITIAL_DATA = {
         "BeginnerFriendly",
         "Setup"
       ],
-      "notes": "Trapper czyli Evan największa sigiemka jaką można sobie wyobrazić, pomimo tego, że jest to niemal harmless killer sprawia naprawdę dużo funu w pub meczach gdzie ludzie zazwyczaj rąk nie mają. W comp dbd killer nigdy nie grany ze względu na jego względnie nudny gameplay i totalny brak mocy.",
-      "guide": "Podnoszenie swojej mocy z ziemi to nie najlepszy design killera. \nDlatego niesamowicie pomocny jest trapper sack, niestetny ma ogromny downsite w postaci braku podnoszenia trapów.\n> Core perkiem na Evanie to oczywiście Corrupt.\nMożna grać buildy typowo pod gen slowdown jednak trapper potrzebuje tych chase perków, na pubie nie jest to aż tak wymagane no chyba, że spotkamy dobry team.\nGłupie też nie jest w większości używanie chase perków, skłaniałbym sie bardziej do tych skracajacych cooldown m1 lub haste niż np bamboozle (który tez nie jest złym wyborem). Rapid może być kuszącym wyborem ale brak bloodlusta to zbyt potęzna kara dla tego killera aby używać tego perka.",
-      "vsNotes": "placeholder",
-      "addonNotes": "Klasyczne połączenie Honing Stone z Iri Stonem daje ogrom zaoszczędzonego czasu i marnowania czasu surwów poprzez wymaganie 2 surwa do ratunku.",
+      "addonNotes": "The classic combination of Honing Stone and Iridescent Stone can waste a great deal of Survivor time by requiring two Survivors to rescue a trapped teammate.",
       "recommendedAddons": [
         "Honing Stone",
         "Iridescent Stone"
@@ -56,32 +53,6 @@ const INITIAL_DATA = {
             "Fastening Tools"
           ]
         }
-      ],
-      "contentSections": [
-        {
-          "key": "notes",
-          "title": "Short Note",
-          "body": "Trapper czyli Evan największa sigiemka jaką można sobie wyobrazić, pomimo tego, że jest to niemal harmless killer sprawia naprawdę dużo funu w pub meczach gdzie ludzie zazwyczaj rąk nie mają. W comp dbd killer nigdy nie grany ze względu na jego względnie nudny gameplay i totalny brak mocy.",
-          "builtin": true
-        },
-        {
-          "key": "guide",
-          "title": "Guide / How to Play",
-          "body": "Podnoszenie swojej mocy z ziemi to nie najlepszy design killera. \nDlatego niesamowicie pomocny jest trapper sack, niestetny ma ogromny downsite w postaci braku podnoszenia trapów.\n> Core perkiem na Evanie to oczywiście Corrupt.\nMożna grać buildy typowo pod gen slowdown jednak trapper potrzebuje tych chase perków, na pubie nie jest to aż tak wymagane no chyba, że spotkamy dobry team.\nGłupie też nie jest w większości używanie chase perków, skłaniałbym sie bardziej do tych skracajacych cooldown m1 lub haste niż np bamboozle (który tez nie jest złym wyborem). Rapid może być kuszącym wyborem ale brak bloodlusta to zbyt potęzna kara dla tego killera aby używać tego perka.",
-          "builtin": true
-        },
-        {
-          "key": "custom_1790158660399",
-          "title": "In Game",
-          "body": "> Początek meczu Evanem wygląda bardzo standardowo, stawia się trapy, które ma sie w ręce i przestawia te najbliższe w miejsca, w których mogą być usefull.\nBardziej doświadczone surwy w tym czasie już mogą chodzić za tobą i baitować cie w chase, biegać za tobą i rozbrajać ci trapy, jako traper nie możesz zrobić z tym nic XD Dlatego tak ważnym addonem jest iri stone. Jednak pub mecz zazwyczaj wygląda dosyć standardowo czyli surwy robią swoje rzeczy, i tutaj wchodzi w gre corrupt, który pozwala kupić trochę tego mega cennego czasu na początku i jednocześnie sprowadzić surwy w twoim kierunku i w miejsca, w których już można grać wokół wcześniej postawionych trapów.\nJeśli jest taka okazja to warto wieszać surwa w piwnicy, użyć 7s czasu braku anty kampy aby zablokować trapami wejścia do piwnicy (w przypadku bloody coila, surw taki jest martwy chyba, że mu oddasz antykampe).\nZazwyczaj lepszym pomysłem jest stawianie trapów w miejsach mniej oczywistych tzn. nie na palecie a na tej loopie gdzieś za rogiem w trawie lub cieniu. Trapowanie samych okien i palet też nie jest błędem jednak taki trap nikogo nie złapie a bardziej nie pozwoli mu tego resource użyć, co również korzystne, no chyba że grany jest iri stone to playstyle sie zmienia i trapowanie palet i okien jest lepszym rozwiązaniem",
-          "builtin": false
-        },
-        {
-          "key": "custom_1790159030241",
-          "title": "Mechanics",
-          "body": "> Trapy staraj sie stawiać w pozycji, w której jej boczne podłużne elementy są skierowane do ściany.\n> Jest to killer który w głównej mierze wymaga dobrego m1 chase \n> Hook positioning z agitation może odratować mecz zwłaszcza gdy mamy zatrapowany ten obszar mapy",
-          "builtin": false
-        }
       ]
     },
     {
@@ -101,9 +72,6 @@ const INITIAL_DATA = {
         "SluggingPotential ",
         "Hit&Run"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -134,9 +102,6 @@ const INITIAL_DATA = {
         "MapDependent",
         "StrongOnOutdoors"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [
         "Iridescent Engravings",
@@ -175,9 +140,6 @@ const INITIAL_DATA = {
         "Snowball",
         "CampingPotential "
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -208,9 +170,6 @@ const INITIAL_DATA = {
         "StrongOnIndoors",
         "InstantDown"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -237,9 +196,6 @@ const INITIAL_DATA = {
         "Setup",
         "Hit&Run"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -265,9 +221,6 @@ const INITIAL_DATA = {
         "PassiveSlowdown",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -294,9 +247,6 @@ const INITIAL_DATA = {
         "CampingPotential ",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -321,9 +271,6 @@ const INITIAL_DATA = {
         "InstantDown",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -351,9 +298,6 @@ const INITIAL_DATA = {
         "StrongOnIndoors",
         "HighSkill"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -380,9 +324,6 @@ const INITIAL_DATA = {
         "DashAttack",
         "StrongOnIndoors"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -409,9 +350,6 @@ const INITIAL_DATA = {
         "CampingPotential ",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -439,9 +377,6 @@ const INITIAL_DATA = {
         "TunnelPotential ",
         "Strong1v1"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [
         "Rusty Flute",
@@ -477,9 +412,6 @@ const INITIAL_DATA = {
         "PassiveSlowdown",
         "Hit&Run"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -508,9 +440,6 @@ const INITIAL_DATA = {
         "Hit&Run",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -538,9 +467,6 @@ const INITIAL_DATA = {
         "StrongOnIndoors",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -567,9 +493,6 @@ const INITIAL_DATA = {
         "DashAttack",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -596,9 +519,6 @@ const INITIAL_DATA = {
         "MapDependent",
         "InstantDown"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -625,9 +545,6 @@ const INITIAL_DATA = {
         "CampingPotential ",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -654,9 +571,6 @@ const INITIAL_DATA = {
         "CampingPotential ",
         "Strong1v1"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -687,9 +601,6 @@ const INITIAL_DATA = {
         "MapDependent",
         "StrongOnOutdoors"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -719,9 +630,6 @@ const INITIAL_DATA = {
         "DashAttack",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -749,9 +657,6 @@ const INITIAL_DATA = {
         "CampingPotential ",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -775,9 +680,6 @@ const INITIAL_DATA = {
         "Strong1v1",
         "PassiveSlowdown"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -804,9 +706,6 @@ const INITIAL_DATA = {
         "MapDependent",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -831,9 +730,6 @@ const INITIAL_DATA = {
         "HalfM1",
         "Strong1v1"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -862,9 +758,6 @@ const INITIAL_DATA = {
         "StrongOnIndoors",
         "Setup"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -892,9 +785,6 @@ const INITIAL_DATA = {
         "Stealth",
         "Setup"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -922,9 +812,6 @@ const INITIAL_DATA = {
         "MapDependent",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -950,9 +837,6 @@ const INITIAL_DATA = {
         "PassiveSlowdown",
         "RNG"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -979,9 +863,6 @@ const INITIAL_DATA = {
         "StatusEffect",
         "Setup"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1011,9 +892,6 @@ const INITIAL_DATA = {
         "StrongOnOutdoors",
         "Setup"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -1040,9 +918,6 @@ const INITIAL_DATA = {
         "Teleport",
         "HalfM1"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1069,9 +944,6 @@ const INITIAL_DATA = {
         "HalfM1",
         "StrongOnIndoors"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1100,9 +972,6 @@ const INITIAL_DATA = {
         "StrongOnIndoors",
         "Setup"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1127,9 +996,6 @@ const INITIAL_DATA = {
         "M1",
         "Strong1v1"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1157,9 +1023,6 @@ const INITIAL_DATA = {
         "Teleport",
         "DashAttack"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [
         "Medusa's Hair",
@@ -1197,9 +1060,6 @@ const INITIAL_DATA = {
         "CampingPotential ",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1226,9 +1086,6 @@ const INITIAL_DATA = {
         "M1",
         "MapDependent"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
@@ -1257,9 +1114,6 @@ const INITIAL_DATA = {
         "HalfM1",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1287,9 +1141,6 @@ const INITIAL_DATA = {
         "DashAttack",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1317,9 +1168,6 @@ const INITIAL_DATA = {
         "SluggingPotential ",
         "Strong1v1"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1349,9 +1197,6 @@ const INITIAL_DATA = {
         "MapDependent",
         "StatusEffect"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
@@ -1381,9 +1226,6 @@ const INITIAL_DATA = {
         "Strong1v1",
         "Hit&Run"
       ],
-      "notes": "placeholder",
-      "guide": "placeholder",
-      "vsNotes": "placeholder",
       "addonNotes": "placeholder",
       "recommendedCombos": [],
       "recommendedAddons": []
@@ -1401,358 +1243,5091 @@ const INITIAL_DATA = {
         "Agitation",
         "Turn Back the Clock"
       ],
-      "tags": [],
-      "addons": [
-        "Iridescent Stone",
-        "Bloody Coil"
+      "tags": [
+        "GenRegression",
+        "GenBlocking"
       ],
       "addonImages": [
         "https://otz-addon-tierlist.pages.dev/public/addons/trapper/iridescentstone.png",
         "https://otz-addon-tierlist.pages.dev/public/addons/trapper/bloodycoil.png"
       ],
-      "description": "Raczej typowy build, nie ma nic pod chase więc może być problem z consistent wygrywaniem. Jednak sam w sobie jest to solidny build z gen regressem i agi aby grać jak najbliżej piwnicy i zazwyczaj zagwarantować sobie wina.",
+      "description": "A fairly typical build with no chase perks, so winning consistently may be difficult. Still, it is a solid build with generator regression and Agitation, designed to play near the basement and secure a win.",
       "patch": "10.1.2",
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
       "changes": "",
       "id": "b1790005623137"
+    },
+    {
+      "id": "hens_animatronic_1",
+      "name": "Best Animatronic Without Limitations",
+      "killerIds": [
+        "animatronic"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Mindbreaker"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Foxy's Hook",
+        "Restaurant Menu"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_animatronic_2",
+      "name": "Funny Animatronic",
+      "killerIds": [
+        "animatronic"
+      ],
+      "perks": [
+        "Batteries Included",
+        "Furtive Chase",
+        "Machine Learning",
+        "Unbound"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Stealth",
+        "Chase",
+        "Haste",
+        "Obsession",
+        "Info"
+      ],
+      "addons": [
+        "Foxy's Hook",
+        "Celebrate! Poster"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_animatronic_3",
+      "name": "Best Beginner Animatronic",
+      "killerIds": [
+        "animatronic"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Tinkerer",
+        "Phantom Fear",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Restaurant Menu",
+        "Help Wanted Ad"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_artist_4",
+      "name": "Best Artist Without Limitations",
+      "killerIds": [
+        "artist"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch",
+        "Rapid Brutality"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Haste"
+      ],
+      "addons": [
+        "Severed Hands",
+        "Untitled Agony"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_artist_5",
+      "name": "Funny Artist",
+      "killerIds": [
+        "artist"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Surveillance",
+        "Oppression",
+        "Discordance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Severed Hands",
+        "Festering Carrion"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_artist_6",
+      "name": "Best Beginner Artist",
+      "killerIds": [
+        "artist"
+      ],
+      "perks": [
+        "Hex: Pentimento",
+        "Scourge Hook: Pain Resonance",
+        "Grim Embrace",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "GenRegression",
+        "GenBlocking",
+        "Hex"
+      ],
+      "addons": [
+        "Thick Tar",
+        "Festering Carrion"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_artist_7",
+      "name": "Unique Artist — Stagger Shot Artist",
+      "killerIds": [
+        "artist"
+      ],
+      "perks": [
+        "Discordance",
+        "Oppression",
+        "Surveillance",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Severed Hands",
+        "Thick Tar"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_blight_8",
+      "name": "Best Blight Without Limitations",
+      "killerIds": [
+        "blight"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention",
+        "Eruption",
+        "Pop Goes the Weasel"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Blighted Crow",
+        "Alchemist's Ring"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_blight_9",
+      "name": "Funny Blight",
+      "killerIds": [
+        "blight"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Lethal Pursuer",
+        "Awakened Awareness",
+        "Agitation"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Info"
+      ],
+      "addons": [
+        "Blighted Crow",
+        "Blighted Rat"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_blight_10",
+      "name": "Best Beginner Blight",
+      "killerIds": [
+        "blight"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Enduring",
+        "Scourge Hook: Gift of Pain",
+        "Deadlock"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Canker Thorn",
+        "Shredded Notes"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_blight_11",
+      "name": "Unique Blight — Stealth Blight",
+      "killerIds": [
+        "blight"
+      ],
+      "perks": [
+        "A Nurse's Calling",
+        "Gearhead",
+        "Spies from the Shadows",
+        "Tinkerer"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Info"
+      ],
+      "addons": [
+        "Rose Tonic",
+        "Vigo's Journal"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cannibal_12",
+      "name": "Best Cannibal Without Limitations",
+      "killerIds": [
+        "cannibal"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Bamboozle"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "The Beast's Marks",
+        "Iridescent Flesh"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cannibal_13",
+      "name": "Funny Cannibal",
+      "killerIds": [
+        "cannibal"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Bamboozle",
+        "Unforeseen",
+        "Scourge Hook: Pain Resonance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Stealth",
+        "Chase",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "The Beast's Marks",
+        "Primer Bulb"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cannibal_14",
+      "name": "Best Beginner Cannibal",
+      "killerIds": [
+        "cannibal"
+      ],
+      "perks": [
+        "Enduring",
+        "Bamboozle",
+        "Pop Goes the Weasel",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Primer Bulb",
+        "Vegetable Oil"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cannibal_15",
+      "name": "Unique Cannibal — Snowball Bubba",
+      "killerIds": [
+        "cannibal"
+      ],
+      "perks": [
+        "Insidious",
+        "Infectious Fright",
+        "Iron Maiden",
+        "Forced Hesitation"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Slugging",
+        "Info"
+      ],
+      "addons": [
+        "Iridescent Flesh",
+        "The Beast's Marks"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cenobite_16",
+      "name": "Best Cenobite Without Limitations",
+      "killerIds": [
+        "cenobite"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch",
+        "Corrupt Intervention",
+        "Turn Back the Clock"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Impaling Wire",
+        "Greasy Black Lens"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cenobite_17",
+      "name": "Funny Cenobite",
+      "killerIds": [
+        "cenobite"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Sloppy Butcher",
+        "Lethal Pursuer",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Larry's Remains",
+        "Frank's Heart"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cenobite_18",
+      "name": "Best Beginner Cenobite",
+      "killerIds": [
+        "cenobite"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Deadlock",
+        "Hex: Plaything",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "Chase",
+        "GenBlocking",
+        "Hex"
+      ],
+      "addons": [
+        "Skewered Rat",
+        "Liquified Gore"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_cenobite_19",
+      "name": "Unique Cenobite — Infinite Chainhunt Pinhead",
+      "killerIds": [
+        "cenobite"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Barbecue & Chilli",
+        "Lethal Pursuer",
+        "Sloppy Butcher"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Frank's Heart",
+        "Larry's Blood"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_clown_20",
+      "name": "Best Clown Without Limitations",
+      "killerIds": [
+        "clown"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Dragon's Grip"
+      ],
+      "tags": [
+        "Hens",
+        "Exposed",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Garish Make-Up Kit",
+        "Cheap Gin Bottle"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_clown_21",
+      "name": "Funny Clown",
+      "killerIds": [
+        "clown"
+      ],
+      "perks": [
+        "Rapid Brutality",
+        "Dead Man's Switch",
+        "Scourge Hook: Pain Resonance",
+        "Brutal Strength"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Haste"
+      ],
+      "addons": [
+        "Flask of Bleach",
+        "Ether 15 Vol%"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_clown_22",
+      "name": "Best Beginner Clown",
+      "killerIds": [
+        "clown"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Brutal Strength",
+        "Sloppy Butcher",
+        "Bamboozle"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "Starling Feather",
+        "Thick Cork Stopper"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_clown_23",
+      "name": "Unique Clown — Speed Clown",
+      "killerIds": [
+        "clown"
+      ],
+      "perks": [
+        "Rapid Brutality",
+        "Machine Learning",
+        "Coup de Grâce",
+        "Save the Best for Last"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Chase",
+        "Haste",
+        "Obsession"
+      ],
+      "addons": [
+        "Garish Make-Up Kit",
+        "Cheap Gin Bottle"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_darklord_24",
+      "name": "Best Dark Lord Without Limitations",
+      "killerIds": [
+        "darklord"
+      ],
+      "perks": [
+        "Hex: Hive Mind",
+        "Hex: Thrill of the Hunt",
+        "Hex: Ruin",
+        "Hex: Pentimento"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Lapis Lazuli",
+        "Winged Boots"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_darklord_25",
+      "name": "Funny Dark Lord",
+      "killerIds": [
+        "darklord"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Barbecue & Chilli",
+        "Spies from the Shadows",
+        "Hex: Undying"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Traveller's Hat",
+        "Clock Tower Gear"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_darklord_26",
+      "name": "Best Beginner Dark Lord",
+      "killerIds": [
+        "darklord"
+      ],
+      "perks": [
+        "Hex: Wretched Fate",
+        "Dominance",
+        "Scourge Hook: Gift of Pain",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "Hex"
+      ],
+      "addons": [
+        "Clock Tower Gear",
+        "Traveller's Hat"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_darklord_27",
+      "name": "Unique Dark Lord — Wolf Dracula",
+      "killerIds": [
+        "darklord"
+      ],
+      "perks": [
+        "Lethal Pursuer",
+        "Coup de Grâce",
+        "Rapid Brutality",
+        "Unforeseen"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Chase",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Warg's Fang",
+        "Force of Echo"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_deathslinger_28",
+      "name": "Best Deathslinger Without Limitations",
+      "killerIds": [
+        "deathslinger"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch",
+        "Turn Back the Clock"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Bayshore's Cigar",
+        "Iridescent Coin"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_deathslinger_29",
+      "name": "Funny Deathslinger",
+      "killerIds": [
+        "deathslinger"
+      ],
+      "perks": [
+        "Unforeseen",
+        "Eruption",
+        "Scourge Hook: Pain Resonance",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Stealth",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Warden's Keys",
+        "Bayshore's Cigar"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_deathslinger_30",
+      "name": "Best Beginner Deathslinger",
+      "killerIds": [
+        "deathslinger"
+      ],
+      "perks": [
+        "A Nurse's Calling",
+        "Dead Man's Switch",
+        "Scourge Hook: Gift of Pain",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "Stealth",
+        "AntiHeal",
+        "GenBlocking",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Warden's Keys",
+        "Modified Ammo Belt"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_deathslinger_31",
+      "name": "Unique Deathslinger — 0 Terror Radius Deathslinger",
+      "killerIds": [
+        "deathslinger"
+      ],
+      "perks": [
+        "Monitor & Abuse",
+        "Gearhead",
+        "Whispers",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Info"
+      ],
+      "addons": [
+        "Marshal's Badge",
+        "Gold Creek Whiskey"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_demogorgon_32",
+      "name": "Best Demogorgon Without Limitations",
+      "killerIds": [
+        "demogorgon"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Dead Man's Switch"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Barb's Glasses",
+        "Leprose Lichen"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_demogorgon_33",
+      "name": "Funny Demogorgon",
+      "killerIds": [
+        "demogorgon"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention",
+        "Grim Embrace"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Black Heart",
+        "Barb's Glasses"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_demogorgon_34",
+      "name": "Best Beginner Demogorgon",
+      "killerIds": [
+        "demogorgon"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Enduring",
+        "Pop Goes the Weasel",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "Barb's Glasses",
+        "Black Heart"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_demogorgon_35",
+      "name": "Unique Demogorgon — Devour Demogorgon",
+      "killerIds": [
+        "demogorgon"
+      ],
+      "perks": [
+        "Hex: Devour Hope",
+        "Hex: Undying",
+        "Hex: Thrill of the Hunt",
+        "Hex: Pentimento"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Exposed",
+        "Hex",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Deer Lung",
+        "Lifeguard Whistle"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_doctor_36",
+      "name": "Best Doctor Without Limitations",
+      "killerIds": [
+        "doctor"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch",
+        "Rapid Brutality"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Haste"
+      ],
+      "addons": [
+        "\"Discipline\" - Carter's Notes",
+        "High Stimulus Electrode"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_doctor_37",
+      "name": "Funny Doctor",
+      "killerIds": [
+        "doctor"
+      ],
+      "perks": [
+        "Rapid Brutality",
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Merciless Storm"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Haste"
+      ],
+      "addons": [
+        "\"Discipline\" - Carter's Notes",
+        "\"Discipline\" - Class II"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_doctor_38",
+      "name": "Best Beginner Doctor",
+      "killerIds": [
+        "doctor"
+      ],
+      "perks": [
+        "Agitation",
+        "Pop Goes the Weasel",
+        "Brutal Strength",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "\"Discipline\" - Class II",
+        "Polished Electrode"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_doctor_39",
+      "name": "Unique Doctor — Terror Radius Doctor",
+      "killerIds": [
+        "doctor"
+      ],
+      "perks": [
+        "Merciless Storm",
+        "Unforeseen",
+        "Monitor & Abuse",
+        "Hex: Face the Darkness"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "\"Calm\" - Class II",
+        "\"Calm\" - Carter's Notes"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_dredge_40",
+      "name": "Best Dredge Without Limitations",
+      "killerIds": [
+        "dredge"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Corrupt Intervention"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Ottomarian Writing",
+        "Lavalier Microphone"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_dredge_41",
+      "name": "Funny Dredge",
+      "killerIds": [
+        "dredge"
+      ],
+      "perks": [
+        "Eruption",
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Sloppy Butcher"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AntiHeal",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Broken Doll",
+        "Haddie's Calendar"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_dredge_42",
+      "name": "Best Beginner Dredge",
+      "killerIds": [
+        "dredge"
+      ],
+      "perks": [
+        "A Nurse's Calling",
+        "Tinkerer",
+        "Brutal Strength",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Haddie's Calendar",
+        "Malthinker's Skull"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_dredge_43",
+      "name": "Unique Dredge — One Shot Dredge",
+      "killerIds": [
+        "dredge"
+      ],
+      "perks": [
+        "Make Your Choice",
+        "Dragon's Grip",
+        "Hex: Devour Hope",
+        "Friends 'Til The End"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Exposed",
+        "Hex",
+        "Haste",
+        "Obsession",
+        "Info"
+      ],
+      "addons": [
+        "Field Recorder",
+        "Lavalier Microphone"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_executioner_44",
+      "name": "Best Executioner Without Limitations",
+      "killerIds": [
+        "executioner"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Hex: Thrill of the Hunt",
+        "Hex: Pentimento",
+        "Hex: Hive Mind"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Obsidian Goblet",
+        "Cinderella Music Box"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_executioner_45",
+      "name": "Funny Executioner",
+      "killerIds": [
+        "executioner"
+      ],
+      "perks": [
+        "Trail of Torment",
+        "Dragon's Grip",
+        "A Nurse's Calling",
+        "Mindbreaker"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Stealth",
+        "Exposed",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Burning Man Painting",
+        "Wax Doll"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_executioner_46",
+      "name": "Best Beginner Executioner",
+      "killerIds": [
+        "executioner"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Spies from the Shadows",
+        "Deadlock",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Spearhead",
+        "Wax Doll"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_executioner_47",
+      "name": "Unique Executioner — Jumpscare One Shot Pyramid Head",
+      "killerIds": [
+        "executioner"
+      ],
+      "perks": [
+        "Mindbreaker",
+        "Dragon's Grip",
+        "Trail of Torment",
+        "A Nurse's Calling"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Exposed",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Obsidian Goblet",
+        "Crimson Ceremony Book"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_first_48",
+      "name": "Best First Without Limitations",
+      "killerIds": [
+        "first"
+      ],
+      "perks": [
+        "Hex: Hive Mind",
+        "Hex: Ruin",
+        "Hex: Thrill of the Hunt",
+        "Hex: Pentimento"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Rabbit Remains",
+        "Smashed Cassette Deck"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghostface_49",
+      "name": "Best Ghost Face Without Limitations",
+      "killerIds": [
+        "ghostface"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Play with Your Food",
+        "Turn Back the Clock"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Haste",
+        "Obsession"
+      ],
+      "addons": [
+        "Drop-Leg Knife Sheath",
+        "Walleye's Matchbook"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghostface_50",
+      "name": "Funny Ghost Face",
+      "killerIds": [
+        "ghostface"
+      ],
+      "perks": [
+        "Surge",
+        "Discordance",
+        "Spies from the Shadows",
+        "Sloppy Butcher"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AntiHeal",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Driver's License",
+        "Drop-Leg Knife Sheath"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghostface_51",
+      "name": "Best Beginner Ghost Face",
+      "killerIds": [
+        "ghostface"
+      ],
+      "perks": [
+        "Sloppy Butcher",
+        "A Nurse's Calling",
+        "Hex: Ruin",
+        "Deadlock"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "GenBlocking",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "\"Philly\"",
+        "Walleye's Matchbook"
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/ghostface/philly.png",
+        "https://otz-addon-tierlist.pages.dev/public/addons/ghostface/walleyesmatchbook.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghostface_52",
+      "name": "Unique Ghost Face — Jumpscare License Ghostface",
+      "killerIds": [
+        "ghostface"
+      ],
+      "perks": [
+        "Spies from the Shadows",
+        "Pop Goes the Weasel",
+        "Scourge Hook: Floods of Rage",
+        "Discordance"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Driver's License",
+        "\"Philly\""
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/ghostface/philly.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghoul_53",
+      "name": "Best Ghoul Without Limitations",
+      "killerIds": [
+        "ghoul"
+      ],
+      "perks": [
+        "Hex: Hive Mind",
+        "Hex: Ruin",
+        "Hex: Thrill of the Hunt",
+        "Hex: Blood Favour"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Yamori's Mask",
+        "Fresh Coffee"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghoul_54",
+      "name": "Funny Ghoul",
+      "killerIds": [
+        "ghoul"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Barbecue & Chilli",
+        "Surge",
+        "Thanatophobia"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Blood-Stained Handkerchief",
+        "Rize's Glasses"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghoul_55",
+      "name": "Unique Ghoul — Endgame Kaneki",
+      "killerIds": [
+        "ghoul"
+      ],
+      "perks": [
+        "No Way Out",
+        "None Are Free",
+        "Hex: No One Escapes Death",
+        "Bitter Murmur"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Exposed",
+        "Endgame",
+        "Hex",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Blood-Stained Handkerchief",
+        "Hide's Headphones"
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/ghoul/hidesheadphones.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_ghoul_56",
+      "name": "Best Beginner Ghoul",
+      "killerIds": [
+        "ghoul"
+      ],
+      "perks": [
+        "Forever Entwined",
+        "Brutal Strength",
+        "Spies from the Shadows",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Fresh Coffee",
+        "Blood-Stained Handkerchief"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_goodguy_57",
+      "name": "Best Good Guy Without Limitations",
+      "killerIds": [
+        "goodguy"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention",
+        "Turn Back the Clock",
+        "Dead Man's Switch"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Straight Razor",
+        "Jump Rope"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_goodguy_58",
+      "name": "Funny Good Guy",
+      "killerIds": [
+        "goodguy"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Brutal Strength",
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Power Drill",
+        "Jump Rope"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_goodguy_59",
+      "name": "Best Beginner Good Guy",
+      "killerIds": [
+        "goodguy"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Friends 'Til The End",
+        "Hex: Plaything",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "Stealth",
+        "AntiHeal",
+        "Exposed",
+        "Chase",
+        "Hex",
+        "Obsession",
+        "Info"
+      ],
+      "addons": [
+        "Power Drill",
+        "Jump Rope"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_goodguy_60",
+      "name": "Unique Good Guy — Infinite Dash Chucky",
+      "killerIds": [
+        "goodguy"
+      ],
+      "perks": [
+        "Remember Me",
+        "No Way Out",
+        "Zanshin Tactics",
+        "Terminus"
+      ],
+      "tags": [
+        "Hens",
+        "Endgame",
+        "Obsession"
+      ],
+      "addons": [
+        "Portable TV",
+        "Power Drill"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hag_61",
+      "name": "Best Hag Without Limitations",
+      "killerIds": [
+        "hag"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Turn Back the Clock",
+        "Sloppy Butcher",
+        "Scourge Hook: Pain Resonance"
+      ],
+      "tags": [
+        "Hens",
+        "AntiHeal",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Rusty Shackles",
+        "Mint Rag"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hag_62",
+      "name": "Funny Hag",
+      "killerIds": [
+        "hag"
+      ],
+      "perks": [
+        "Sloppy Butcher",
+        "Corrupt Intervention",
+        "A Nurse's Calling",
+        "Spies from the Shadows"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "AntiHeal",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Swamp Orchid Necklet",
+        "Cypress Necklet"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hag_63",
+      "name": "Best Beginner Hag",
+      "killerIds": [
+        "hag"
+      ],
+      "perks": [
+        "Hex: Thrill of the Hunt",
+        "Hex: Devour Hope",
+        "Hex: Ruin",
+        "Sloppy Butcher"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Exposed",
+        "GenRegression",
+        "Hex",
+        "Haste"
+      ],
+      "addons": [
+        "Cypress Necklet",
+        "Dragonfly Wings"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hag_64",
+      "name": "Unique Hag — Chase Hag",
+      "killerIds": [
+        "hag"
+      ],
+      "perks": [
+        "Unrelenting",
+        "Rapid Brutality",
+        "Save the Best for Last",
+        "Play with Your Food"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "Haste",
+        "Obsession"
+      ],
+      "addons": [
+        "Waterlogged Shoe",
+        "Scarred Hand"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hillbilly_65",
+      "name": "Best Hillbilly Without Limitations",
+      "killerIds": [
+        "hillbilly"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Dead Man's Switch"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Iridescent Engravings",
+        "Spiked Boots"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hillbilly_66",
+      "name": "Funny Hillbilly",
+      "killerIds": [
+        "hillbilly"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Lethal Pursuer",
+        "Awakened Awareness",
+        "Agitation"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Info"
+      ],
+      "addons": [
+        "Iridescent Engravings",
+        "Spiked Boots"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hillbilly_67",
+      "name": "Best Beginner Hillbilly",
+      "killerIds": [
+        "hillbilly"
+      ],
+      "perks": [
+        "Enduring",
+        "Bamboozle",
+        "Spies from the Shadows",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Spiked Boots",
+        "Dad's Boots"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_hillbilly_68",
+      "name": "Unique Hillbilly — Jumpscare Billy",
+      "killerIds": [
+        "hillbilly"
+      ],
+      "perks": [
+        "Machine Learning",
+        "Mindbreaker",
+        "Trail of Torment",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Chase",
+        "Hex",
+        "Haste"
+      ],
+      "addons": [
+        "Apex Muffler",
+        "Spiked Boots"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_houndmaster_69",
+      "name": "Best Houndmaster Without Limitations",
+      "killerIds": [
+        "houndmaster"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Starstruck"
+      ],
+      "tags": [
+        "Hens",
+        "Exposed",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Barley Meal",
+        "Spiked Collar"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_houndmaster_70",
+      "name": "Funny Houndmaster",
+      "killerIds": [
+        "houndmaster"
+      ],
+      "perks": [
+        "Agitation",
+        "Awakened Awareness",
+        "Starstruck",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Exposed",
+        "Info"
+      ],
+      "addons": [
+        "Ship Figurehead",
+        "Young Coconut"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_houndmaster_71",
+      "name": "Best Beginner Houndmaster",
+      "killerIds": [
+        "houndmaster"
+      ],
+      "perks": [
+        "No Quarter",
+        "Brutal Strength",
+        "Spies from the Shadows",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Smoked Snapper",
+        "Young Coconut"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_huntress_72",
+      "name": "Best Huntress Without Limitations",
+      "killerIds": [
+        "huntress"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch",
+        "Turn Back the Clock"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Flower Babushka",
+        "Rose Root"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_huntress_73",
+      "name": "Funny Huntress",
+      "killerIds": [
+        "huntress"
+      ],
+      "perks": [
+        "Darkness Revealed",
+        "Barbecue & Chilli",
+        "Lethal Pursuer",
+        "Bitter Murmur"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Info"
+      ],
+      "addons": [
+        "Flower Babushka",
+        "Glowing Concoction"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_huntress_74",
+      "name": "Best Beginner Huntress",
+      "killerIds": [
+        "huntress"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Bitter Murmur",
+        "A Nurse's Calling",
+        "Deadlock"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "Chase",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Oak Haft",
+        "Shiny Pin"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_huntress_75",
+      "name": "Unique Huntress — Jump Scare Melee Huntress",
+      "killerIds": [
+        "huntress"
+      ],
+      "perks": [
+        "Discordance",
+        "Spies from the Shadows",
+        "Darkness Revealed",
+        "Coup de Grâce"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Soldier's Puttee",
+        "Wooden Fox"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_knight_76",
+      "name": "Best Knight Without Limitations",
+      "killerIds": [
+        "knight"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Hex: Hive Mind",
+        "Hex: Thrill of the Hunt",
+        "Hex: Pentimento"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Dried Horsemeat",
+        "Call to Arms"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_knight_77",
+      "name": "Funny Knight",
+      "killerIds": [
+        "knight"
+      ],
+      "perks": [
+        "Discordance",
+        "Barbecue & Chilli",
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Call to Arms",
+        "Map of the Realm"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_knight_78",
+      "name": "Best Beginner Knight",
+      "killerIds": [
+        "knight"
+      ],
+      "perks": [
+        "Nowhere to Hide",
+        "Spies from the Shadows",
+        "Pop Goes the Weasel",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Call to Arms",
+        "Map of the Realm"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_knight_79",
+      "name": "Unique Knight — Languid Spies Knight",
+      "killerIds": [
+        "knight"
+      ],
+      "perks": [
+        "Machine Learning",
+        "Spies from the Shadows",
+        "Languid Touch",
+        "Discordance"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Knight's Contract",
+        "Call to Arms"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_krasue_80",
+      "name": "Best Krasue Without Limitations",
+      "killerIds": [
+        "krasue"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Hex: Ruin",
+        "Hex: Undying",
+        "Dead Man's Switch"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "GenRegression",
+        "GenBlocking",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Chicken Head",
+        "Framed Newspaper"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_krasue_81",
+      "name": "Funny Krasue",
+      "killerIds": [
+        "krasue"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Barbecue & Chilli",
+        "Hex: Ruin",
+        "Hex: Undying"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Framed Newspaper",
+        "Dulled Knife"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_krasue_82",
+      "name": "Best Beginner Krasue",
+      "killerIds": [
+        "krasue"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Spies from the Shadows",
+        "Hex: Plaything",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "Chase",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Luckless Mouse",
+        "Pig's Eye"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_legion_83",
+      "name": "Best Legion Without Limitations",
+      "killerIds": [
+        "legion"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Bamboozle"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Scratched Ruler",
+        "Iridescent Button"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_legion_84",
+      "name": "Funny Legion",
+      "killerIds": [
+        "legion"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Enduring",
+        "Spirit Fury"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Chase",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Julie's Mix Tape",
+        "Iridescent Button"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_legion_85",
+      "name": "Best Beginner Legion",
+      "killerIds": [
+        "legion"
+      ],
+      "perks": [
+        "Discordance",
+        "Bamboozle",
+        "Pop Goes the Weasel",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Mischief List",
+        "Friendship Bracelet"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_legion_86",
+      "name": "Unique Legion — 150% Speed Legion",
+      "killerIds": [
+        "legion"
+      ],
+      "perks": [
+        "No Way Out",
+        "Hex: No One Escapes Death",
+        "Batteries Included",
+        "Machine Learning"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Hex",
+        "Haste"
+      ],
+      "addons": [
+        "BFFs",
+        "Mural Sketch"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_lich_87",
+      "name": "Best Lich Without Limitations",
+      "killerIds": [
+        "lich"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention",
+        "Turn Back the Clock",
+        "Deerstalker"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Slugging",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Boots of Speed",
+        "Raven's Feather"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_lich_88",
+      "name": "Funny Lich",
+      "killerIds": [
+        "lich"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Rapid Brutality",
+        "Scourge Hook: Pain Resonance",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Pearl of Power",
+        "Ring of Spell Storing"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_lich_89",
+      "name": "Best Beginner Lich",
+      "killerIds": [
+        "lich"
+      ],
+      "perks": [
+        "A Nurse's Calling",
+        "Languid Touch",
+        "Spies from the Shadows",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "Info"
+      ],
+      "addons": [
+        "Potion of Speed",
+        "Raven's Feather"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_lich_90",
+      "name": "Unique Lich — Sneak Fake Chest Vecna",
+      "killerIds": [
+        "lich"
+      ],
+      "perks": [
+        "Trail of Torment",
+        "Rapid Brutality",
+        "Machine Learning",
+        "Dragon's Grip"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Exposed",
+        "Chase",
+        "Haste"
+      ],
+      "addons": [
+        "Cloak of Invisibility",
+        "Bag of Holding"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_mastermind_91",
+      "name": "Best Mastermind Without Limitations",
+      "killerIds": [
+        "mastermind"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Grim Embrace"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Iridescent Uroboros Vial",
+        "Lab Photo"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_mastermind_92",
+      "name": "Funny Mastermind",
+      "killerIds": [
+        "mastermind"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Brutal Strength",
+        "Scourge Hook: Pain Resonance",
+        "Lethal Pursuer"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Egg (Gold)",
+        "Leather Gloves"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_mastermind_93",
+      "name": "Best Beginner Mastermind",
+      "killerIds": [
+        "mastermind"
+      ],
+      "perks": [
+        "Brutal Strength",
+        "Spies from the Shadows",
+        "Hex: Plaything",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "Chase",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Uroboros Tendril",
+        "Leather Gloves"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_mastermind_94",
+      "name": "Unique Mastermind — Throw Wesker",
+      "killerIds": [
+        "mastermind"
+      ],
+      "perks": [
+        "Dominance",
+        "Hex: Undying",
+        "Hex: Blood Favour",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Chase",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Jewel Beetle",
+        "Lion Medallion"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nemesis_95",
+      "name": "Best Nemesis Without Limitations",
+      "killerIds": [
+        "nemesis"
+      ],
+      "perks": [
+        "Turn Back the Clock",
+        "Discordance",
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Marvin's Blood",
+        "Licker Tongue"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nemesis_96",
+      "name": "Funny Nemesis",
+      "killerIds": [
+        "nemesis"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Hex: Ruin",
+        "Hex: Undying",
+        "Discordance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "GenRegression",
+        "GenBlocking",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Depleted Ink Ribbon",
+        "Shattered S.T.A.R.S. Badge"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nemesis_97",
+      "name": "Best Beginner Nemesis",
+      "killerIds": [
+        "nemesis"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Eruption",
+        "Lethal Pursuer",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Marvin's Blood",
+        "Mikhail's Eye"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nemesis_98",
+      "name": "Unique Nemesis — Speed Zombie Nemesis",
+      "killerIds": [
+        "nemesis"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Discordance",
+        "Hex: Face the Darkness",
+        "Infectious Fright"
+      ],
+      "tags": [
+        "Hens",
+        "Slugging",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Shattered S.T.A.R.S. Badge",
+        "Depleted Ink Ribbon"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nightmare_99",
+      "name": "Best Nightmare Without Limitations",
+      "killerIds": [
+        "nightmare"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Pop Goes the Weasel",
+        "Eruption"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Unicorn Block",
+        "Jump Rope"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nightmare_100",
+      "name": "Funny Nightmare",
+      "killerIds": [
+        "nightmare"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Barbecue & Chilli",
+        "Rapid Brutality",
+        "Sloppy Butcher"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Pill Bottle",
+        "Unicorn Block"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nightmare_101",
+      "name": "Best Beginner Nightmare",
+      "killerIds": [
+        "nightmare"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Tinkerer",
+        "Brutal Strength",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Garden Rake",
+        "Outdoor Rope"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nightmare_102",
+      "name": "Unique Nightmare — Skillcheck Freddy",
+      "killerIds": [
+        "nightmare"
+      ],
+      "perks": [
+        "Merciless Storm",
+        "Overcharge",
+        "Hex: Huntress Lullaby",
+        "Oppression"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Green Dress",
+        "Blue Dress"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nurse_103",
+      "name": "Best Nurse Without Limitations",
+      "killerIds": [
+        "nurse"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Lethal Pursuer",
+        "Nowhere to Hide"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Jenner's Last Breath",
+        "Heavy Panting"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nurse_104",
+      "name": "Funny Nurse",
+      "killerIds": [
+        "nurse"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Lethal Pursuer",
+        "Scourge Hook: Floods of Rage",
+        "Agitation"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Info"
+      ],
+      "addons": [
+        "Fragile Wheeze",
+        "Heavy Panting"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nurse_105",
+      "name": "Best Beginner Nurse",
+      "killerIds": [
+        "nurse"
+      ],
+      "perks": [
+        "Spies from the Shadows",
+        "Thanatophobia",
+        "Predator",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Info"
+      ],
+      "addons": [
+        "Bad Man Keepsake",
+        "Wooden Horse"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_nurse_106",
+      "name": "Unique Nurse — 5 Blink Nurse",
+      "killerIds": [
+        "nurse"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Discordance",
+        "Lethal Pursuer",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Torn Bookmark",
+        "Jenner's Last Breath"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_oni_107",
+      "name": "Best Oni Without Limitations",
+      "killerIds": [
+        "oni"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Eruption",
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Splintered Hull",
+        "Akito's Crutch"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_oni_108",
+      "name": "Funny Oni",
+      "killerIds": [
+        "oni"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Brutal Strength"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Splintered Hull",
+        "Lion Fang"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_oni_109",
+      "name": "Best Beginner Oni",
+      "killerIds": [
+        "oni"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Brutal Strength",
+        "Bamboozle",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "Ink Lion",
+        "Cracked Sakazuki"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_oni_110",
+      "name": "Unique Oni — All Seeing Oni",
+      "killerIds": [
+        "oni"
+      ],
+      "perks": [
+        "Machine Learning",
+        "Tinkerer",
+        "Mindbreaker",
+        "Trail of Torment"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Chase",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Renjiro's Bloody Glove",
+        "Splintered Hull"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_onryo_111",
+      "name": "Best Onryo Without Limitations",
+      "killerIds": [
+        "onryo"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Sloppy Butcher",
+        "Hex: Ruin",
+        "Hex: Face the Darkness"
+      ],
+      "tags": [
+        "Hens",
+        "AntiHeal",
+        "GenRegression",
+        "GenBlocking",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Remote Control",
+        "Bloody Fingernails"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_onryo_112",
+      "name": "Funny Onryo",
+      "killerIds": [
+        "onryo"
+      ],
+      "perks": [
+        "Hex: Face the Darkness",
+        "Sloppy Butcher",
+        "Discordance",
+        "Spies from the Shadows"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AntiHeal",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Old Newspaper",
+        "Bloody Fingernails"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_onryo_113",
+      "name": "Best Beginner Onryo",
+      "killerIds": [
+        "onryo"
+      ],
+      "perks": [
+        "Spies from the Shadows",
+        "Sloppy Butcher",
+        "A Nurse's Calling",
+        "Hex: Ruin"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Reiko's Watch",
+        "Old Newspaper"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_onryo_114",
+      "name": "Unique Onryo — Infinite Teleport Onryo",
+      "killerIds": [
+        "onryo"
+      ],
+      "perks": [
+        "Surveillance",
+        "Oppression",
+        "Sloppy Butcher",
+        "Hex: Face the Darkness"
+      ],
+      "tags": [
+        "Hens",
+        "AntiHeal",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Bloody Fingernails",
+        "Iridescent Videotape"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_pig_115",
+      "name": "Best Pig Without Limitations",
+      "killerIds": [
+        "pig"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Pop Goes the Weasel",
+        "Eruption",
+        "Brutal Strength"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "Rules Set No.2",
+        "Video Tape"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_pig_116",
+      "name": "Funny Pig",
+      "killerIds": [
+        "pig"
+      ],
+      "perks": [
+        "Sloppy Butcher",
+        "Scourge Hook: Pain Resonance",
+        "Monitor & Abuse",
+        "Whispers"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Stealth",
+        "AntiHeal",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Workshop Grease",
+        "Last Will"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_pig_117",
+      "name": "Best Beginner Pig",
+      "killerIds": [
+        "pig"
+      ],
+      "perks": [
+        "Whispers",
+        "Brutal Strength",
+        "Scourge Hook: Gift of Pain",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "Chase",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Combat Straps",
+        "John's Medical File"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_pig_118",
+      "name": "Unique Pig — Scream Pig",
+      "killerIds": [
+        "pig"
+      ],
+      "perks": [
+        "Hex: Face the Darkness",
+        "Ultimate Weapon",
+        "Infectious Fright",
+        "THWACK!"
+      ],
+      "tags": [
+        "Hens",
+        "Slugging",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Razor Wires",
+        "Interlocking Razor"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_plague_119",
+      "name": "Best Plague Without Limitations",
+      "killerIds": [
+        "plague"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Hex: Thrill of the Hunt",
+        "Hex: Blood Favour",
+        "Hex: Pentimento"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Devotee's Amulet",
+        "Iridescent Seal"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_plague_120",
+      "name": "Funny Plague",
+      "killerIds": [
+        "plague"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Trail of Torment"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Stealth",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Rubbing Oil",
+        "Infected Emetic"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_plague_121",
+      "name": "Best Beginner Plague",
+      "killerIds": [
+        "plague"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Thanatophobia",
+        "Hex: Plaything",
+        "Deadlock"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "GenBlocking",
+        "Hex"
+      ],
+      "addons": [
+        "Blessed Apple",
+        "Emetic Potion"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_plague_122",
+      "name": "Unique Plague — Speed Plague",
+      "killerIds": [
+        "plague"
+      ],
+      "perks": [
+        "Play with Your Food",
+        "Batteries Included",
+        "Furtive Chase",
+        "Machine Learning"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Chase",
+        "Haste",
+        "Obsession",
+        "Info"
+      ],
+      "addons": [
+        "Rubbing Oil",
+        "Infected Emetic"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_shape_123",
+      "name": "Best Shape Without Limitations",
+      "killerIds": [
+        "shape"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Bamboozle"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Lock of Hair",
+        "Vanity Mirror"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_shape_124",
+      "name": "Funny Shape",
+      "killerIds": [
+        "shape"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Fire Up",
+        "Superior Anatomy",
+        "Dark Arrogance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Chase"
+      ],
+      "addons": [
+        "J. Myers Memorial",
+        "Memorial Flower"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_shape_125",
+      "name": "Best Beginner Shape",
+      "killerIds": [
+        "shape"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Pop Goes the Weasel",
+        "Play with Your Food",
+        "Tinkerer"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Chase",
+        "GenRegression",
+        "Haste",
+        "Obsession",
+        "Info"
+      ],
+      "addons": [
+        "Memorial Flower",
+        "Dead Rabbit"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_shape_126",
+      "name": "Unique Shape — Speed Vault Wallhack Myers",
+      "killerIds": [
+        "shape"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Superior Anatomy",
+        "Monitor & Abuse",
+        "Hex: Face the Darkness"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Chase",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Dead Rabbit",
+        "Vanity Mirror"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_singularity_127",
+      "name": "Best Singularity Without Limitations",
+      "killerIds": [
+        "singularity"
+      ],
+      "perks": [
+        "Rapid Brutality",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Pop Goes the Weasel"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "Haste"
+      ],
+      "addons": [
+        "Denied Requisition Form",
+        "Diagnostic Tool (Repair)"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_singularity_128",
+      "name": "Funny Singularity",
+      "killerIds": [
+        "singularity"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Rapid Brutality",
+        "Sloppy Butcher",
+        "Scourge Hook: Pain Resonance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Haste"
+      ],
+      "addons": [
+        "Kid's Ball Glove",
+        "Soma Family Photo"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_singularity_129",
+      "name": "Best Beginner Singularity",
+      "killerIds": [
+        "singularity"
+      ],
+      "perks": [
+        "Machine Learning",
+        "Genetic Limits",
+        "A Nurse's Calling",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "Stealth",
+        "AntiHeal",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Diagnostic Tool (Repair)",
+        "Nutritional Slurry"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_singularity_130",
+      "name": "Unique Singularity — Speed Singularity",
+      "killerIds": [
+        "singularity"
+      ],
+      "perks": [
+        "Enduring",
+        "Hubris",
+        "Coup de Grâce",
+        "Batteries Included"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "Haste"
+      ],
+      "addons": [
+        "Iridescent Crystal Shard",
+        "Diagnostic Tool (Repair)"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_skullmerchant_131",
+      "name": "Best Skull Merchant Without Limitations",
+      "killerIds": [
+        "skullmerchant"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock",
+        "Dead Man's Switch"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Vital Targeting Processor",
+        "Ultrasonic Speaker"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_skullmerchant_132",
+      "name": "Funny Skull Merchant",
+      "killerIds": [
+        "skullmerchant"
+      ],
+      "perks": [
+        "Dissolution",
+        "Hex: Ruin",
+        "Hex: Undying",
+        "Barbecue & Chilli"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Adaptive Lighting",
+        "Ultrasonic Speaker"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_skullmerchant_133",
+      "name": "Best Beginner Skull Merchant",
+      "killerIds": [
+        "skullmerchant"
+      ],
+      "perks": [
+        "Leverage",
+        "A Nurse's Calling",
+        "Brutal Strength",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Adaptive Lighting",
+        "Ultrasonic Speaker"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_skullmerchant_134",
+      "name": "Unique Skull Merchant — Wall Beam Skull Merchant",
+      "killerIds": [
+        "skullmerchant"
+      ],
+      "perks": [
+        "Dissolution",
+        "Rapid Brutality",
+        "Dark Devotion",
+        "Infectious Fright"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Chase",
+        "Slugging",
+        "Haste",
+        "Obsession",
+        "Info"
+      ],
+      "addons": [
+        "Low-Power Mode",
+        "Iridescent Unpublished Manuscript"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_spirit_135",
+      "name": "Best Spirit Without Limitations",
+      "killerIds": [
+        "spirit"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention",
+        "Turn Back the Clock",
+        "Genetic Limits"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Mother-Daughter Ring",
+        "Rusty Flute"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_spirit_136",
+      "name": "Funny Spirit",
+      "killerIds": [
+        "spirit"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Scourge Hook: Jagged Compass",
+        "Scourge Hook: Pain Resonance",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "AntiHeal",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Muddy Sports Day Cap",
+        "Rusty Flute"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_spirit_137",
+      "name": "Best Beginner Spirit",
+      "killerIds": [
+        "spirit"
+      ],
+      "perks": [
+        "Hex: Ruin",
+        "Hex: Haunted Ground",
+        "Hex: Devour Hope",
+        "Hex: Thrill of the Hunt"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Exposed",
+        "GenRegression",
+        "Hex",
+        "Haste"
+      ],
+      "addons": [
+        "Rusty Flute",
+        "Muddy Sports Day Cap"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_spirit_138",
+      "name": "Unique Spirit — One Shot Spirit",
+      "killerIds": [
+        "spirit"
+      ],
+      "perks": [
+        "Hubris",
+        "Fire Up",
+        "Brutal Strength",
+        "Enduring"
+      ],
+      "tags": [
+        "Hens",
+        "Chase"
+      ],
+      "addons": [
+        "Kintsugi Teacup",
+        "Muddy Sports Day Cap"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trapper_139",
+      "name": "Best Trapper Without Limitations",
+      "killerIds": [
+        "trapper"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Agitation",
+        "Scourge Hook: Pain Resonance",
+        "Turn Back the Clock"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Bloody Coil",
+        "Iridescent Stone"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trapper_140",
+      "name": "Funny Trapper",
+      "killerIds": [
+        "trapper"
+      ],
+      "perks": [
+        "Save the Best for Last",
+        "Agitation",
+        "Fire Up",
+        "Mad Grit"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "Chase",
+        "Obsession"
+      ],
+      "addons": [
+        "Coffee Grounds",
+        "Fastening Tools"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trapper_141",
+      "name": "Best Beginner Trapper",
+      "killerIds": [
+        "trapper"
+      ],
+      "perks": [
+        "Agitation",
+        "Brutal Strength",
+        "Bamboozle",
+        "Pop Goes the Weasel"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "Makeshift Wrap",
+        "Bear Oil"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trapper_142",
+      "name": "Unique Trapper — Small Room Trapper",
+      "killerIds": [
+        "trapper"
+      ],
+      "perks": [
+        "Insidious",
+        "Dragon's Grip",
+        "Agitation",
+        "Mad Grit"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Exposed"
+      ],
+      "addons": [
+        "Trapper Bag",
+        "Fastening Tools"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trickster_143",
+      "name": "Best Trickster Without Limitations",
+      "killerIds": [
+        "trickster"
+      ],
+      "perks": [
+        "Hex: Pentimento",
+        "Hex: Ruin",
+        "Hex: Thrill of the Hunt",
+        "Hex: Crowd Control"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Cut Thru U Single",
+        "Ripper Brace"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trickster_144",
+      "name": "Funny Trickster",
+      "killerIds": [
+        "trickster"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Hex: Blood Favour",
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "GenBlocking",
+        "Hex",
+        "Info"
+      ],
+      "addons": [
+        "Memento Blades",
+        "Waiting For You Watch"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trickster_145",
+      "name": "Best Beginner Trickster",
+      "killerIds": [
+        "trickster"
+      ],
+      "perks": [
+        "Hex: Crowd Control",
+        "Deadlock",
+        "Scourge Hook: Gift of Pain",
+        "Hex: Plaything"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "Stealth",
+        "AntiHeal",
+        "Chase",
+        "GenBlocking",
+        "Hex"
+      ],
+      "addons": [
+        "Tequila Moonrock",
+        "Caged Heart Shoes"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_trickster_146",
+      "name": "Unique Trickster — Main Event Trickster",
+      "killerIds": [
+        "trickster"
+      ],
+      "perks": [
+        "Forced Hesitation",
+        "Batteries Included",
+        "Discordance",
+        "Machine Learning"
+      ],
+      "tags": [
+        "Hens",
+        "Stealth",
+        "Chase",
+        "Slugging",
+        "Haste",
+        "Info"
+      ],
+      "addons": [
+        "Memento Blades",
+        "Waiting For You Watch"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_twins_147",
+      "name": "Best Twins Without Limitations",
+      "killerIds": [
+        "twins"
+      ],
+      "perks": [
+        "Hex: Pentimento",
+        "Hex: Ruin",
+        "Hex: Hive Mind",
+        "Hex: Thrill of the Hunt"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Forest Stew",
+        "Madeleine's Scarf"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_twins_148",
+      "name": "Funny Twins",
+      "killerIds": [
+        "twins"
+      ],
+      "perks": [
+        "Deerstalker",
+        "Scourge Hook: Pain Resonance",
+        "Corrupt Intervention",
+        "Forced Hesitation"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Slugging",
+        "GenRegression",
+        "GenBlocking",
+        "Info"
+      ],
+      "addons": [
+        "Madeleine's Scarf",
+        "Forest Stew"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_twins_149",
+      "name": "Best Beginner Twins",
+      "killerIds": [
+        "twins"
+      ],
+      "perks": [
+        "Hex: Thrill of the Hunt",
+        "Hex: Ruin",
+        "Coup de Grâce",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Tiny Fingernail",
+        "Toy Sword"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_twins_150",
+      "name": "Unique Twins — Insidious Twins",
+      "killerIds": [
+        "twins"
+      ],
+      "perks": [
+        "Deerstalker",
+        "Insidious",
+        "Forced Hesitation",
+        "Dragon's Grip"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Exposed",
+        "Slugging",
+        "Info"
+      ],
+      "addons": [
+        "Tiny Fingernail",
+        "Bloody Black Hood"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_unknown_151",
+      "name": "Best Unknown Without Limitations",
+      "killerIds": [
+        "unknown"
+      ],
+      "perks": [
+        "Corrupt Intervention",
+        "Scourge Hook: Pain Resonance",
+        "Dead Man's Switch",
+        "Eruption"
+      ],
+      "tags": [
+        "Hens",
+        "GenRegression",
+        "GenBlocking"
+      ],
+      "addons": [
+        "Captured by the Dark",
+        "Iridescent OSS Report"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_unknown_152",
+      "name": "Funny Unknown",
+      "killerIds": [
+        "unknown"
+      ],
+      "perks": [
+        "Scourge Hook: Pain Resonance",
+        "Barbecue & Chilli",
+        "Eruption",
+        "Nowhere to Hide"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Slashed Backpack",
+        "Notebook of Theories"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_unknown_153",
+      "name": "Best Beginner Unknown",
+      "killerIds": [
+        "unknown"
+      ],
+      "perks": [
+        "Unforeseen",
+        "Brutal Strength",
+        "A Nurse's Calling",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "Stealth",
+        "AntiHeal",
+        "Chase",
+        "Info"
+      ],
+      "addons": [
+        "Blurry Photo",
+        "Notebook of Theories"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_unknown_154",
+      "name": "Unique Unknown — Fake Illusion Unknown",
+      "killerIds": [
+        "unknown"
+      ],
+      "perks": [
+        "Dragon's Grip",
+        "Insidious",
+        "Discordance",
+        "Scourge Hook: Floods of Rage"
+      ],
+      "tags": [
+        "Hens",
+        "AuraReading",
+        "Stealth",
+        "Exposed",
+        "Info"
+      ],
+      "addons": [
+        "Last Known Recording",
+        "Notebook of Theories"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_wraith_155",
+      "name": "Best Wraith Without Limitations",
+      "killerIds": [
+        "wraith"
+      ],
+      "perks": [
+        "Sloppy Butcher",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Bamboozle"
+      ],
+      "tags": [
+        "Hens",
+        "AntiHeal",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "\"Shadow Dance\" - Blood",
+        "\"Swift Hunt\" - Blood"
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/shadowdanceblood.png",
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/swifthuntblood.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_wraith_156",
+      "name": "Funny Wraith",
+      "killerIds": [
+        "wraith"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Sloppy Butcher",
+        "Eruption",
+        "Scourge Hook: Pain Resonance"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AntiHeal",
+        "Chase",
+        "GenRegression"
+      ],
+      "addons": [
+        "\"Swift Hunt\" - Blood",
+        "\"Shadow Dance\" - Blood"
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/swifthuntblood.png",
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/shadowdanceblood.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_wraith_157",
+      "name": "Best Beginner Wraith",
+      "killerIds": [
+        "wraith"
+      ],
+      "perks": [
+        "Pop Goes the Weasel",
+        "Bamboozle",
+        "A Nurse's Calling",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AuraReading",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Bone Clapper",
+        "\"Swift Hunt\" - Mud"
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/swifthuntmud.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_wraith_158",
+      "name": "Unique Wraith — Dissolution Wraith",
+      "killerIds": [
+        "wraith"
+      ],
+      "perks": [
+        "Dissolution",
+        "Rapid Brutality",
+        "Hex: Crowd Control",
+        "Coup de Grâce"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "Hex",
+        "Haste"
+      ],
+      "addons": [
+        "\"The Serpent\" - Soot",
+        "\"The Beast\" - Soot"
+      ],
+      "addonImages": [
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/theserpentsoot.png",
+        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/thebeastsoot.png"
+      ],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_xenomorph_159",
+      "name": "Best Xenomorph Without Limitations",
+      "killerIds": [
+        "xenomorph"
+      ],
+      "perks": [
+        "Hex: Pentimento",
+        "Hex: Ruin",
+        "Hex: Thrill of the Hunt",
+        "Hex: Blood Favour"
+      ],
+      "tags": [
+        "Hens",
+        "Chase",
+        "GenRegression",
+        "Hex"
+      ],
+      "addons": [
+        "Self-Destruct Bolt",
+        "Harpoon Gun"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_xenomorph_160",
+      "name": "Funny Xenomorph",
+      "killerIds": [
+        "xenomorph"
+      ],
+      "perks": [
+        "Barbecue & Chilli",
+        "Scourge Hook: Pain Resonance",
+        "Eruption",
+        "Bamboozle"
+      ],
+      "tags": [
+        "Hens",
+        "Fun",
+        "AuraReading",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Self-Destruct Bolt",
+        "Lambert's Star Map"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": true,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_xenomorph_161",
+      "name": "Best Beginner Xenomorph",
+      "killerIds": [
+        "xenomorph"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Spies from the Shadows",
+        "Pop Goes the Weasel",
+        "Scourge Hook: Gift of Pain"
+      ],
+      "tags": [
+        "Hens",
+        "BeginnerFriendly",
+        "AntiHeal",
+        "Chase",
+        "GenRegression",
+        "Info"
+      ],
+      "addons": [
+        "Cereal Rations",
+        "Lambert's Star Map"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
+    },
+    {
+      "id": "hens_xenomorph_162",
+      "name": "Unique Xenomorph — One Shot Xenomorph",
+      "killerIds": [
+        "xenomorph"
+      ],
+      "perks": [
+        "Bamboozle",
+        "Enduring",
+        "Superior Anatomy",
+        "Spirit Fury"
+      ],
+      "tags": [
+        "Hens",
+        "Chase"
+      ],
+      "addons": [
+        "Acidic Blood",
+        "Self-Destruct Bolt"
+      ],
+      "addonImages": [],
+      "description": "",
+      "patch": "10.1.2",
+      "version": "",
+      "favorite": false,
+      "currentlyUsing": false,
+      "changes": ""
     }
   ],
-  "killerTags": [
-    {
-      "name": "HighMobility",
-      "color": "#4a9eff"
-    },
-    {
-      "name": "HighSkill",
-      "color": "#ff4a4a"
-    },
-    {
-      "name": "Stealth",
-      "color": "#7f8c8d"
-    },
-    {
-      "name": "BeginnerFriendly",
-      "color": "#f1c40f"
-    },
-    {
-      "name": "Range",
-      "color": "#e67e22"
-    },
-    {
-      "name": "Snowball",
-      "color": "#e74c3c"
-    },
-    {
-      "name": "AreaControl",
-      "color": "#9b59b6"
-    },
-    {
-      "name": "2TapPotential ",
-      "color": "#33ccad"
-    },
-    {
-      "name": "M1",
-      "color": "#d03cd3"
-    },
-    {
-      "name": "RNG",
-      "color": "#d9af3a"
-    },
-    {
-      "name": "TunnelPotential ",
-      "color": "#81c369"
-    },
-    {
-      "name": "SluggingPotential ",
-      "color": "#c282d3"
-    },
-    {
-      "name": "CampingPotential ",
-      "color": "#048b5e"
-    },
-    {
-      "name": "Strong1v1",
-      "color": "#a16ad7"
-    },
-    {
-      "name": "PassiveSlowdown",
-      "color": "#41c851"
-    },
-    {
-      "name": "Teleport",
-      "color": "#c1b5cf"
-    },
-    {
-      "name": "DashAttack",
-      "color": "#4a9eff"
-    },
-    {
-      "name": "HalfM1",
-      "color": "#3ebb35"
-    },
-    {
-      "name": "Hit&Run",
-      "color": "#ee445e"
-    },
-    {
-      "name": "InstantDown",
-      "color": "#971159"
-    },
-    {
-      "name": "MapDependent",
-      "color": "#33852e"
-    },
-    {
-      "name": "StrongOnIndoors",
-      "color": "#c2af6b"
-    },
-    {
-      "name": "StrongOnOutdoors",
-      "color": "#32b828"
-    },
-    {
-      "name": "StatusEffect",
-      "color": "#45d9bb"
-    },
-    {
-      "name": "Setup",
-      "color": "#e8c721"
-    }
-  ],
-  "buildTags": [
-    {
-      "name": "meta",
-      "color": "#9b59b6"
-    },
-    {
-      "name": "fun",
-      "color": "#2ecc71"
-    },
-    {
-      "name": "tournament",
-      "color": "#3498db"
-    },
-    {
-      "name": "universal",
-      "color": "#95a5a6"
-    },
-    {
-      "name": "info",
-      "color": "#1abc9c"
-    },
-    {
-      "name": "hex",
-      "color": "#e74c3c"
-    },
-    {
-      "name": "chase",
-      "color": "#e67e22"
-    },
-    {
-      "name": "gen-pressure",
-      "color": "#c41e3a"
-    },
-    {
-      "name": "slowdown",
-      "color": "#7f8c8d"
-    }
-  ],
-  "tags": [
-    {
-      "name": "HighMobility",
-      "color": "#4a9eff"
-    },
-    {
-      "name": "HighSkill",
-      "color": "#ff4a4a"
-    },
-    {
-      "name": "Stealth",
-      "color": "#7f8c8d"
-    },
-    {
-      "name": "BeginnerFriendly",
-      "color": "#f1c40f"
-    },
-    {
-      "name": "Range",
-      "color": "#e67e22"
-    },
-    {
-      "name": "Snowball",
-      "color": "#e74c3c"
-    },
-    {
-      "name": "AreaControl",
-      "color": "#9b59b6"
-    },
-    {
-      "name": "2TapPotential ",
-      "color": "#33ccad"
-    },
-    {
-      "name": "M1",
-      "color": "#d03cd3"
-    },
-    {
-      "name": "RNG",
-      "color": "#d9af3a"
-    },
-    {
-      "name": "TunnelPotential ",
-      "color": "#81c369"
-    },
-    {
-      "name": "SluggingPotential ",
-      "color": "#c282d3"
-    },
-    {
-      "name": "CampingPotential ",
-      "color": "#048b5e"
-    },
-    {
-      "name": "Strong1v1",
-      "color": "#a16ad7"
-    },
-    {
-      "name": "PassiveSlowdown",
-      "color": "#41c851"
-    },
-    {
-      "name": "Teleport",
-      "color": "#c1b5cf"
-    },
-    {
-      "name": "DashAttack",
-      "color": "#4a9eff"
-    },
-    {
-      "name": "HalfM1",
-      "color": "#3ebb35"
-    },
-    {
-      "name": "Hit&Run",
-      "color": "#ee445e"
-    },
-    {
-      "name": "InstantDown",
-      "color": "#971159"
-    },
-    {
-      "name": "MapDependent",
-      "color": "#33852e"
-    },
-    {
-      "name": "StrongOnIndoors",
-      "color": "#c2af6b"
-    },
-    {
-      "name": "StrongOnOutdoors",
-      "color": "#32b828"
-    },
-    {
-      "name": "StatusEffect",
-      "color": "#45d9bb"
-    },
-    {
-      "name": "Setup",
-      "color": "#e8c721"
-    }
-  ],
-  "perks": [
-    "Scourge Hook: Pain Resonance",
-    "Lethal Pursuer",
-    "Pop Goes the Weasel",
-    "Corrupt Intervention",
-    "Barbecue & Chili",
-    "Nowhere to Hide",
-    "Hex: Ruin",
-    "Eruption",
-    "Dead Man's Switch",
-    "A Nurse's Calling",
-    "Grim Embrace",
-    "Discordance",
-    "Surge",
-    "Deadlock",
-    "Hex: Plaything",
-    "Iron Maiden",
-    "Whispers",
-    "Friends 'til the End",
-    "Brutal Strength",
-    "Enduring",
-    "Spirit Fury",
-    "Bamboozle",
-    "Save the Best for Last",
-    "Scourge Hook: Floods of Rage",
-    "Hex: Devour Hope",
-    "Hex: No One Escapes Death",
-    "Sloppy Butcher",
-    "Bitter Murmur",
-    "Spies from the Shadows",
-    "Tinkerer",
-    "Monitor & Abuse",
-    "Overcharge",
-    "Thanatophobia",
-    "Lightborn",
-    "Franklin's Demise",
-    "Coup de Grace",
-    "No Way Out",
-    "Hex: Crowd Control",
-    "Call of Brine",
-    "Merciless Storm",
-    "Oppression",
-    "Dragon's Grip",
-    "I'm All Ears",
-    "Zanshin Tactics",
-    "Blood Warden",
-    "Remember Me",
-    "Fire Up",
-    "Play with Your Food",
-    "Dying Light",
-    "Thrilling Tremors",
-    "Gearhead",
-    "Celestial Witness",
-    "Nemesis",
-    "Lay Waste",
-    "Darkness Revealed",
-    "Predator",
-    "Mindbreaker",
-    "Phantom Fear",
-    "Hex: Undying",
-    "Unrelenting",
-    "Turn Back the Clock",
-    "Alien Instinct",
-    "All-Shaking Thunder",
-    "Deerstalker",
-    "Distressing",
-    "Hex: Thrill of the Hunt",
-    "Agitation",
-    "Insidious",
-    "Knock Out",
-    "Iron Grasp",
-    "Unnerving Presence",
-    "Stridor",
-    "Hex: Huntress Lullaby",
-    "Make Your Choice",
-    "Rancor",
-    "Blood Echo",
-    "Infectious Fright",
-    "Surveillance",
-    "Forced Penance",
-    "Trail of Torment",
-    "Deathbound",
-    "Hex: Retribution",
-    "Jolt",
-    "Scourge Hook: Gift of Pain",
-    "Septic Touch",
-    "Terminus",
-    "Ultimate Weapon",
-    "Hubris",
-    "Leverage",
-    "Game Afoot",
-    "Hex: Blood Favour"
-  ],
-  "addons": []
+  "survivorBuilds": [],
+  "loadouts": [],
+  "survivorInfo": {
+    "count": "55",
+    "perkCount": "176",
+    "note": "",
+    "patch": ""
+  }
 };

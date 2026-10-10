@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DBD Killer Hub</title>
+  <title>DBD Build Hub</title>
   <link rel="stylesheet" href="style.css">
 </head>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script><!-- End Cloudflare Web Analytics -->
 <body>
   <div id="app">
     <nav class="navbar">
-      <div class="nav-brand">🩸 DBD Killer Hub</div>
+      <div class="nav-brand">🩸 DBD Build Hub</div>
       <div class="nav-links nav-primary">
         <button class="nav-btn active" data-tab="killers">Killers</button>
+        <button class="nav-btn" data-tab="survivors">Survivors</button>
         <button class="nav-btn" data-tab="builds">Builds</button>
       </div>
       <div class="nav-links nav-admin">
@@ -88,19 +89,31 @@
           <div id="killers-container" class="killers-grid"></div>
         </div>
 
-        <!-- Detail view (zamiast modala) -->
+        <!-- Killer detail view -->
         <div id="killer-detail-view" class="killer-detail-view" hidden>
           <button class="btn back-btn" onclick="closeKillerDetail()">← Back to list</button>
           <div id="killer-detail-content"></div>
         </div>
       </section>
 
-      <!-- BUILDY -->
+
+      <section id="tab-survivors" class="tab">
+        <div id="survivor-detail-content"></div>
+      </section>
+
+      <!-- BUILDS -->
       <section id="tab-builds" class="tab">
         <div class="section-header">
           <h1>Build library</h1>
-          <div class="filters">
+          <div class="side-switch" id="build-side-switch">
+            <button type="button" class="on" data-side="killer" onclick="setBuildSide('killer')">Killer</button>
+            <button type="button" data-side="survivor" onclick="setBuildSide('survivor')">Survivor</button>
+            <button type="button" data-side="all" onclick="setBuildSide('all')">All</button>
+          </div>
+          <div class="filters build-library-filters">
             <input type="text" id="build-search" placeholder="Search builds, perks, tags..." oninput="renderBuilds()">
+            <select id="build-sort" onchange="renderBuilds()"><option value="name">Name A–Z</option><option value="nameDesc">Name Z–A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
+            <div class="perk-filter" data-perk-filter="builds"><div class="perk-filter-chips" id="builds-perk-chips"></div><input id="builds-perk-search" placeholder="Filter by perks…" autocomplete="off" onclick="renderPerkFilterSuggestions('builds',null,true)" oninput="renderPerkFilterSuggestions('builds')"><div class="chip-dropdown" id="builds-perk-dropdown"></div></div>
             <select id="build-killer-filter" onchange="renderBuilds()">
               <option value="">All killers</option>
             </select>
@@ -123,7 +136,6 @@
             <button type="button" class="btn btn-sm" onclick="resetBuildFilters()" title="Reset filters">↺ Reset</button>
           </div>
         </div>
-        <!-- BEZ przycisku + New build -->
         <div id="builds-container" class="builds-list"></div>
         
       </section>
@@ -133,16 +145,17 @@
         <h1>Data Editor</h1>
         <div id="editor-unsaved-banner" class="editor-unsaved-banner" hidden></div>
         <p class="hint">
-          Edit data, then generate code for <code>data.js</code>.
-          New perks: “Quick add” + snippet for <code>config.js</code>.
-          Addons come from Otz tierlist (no local addon images).
+          Core game catalogs and tags belong in <code>config.js</code>; killers, ratings, and builds belong in <code>data.js</code>. Otz data stays in its own file.
         </p>
         <div class="editor-tabs">
           <button class="editor-tab active" data-editor="killers">Killers</button>
-          <button class="editor-tab" data-editor="builds">Builds</button>
+          <button class="editor-tab" data-editor="builds">Killer builds</button>
+          <button class="editor-tab" data-editor="sbuilds">Survivor builds</button>
           <button class="editor-tab" data-editor="killer-tags">Killer tags</button>
           <button class="editor-tab" data-editor="build-tags">Build tags</button>
-          <button class="editor-tab" data-editor="perks">Perks</button>
+          <button class="editor-tab" data-editor="shub">Survivor hub</button>
+          <button class="editor-tab" data-editor="kperks">Killer perks</button>
+          <button class="editor-tab" data-editor="sperks">Survivor perks</button>
           
         </div>
         <div id="editor-killers" class="editor-panel active">
@@ -162,6 +175,13 @@
           </div>
           <div id="editor-killers-list"></div>
         </div>
+        <div id="editor-sbuilds" class="editor-panel">
+          <div class="editor-toolbar">
+            <button class="btn btn-primary" onclick="openSurvivorBuildModal()">+ New survivor build</button>
+            <input type="text" id="ed-sbuild-search" placeholder="Search survivor builds…" oninput="renderSurvivorBits()" class="editor-search">
+          </div>
+          <div id="editor-sbuilds-list"></div>
+        </div>
         <div id="editor-builds" class="editor-panel">
           <div class="editor-toolbar">
             <button class="btn btn-primary" onclick="openBuildModal()">+ New build</button>
@@ -169,8 +189,10 @@
             <select id="ed-build-sort" onchange="renderEditor()">
               <option value="name">Name A–Z</option>
               <option value="nameDesc">Name Z–A</option>
-              <option value="patch">Patch</option>
-              <option value="killer">Killer name</option>
+              <option value="patch">Patch (oldest)</option>
+              <option value="patchDesc">Patch (newest)</option>
+              <option value="killer">Killer name A-Z</option>
+              <option value="killerDesc">Killer name Z-A</option>
             </select>
           </div>
           <div id="editor-builds-list"></div>
@@ -189,37 +211,27 @@
           </div>
           <div id="editor-build-tags-list"></div>
         </div>
-        <div id="editor-perks" class="editor-panel">
+        <div id="editor-shub" class="editor-panel">
+          <div id="editor-shub-body"></div>
+        </div>
+        <div id="editor-kperks" class="editor-panel">
           <div class="editor-toolbar">
-            <button class="btn" onclick="quickAddPerk()">+ Add perk</button>
-            <input type="text" id="ed-perk-search" placeholder="Search perks…" oninput="renderEditor()" class="editor-search">
+            <button class="btn btn-primary" onclick="openPerkEditor('killer')">+ Add perk</button>
+            <input type="text" id="ed-kperk-search" placeholder="Search killer perks…" oninput="renderEditor()" class="editor-search">
           </div>
-          <div id="perk-add-form" class="inline-add-form" hidden>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Perk name (exact in-game)</label>
-                <input id="new-perk-name" placeholder="">
-              </div>
-              <div class="form-group">
-                <label>Icon URL (wiki.gg)</label>
-                <input id="new-perk-url" placeholder="">
-              </div>
-            </div>
-            <div class="modal-actions" style="justify-content:flex-start;margin-top:0.5rem">
-              <button class="btn btn-primary" type="button" onclick="submitNewPerk()">Add perk</button>
-              <button class="btn" type="button" onclick="cancelNewPerk()">Cancel</button>
-            </div>
-            <div id="perk-config-snippet" hidden style="margin-top:0.75rem">
-              <p class="hint">Paste into <code>config.js</code> → <code>perkIcons</code>:</p>
-              <textarea rows="2" style="width:100%;font-family:monospace;background:#0d0d0d;color:#8f8;padding:0.5rem;border-radius:6px;border:1px solid #333"></textarea>
-              <button class="btn btn-sm" type="button" onclick="copyPerkSnippet()" style="margin-top:0.35rem">Copy snippet</button>
-            </div>
+          <div id="editor-kperks-list"></div>
+        </div>
+        <div id="editor-sperks" class="editor-panel">
+          <div class="editor-toolbar">
+            <button class="btn btn-primary" onclick="openPerkEditor('survivor')">+ Add perk</button>
+            <input type="text" id="ed-sperk-search" placeholder="Search survivor perks…" oninput="renderEditor()" class="editor-search">
           </div>
-          <div id="editor-perks-list"></div>
+          <div id="editor-sperks-list"></div>
         </div>
         <div class="editor-actions">
-          <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js</button>
+          <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js (killers & builds)</button>
           <button class="btn btn-primary" onclick="downloadGeneratedDataJs()">⬇ Download data.js</button>
+          <button class="btn" onclick="downloadGeneratedConfigJs()">Download config.js (catalogs & tags)</button>
           <button class="btn" onclick="document.getElementById('import-file').click()">⬆ Import data (.js / .json)</button>
           <input type="file" id="import-file" accept=".js,.json,text/javascript,application/json" style="display:none" onchange="importJSON(event)">
         </div>
@@ -244,10 +256,18 @@
             </div>
           </div>
           <div class="settings-box">
+            <h3>Duplicate builds</h3>
+            <p class="hint">Find builds with the same perks and add-ons. Survivor items are also compared. Patch and build name are ignored.</p>
+            <div class="settings-actions">
+              <button class="btn btn-primary" type="button" onclick="checkDuplicateBuilds()">Check for duplicates</button>
+            </div>
+            <div id="duplicate-build-results" aria-live="polite"></div>
+          </div>
+          <div class="settings-box">
             <h3>Where to save</h3>
             <ul class="settings-list">
-              <li>Killers, builds, tags → Editor → Generate → <code>data/data.js</code></li>
-              <li>Portraits & perk icons → <code>data/config.js</code></li>
+              <li>Perks, tags, items, and item add-ons → Editor → Download <code>config.js</code></li>
+              <li>Killer details, ratings, and builds → Editor → Download <code>data.js</code></li>
               <li>Otz addons → form below → <code>data/otz-addons.js</code></li>
             </ul>
           </div>
@@ -290,13 +310,13 @@
           <p class="hint">
             Otz folder ID = png name on
             <a href="https://otz-addon-tierlist.pages.dev/" target="_blank" rel="noopener">otz-addon-tierlist</a>
-            (e.g. <code>chucky</code>). File key = your <code>killer.id</code>.
+            Enter the folder ID matching the killer record's <code>killer.id</code>.
             Fetch → Copy → paste into <code>OTZ_ADDONS</code> in <code>data/otz-addons.js</code>.
           </p>
           <div class="form-row">
             <div class="form-group">
               <label>Otz folder ID</label>
-              <input id="otz-fetch-id" placeholder="chucky" autocomplete="off">
+              <input id="otz-fetch-id" placeholder="killer-id" autocomplete="off">
             </div>
             <div class="form-group">
               <label>File key = killer.id</label>
@@ -322,5 +342,6 @@
   <script src="data/otz-addons.js"></script>
   <script src="data/data.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/survivors.js"></script>
 </body>
 </html>

@@ -3,16 +3,85 @@
 // ============================================
 
 const STORAGE_KEY = "dbd_killer_hub_v56";
+// Immutable file-backed config snapshot. Runtime editor changes are merged into CONFIG,
+// but reset and "unsaved" comparisons must use the original config.js contents.
+const STARTER_CONFIG = JSON.parse(JSON.stringify(CONFIG));
+if (!Array.isArray(STARTER_CONFIG.killerTags)) STARTER_CONFIG.killerTags = [];
+if (!Array.isArray(STARTER_CONFIG.buildTags)) STARTER_CONFIG.buildTags = [];
+const STARTER_PERK_NAMES = new Set([
+  ...((INITIAL_DATA && INITIAL_DATA.perks) || []),
+  ...((STARTER_CONFIG.killerPerks || []).map(p => p.name)),
+  ...((STARTER_CONFIG.survivorPerks || []).map(p => p.name)),
+  ...Object.keys(STARTER_CONFIG.perkIcons || {})
+].filter(Boolean).map(name => String(name).toLowerCase()));
 
 
-let state = { killers: [], builds: [], tags: [], perks: [], addons: [] };
+let state = { killers: [], builds: [] };
+const CORE_CONFIG_KEYS = ["killerPerks", "survivorPerks", "survivorRoster", "survivorPortraits", "perkIcons", "killerTags", "buildTags", "items", "itemAddons", "itemOrder", "addonOrder", "rarityColors"];
+function coreConfigSnapshot(source = CONFIG) {
+  const out = {};
+  CORE_CONFIG_KEYS.forEach(key => { out[key] = JSON.parse(JSON.stringify(source[key] || (key.endsWith("Perks") || key.endsWith("Tags") || key.endsWith("Roster") || key === "survivorPortraits" || key === "items" || key === "itemAddons" ? [] : {}))); });
+  ["killerTags", "buildTags"].forEach(key => out[key].forEach(tag => delete tag._locked));
+  return out;
+}
+function configForFile() {
+  const out = JSON.parse(JSON.stringify(CONFIG));
+  const core = coreConfigSnapshot(CONFIG);
+  CORE_CONFIG_KEYS.forEach(key => { out[key] = core[key]; });
+  return out;
+}
+const STARTER_CORE_CONFIG = coreConfigSnapshot(STARTER_CONFIG);
+function applyCoreConfigDraft() {
+  if (state._coreConfig) {
+    CORE_CONFIG_KEYS.forEach(key => {
+      if (state._coreConfig[key] !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(state._coreConfig[key]));
+    });
+    return;
+  }
+  // Migrate catalogs edited by older versions from the local draft/data file into CONFIG.
+  const legacyKillerTags = state.killerTags || [];
+  const legacyBuildTags = state.buildTags || [];
+  const starterKillerTags = STARTER_CONFIG.killerTags || [];
+  const starterBuildTags = STARTER_CONFIG.buildTags || [];
+  if (legacyKillerTags.length && JSON.stringify(legacyKillerTags) !== JSON.stringify(starterKillerTags)) CONFIG.killerTags = JSON.parse(JSON.stringify(legacyKillerTags));
+  if (legacyBuildTags.length && JSON.stringify(legacyBuildTags) !== JSON.stringify(starterBuildTags)) CONFIG.buildTags = JSON.parse(JSON.stringify(legacyBuildTags));
+  CONFIG.killerTags = CONFIG.killerTags || [];
+  CONFIG.buildTags = CONFIG.buildTags || [];
+  if (!CONFIG.itemOrder || !Object.keys(CONFIG.itemOrder).length) CONFIG.itemOrder = JSON.parse(JSON.stringify(state.itemOrder || CONFIG.itemOrder || {}));
+  if (!CONFIG.addonOrder || !Object.keys(CONFIG.addonOrder).length) CONFIG.addonOrder = JSON.parse(JSON.stringify(state.addonOrder || CONFIG.addonOrder || {}));
+  const removed = new Set((state._removedPerks || []).map(n => String(n).toLowerCase()));
+  if (removed.size) {
+    CONFIG.killerPerks = (CONFIG.killerPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
+    CONFIG.survivorPerks = (CONFIG.survivorPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
+    Object.keys(CONFIG.perkIcons || {}).forEach(n => { if (removed.has(n.toLowerCase())) delete CONFIG.perkIcons[n]; });
+  }
+  (state._customPerks || []).forEach(p => {
+    if (!p || !p.name || removed.has(String(p.name).toLowerCase())) return;
+    const pool = p.role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
+    if (!pool.some(x => x.name.toLowerCase() === p.name.toLowerCase())) pool.push({ name: p.name, icon: p.icon || CONFIG.placeholderPerk });
+  });
+  CONFIG.perkIcons = CONFIG.perkIcons || {};
+  Object.assign(CONFIG.perkIcons, state._perkIcons || {}, state._pendingPerkIcons || {});
+}
+function applyCoreConfigToDraft() { state._coreConfig = coreConfigSnapshot(CONFIG); }
+function clearLegacyCoreMetadata() {
+  delete state._perkIcons;
+  delete state._customPerks;
+  delete state._removedPerks;
+  delete state._pendingPerkIcons;
+  delete state.killerTags;
+  delete state.buildTags;
+  delete state.tags;
+  delete state.itemOrder;
+  delete state.addonOrder;
+  delete state.addons;
+}
 
 // temporary selections in forms
 let formSelectedTags = [];
 let formSelectedPerks = [];
 let formSelectedAddons = [];
 let formSelectedCombos = [];
-let formContentSections = null; // array of arrays, each 1-2 addon names
 
 // Otz lookup: data/otz-addons.js (getOtzStore, getOtzAddonsForKiller)
 
@@ -20,13 +89,15 @@ let formContentSections = null; // array of arrays, each 1-2 addon names
 
 let activeFilterTags = [];
 let activeBuildFilterTags = [];
+let excludedBuildFilterTags = [];
+const buildPerkFilters = { builds: [], "killer-profile": [] };
 let killersListScrollY = 0;
 let showAllKillerTags = false;
 
 
 
-function getKillerTags() { return state.killerTags || state.tags || []; }
-function getBuildTags() { return state.buildTags || []; }
+function getKillerTags() { return CONFIG.killerTags || []; }
+function getBuildTags() { return CONFIG.buildTags || []; }
 function findTagMeta(name, list) {
   return (list || []).find(x => x.id === name || x.name === name);
 }
@@ -137,11 +208,6 @@ function wrapFmt(id, before, after) {
   el.value = next;
   el.focus();
   el.setSelectionRange(start + before.length, start + before.length + sel.length);
-  // sync section body if this is a section textarea
-  if (id && id.startsWith("k-sec-")) {
-    const i = +id.replace("k-sec-", "");
-    if (formContentSections && formContentSections[i]) formContentSections[i].body = el.value;
-  }
   schedulePreviewRefresh();
 }
 
@@ -279,30 +345,28 @@ function loadData() {
       if (!state.buildTags) state.buildTags = [];
       if (state.tags && state.tags.length && !state.killerTags.length && !state.buildTags.length) {
         // split heuristically or put all into killerTags + copy meta/fun to build
-        const buildish = new Set(["meta","fun","tournament","universal","info","hex","chase","gen-pressure","slowdown"]);
-        state.tags.forEach(t => {
-          if (buildish.has(t.id) || buildish.has(t.name)) state.buildTags.push(t);
-          else state.killerTags.push(t);
-        });
+        
+        state.killerTags = JSON.parse(JSON.stringify(state.tags));
       }
-      if (typeof INITIAL_DATA !== "undefined") {
-        if (!state.killerTags.length && INITIAL_DATA.killerTags) state.killerTags = JSON.parse(JSON.stringify(INITIAL_DATA.killerTags));
-        if (!state.buildTags.length && INITIAL_DATA.buildTags) state.buildTags = JSON.parse(JSON.stringify(INITIAL_DATA.buildTags));
-      }
+      
 
     } catch (e) { seedInitial(); }
   } else seedInitial();
+  applyCoreConfigDraft();
+  mergeCatalogPerks();
+  clearLegacyCoreMetadata();
+  applyCoreConfigToDraft();
+  saveData();
 }
 
 function seedInitial() {
   if (typeof INITIAL_DATA !== "undefined") {
     state = JSON.parse(JSON.stringify(INITIAL_DATA));
   } else {
-    state = { killers: [], builds: [], killerTags: [], buildTags: [], tags: [], perks: [], addons: [] };
+    state = { killers: [], builds: [] };
   }
   if (!state.killerTags) state.killerTags = [];
   if (!state.buildTags) state.buildTags = [];
-  if (!state.addons) state.addons = [];
   if (!state.perks) state.perks = [];
   if (!state.builds) state.builds = [];
   if (!state.killers) state.killers = [];
@@ -324,10 +388,42 @@ function seedInitial() {
         }
 
   });
+  applyCoreConfigDraft();
+  mergeCatalogPerks();
+  clearLegacyCoreMetadata();
+  applyCoreConfigToDraft();
   saveData();
 }
 
+function mergeCatalogPerks() {
+  if (!state.perks) state.perks = [];
+  state._perkIcons = state._perkIcons || {};
+  state._customPerks = state._customPerks || [];
+  state._removedPerks = state._removedPerks || [];
+  const removed = new Set(state._removedPerks.map(n => String(n).toLowerCase()));
+  if (typeof CONFIG !== "undefined") {
+    Object.keys(CONFIG.perkIcons || {}).forEach(n => { if (removed.has(n.toLowerCase())) delete CONFIG.perkIcons[n]; });
+    CONFIG.killerPerks = (CONFIG.killerPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
+    CONFIG.survivorPerks = (CONFIG.survivorPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
+    state._customPerks.forEach(p => {
+      if (!p || !p.name || removed.has(String(p.name).toLowerCase())) return;
+      const pool = p.role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
+      if (!pool.some(x => x.name.toLowerCase() === p.name.toLowerCase())) pool.push({ name: p.name, icon: p.icon || CONFIG.placeholderPerk });
+    });
+  }
+  const names = new Set(state.perks.map(x => String(x).toLowerCase()));
+  const extra = [];
+  if (typeof CONFIG !== "undefined") {
+    (CONFIG.killerPerks || []).forEach(p => extra.push(p.name));
+    (CONFIG.survivorPerks || []).forEach(p => extra.push(p.name));
+  }
+  extra.forEach(n => { if (!removed.has(n.toLowerCase()) && !names.has(n.toLowerCase())) { state.perks.push(n); names.add(n.toLowerCase()); } });
+  if (!state.survivorBuilds) state.survivorBuilds = [];
+  if (!state.loadouts) state.loadouts = [];
+}
 function saveData() {
+  (state.killers || []).forEach(k => ["notes", "guide", "vsNotes", "contentSections"].forEach(key => delete k[key]));
+  applyCoreConfigToDraft();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
@@ -344,8 +440,7 @@ function isDirtyKiller(k) {
   if (!base) return true;
   const pick = (x) => JSON.stringify({
     name: x.name, difficulty: x.difficulty, skillFloor: x.skillFloor, skillCeiling: x.skillCeiling,
-    fun2play: x.fun2play, tier: x.tier || "", tags: x.tags || [], notes: x.notes, guide: x.guide,
-    vsNotes: x.vsNotes, addonNotes: x.addonNotes, patch: x.patch || "", contentSections: x.contentSections || []
+    fun2play: x.fun2play, tier: x.tier || "", tags: x.tags || [], addonNotes: x.addonNotes, patch: x.patch || ""
   });
   return pick(k) !== pick(base);
 }
@@ -363,10 +458,35 @@ function isDirtyBuild(b) {
   return pick(b) !== pick(base);
 }
 function isLocalOnlyPerk(name) {
-  return !(getBaseline().perks || []).includes(name);
+  const key = String(name || "").toLowerCase();
+  const fileCustom = (getBaseline()._customPerks || []).some(p => String(p && p.name || "").toLowerCase() === key);
+  return !STARTER_PERK_NAMES.has(key) && !fileCustom;
+}
+function findPerkIconInConfig(config, name) {
+  const key = String(name || "").toLowerCase();
+  const pool = [...(config.killerPerks || []), ...(config.survivorPerks || [])];
+  const perk = pool.find(p => String(p.name || "").toLowerCase() === key);
+  if (perk && perk.icon) return perk.icon;
+  const iconKey = Object.keys(config.perkIcons || {}).find(n => n.toLowerCase() === key);
+  return iconKey ? config.perkIcons[iconKey] : "";
+}
+function findPerkIconInMap(map, name) {
+  const key = String(name || "").toLowerCase();
+  const match = Object.keys(map || {}).find(n => n.toLowerCase() === key);
+  return match ? map[match] : "";
+}
+function baselinePerkIcon(name) {
+  const data = getBaseline();
+  const custom = (data._customPerks || []).find(p => String(p && p.name || "").toLowerCase() === String(name || "").toLowerCase());
+  return findPerkIconInMap(data._perkIcons, name) || (custom && custom.icon) || findPerkIconInConfig(STARTER_CONFIG, name);
+}
+function isDirtyPerkIcon(name) {
+  if (isLocalOnlyPerk(name)) return false;
+  const current = findPerkIconInMap(state._perkIcons, name) || findPerkIconInConfig(CONFIG, name);
+  return !!current && current !== baselinePerkIcon(name);
 }
 function isLocalOnlyTag(kind, t) {
-  const arr = kind === "build" ? (getBaseline().buildTags || []) : (getBaseline().killerTags || []);
+  const arr = kind === "build" ? (STARTER_CONFIG.buildTags || []) : (STARTER_CONFIG.killerTags || []);
   return !arr.some(x => x.id === t.id || x.name === t.name);
 }
 function unsavedBadge(title) {
@@ -384,7 +504,11 @@ function updateEditorUnsavedBanner() {
   const localB = (state.builds || []).filter(isLocalOnlyBuild).length;
   const dirtyB = (state.builds || []).filter(b => !isLocalOnlyBuild(b) && isDirtyBuild(b)).length;
   const localP = (state.perks || []).filter(isLocalOnlyPerk).length;
-  const total = localK + dirtyK + localB + dirtyB + localP;
+  const dirtyP = (state.perks || []).filter(n => !isLocalOnlyPerk(n) && isDirtyPerkIcon(n)).length;
+  const fileRemovedPerks = new Set((getBaseline()._removedPerks || []).map(n => String(n).toLowerCase()));
+  const removedP = (state._removedPerks || []).filter(n => STARTER_PERK_NAMES.has(String(n).toLowerCase()) && !fileRemovedPerks.has(String(n).toLowerCase())).length;
+  const coreDirty = JSON.stringify(coreConfigSnapshot()) !== JSON.stringify(STARTER_CORE_CONFIG);
+  const total = localK + dirtyK + localB + dirtyB + localP + dirtyP + removedP + (coreDirty ? 1 : 0);
   if (total === 0) {
     el.hidden = true;
     el.innerHTML = "";
@@ -393,8 +517,8 @@ function updateEditorUnsavedBanner() {
   el.hidden = false;
   el.innerHTML = `
     <strong>Unsaved to files</strong>
-    <span>${localK ? localK + " new killer(s) " : ""}${dirtyK ? dirtyK + " edited killer(s) " : ""}${localB ? localB + " new build(s) " : ""}${dirtyB ? dirtyB + " edited build(s) " : ""}${localP ? localP + " new perk(s)" : ""}</span>
-    <span class="hint-inline">Generate data.js code and paste into the file, then Reset after updating files.</span>
+    <span>${localK ? localK + " new killer(s) " : ""}${dirtyK ? dirtyK + " edited killer(s) " : ""}${localB ? localB + " new build(s) " : ""}${dirtyB ? dirtyB + " edited build(s) " : ""}${localP ? localP + " new perk(s) " : ""}${dirtyP ? dirtyP + " edited perk icon(s) " : ""}${removedP ? removedP + " removed perk(s) " : ""}${coreDirty ? "core catalog changes (config.js)" : ""}</span>
+    <span class="hint-inline">Download config.js for catalog changes and data.js for killer, rating, and build changes; replace those files in the project.</span>
   `;
 }
 
@@ -428,6 +552,7 @@ function switchTab(tabName) {
   document.getElementById(`tab-${tabName}`)?.classList.add("active");
   if (tabName === "killers") renderKillers();
   if (tabName === "builds") renderBuilds();
+  if (tabName === "survivors" && typeof renderSurvivorDetail === "function") renderSurvivorDetail(true);
   if (tabName === "editor") renderEditor();
 }
 
@@ -435,6 +560,7 @@ function renderAll() {
   populateFilterSelects();
   renderKillers();
   renderBuilds();
+  if (typeof renderSurvivorBits === "function") renderSurvivorBits();
 }
 
 function populateFilterSelects() {
@@ -496,7 +622,7 @@ function toggleKillerTagsPanel(e) {
 function renderBuildTagFilterUI() {
   const panel = document.getElementById("build-filter-tags-panel");
   const countEl = document.getElementById("build-filter-tags-count");
-  if (countEl) countEl.textContent = activeBuildFilterTags.length ? `(${activeBuildFilterTags.length})` : "";
+  if (countEl) countEl.textContent = (activeBuildFilterTags.length + excludedBuildFilterTags.length) ? `(${activeBuildFilterTags.length + excludedBuildFilterTags.length})` : "";
   if (!panel) return;
   const tags = getBuildTags();
   if (!tags.length) {
@@ -505,15 +631,14 @@ function renderBuildTagFilterUI() {
   }
   panel.innerHTML =
     `<div class="filter-panel-head">
-      <span>Filter by tags</span>
-      ${activeBuildFilterTags.length ? `<button type="button" class="btn btn-sm" onclick="event.stopPropagation();activeBuildFilterTags=[];renderBuildTagFilterUI();renderBuilds();">Clear</button>` : ""}
+      <span>Build must contain / must not contain</span>
+      ${(activeBuildFilterTags.length || excludedBuildFilterTags.length) ? `<button type="button" class="btn btn-sm" onclick="event.stopPropagation();activeBuildFilterTags=[];excludedBuildFilterTags=[];renderBuildTagFilterUI();renderBuilds();">Clear</button>` : ""}
     </div>
-    <div class="filter-panel-chips">` +
-    tags.map(t => {
-      const on = activeBuildFilterTags.includes(t.name) || activeBuildFilterTags.includes(t.id);
-      return `<button type="button" class="tag-filter-chip ${on ? "on" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleBuildFilterTag('${escapeAttr(t.name)}')">${escapeHtml(t.name)}</button>`;
-    }).join("") +
-    `</div>`;
+    <div class="build-tag-filter-section"><span>Must contain</span><div class="filter-panel-chips">` +
+    tags.map(t => `<button type="button" class="tag-filter-chip ${activeBuildFilterTags.includes(t.name) || activeBuildFilterTags.includes(t.id) ? "on" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleBuildFilterTag('${escapeAttr(t.name)}')">${escapeHtml(t.name)}</button>`).join("") +
+    `</div></div><div class="build-tag-filter-section"><span>Must not contain</span><div class="filter-panel-chips">` +
+    tags.map(t => `<button type="button" class="tag-filter-chip ${excludedBuildFilterTags.includes(t.name) || excludedBuildFilterTags.includes(t.id) ? "on excluded" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleExcludedBuildFilterTag('${escapeAttr(t.name)}')">${escapeHtml(t.name)}</button>`).join("") +
+    `</div></div>`;
 }
 
 function toggleBuildTagsPanel(e) {
@@ -571,10 +696,13 @@ function patchMatches(buildPatch, op, filterPatch) {
 
 function resetBuildFilters() {
   activeBuildFilterTags = [];
+  excludedBuildFilterTags = [];
   const s = document.getElementById("build-search"); if (s) s.value = "";
   const k = document.getElementById("build-killer-filter"); if (k) k.value = "";
   const op = document.getElementById("build-patch-op"); if (op) op.value = "=";
   const pv = document.getElementById("build-patch-value"); if (pv) pv.value = "";
+  const sort = document.getElementById("build-sort"); if (sort) sort.value = "name";
+  buildPerkFilters.builds = []; renderPerkFilterChips("builds");
   renderBuildTagFilterUI();
   populateBuildPatchFilter();
   renderBuilds();
@@ -593,6 +721,14 @@ function toggleBuildFilterTag(name) {
   const i = activeBuildFilterTags.indexOf(name);
   if (i >= 0) activeBuildFilterTags.splice(i, 1);
   else activeBuildFilterTags.push(name);
+  renderBuildTagFilterUI();
+  renderBuilds();
+}
+
+function toggleExcludedBuildFilterTag(name) {
+  const i = excludedBuildFilterTags.indexOf(name);
+  if (i >= 0) excludedBuildFilterTags.splice(i, 1);
+  else excludedBuildFilterTags.push(name);
   renderBuildTagFilterUI();
   renderBuilds();
 }
@@ -737,6 +873,8 @@ function openKillerDetail(id) {
   const k = state.killers.find(x => x.id === id);
   if (!k) return;
   const killerBuilds = state.builds.filter(b => (b.killerIds || []).includes(id));
+  window._currentKillerDetailId = id;
+  const killerPatches = [...new Set(killerBuilds.map(b => (b.patch || "").trim()).filter(Boolean))].sort(comparePatchVersions);
   const src = getKillerPortrait(k.name);
 
   const releaseStr = k.releaseDate
@@ -829,36 +967,35 @@ function openKillerDetail(id) {
       })()}
     </div>
 
-    ${(() => {
-      const secs = (k.contentSections && k.contentSections.length)
-        ? k.contentSections.filter(s => s.key !== "addonNotes")
-        : [
-            { key: "notes", title: "Short Note", body: k.notes },
-            { key: "guide", title: "Guide / How to Play", body: k.guide }
-          ];
-      return secs.map(sec => {
-        const body = sec.body;
-        if (!body || body === "placeholder") return "";
-        return `<div class="detail-section">
-          <h3>${escapeHtml(sec.title || sec.key)}</h3>
-          <div class="md-body">${renderMarkdown(body)}</div>
-        </div>`;
-      }).join("");
-    })()}
     <div class="detail-section">
       <h3>Builds (${killerBuilds.length})</h3>
-      <div class="profile-builds">
-        ${killerBuilds.length
-          ? killerBuilds.map(b => buildCardHTML(b, true)).join("")
-          : "<p style='color:var(--text-dim)'>No builds.</p>"}
+      <div class="filters killer-profile-build-filters">
+        <input id="killer-profile-build-search" placeholder="Search builds…" oninput="renderKillerProfileBuilds()">
+        <select id="killer-profile-build-sort" onchange="renderKillerProfileBuilds()"><option value="name">Name A–Z</option><option value="nameDesc">Name Z–A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
+        <div class="perk-filter" data-perk-filter="killer-profile"><div class="perk-filter-chips" id="killer-profile-perk-chips"></div><input id="killer-profile-perk-search" placeholder="Filter by perks…" autocomplete="off" onclick="renderPerkFilterSuggestions('killer-profile','killer',true)" oninput="renderPerkFilterSuggestions('killer-profile','killer')"><div class="chip-dropdown" id="killer-profile-perk-dropdown"></div></div>
+        <div class="patch-filter-group" title="Filter builds by patch"><select id="killer-profile-patch-op" onchange="renderKillerProfileBuilds()"><option value="=">=</option><option value=">">&gt;</option><option value=">=">&gt;=</option><option value="<">&lt;</option><option value="<=">&lt;=</option></select>
+        <select id="killer-profile-patch-value" onchange="renderKillerProfileBuilds()"><option value="">Patch</option>${killerPatches.map(p => `<option value="${escapeAttr(p)}">${escapeHtml(p)}</option>`).join("")}</select></div>
       </div>
+      <div id="killer-profile-builds-container" class="profile-builds"></div>
     </div>
   `;
 
   document.getElementById("killers-list-view").hidden = true;
   document.getElementById("killer-detail-view").hidden = false;
   document.getElementById("killer-detail-content").innerHTML = html;
+  renderKillerProfileBuilds();
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderKillerProfileBuilds() {
+  const box = document.getElementById("killer-profile-builds-container");
+  if (!box) return;
+  const id = window._currentKillerDetailId;
+  const op = document.getElementById("killer-profile-patch-op")?.value || "=";
+  const patch = document.getElementById("killer-profile-patch-value")?.value || "";
+  let builds = (state.builds || []).filter(b => (b.killerIds || []).includes(id) && (!patch || patchMatches(b.patch, op, patch)));
+  builds = applyBuildSearchSort(builds, document.getElementById("killer-profile-build-search")?.value || "", document.getElementById("killer-profile-build-sort")?.value || "name", buildPerkFilters["killer-profile"]);
+  box.innerHTML = builds.length ? builds.map(b => buildCardHTML(b, true)).join("") : "<p style='color:var(--text-dim)'>No builds.</p>";
 }
 
 function ensureComboBoxes() {
@@ -890,7 +1027,7 @@ function getComboOtzList() {
   if (typeof getOtzAddonsForKiller !== "function") return [];
   const name = document.getElementById("k-name")?.value?.trim() || "";
   const id = document.getElementById("k-id")?.value?.trim() || window._editingKillerId || "";
-  // Prefer full object so id-based Otz keys work (chucky, jason, …)
+  // Prefer full object so ID-based Otz keys can be matched.
   if (id || name) {
     const list = getOtzAddonsForKiller({ id, name }) || [];
     if (list.length) return list;
@@ -1127,8 +1264,15 @@ function findOtzAddonImg(addonName, killerIds) {
 function buildCardHTML(b, compact = false) {
   const killerNames = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(", ");
   const hasKillers = !!(b.killerIds && b.killerIds.length);
+  const assignedKiller = !compact && (b.killerIds || []).length === 1
+    ? state.killers.find(k => k.id === b.killerIds[0])
+    : null;
+  const killerPortrait = assignedKiller
+    ? `<img class="build-killer-portrait" src="${escapeAttr(getKillerPortrait(assignedKiller.name))}" alt="${escapeAttr(assignedKiller.name)}" onerror="this.src=CONFIG.placeholderPortrait">`
+    : "";
   return `
-    <div class="build-card" style="${compact ? "padding:0.75rem;grid-template-columns:auto 1fr auto" : ""}">
+    <div class="build-card ${killerPortrait ? "has-killer-portrait" : ""}" style="${compact ? "padding:0.75rem;grid-template-columns:auto 1fr auto" : ""}">
+      ${killerPortrait}
       ${perkDiamondHTML(b.perks)}
       <div>
         <div class="title">${escapeHtml(b.name)}</div>
@@ -1162,31 +1306,97 @@ function buildCardHTML(b, compact = false) {
   `;
 }
 
+function renderPerkFilterSuggestions(scope, role, openOnClick = false) {
+  const input = document.getElementById(`${scope}-perk-search`);
+  const drop = document.getElementById(`${scope}-perk-dropdown`);
+  if (!input || !drop) return;
+  if (!openOnClick && !drop.classList.contains("open")) return;
+  const side = document.getElementById("build-side")?.value || "killer";
+  const pool = role === "killer-profile" || (scope === "builds" && side === "killer")
+    ? (CONFIG.killerPerks || []).map(p => p.name)
+    : role === "survivor" || side === "survivor"
+      ? (CONFIG.survivorPerks || []).map(p => p.name)
+      : [...(CONFIG.killerPerks || []), ...(CONFIG.survivorPerks || [])].map(p => p.name);
+  const selected = buildPerkFilters[scope] || [];
+  const query = input.value.trim().toLowerCase();
+  const available = [...new Set(pool)].filter(name => name && !selected.includes(name) && (!query || name.toLowerCase().includes(query))).slice(0, 50);
+  if (!available.length) { drop.innerHTML = ""; drop.classList.remove("open"); return; }
+  drop.innerHTML = available.map((name, i) => `<div class="chip-dropdown-item" data-perk-index="${i}"><img src="${getPerkIcon(name)}" alt="" onerror="this.src=CONFIG.placeholderPerk">${escapeHtml(name)}</div>`).join("");
+  drop.querySelectorAll("[data-perk-index]").forEach(row => row.onclick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const perk = available[+row.dataset.perkIndex];
+    if (!perk || !buildPerkFilters[scope]) return;
+    buildPerkFilters[scope].push(perk);
+    input.value = "";
+    renderPerkFilterChips(scope);
+    drop.classList.remove("open");
+    drop.innerHTML = "";
+    if (scope === "builds") renderBuilds();
+    else if (scope === "killer-profile") renderKillerProfileBuilds();
+    else if (scope === "survivor-hub") renderSurvivorBuilds();
+  });
+  drop.classList.add("open");
+}
+
+function renderPerkFilterChips(scope) {
+  const host = document.getElementById(`${scope}-perk-chips`);
+  if (!host) return;
+  host.innerHTML = (buildPerkFilters[scope] || []).map((name, i) => `<span class="chip perk-filter-chip">${escapeHtml(name)}<button type="button" aria-label="Remove ${escapeAttr(name)}" onclick="removePerkFilter('${scope}',${i})">×</button></span>`).join("");
+}
+
+function removePerkFilter(scope, index) {
+  if (!buildPerkFilters[scope]) return;
+  buildPerkFilters[scope].splice(index, 1);
+  renderPerkFilterChips(scope);
+  if (scope === "builds") renderBuilds();
+  else if (scope === "killer-profile") renderKillerProfileBuilds();
+  else if (scope === "survivor-hub") renderSurvivorBuilds();
+}
+
+function applyBuildSearchSort(list, query, sort, selectedPerks) {
+  let out = list;
+  const q = (query || "").trim().toLowerCase();
+  if (q) out = out.filter(b => [b.name,b.item,b.patch,b.description,...(b.perks || []),...(b.addons || []),...(b.tags || [])].join(" ").toLowerCase().includes(q));
+  if (selectedPerks?.length) out = out.filter(b => selectedPerks.every(p => (b.perks || []).includes(p)));
+  out = [...out];
+  if (sort === "nameDesc") out.sort((a,b) => String(b.name || "").localeCompare(String(a.name || "")));
+  else if (sort === "patch" || sort === "patchDesc") out.sort((a,b) => {
+    const d = comparePatchVersions(a.patch || "", b.patch || "");
+    return sort === "patchDesc" ? -d : d;
+  });
+  else out.sort((a,b) => String(a.name || "").localeCompare(String(b.name || "")));
+  return out;
+}
+
 function renderBuilds() {
   const search = (document.getElementById("build-search")?.value || "").toLowerCase();
   const killerF = document.getElementById("build-killer-filter")?.value || "";
-  let list = [...state.builds];
-  if (search) {
-    list = list.filter(b =>
-      (b.name || "").toLowerCase().includes(search) ||
-      (b.perks || []).some(p => p.toLowerCase().includes(search)) ||
-      (b.tags || []).some(t => t.toLowerCase().includes(search))
-    );
-  }
-  if (killerF) list = list.filter(b => (b.killerIds || []).includes(killerF));
-  if (activeBuildFilterTags.length) {
-    list = list.filter(b => activeBuildFilterTags.every(t =>
-      (b.tags || []).includes(t) || (b.tags || []).some(bt => bt.toLowerCase() === t.toLowerCase())
-    ));
-  }
   const patchOp = document.getElementById("build-patch-op")?.value || "=";
   const patchVal = document.getElementById("build-patch-value")?.value || "";
-  if (patchVal) list = list.filter(b => patchMatches(b.patch, patchOp, patchVal));
-
-
+  const side = document.getElementById("build-side")?.value || "killer";
+  const sort = document.getElementById("build-sort")?.value || "name";
+  const selectedPerks = buildPerkFilters.builds || [];
+  const matchesSearch = b => !search || [b.name,b.item,b.patch,b.description,...(b.perks || []),...(b.addons || []),...(b.tags || [])].join(" ").toLowerCase().includes(search);
+  const matchesTags = b => {
+    const tags = (b.tags || []).map(tag => tag.toLowerCase());
+    return activeBuildFilterTags.every(tag => tags.includes(tag.toLowerCase())) && !excludedBuildFilterTags.some(tag => tags.includes(tag.toLowerCase()));
+  };
+  const matchesPerks = b => selectedPerks.every(perk => (b.perks || []).includes(perk));
+  const killerPool = (CONFIG.killerPerks || []).map(p => p.name);
+  const survivorPool = (CONFIG.survivorPerks || []).map(p => p.name);
+  const killerPerksSelected = selectedPerks.filter(p => killerPool.includes(p));
+  const survivorPerksSelected = selectedPerks.filter(p => survivorPool.includes(p));
+  let killerBuilds = (state.builds || []).filter(b => matchesSearch(b) && matchesTags(b) && (!killerF || (b.killerIds || []).includes(killerF)) && (!patchVal || patchMatches(b.patch, patchOp, patchVal)) && matchesPerks(b) && !survivorPerksSelected.some(p => (b.perks || []).includes(p)));
+  let survivorBuilds = (state.survivorBuilds || []).filter(b => matchesSearch(b) && (!patchVal || patchMatches(b.patch, patchOp, patchVal)) && matchesPerks(b) && !killerPerksSelected.some(p => (b.perks || []).includes(p)));
+  killerBuilds = applyBuildSearchSort(killerBuilds, "", sort, []);
+  survivorBuilds = applyBuildSearchSort(survivorBuilds, "", sort, []);
   const container = document.getElementById("builds-container");
   if (!container) return;
-  container.innerHTML = list.map(b => buildCardHTML(b)).join("") || "";
+  const cards = [];
+  if (side !== "survivor") cards.push(...killerBuilds.map(b => buildCardHTML(b)));
+  if (side !== "killer" && typeof survivorBuildCardHTML === "function") cards.push(...survivorBuilds.map(survivorBuildCardHTML));
+  container.innerHTML = cards.join("") || '<p class="hint">No builds match these filters.</p>';
 }
 
 function copyBuild(id) {
@@ -1208,6 +1418,66 @@ function deleteBuild(id) {
     saveData();
     renderBuilds();
     if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
+    showToast("Build deleted");
+  });
+}
+
+function normalizedBuildParts(build) {
+  const normalize = values => (values || []).map(value => String(value || "").trim().toLocaleLowerCase()).filter(Boolean).sort();
+  return { perks: normalize(build.perks), addons: normalize(build.addons) };
+}
+
+function findDuplicateBuildGroups() {
+  const groups = new Map();
+  const add = (role, build) => {
+    const parts = normalizedBuildParts(build);
+    if (!parts.perks.length && !parts.addons.length) return;
+    const item = role === "survivor" ? String(build.item || "").trim().toLocaleLowerCase() : "";
+    const key = JSON.stringify([role, parts.perks, parts.addons, item]);
+    if (!groups.has(key)) groups.set(key, { role, perks: parts.perks, addons: parts.addons, item, builds: [] });
+    groups.get(key).builds.push(build);
+  };
+  (state.builds || []).forEach(build => add("killer", build));
+  (state.survivorBuilds || []).forEach(build => add("survivor", build));
+  return [...groups.values()].filter(group => group.builds.length > 1);
+}
+
+function renderDuplicateBuildReport() {
+  const host = document.getElementById("duplicate-build-results");
+  if (!host) return;
+  const groups = findDuplicateBuildGroups();
+  if (!groups.length) {
+    host.innerHTML = '<p class="hint duplicate-empty">No duplicate builds found.</p>';
+    return;
+  }
+  host.innerHTML = groups.map(group => `
+    <section class="duplicate-group">
+      <h4>${group.role === "killer" ? "Killer" : "Survivor"} loadout · ${group.builds.length} builds</h4>
+      <p><strong>Perks:</strong> ${escapeHtml(group.perks.join(", ") || "None")}<br>
+      <strong>Add-ons:</strong> ${escapeHtml(group.addons.join(", ") || "None")}${group.role === "survivor" ? `<br><strong>Item:</strong> ${escapeHtml(group.item || "None")}` : ""}</p>
+      <ul>${group.builds.map(build => `<li><span>${escapeHtml(build.name || "Untitled")} <small>(${escapeHtml(build.patch || "no patch")})</small></span>
+        <button class="btn btn-sm btn-danger" type="button" onclick="deleteDuplicateBuild('${group.role}','${escapeAttr(build.id)}')">Delete</button></li>`).join("")}</ul>
+    </section>`).join("");
+}
+
+function checkDuplicateBuilds() {
+  renderDuplicateBuildReport();
+  const count = findDuplicateBuildGroups().reduce((sum, group) => sum + group.builds.length, 0);
+  showToast(count ? `${count} builds in duplicate groups` : "No duplicate builds found");
+}
+
+function deleteDuplicateBuild(role, id) {
+  const collection = role === "survivor" ? (state.survivorBuilds || []) : (state.builds || []);
+  const build = collection.find(item => String(item.id) === String(id));
+  if (!build) return;
+  showConfirm(`Delete “${build.name || "Untitled"}”?`, () => {
+    if (role === "survivor") state.survivorBuilds = (state.survivorBuilds || []).filter(item => String(item.id) !== String(id));
+    else state.builds = (state.builds || []).filter(item => String(item.id) !== String(id));
+    saveData();
+    renderBuilds();
+    if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
+    if (role === "survivor" && typeof renderSurvivorBits === "function") renderSurvivorBits();
+    renderDuplicateBuildReport();
     showToast("Build deleted");
   });
 }
@@ -1269,9 +1539,11 @@ function refreshBuildAddonPool() {
       formAddonPool = list.map(a => ({ name: a.name, img: a.img, tier: a.tier }));
     }
   }
-  // only fall back to generic names if not exactly one killer
+  // For universal builds, use the separate Otz catalog as the generic add-on pool.
   if (!formAddonPool.length && checked.length !== 1) {
-    formAddonPool = (state.addons || []).map(a => ({ name: a, img: null, tier: null }));
+    const store = typeof getOtzStore === "function" ? getOtzStore() : {};
+    const names = [...new Set(Object.values(store || {}).flatMap(entry => (entry && entry.addons || []).map(a => a.name)).filter(Boolean))];
+    formAddonPool = names.map(name => ({ name, img: findOtzAddonImg(name, []), tier: null }));
   }
   updateAddonPickerHint(checked.length);
   renderAddonPickerGrid();
@@ -1425,23 +1697,14 @@ function setupTagPicker(kind) {
   });
 }
 
-function addFormTag(name) {
-  if (formSelectedTags.includes(name)) return;
-  formSelectedTags.push(name);
-  renderChipList("form-tag-chips", formSelectedTags, "tag");
-  const input = document.getElementById("tag-search-input");
-  const drop = document.getElementById("tag-search-dropdown");
-  if (input) input.value = "";
-  if (drop) { drop.classList.remove("open"); drop.innerHTML = ""; }
-}
-
 function setupPerkSearch(inputId, dropdownId) {
   const input = document.getElementById(inputId);
   const drop = document.getElementById(dropdownId);
   if (!input || !drop) return;
+  const perkPool = (CONFIG.killerPerks || []).map(p => p.name).filter(Boolean);
   const showPerkSuggestions = () => {
     const q = input.value.trim().toLowerCase();
-    const available = state.perks.filter(p =>
+    const available = perkPool.filter(p =>
       !formSelectedPerks.includes(p) && (!q || p.toLowerCase().includes(q))
     ).slice(0, 60);
     if (!available.length) { drop.classList.remove("open"); drop.innerHTML = ""; return; }
@@ -1464,7 +1727,7 @@ function setupPerkSearch(inputId, dropdownId) {
       e.preventDefault();
       const q = input.value.trim();
       if (!q) return;
-      const found = state.perks.find(p => p.toLowerCase() === q.toLowerCase());
+      const found = perkPool.find(p => p.toLowerCase() === q.toLowerCase());
       if (found) addFormPerk(found);
       input.value = "";
       drop.classList.remove("open");
@@ -1505,6 +1768,9 @@ function refreshBuildEditPreview() {
   const perkDiamond = perks.length
     ? perkDiamondHTML(perks, false)
     : `<p style="color:#666;font-size:0.85rem">No perks yet</p>`;
+  const portrait = killerIds.length === 1
+    ? `<img class="build-preview-killer" src="${escapeAttr(getKillerPortrait(killerNames[0]))}" alt="" onerror="this.src=CONFIG.placeholderPortrait">`
+    : "";
   const addonRow = addons.length ? `
     <div class="addon-row addon-row-icons" style="margin-top:0.5rem">
       ${addons.map((a, i) => {
@@ -1516,7 +1782,8 @@ function refreshBuildEditPreview() {
       }).join("")}
     </div>` : `<p style="color:#666;font-size:0.8rem;margin-top:0.4rem">${killerIds.length ? "Universal (no specific addons)" : "No specific killer selected"}</p>`;
   box.innerHTML = `
-    <div class="build-card-preview">
+    <div class="build-card-preview ${portrait ? "has-killer-portrait" : ""}">
+      ${portrait}<div class="build-preview-content">
       <strong style="font-size:1.05rem">${escapeHtml(name)}</strong>
       <div style="font-size:0.8rem;color:#b0a0a8;margin:0.35rem 0">
         ${killerNames.length ? escapeHtml(killerNames.join(", ")) : "<em>No killers</em>"}
@@ -1526,6 +1793,7 @@ function refreshBuildEditPreview() {
       ${perkDiamond}
       ${addonRow}
       ${desc ? `<div class="md-body" style="margin-top:0.6rem;font-size:0.85rem">${escapeHtml(desc)}</div>` : ""}
+      </div>
     </div>`;
 }
 
@@ -1556,6 +1824,7 @@ function openBuildModal(editId = null) {
             <input id="b-name" value="${escapeAttr(b?.name || "")}" oninput="schedulePreviewRefresh()">
           </div>
           <div class="form-group"><label>Patch / update</label>
+            <select id="b-patch-pick"><option value="">Choose existing patch…</option>${[...new Set([...(state.builds || []).map(x => x.patch), ...(state.survivorBuilds || []).map(x => x.patch), ...(state.killers || []).map(x => x.patch)].filter(Boolean))].map(p => `<option value="${escapeAttr(p)}" ${b?.patch === p ? "selected" : ""}>${escapeHtml(p)}</option>`).join("")}</select>
             <input id="b-patch" value="${escapeAttr(b?.patch || "")}" oninput="schedulePreviewRefresh()">
           </div>
           <div class="form-group"><label>Description</label>
@@ -1618,6 +1887,8 @@ function openBuildModal(editId = null) {
     </div>
   `;
   showModal(html, { wide: true });
+  const patchPicker = document.getElementById("b-patch-pick");
+  if (patchPicker) patchPicker.onchange = () => { if (patchPicker.value) document.getElementById("b-patch").value = patchPicker.value; schedulePreviewRefresh(); };
   formTagKind = "build";
   renderChipList("form-tag-chips", formSelectedTags, "tag", "build");
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
@@ -1663,105 +1934,6 @@ function saveBuild(editId) {
 }
 
 // ---------- KILLER FORM ----------
-const DEFAULT_CONTENT_SECTIONS = [
-  { key: "notes", title: "Short Note", builtin: true },
-  { key: "guide", title: "Guide / How to Play", builtin: true }
-];
-
-function loadKillerSections(k) {
-  if (k && Array.isArray(k.contentSections) && k.contentSections.length) {
-    return k.contentSections
-      .filter(s => s.key !== "addonNotes")
-      .map(s => ({
-        key: s.key,
-        title: s.title || s.key,
-        body: s.body === "placeholder" ? "" : (s.body || ""),
-        builtin: !!s.builtin || ["notes", "guide"].includes(s.key)
-      }));
-  }
-  return DEFAULT_CONTENT_SECTIONS.map(d => ({
-    key: d.key,
-    title: d.title,
-    builtin: true,
-    body: (() => {
-      const v = k && k[d.key];
-      return (!v || v === "placeholder") ? "" : String(v);
-    })()
-  }));
-}
-
-function renderContentSectionsEditor() {
-  const wrap = document.getElementById("content-sections-editor");
-  if (!wrap || !formContentSections) return;
-  const presentKeys = new Set(formContentSections.map(s => s.key));
-  const missingBuiltins = DEFAULT_CONTENT_SECTIONS.filter(d => !presentKeys.has(d.key));
-  wrap.innerHTML =
-    (missingBuiltins.length
-      ? `<div class="restored-builtins">${missingBuiltins.map(d =>
-          `<button type="button" class="btn btn-sm" onclick="restoreBuiltinSection('${d.key}')">↩ Restore ${escapeHtml(d.title)}</button>`
-        ).join("")}</div>`
-      : "") +
-    formContentSections.map((sec, i) => `
-      <div class="section-edit-block" data-sec-i="${i}">
-        <div class="section-edit-head">
-          <div class="section-order-btns">
-            <button type="button" class="btn btn-sm" onclick="moveContentSection(${i}, -1)" title="Move up" ${i === 0 ? "disabled" : ""}>↑</button>
-            <button type="button" class="btn btn-sm" onclick="moveContentSection(${i}, 1)" title="Move down" ${i >= formContentSections.length - 1 ? "disabled" : ""}>↓</button>
-          </div>
-          <input type="text" class="section-title-input" value="${escapeAttr(sec.title)}"
-            ${sec.builtin ? "readonly" : ""}
-            oninput="updateSectionTitle(${i}, this.value)"
-            placeholder="Section title">
-          <button type="button" class="btn btn-sm btn-danger" onclick="removeContentSection(${i})">Remove</button>
-        </div>
-        ${formatToolbarHTML("k-sec-" + i)}
-        <textarea id="k-sec-${i}" rows="4" oninput="updateSectionBody(${i}, this.value)">${escapeHtml(sec.body || "")}</textarea>
-      </div>
-    `).join("");
-}
-
-function moveContentSection(i, dir) {
-  if (!formContentSections) return;
-  const j = i + dir;
-  if (j < 0 || j >= formContentSections.length) return;
-  const tmp = formContentSections[i];
-  formContentSections[i] = formContentSections[j];
-  formContentSections[j] = tmp;
-  renderContentSectionsEditor();
-  refreshKillerEditPreview();
-}
-
-function updateSectionTitle(i, val) {
-  if (!formContentSections || !formContentSections[i]) return;
-  formContentSections[i].title = val;
-  refreshKillerEditPreview();
-}
-function updateSectionBody(i, val) {
-  if (!formContentSections || !formContentSections[i]) return;
-  formContentSections[i].body = val;
-  refreshKillerEditPreview();
-}
-function removeContentSection(i) {
-  if (!formContentSections) return;
-  formContentSections.splice(i, 1);
-  renderContentSectionsEditor();
-  refreshKillerEditPreview();
-}
-function restoreBuiltinSection(key) {
-  const def = DEFAULT_CONTENT_SECTIONS.find(d => d.key === key);
-  if (!def || !formContentSections) return;
-  if (formContentSections.some(s => s.key === key)) return;
-  formContentSections.push({ key: def.key, title: def.title, body: "", builtin: true });
-  renderContentSectionsEditor();
-  refreshKillerEditPreview();
-}
-function addCustomContentSection() {
-  if (!formContentSections) formContentSections = [];
-  formContentSections.push({ key: "custom_" + Date.now(), title: "New section", body: "", builtin: false });
-  renderContentSectionsEditor();
-  refreshKillerEditPreview();
-}
-
 function refreshKillerEditPreview() {
   const box = document.getElementById("killer-edit-preview-body");
   if (!box) return;
@@ -1780,14 +1952,7 @@ function refreshKillerEditPreview() {
     const col = (tg && tg.color) || "#666";
     return `<span class="tag-dot" style="--tc:${col}">${escapeHtml(t)}</span>`;
   }).join("");
-  // Sync section bodies from live textareas before paint
-  if (formContentSections) {
-    formContentSections.forEach((sec, i) => {
-      const ta = document.getElementById("k-sec-" + i);
-      if (ta) sec.body = ta.value;
-    });
-  }
-  const addonNotesEl = document.getElementById("k-addon-notes");
+const addonNotesEl = document.getElementById("k-addon-notes");
   const addonNotes = addonNotesEl ? String(addonNotesEl.value || "").trim() : "";
   const killerId = window._editingKillerId || "";
   const comboHtml = (formSelectedCombos || []).filter(c => (c.addons || []).length || (c.name || "").trim()).map((combo, ci) => {
@@ -1799,13 +1964,6 @@ function refreshKillerEditPreview() {
       </div>`;
     }).join("");
     return `<div class="my-combo-box"><h4>${escapeHtml(combo.name || ("Combo " + (ci + 1)))}</h4><div class="my-combo-row">${items || "—"}</div></div>`;
-  }).join("");
-  const sections = (formContentSections || []).map(sec => {
-    const body = (sec.body || "").trim();
-    return `<div class="detail-section" style="margin-top:0.65rem">
-      <h3 style="font-size:0.95rem;margin-bottom:0.3rem">${escapeHtml(sec.title)}</h3>
-      <div class="md-body">${body ? renderMarkdown(body) : "<em style='color:var(--text-dim)'>—</em>"}</div>
-    </div>`;
   }).join("");
   box.innerHTML = `
     <div style="display:flex;gap:0.75rem;align-items:flex-start">
@@ -1826,11 +1984,7 @@ function refreshKillerEditPreview() {
       </div>
     </div>
     ${comboHtml ? `<div class="my-combos-wrap" style="margin-top:0.75rem">${comboHtml}</div>` : ""}
-    <div class="detail-section" style="margin-top:0.75rem">
-      <h3 style="font-size:0.95rem">Addon notes</h3>
-      <div class="md-body">${addonNotes ? renderMarkdown(addonNotes) : "<em style='color:var(--text-dim)'>—</em>"}</div>
-    </div>
-    ${sections}`;
+    `;
 }
 
 function schedulePreviewRefresh(immediate) {
@@ -1851,12 +2005,9 @@ function schedulePreviewRefresh(immediate) {
 
 function openDetailedKillerForm(editId = null) {
   try {
-  if (!state.addons) state.addons = [];
-  if (!state.killerTags) state.killerTags = [];
   const k = editId ? state.killers.find(x => x.id === editId) : null;
   formSelectedTags = [...(k?.tags || [])];
   window._editingKillerId = k?.id || "";
-  formContentSections = loadKillerSections(k);
 
   if (k?.recommendedCombos && k.recommendedCombos.length) {
     formSelectedCombos = k.recommendedCombos.map(c => {
@@ -1895,7 +2046,7 @@ function openDetailedKillerForm(editId = null) {
               <input id="k-chapter" value="${escapeAttr(k?.chapter != null ? String(k.chapter) : "")}" placeholder="e.g. 1 or 32" oninput="schedulePreviewRefresh()">
             </div>
             <div class="form-group"><label>Release order</label>
-              <input type="number" id="k-release-order" value="${k?.releaseOrder ?? 9999}" min="0" step="1" title="Same date: lower = earlier (Trapper=1)">
+              <input type="number" id="k-release-order" value="${k?.releaseOrder ?? 9999}" min="0" step="1" title="Same date: lower numbers appear earlier">
             </div>
           </div>
         </div>
@@ -1947,12 +2098,6 @@ function openDetailedKillerForm(editId = null) {
             <textarea id="k-addon-notes" rows="3" oninput="schedulePreviewRefresh()">${escapeHtml(addonNotesVal)}</textarea>
           </div>
         </div>
-        <div class="edit-block">
-          <h3 class="edit-block-title">Text sections</h3>
-          <p class="hint" style="margin:0 0 0.4rem">Reorder with ↑↓. Remove / restore defaults, or add custom sections.</p>
-          <div id="content-sections-editor"></div>
-          <button type="button" class="btn btn-sm" onclick="addCustomContentSection()">+ New section</button>
-        </div>
         <div class="modal-actions">
           ${k ? `<button class="btn btn-danger" style="margin-right:auto" type="button" onclick="deleteKiller('${k.id}')">Delete</button>` : ""}
           <button class="btn" type="button" onclick="closeModal()">Cancel</button>
@@ -1974,7 +2119,6 @@ function openDetailedKillerForm(editId = null) {
   renderChipList("form-tag-chips", formSelectedTags, "tag", "killer");
   setupTagPicker("killer");
   setupKillerComboPicker(k?.name || "");
-  renderContentSectionsEditor();
   refreshKillerEditPreview();
   document.getElementById("k-name")?.addEventListener("change", () => setupKillerComboPicker(document.getElementById("k-name").value));
   } catch (err) {
@@ -1988,23 +2132,6 @@ function saveKiller(editId) {
   if (!name) { showToast("Enter a name"); return; }
   let id = editId || name.toLowerCase().replace(/^the\s+/i, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (!editId && state.killers.some(k => k.id === id)) id = id + "-" + Date.now();
-
-  if (formContentSections) {
-    formContentSections.forEach((sec, i) => {
-      const ta = document.getElementById("k-sec-" + i);
-      if (ta) sec.body = ta.value;
-      const titleEl = document.querySelector('.section-edit-block[data-sec-i="' + i + '"] .section-title-input');
-      if (titleEl && !sec.builtin) sec.title = titleEl.value;
-    });
-  }
-  const sections = (formContentSections || []).map(sec => ({
-    key: sec.key,
-    title: sec.title || sec.key,
-    body: (sec.body || "").trim() || "placeholder",
-    builtin: !!sec.builtin
-  }));
-  const byKey = Object.fromEntries(sections.map(s => [s.key, s.body]));
-  const prev = editId ? state.killers.find(x => x.id === editId) : null;
   const addonNotes = (document.getElementById("k-addon-notes")?.value || "").trim() || "placeholder";
 
   const data = {
@@ -2015,11 +2142,8 @@ function saveKiller(editId) {
     fun2play: Math.round((+document.getElementById("k-fun")?.value || 0) * 10) / 10,
     tier: document.getElementById("k-tier")?.value || "",
     tags: [...formSelectedTags],
-    notes: byKey.notes || "placeholder",
-    guide: byKey.guide || "placeholder",
-    vsNotes: prev?.vsNotes || "placeholder",
     addonNotes,
-    contentSections: sections,
+
     recommendedCombos: (formSelectedCombos || [])
       .map(c => ({ name: (c.name || "").trim(), addons: [...(c.addons || [])] }))
       .filter(c => c.addons.length || c.name),
@@ -2063,54 +2187,48 @@ function deleteKiller(id) {
   renderEditor();
 }
 
-// ---------- QUICK ADD (tylko w Editor) ----------
-function quickAddPerk() {
-  const panel = document.getElementById("perk-add-form");
-  if (panel) {
-    panel.hidden = false;
-    document.getElementById("new-perk-name")?.focus();
+function openPerkEditor(role, name = "", trigger = null) {
+  const panel = document.getElementById(role === "killer" ? "editor-kperks" : "editor-sperks");
+  if (!panel) return;
+  panel.querySelector("#perk-editor-inline")?.remove();
+  const pool = role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
+  const perk = name ? pool.find(p => p.name.toLowerCase() === name.toLowerCase()) : null;
+  const icon = (perk && perk.icon) || findPerkIconInConfig(CONFIG, name) || "";
+  const list = panel.querySelector(role === "killer" ? "#editor-kperks-list" : "#editor-sperks-list");
+  const form = document.createElement("div");
+  form.id = "perk-editor-inline"; form.className = "perk-editor-inline";
+  form.innerHTML = "<h3>" + (name ? "Edit perk" : "Add perk") + "</h3>" +
+    '<label>Name<input id="perk-edit-name" value="' + escapeAttr(name) + '" ' + (name ? "readonly" : "") + "></label>" +
+    '<label>Image URL<input id="perk-edit-icon" type="url" value="' + escapeAttr(icon) + '" placeholder="https://..."></label>' +
+    '<div class="settings-actions"><button class="btn btn-primary" onclick="savePerkEditor(\'' + role + '\',\'' + escapeAttr(name) + '\')">Save</button>' +
+    (name ? '<button class="btn btn-danger" onclick="deletePerkEditor(\'' + role + '\',\'' + escapeAttr(name) + '\')">Delete</button>' : "") +
+    '<button class="btn" onclick="document.getElementById(\'perk-editor-inline\').remove()">Cancel</button></div>';
+  const row = trigger && trigger.closest(".editor-item");
+  if (row) row.insertAdjacentElement("afterend", form);
+  else list.before(form);
+}
+function savePerkEditor(role, oldName = "") {
+  const name = document.getElementById("perk-edit-name").value.trim();
+  const icon = document.getElementById("perk-edit-icon").value.trim();
+  if (!name || !icon) return showToast("Enter a name and image URL");
+  const pool = role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
+  const perk = oldName && pool.find(p => p.name.toLowerCase() === oldName.toLowerCase());
+  if (!oldName && pool.some(p => p.name.toLowerCase() === name.toLowerCase())) return showToast("Perk already exists");
+  CONFIG.perkIcons = CONFIG.perkIcons || {};
+  if (perk) { perk.icon = icon; CONFIG.perkIcons[perk.name] = icon; }
+  else {
+    pool.push({ name, icon }); CONFIG.perkIcons[name] = icon; state.perks = state.perks || [];
+    if (!state.perks.some(p => String(p).toLowerCase() === name.toLowerCase())) state.perks.push(name);
   }
+  saveData(); renderEditor(); renderAll(); showToast("Perk saved");
 }
-
-function submitNewPerk() {
-  const name = document.getElementById("new-perk-name")?.value.trim();
-  const url = document.getElementById("new-perk-url")?.value.trim();
-  if (!name) { showToast("Enter perk name"); return; }
-  if (!url) { showToast("Enter icon URL (wiki.gg)"); return; }
-  if (!state.perks.includes(name)) state.perks.push(name);
-  if (typeof CONFIG !== "undefined") {
-    if (!CONFIG.perkIcons) CONFIG.perkIcons = {};
-    CONFIG.perkIcons[name] = url;
-  }
-  if (!state._pendingPerkIcons) state._pendingPerkIcons = {};
-  state._pendingPerkIcons[name] = url;
-  saveData();
-  const snippet = `  "${name}": "${url}",`;
-  const sn = document.getElementById("perk-config-snippet");
-  if (sn) {
-    sn.hidden = false;
-    const ta = sn.querySelector("textarea");
-    if (ta) ta.value = snippet;
-  }
-  const n1 = document.getElementById("new-perk-name");
-  const n2 = document.getElementById("new-perk-url");
-  if (n1) n1.value = "";
-  if (n2) n2.value = "";
-  showToast("Perk added locally — paste icon line into config.js");
-  renderEditor();
+function deletePerkEditor(role, name) {
+  state.perks = (state.perks || []).filter(p => String(p).toLowerCase() !== name.toLowerCase());
+  const pool = role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
+  const i = pool.findIndex(p => p.name.toLowerCase() === name.toLowerCase()); if (i >= 0) pool.splice(i,1);
+  if (CONFIG.perkIcons) delete CONFIG.perkIcons[name];
+  saveData(); renderEditor(); renderAll(); showToast("Perk removed locally — download config.js to save it to the project");
 }
-
-function copyPerkSnippet() {
-  const ta = document.querySelector("#perk-config-snippet textarea");
-  if (!ta) return;
-  navigator.clipboard.writeText(ta.value).then(() => showToast("Copied!")).catch(() => {});
-}
-
-function cancelNewPerk() {
-  const panel = document.getElementById("perk-add-form");
-  if (panel) panel.hidden = true;
-}
-
 // ---------- EDITOR ----------
 
 function setupEditorTabs() {
@@ -2186,11 +2304,15 @@ function renderEditor() {
     }
     list.sort((a, b) => {
       if (sort === "nameDesc") return b.name.localeCompare(a.name);
-      if (sort === "patch") return String(a.patch || "").localeCompare(String(b.patch || ""), undefined, { numeric: true });
-      if (sort === "killer") {
+      if (sort === "patch" || sort === "patchDesc") {
+        const d = String(a.patch || "").localeCompare(String(b.patch || ""), undefined, { numeric: true });
+        return sort === "patchDesc" ? -d : d;
+      }
+      if (sort === "killer" || sort === "killerDesc") {
         const na = (a.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(",");
         const nb = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(",");
-        return na.localeCompare(nb);
+        const d = na.localeCompare(nb);
+        return sort === "killerDesc" ? -d : d;
       }
       return a.name.localeCompare(b.name);
     });
@@ -2220,22 +2342,26 @@ function renderEditor() {
     const tags = getBuildTags().map((t, i) => ({ t, i })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
     btList.innerHTML = tags.map(({ t, i }) => tagEditRowHTML("build", t, i)).join("") || "<p style='color:var(--text-dim)'>No build tags</p>";
   }
-  const pList = document.getElementById("editor-perks-list");
-  if (pList) {
-    const q = (document.getElementById("ed-perk-search")?.value || "").trim().toLowerCase();
-    const rows = state.perks.map((p, i) => ({ p, i })).filter(x => {
-      const name = typeof x.p === "string" ? x.p : (x.p && x.p.name);
-      return !q || String(name || "").toLowerCase().includes(q);
-    });
-    pList.innerHTML = rows.map(({ p, i }) => {
-      const name = typeof p === "string" ? p : (p && p.name) || "";
-      return `
-      <div class="editor-item">
-        <img src="${getPerkIcon(name)}" style="width:36px;height:36px;border-radius:4px" onerror="this.style.opacity=0.3">
-        <strong>${escapeHtml(name)}</strong>
-        ${isLocalOnlyPerk(name) ? unsavedBadge("New perk") : ""}
-      </div>`;
-    }).join("") || "<p style='color:var(--text-dim)'>No perks</p>";
+  const perkNames = (q, role) => (state.perks || []).map((p, i) => ({ p, i })).filter(x => {
+    const name = typeof x.p === "string" ? x.p : (x.p && x.p.name);
+    if (q && !String(name || "").toLowerCase().includes(q)) return false;
+    if (!role || typeof CONFIG === "undefined") return true;
+    const pool = role === "killer" ? (CONFIG.killerPerks || []) : (CONFIG.survivorPerks || []);
+    return pool.some(pk => pk.name.toLowerCase() === String(name || "").toLowerCase());
+  });
+  const perkRow = ({ p }, role) => {
+    const name = typeof p === "string" ? p : (p && p.name) || "";
+    return `<div class="editor-item"><img src="${getPerkIcon(name)}" style="width:36px;height:36px;border-radius:4px" onerror="this.style.opacity=0.3"><strong>${escapeHtml(name)}</strong><button class="btn btn-sm" style="margin-left:auto" onclick="openPerkEditor('${role}','${escapeAttr(name)}',this)">Edit</button></div>`;
+  };
+  const kPerks = document.getElementById("editor-kperks-list");
+  if (kPerks) {
+    const q = (document.getElementById("ed-kperk-search")?.value || "").trim().toLowerCase();
+    kPerks.innerHTML = perkNames(q, "killer").map(x => perkRow(x, "killer")).join("") || "<p style='color:var(--text-dim)'>No killer perks</p>";
+  }
+  const sPerks = document.getElementById("editor-sperks-list");
+  if (sPerks) {
+    const q = (document.getElementById("ed-sperk-search")?.value || "").trim().toLowerCase();
+    sPerks.innerHTML = perkNames(q, "survivor").map(x => perkRow(x, "survivor")).join("") || "<p style='color:var(--text-dim)'>No survivor perks</p>";
   }
   updateEditorUnsavedBanner();
 }
@@ -2249,13 +2375,13 @@ function tagEditRowHTML(kind, t, i) {
         onclick="toggleTagLock('${kind}',${i})">${locked ? "🔒" : "🔓"}</button>
       <input type="color" value="${t.color}" ${locked ? "disabled" : ""} onchange="updateTagField('${kind}',${i},'color',this.value)" title="Color">
       <input type="text" class="tag-name-input" value="${escapeAttr(t.name)}" ${locked ? "readonly" : ""} onchange="updateTagField('${kind}',${i},'name',this.value)">
-      ${isLocalOnlyTag(kind, t) ? unsavedBadge("New tag — not in data.js") : ""}
+      ${isLocalOnlyTag(kind, t) ? unsavedBadge("New tag — not in config.js") : ""}
       <button class="btn btn-sm btn-danger" ${locked ? "disabled" : ""} onclick="deleteEditorTag('${kind}',${i})">Del</button>
     </div>`;
 }
 
 function toggleTagLock(kind, i) {
-  const arr = kind === "build" ? state.buildTags : state.killerTags;
+  const arr = kind === "build" ? CONFIG.buildTags : CONFIG.killerTags;
   if (!arr[i]) return;
   const currentlyLocked = arr[i]._locked !== false;
   arr[i]._locked = !currentlyLocked;
@@ -2264,14 +2390,14 @@ function toggleTagLock(kind, i) {
 }
 
 function addEditorTag(kind) {
-  const arr = kind === "build" ? (state.buildTags = state.buildTags || []) : (state.killerTags = state.killerTags || []);
+  const arr = kind === "build" ? (CONFIG.buildTags = CONFIG.buildTags || []) : (CONFIG.killerTags = CONFIG.killerTags || []);
   const id = "tag-" + Date.now();
   arr.push({ id, name: "new-tag", color: kind === "build" ? "#9b59b6" : "#4a9eff" });
   saveData(); renderEditor();
 }
 
 function updateTagField(kind, i, field, value) {
-  const arr = kind === "build" ? state.buildTags : state.killerTags;
+  const arr = kind === "build" ? CONFIG.buildTags : CONFIG.killerTags;
   if (!arr[i]) return;
   arr[i][field] = value;
   if (field === "name") arr[i].id = value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -2280,13 +2406,8 @@ function updateTagField(kind, i, field, value) {
   populateFilterSelects();
 }
 
-function editEditorTag(kind, i) {
-  // kept for compatibility — editing is inline
-  updateTagField(kind, i, "name", state[kind === "build" ? "buildTags" : "killerTags"][i]?.name);
-}
-
 function deleteEditorTag(kind, i) {
-  const arr = kind === "build" ? state.buildTags : state.killerTags;
+  const arr = kind === "build" ? CONFIG.buildTags : CONFIG.killerTags;
   showConfirm("Delete this tag?", () => {
     arr.splice(i, 1);
     saveData(); renderEditor();
@@ -2446,16 +2567,7 @@ function mergeDataSets(a, b) {
   };
 }
 
-function recordFingerprint(obj, keys) {
-  if (!obj) return "";
-  const o = {};
-  for (const k of keys) {
-    if (obj[k] !== undefined) o[k] = obj[k];
-  }
-  return JSON.stringify(o);
-}
-
-const KILLER_DIFF_KEYS = ["name","tier","difficulty","skillFloor","skillCeiling","fun2play","notes","guide","addonNotes","patch","tags","chapter","releaseDate","releaseOrder","recommendedCombos","contentSections"];
+const KILLER_DIFF_KEYS = ["name","tier","difficulty","skillFloor","skillCeiling","fun2play","addonNotes","patch","tags","chapter","releaseDate","releaseOrder","recommendedCombos"];
 const BUILD_DIFF_KEYS = ["name","description","perks","addons","tags","patch","killerIds"];
 
 
@@ -2718,8 +2830,8 @@ async function runDataMerge() {
       const live = normalizeDataShape({
         killers: state.killers,
         builds: state.builds,
-        killerTags: state.killerTags || state.tags,
-        buildTags: state.buildTags,
+        killerTags: getKillerTags(),
+        buildTags: getBuildTags(),
         perks: state.perks
       });
       merged = mergeDataSets(merged, live);
@@ -2728,7 +2840,7 @@ async function runDataMerge() {
     }
     _lastMergedData = merged;
     _lastMergeReport = buildMergeReport(sources, merged);
-    if (out) out.value = "const INITIAL_DATA = " + JSON.stringify(merged, null, 2) + ";\n";
+    if (out) out.value = "const INITIAL_DATA = " + JSON.stringify(dynamicDataForFile(merged), null, 2) + ";\nif (typeof window !== 'undefined') window.INITIAL_DATA = INITIAL_DATA;\n";
     if (btnApply) btnApply.disabled = false;
     if (btnCopy) btnCopy.disabled = false;
     if (btnCh) btnCh.disabled = false;
@@ -2757,15 +2869,13 @@ function applyMergedToLive() {
   showConfirm("Replace current page data with merge result? (LocalStorage will update)", () => {
     state.killers = _lastMergedData.killers;
     state.builds = _lastMergedData.builds;
-    state.killerTags = _lastMergedData.killerTags;
-    state.buildTags = _lastMergedData.buildTags;
-    state.tags = _lastMergedData.killerTags;
-    state.perks = _lastMergedData.perks;
+    CONFIG.killerTags = _lastMergedData.killerTags;
+    CONFIG.buildTags = _lastMergedData.buildTags;
     saveData();
     renderAll();
     renderEditor();
     showToast("Applied merge to page");
-    setMergeStatus((document.getElementById("merge-status").innerHTML || "") + "<br>Applied to LocalStorage. Still paste into data/data.js for permanent file.");
+    setMergeStatus((document.getElementById("merge-status").innerHTML || "") + "<br>Applied locally. Download config.js for merged tags and data.js for killer/build content.");
   });
 }
 
@@ -2782,7 +2892,7 @@ async function mergeAndDownload() {
   await runDataMerge();
   if (!_lastMergedData) return;
   const text = (document.getElementById("merge-result") && document.getElementById("merge-result").value)
-    || ("const INITIAL_DATA = " + JSON.stringify(_lastMergedData, null, 2) + ";\n");
+    || ("const INITIAL_DATA = " + JSON.stringify(dynamicDataForFile(_lastMergedData), null, 2) + ";\nif (typeof window !== 'undefined') window.INITIAL_DATA = INITIAL_DATA;\n");
   const blob = new Blob([text], { type: "application/javascript;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -2794,14 +2904,22 @@ async function mergeAndDownload() {
 }
 
 
+function dynamicDataForFile(source) {
+  const dynamicData = JSON.parse(JSON.stringify(source || {}));
+  ["_coreConfig", "killerTags", "buildTags", "tags", "perks", "addons", "itemOrder", "addonOrder", "_perkIcons", "_customPerks", "_removedPerks", "_pendingPerkIcons"].forEach(key => delete dynamicData[key]);
+  (dynamicData.killers || []).forEach(k => ["notes", "guide", "vsNotes", "contentSections"].forEach(key => delete k[key]));
+  return dynamicData;
+}
 function buildDataJsText() {
+  const dynamicData = dynamicDataForFile(state);
   return `// ============================================
 // DBD KILLER HUB - START DATA
 // Generated: ${new Date().toLocaleString("pl-PL")}
 // Paste this entire file as data/data.js
 // ============================================
 
-const INITIAL_DATA = ${JSON.stringify(state, null, 2)};
+const INITIAL_DATA = ${JSON.stringify(dynamicData, null, 2)};
+if (typeof window !== "undefined") window.INITIAL_DATA = INITIAL_DATA;
 `;
 }
 
@@ -2824,6 +2942,17 @@ function copyGeneratedCode() {
   });
 }
 
+function downloadGeneratedConfigJs() {
+  saveData();
+  const text = "const CONFIG = " + JSON.stringify(configForFile(), null, 2) + ";\n" +
+    "if (typeof window !== 'undefined') window.CONFIG = CONFIG;\n" +
+    "function getKillerPortrait(name){return (CONFIG.killerPortraits&&CONFIG.killerPortraits[name])||CONFIG.placeholderPortrait;}\n" +
+    "function getPerkIcon(name){const o=typeof state!=='undefined'&&state._perkIcons&&state._perkIcons[name];if(o)return o;const a=[...(CONFIG.killerPerks||[]),...(CONFIG.survivorPerks||[])];const p=a.find(x=>x.name.toLowerCase()===String(name||'').toLowerCase());return (p&&p.icon)||CONFIG.placeholderPerk;}\n" +
+    "function getSurvivorPortrait(id){const a=CONFIG.survivorRoster||[];const s=a.find(x=>x.id===String(id||'')||x.name===String(id||''));if(s)return s.icon;const p=CONFIG.survivorPortraits||[];if(!p.length)return CONFIG.placeholderPortrait;let n=0;String(id||'surv').split('').forEach(c=>{n=(n*33+c.charCodeAt(0))>>>0;});return p[n%p.length];}\n";
+  const blob=new Blob([text],{type:"application/javascript;charset=utf-8"}),link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);link.download="config.js";document.body.appendChild(link);link.click();
+  setTimeout(()=>{URL.revokeObjectURL(link.href);link.remove();},500);showToast("Generated config.js");
+}
 function downloadGeneratedDataJs() {
   // Always regenerate from current state first, then download
   if (typeof generateConfigCode === "function") generateConfigCode();
@@ -2838,14 +2967,6 @@ function downloadGeneratedDataJs() {
   a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   showToast("Generated + downloaded data.js");
-}
-
-function exportJSON() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `dbd-killer-hub-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
 }
 
 function importJSON(event) {
@@ -2863,6 +2984,7 @@ function importJSON(event) {
       }
       data = data.INITIAL_DATA || data;
       state = {
+        ...data,
         killers: data.killers || [],
         builds: data.builds || [],
         tags: data.killerTags || data.tags || [],
@@ -2871,10 +2993,23 @@ function importJSON(event) {
         perks: data.perks || [],
         addons: data.addons || []
       };
+      if (data._coreConfig) {
+        CORE_CONFIG_KEYS.forEach(key => { if (data._coreConfig[key] !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(data._coreConfig[key])); });
+      } else {
+        if (Array.isArray(data.killerTags)) CONFIG.killerTags = data.killerTags;
+        else if (Array.isArray(data.tags)) CONFIG.killerTags = data.tags;
+        if (Array.isArray(data.buildTags)) CONFIG.buildTags = data.buildTags;
+        if (data.itemOrder) CONFIG.itemOrder = data.itemOrder;
+        if (data.addonOrder) CONFIG.addonOrder = data.addonOrder;
+      }
       state.builds.forEach(b => {
         if (b.killerId && !b.killerIds) { b.killerIds = [b.killerId]; delete b.killerId; }
         if (!b.killerIds) b.killerIds = [];
       });
+      applyCoreConfigDraft();
+      mergeCatalogPerks();
+      clearLegacyCoreMetadata();
+      applyCoreConfigToDraft();
       saveData();
       renderAll();
       if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
@@ -2883,7 +3018,6 @@ function importJSON(event) {
       console.error(err);
       showToast("Import failed");
       setMergeStatus && setMergeStatus("Import error: " + (err.message || err));
-      alert("Import error: " + err.message);
     }
   };
   reader.readAsText(file);
@@ -2961,7 +3095,7 @@ function resolveOtzKey(killerOrName) {
     }
   }
 
-  // 4) Match Otz displayName aliases ("Chucky,Good Guy")
+  // 4) Match aliases listed in the Otz display name.
   const want = n || id;
   if (want) {
     for (const key of Object.keys(store)) {
@@ -3069,11 +3203,11 @@ async function fetchOtzKillerSnippet() {
   const ids = idRaw.split(/[,;]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
   const out = document.getElementById("otz-snippet-out");
   if (!ids.length) {
-    setOtzStatus("Wpisz Otz ID (folder png), np. <code>chucky</code>.");
-    showToast("Podaj Otz ID");
+    setOtzStatus("Enter an Otz ID (PNG folder name).");
+    showToast("Enter an Otz ID");
     return;
   }
-  setOtzStatus("Pobieranie Otza…");
+  setOtzStatus("Fetching Otz data…");
   try {
     const res = await fetch("https://otz-addon-tierlist.pages.dev/", { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -3083,13 +3217,13 @@ async function fetchOtzKillerSnippet() {
     for (const id of ids) {
       const data = parseSingleOtzKiller(html, id);
       if (!data) {
-        notes.push(`❌ <code>${id}</code> nie znaleziony`);
+        notes.push(`❌ <code>${id}</code> not found`);
         continue;
       }
       // One Otz id + one my id: use my id as key. Multiple Otz ids: each keeps its Otz key.
       const entryKey = (myId && ids.length === 1) ? myId : id;
       blocks.push(formatOtzSnippet(entryKey, data));
-      notes.push(`✅ Otz <code>${id}</code> → klucz pliku <code>"${entryKey}"</code> (${data.addons.length} addonów)`);
+      notes.push(`✅ Otz <code>${id}</code> → file key <code>"${entryKey}"</code> (${data.addons.length} add-ons)`);
       // merge into live store for this session
       try {
         const store = getOtzStore() || (window.OTZ_ADDONS = {});
@@ -3105,8 +3239,8 @@ async function fetchOtzKillerSnippet() {
     if (out) out.value = blocks.join(",\n") + ",";
     setOtzStatus(
       notes.join("<br>") +
-      "<br><strong>Wklej</strong> do <code>data/otz-addons.js</code> w <code>var OTZ_ADDONS = { … }</code>. " +
-      "Klucz <strong>musi być równy</strong> <code>killer.id</code> na stronie — wtedy wszystko łączy się samo."
+      "<br><strong>Paste</strong> into <code>data/otz-addons.js</code> inside <code>var OTZ_ADDONS = { … }</code>. " +
+      "The key <strong>must match</strong> the killer's <code>killer.id</code> so the data can be linked automatically."
     );
     showToast("Snippet gotowy");
   } catch (err) {
@@ -3121,30 +3255,15 @@ async function fetchOtzKillerSnippet() {
 
 function copyOtzSnippet() {
   const ta = document.getElementById("otz-snippet-out");
-  if (!ta || !ta.value.trim()) { showToast("Brak snippeta"); return; }
-  navigator.clipboard.writeText(ta.value).then(() => showToast("Skopiowano")).catch(() => { ta.select(); showToast("Ctrl+C"); });
+  if (!ta || !ta.value.trim()) { showToast("No snippet to copy"); return; }
+  navigator.clipboard.writeText(ta.value).then(() => showToast("Copied!")).catch(() => { ta.select(); showToast("Press Ctrl+C to copy"); });
 }
-
-function downloadCurrentOtzFile() {
-  const store = getOtzStore();
-  if (!store) { showToast("Brak OTZ_ADDONS"); return; }
-  const fixed = [
-    "// OTZ ADDONS — pure data (from live memory)",
-    "var OTZ_ADDONS = " + JSON.stringify(store, null, 2) + ";",
-    "",
-    'if (typeof window !== "undefined") window.OTZ_ADDONS = OTZ_ADDONS;'
-  ].join("\n");
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([fixed], { type: "application/javascript" }));
-  a.download = "otz-addons.js";
-  a.click();
-  showToast("Downloaded");
-}
-
 
 function resetAllData() {
-  showConfirm("Reset to starter data from data.js? LocalStorage will be cleared.", () => {
+  showConfirm("Reset local edits to data.js and config.js? Browser-saved drafts will be cleared.", () => {
     localStorage.removeItem(STORAGE_KEY);
+    Object.keys(CONFIG).forEach(key => delete CONFIG[key]);
+    Object.assign(CONFIG, JSON.parse(JSON.stringify(STARTER_CONFIG)));
     seedInitial();
     renderAll();
     renderEditor();
@@ -3169,7 +3288,7 @@ function closeModal(e) {
   if (ov) ov.classList.remove("show");
   if (mc) { mc.innerHTML = ""; mc.classList.remove("modal-wide"); }
   window._editingKillerId = "";
-  formContentSections = null;
+
 }
 
 function escapeHtml(str) {
@@ -3180,8 +3299,6 @@ function escapeAttr(str) {
   if (!str) return "";
   return String(str).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
-function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
-
 document.addEventListener("DOMContentLoaded", init);
 document.addEventListener("click", () => { try { closeAllFilterPanels(); } catch (_) {} });
 
@@ -3196,15 +3313,9 @@ window.toggleMergeChanges = toggleMergeChanges;
 window.applyMergedToLive = applyMergedToLive;
 window.copyMergedDataJs = copyMergedDataJs;
 
-window.addCustomContentSection = addCustomContentSection;
-window.removeContentSection = removeContentSection;
-window.restoreBuiltinSection = restoreBuiltinSection;
-window.updateSectionTitle = updateSectionTitle;
-window.updateSectionBody = updateSectionBody;
 window.refreshKillerEditPreview = refreshKillerEditPreview;
 window.refreshBuildEditPreview = refreshBuildEditPreview;
 window.schedulePreviewRefresh = schedulePreviewRefresh;
-window.moveContentSection = moveContentSection;
 
 window.openDetailedKillerForm = openDetailedKillerForm;
 window.getOtzAddonsForKiller = getOtzAddonsForKiller;
@@ -3212,10 +3323,10 @@ window.getOtzStore = getOtzStore;
 window.resolveOtzKey = resolveOtzKey;
 window.fetchOtzKillerSnippet = fetchOtzKillerSnippet;
 window.copyOtzSnippet = copyOtzSnippet;
-window.downloadCurrentOtzFile = downloadCurrentOtzFile;
-window.fetchOtzKillerSnippet = fetchOtzKillerSnippet;
-window.copyOtzSnippet = copyOtzSnippet;
-window.updateOtzAddonsFromWeb = updateOtzAddonsFromWeb;
-window.downloadCurrentOtzFile = downloadCurrentOtzFile;
 window.openBuildModal = openBuildModal;
+window.renderPerkFilterSuggestions = renderPerkFilterSuggestions;
+window.removePerkFilter = removePerkFilter;
+window.toggleExcludedBuildFilterTag = toggleExcludedBuildFilterTag;
+window.checkDuplicateBuilds = checkDuplicateBuilds;
+window.deleteDuplicateBuild = deleteDuplicateBuild;
 window.saveKiller = saveKiller;

@@ -26,7 +26,7 @@ const tiles = [
     link:  "./kalendarz/kalendarz.html"
   },
   {
-    title: "DBD Killers Info",
+    title: "DBD Builds & Info",
     image: "./main_image/dbd-killers-info.png",
     link:  "./DBDKillersInfo/DBDKillersInfo.html"
   }

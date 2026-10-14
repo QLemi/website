@@ -179,7 +179,7 @@ const STATS_CONFIG = {
     97: { sheet: 'sheet2', x: 580, y: 489, w: 148, h: 148, label: true },
     98: { sheet: 'sheet2', x: 580, y: 489, w: 148, h: 148, label: true },
     99: { sheet: 'sheet2', x: 755, y: 489, w: 148, h: 148, label: true },
-    100: { sheet: 'sheet2', x: 391, y: 679, w: 200, h: 200, label: true }
+    100: { sheet: 'sheet2', x: 379, y: 670, w: 224, h: 224, label: true }
     }
   },
 

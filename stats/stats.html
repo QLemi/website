@@ -3,80 +3,143 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DBD Account Stats</title>
+  <meta name="theme-color" content="#0b1018">
+  <meta name="description" content="Browse Dead By Daylight character prestige and inventory statistics for Killers and Survivors.">
+  <title>Dead By Daylight Stats · Lemi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style_stats.css">
   <script src="config_stats.js"></script>
-  <script>
-    STATS_CONFIG.SHOW_CATEGORY_ICONS = true;
-  </script>
   <script src="script_stats.js" defer></script>
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"13025904a55346ff8201f3e4a9a4eb5e"}'></script>
 </head>
-  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script><!-- End Cloudflare Web Analytics -->
-<body class="mode-killers show-icons">
-  <div class="bg-layer"></div>
+<body class="mode-killers">
+  <a class="skip-link" href="#explorer">Skip To Statistics</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
 
-  <header>
-    <div class="logo-mark">ACCOUNT STATS</div>
-    <div class="subtitle">Dead by Daylight</div>
-    <div class="stats-bar">
-      <div class="stat">
-        <div class="stat-value" id="stat-chars">0</div>
-        <div class="stat-label">Characters</div>
-      </div>
-      <div class="stat stat-prestige">
-        <div class="stat-value" id="stat-avg-prestige">0 / 0</div>
-        <div class="stat-label-stack">
-          <span>avg prestige</span>
-          <span>median</span>
-        </div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="stat-p100">0</div>
-        <div class="stat-label">P100</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="stat-total-prestige">0</div>
-        <div class="stat-label">Total prestige</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="stat-mode">KILLERS</div>
-        <div class="stat-label">Mode</div>
-      </div>
-    </div>
-    <div class="controls">
-      <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
+  <header class="site-header page-shell">
+    <a class="brand" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" aria-label="Lemi — Steam Profile">
+      <span class="brand-text">Lemi</span>
+    </a>
+    <div class="header-actions">
+      <button class="button button-quiet" id="refresh-button" type="button"><span aria-hidden="true">↻</span> Refresh</button>
     </div>
   </header>
 
-  <main>
-    <div class="section-title">Character Stats</div>
-    <div class="split-wrap">
-      <div class="split-side" id="split-side"></div>
-      <div class="split-detail" id="split-detail">
-        <div class="split-empty">Loading...</div>
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-row">
+        <div>
+          <h1 id="page-title">Dead By Daylight<br><span>Account Stats</span></h1>
+        </div>
+        <div class="source-card" aria-live="polite">
+          <div class="source-heading"><span class="source-dot" id="source-dot"></span> Data Source</div>
+          <strong id="source-status">Connecting…</strong>
+          <span id="source-time">Loading Data</span>
+        </div>
       </div>
-    </div>
+      <div class="role-switch" role="tablist" aria-label="Select role">
+        <button class="role-tab active" id="tab-killers" type="button" role="tab" aria-selected="true" aria-controls="explorer" data-mode="killers"><span class="role-symbol" aria-hidden="true">◆</span> Killers <span class="tab-count" id="tab-killers-count">—</span></button>
+        <button class="role-tab" id="tab-survivors" type="button" role="tab" aria-selected="false" aria-controls="explorer" data-mode="survivors"><span class="role-symbol" aria-hidden="true">✦</span> Survivors <span class="tab-count" id="tab-survivors-count">—</span></button>
+      </div>
+    </section>
 
-    <div class="section-title">Category Totals</div>
-    <div class="footer-totals" id="footer-totals"></div>
+    <section class="combined-section" aria-label="Combined Account Totals For Both Roles">
+      <div class="combined-heading">ACCOUNT TOTALS <span>· BOTH ROLES</span></div>
+      <div class="combined-overview">
+        <div class="metric-card metric-main"><span class="metric-label">Characters</span><strong id="combined-chars">—</strong><span class="metric-note">Killers + Survivors</span></div>
+        <div class="metric-card"><span class="metric-label">Total Prestige</span><strong id="combined-prestige">—</strong><span class="metric-note">Across Both Roles</span></div>
+        <div class="metric-card"><span class="metric-label">Average / Median</span><strong id="combined-average">—</strong><span class="metric-note">Prestige Level</span></div>
+        <div class="metric-card"><span class="metric-label">P100 Characters</span><strong id="combined-p100">—</strong><span class="metric-note">Across Both Roles</span></div>
+        <div class="metric-card"><span class="metric-label">Bloodpoints Offerings</span><strong id="combined-offerings">—</strong><span class="metric-note">Streamers, Puddings & Cakes</span></div>
+        <div class="metric-card"><span class="metric-label">P10+ Characters</span><strong id="combined-p10">—</strong><span class="metric-note">Prestige 10 Or Higher</span></div>
+        <div class="metric-card"><span class="metric-label">P25+ Characters</span><strong id="combined-p25">—</strong><span class="metric-note">Prestige 25 Or Higher</span></div>
+        <div class="metric-card"><span class="metric-label">P50+ Characters</span><strong id="combined-p50">—</strong><span class="metric-note">Prestige 50 Or Higher</span></div>
+      </div>
+    </section>
+
+    <section class="overview role-overview" aria-label="Role Overview">
+      <div class="metric-card metric-main"><span class="metric-label">Characters</span><strong id="stat-chars">—</strong><span class="metric-note">Selected Role</span></div>
+      <div class="metric-card"><span class="metric-label">Total Prestige</span><strong id="stat-total-prestige">—</strong><span class="metric-note">Across All Characters</span></div>
+      <div class="metric-card"><span class="metric-label">Average / Median</span><strong id="stat-avg-prestige">—</strong><span class="metric-note">Prestige Level</span></div>
+      <div class="metric-card"><span class="metric-label">P100 Characters</span><strong id="stat-p100">—</strong><span class="metric-note">Maximum Prestige</span></div>
+      <div class="metric-card"><span class="metric-label">Bloodpoints Offerings</span><strong id="stat-offerings">—</strong><span class="metric-note">Streamers, Puddings & Cakes</span></div>
+      <div class="metric-card"><span class="metric-label">P10+ Characters</span><strong id="stat-p10">—</strong><span class="metric-note">Prestige 10 Or Higher</span></div>
+      <div class="metric-card"><span class="metric-label">P25+ Characters</span><strong id="stat-p25">—</strong><span class="metric-note">Prestige 25 Or Higher</span></div>
+      <div class="metric-card"><span class="metric-label">P50+ Characters</span><strong id="stat-p50">—</strong><span class="metric-note">Prestige 50 Or Higher</span></div>
+    </section>
+
+    <section class="section" id="explorer" aria-labelledby="explorer-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">01 / EXPLORE</span><h2 id="explorer-title">Characters & Inventory</h2><p>Browse Prestige Levels And Item Counts.</p></div>
+      </div>
+
+      <div class="explorer-panel">
+        <aside class="character-sidebar" aria-label="Character List">
+          <div class="sidebar-controls">
+            <label class="sr-only" for="character-search">Search Characters</label>
+            <div class="search-field"><span aria-hidden="true">⌕</span><input id="character-search" type="search" autocomplete="off" placeholder="Search Characters…"><kbd>/</kbd></div>
+            <div class="filter-row">
+              <label class="sr-only" for="sort-select">Sort Characters</label>
+              <select id="sort-select"><option value="game">Game Order · Oldest First</option><option value="name">Name A–Z</option><option value="prestige">Highest Prestige</option><option value="item">Most Of Selected Item</option></select>
+            </div>
+            <label class="minimum-filter" for="item-sort-category">Inventory Item
+              <select id="item-sort-category"><option value="">Choose Item…</option></select>
+            </label>
+            <label class="minimum-filter" for="prestige-filter">Prestige Filter
+              <select id="prestige-filter">
+                <option value="all">Any</option>
+                <optgroup label="Prestige Ranges">
+                  <option value="0-9">P0–P9</option>
+                  <option value="10-24">P10–P24</option>
+                  <option value="25-49">P25–P49</option>
+                  <option value="50-74">P50–P74</option>
+                  <option value="75-99">P75–P99</option>
+                  <option value="100">P100</option>
+                </optgroup>
+                <optgroup label="Minimum Prestige">
+                  <option value="min-10">P10+</option>
+                  <option value="min-20">P20+</option>
+                  <option value="min-25">P25+</option>
+                  <option value="min-30">P30+</option>
+                  <option value="min-40">P40+</option>
+                  <option value="min-50">P50+</option>
+                  <option value="min-60">P60+</option>
+                  <option value="min-75">P75+</option>
+                  <option value="min-80">P80+</option>
+                  <option value="min-90">P90+</option>
+                  <option value="min-100">P100</option>
+                </optgroup>
+              </select>
+            </label>
+            <button class="button button-small button-quiet clear-filters-button" id="clear-filters-button" type="button">Clear Filters</button>
+            <div class="list-caption"><span id="list-count">—</span><span>Search, Sort & Filter</span></div>
+          </div>
+          <div class="character-list" id="character-list" aria-live="polite"></div>
+        </aside>
+        <div class="detail-panel" id="character-detail" aria-live="polite"><div class="empty-state">Loading Stats…</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="totals" aria-labelledby="totals-title">
+      <div class="section-heading"><div><span class="section-kicker">02 / TOTALS</span><h2 id="totals-title">Category Totals</h2><p>Item And Offering Counts Across All Characters In The Selected Role.</p></div></div>
+      <div class="totals-panel"><div class="totals-toolbar">
+        <div class="totals-toolbar-controls">
+          <div class="totals-role-switch" role="group" aria-label="Choose totals role">
+            <button class="totals-role-button active" type="button" data-total-mode="killers" aria-pressed="true">Killers</button>
+            <button class="totals-role-button" type="button" data-total-mode="survivors" aria-pressed="false">Survivors</button>
+            <button class="totals-role-button" type="button" data-total-mode="both" aria-pressed="false">Both</button>
+          </div>
+          <label class="sr-only" for="totals-search">Search Categories</label><input id="totals-search" type="search" placeholder="Search Categories…">
+        </div>
+        <span id="totals-count"></span>
+      </div><div class="totals-grid" id="footer-totals"></div></div>
+    </section>
+
+    <footer class="page-footer"><span>Dead By Daylight Statistics</span><span>Live Data From Spreadsheet</span></footer>
   </main>
-
-  <div class="demand-dock">
-    <button class="demand-btn" id="demand-toggle-btn" onclick="toggleDemandMode()">Demand <span class="badge" id="demand-count-badge" style="display:none"></span></button>
-    <button class="demand-btn" id="demand-list-btn" onclick="openDemandModal()">Changes</button>
-  </div>
-
-  <div class="demand-modal-overlay hidden" id="demand-modal-overlay">
-    <div class="demand-modal">
-      <div class="demand-modal-head">
-        <div class="demand-modal-title">DEMAND CHANGES</div>
-        <button class="demand-modal-close" onclick="closeDemandModal()">×</button>
-      </div>
-      <div class="demand-modal-body" id="demand-modal-body"></div>
-    </div>
-  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

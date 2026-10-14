@@ -113,8 +113,8 @@ function parseCSV(text) {
       else field += c;
     } else if (c === '"') quoted = true;
     else if (c === ',') { row.push(field); field = ''; }
-    else if (c === '\r\n' || c === '\r') {
-      if (c === '\r' && input[i + 1] === '\r\n') i++;
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && input[i + 1] === '\n') i++;
       row.push(field);
       rows.push(row);
       row = [];

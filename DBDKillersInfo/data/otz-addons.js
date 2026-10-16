@@ -1,5 +1,5 @@
-// OTZ_ADDONS — key must equal killer.id (paste new entries from Settings → Fetch)
-// Full refresh: node tools/fetch-otz.mjs
+
+
 
 var OTZ_ADDONS = {
   "trapper": {

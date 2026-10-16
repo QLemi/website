@@ -1,8 +1,8 @@
-// ============================================
-// DBD KILLER HUB - START DATA
-// Generated: 10.10.2026, 14:45:57
-// Paste this entire file as data/data.js
-// ============================================
+
+
+
+
+
 
 const INITIAL_DATA = {
   "killers": [

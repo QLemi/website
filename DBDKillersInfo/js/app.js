@@ -1,10 +1,10 @@
-// ============================================
-// DBD KILLER HUB - MAIN SCRIPT v4
-// ============================================
+
+
+
 
 const STORAGE_KEY = "dbd_killer_hub_v56";
-// Immutable file-backed config snapshot. Runtime editor changes are merged into CONFIG,
-// but reset and "unsaved" comparisons must use the original config.js contents.
+
+
 const STARTER_CONFIG = JSON.parse(JSON.stringify(CONFIG));
 if (!Array.isArray(STARTER_CONFIG.killerTags)) STARTER_CONFIG.killerTags = [];
 if (!Array.isArray(STARTER_CONFIG.buildTags)) STARTER_CONFIG.buildTags = [];
@@ -38,7 +38,7 @@ function applyCoreConfigDraft() {
     });
     return;
   }
-  // Migrate catalogs edited by older versions from the local draft/data file into CONFIG.
+  
   const legacyKillerTags = state.killerTags || [];
   const legacyBuildTags = state.buildTags || [];
   const starterKillerTags = STARTER_CONFIG.killerTags || [];
@@ -77,13 +77,13 @@ function clearLegacyCoreMetadata() {
   delete state.addons;
 }
 
-// temporary selections in forms
+
 let formSelectedTags = [];
 let formSelectedPerks = [];
 let formSelectedAddons = [];
 let formSelectedCombos = [];
 
-// Otz lookup: data/otz-addons.js (getOtzStore, getOtzAddonsForKiller)
+
 
 
 
@@ -122,37 +122,37 @@ function formatReleaseDate(iso) {
 function renderMarkdown(raw) {
   if (!raw || raw === "placeholder") return "";
   let t = escapeHtml(String(raw));
-  // code blocks ```
+  
   t = t.replace(/```([\s\S]*?)```/g, (_, c) => `<pre class="md-pre">${c}</pre>`);
-  // inline code
+  
   t = t.replace(/`([^`]+)`/g, '<code class="md-code">$1</code>');
-  // links [text](url)
+  
   t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a class="md-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-  // colors [red]...[/red] [orange] [yellow] [green] [blue] [purple] [pink] [gray] [white]
+  
   t = t.replace(/\[(red|orange|yellow|green|blue|purple|pink|gray|grey|white|cyan)\]([\s\S]*?)\[\/\1\]/gi,
     (_, c, body) => `<span class="md-color md-${c.toLowerCase()}">${body}</span>`);
-  // headings
+  
   t = t.replace(/^### (.+)$/gm, '<h5 class="md-h3">$1</h5>');
   t = t.replace(/^## (.+)$/gm, '<h4 class="md-h2">$1</h4>');
   t = t.replace(/^# (.+)$/gm, '<h3 class="md-h1">$1</h3>');
-  // bold ** **
+  
   t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  // underline __ __
+  
   t = t.replace(/__([^_]+)__/g, '<span class="md-u">$1</span>');
-  // italic * *
+  
   t = t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  // strike ~~ ~~
+  
   t = t.replace(/~~([^~]+)~~/g, '<s>$1</s>');
-  // spoiler || ||
+  
   t = t.replace(/\|\|([^|]+)\|\|/g, '<span class="md-spoiler" title="Click to reveal" onclick="this.classList.toggle(\'revealed\')">$1</span>');
-  // quote >
+  
   t = t.replace(/^&gt; (.+)$/gm, '<blockquote class="md-quote">$1</blockquote>');
-  // lists - item
+  
   t = t.replace(/^- (.+)$/gm, '<li class="md-li">$1</li>');
   t = t.replace(/(<li class="md-li">[\s\S]*?<\/li>)(?:\s*<li class="md-li">[\s\S]*?<\/li>)*/g, (m) => `<ul class="md-ul">${m}</ul>`);
-  // newlines
+  
   t = t.replace(/\n/g, '<br>');
-  // clean br inside block elements
+  
   t = t.replace(/<(h[3-5]|ul|li|blockquote|pre)([^>]*)><br>/g, '<$1$2>');
   t = t.replace(/<br><\/(h[3-5]|ul|blockquote|pre)>/g, '</$1>');
   return t;
@@ -220,7 +220,7 @@ function insertLinkFmt(id) {
   const snippet = `[${sel}](https://)`;
   el.value = el.value.slice(0, start) + snippet + el.value.slice(end);
   el.focus();
-  // select url part
+  
   const urlStart = start + sel.length + 3;
   el.setSelectionRange(urlStart, urlStart + 8);
 }
@@ -238,7 +238,7 @@ function tierBadgeHTML(tier) {
   return `<span class="tier-badge tier-${letter}">${escapeHtml(t)}</span>`;
 }
 
-// In-page toast / confirm (no browser popups)
+
 function showToast(msg, ms = 2200) {
   let el = document.getElementById("app-toast");
   if (!el) {
@@ -315,22 +315,22 @@ function loadData() {
         if (k.skillFloor === undefined) k.skillFloor = 0;
         if (k.skillCeiling === undefined) k.skillCeiling = 0;
         if (k.fun2play === undefined) k.fun2play = 0;
-        // difficulty rename
+        
         const diffMap = {
           "Very Easy": "Beginner", "Easy": "Easy", "Medium": "Medium",
           "Hard": "Hard", "Very Hard": "Very Hard", "Nightmare": "Extremely Hard",
           "Intermediate": "Medium", "Advanced": "Hard", "Expert": "Very Hard", "Master": "Extremely Hard"
         };
         if (diffMap[k.difficulty]) k.difficulty = diffMap[k.difficulty];
-        // recommendedCombos from recommendedAddons
+        
         if (!k.recommendedCombos && k.recommendedAddons && k.recommendedAddons.length) {
           k.recommendedCombos = [k.recommendedAddons];
         }
 
-        // personalRank number -> tier letter
+        
         if (k.tier === undefined) {
           if (typeof k.personalRank === "number" && k.personalRank > 0) {
-            // map old 1..15-ish to tiers loosely, or leave empty
+            
             k.tier = "";
           } else if (typeof k.personalRank === "string") {
             k.tier = k.personalRank;
@@ -340,11 +340,11 @@ function loadData() {
         }
 
       });
-      // migrate tags -> killerTags / buildTags
+      
       if (!state.killerTags) state.killerTags = [];
       if (!state.buildTags) state.buildTags = [];
       if (state.tags && state.tags.length && !state.killerTags.length && !state.buildTags.length) {
-        // split heuristically or put all into killerTags + copy meta/fun to build
+        
         
         state.killerTags = JSON.parse(JSON.stringify(state.tags));
       }
@@ -375,14 +375,14 @@ function seedInitial() {
     if (k.skillFloor === undefined) k.skillFloor = 0;
     if (k.skillCeiling === undefined) k.skillCeiling = 0;
     if (k.fun2play === undefined) k.fun2play = 0;
-        // difficulty rename
+        
         const diffMap = {
           "Very Easy": "Beginner", "Easy": "Easy", "Medium": "Medium",
           "Hard": "Hard", "Very Hard": "Very Hard", "Nightmare": "Extremely Hard",
           "Intermediate": "Medium", "Advanced": "Hard", "Expert": "Very Hard", "Master": "Extremely Hard"
         };
         if (diffMap[k.difficulty]) k.difficulty = diffMap[k.difficulty];
-        // recommendedCombos from recommendedAddons
+        
         if (!k.recommendedCombos && k.recommendedAddons && k.recommendedAddons.length) {
           k.recommendedCombos = [k.recommendedAddons];
         }
@@ -669,7 +669,7 @@ function populateBuildPatchFilter() {
   ).join("");
 }
 
-/** Compare patch strings like 10.1.2, 9.2.0, 8.4.0 */
+
 function comparePatchVersions(a, b) {
   const pa = String(a).split(/[^0-9]+/).filter(Boolean).map(Number);
   const pb = String(b).split(/[^0-9]+/).filter(Boolean).map(Number);
@@ -737,7 +737,7 @@ function toggleExcludedBuildFilterTag(name) {
 
 
 
-// ---------- KILLERS ----------
+
 function resetKillerFilters() {
   const s = document.getElementById("killer-search"); if (s) s.value = "";
   const d = document.getElementById("filter-difficulty"); if (d) d.value = "";
@@ -800,7 +800,7 @@ function renderKillers() {
     if (sortBy === "name") return a.name.localeCompare(b.name);
     if (sortBy === "personalRank" || sortBy === "tier") {
       const ar = tierRankValue(a.tier), br = tierRankValue(b.tier);
-      if (ar !== br) return ar - br; // S+ first
+      if (ar !== br) return ar - br; 
       return a.name.localeCompare(b.name);
     }
     if (sortBy === "skillCeiling") return (b.skillCeiling || 0) - (a.skillCeiling || 0);
@@ -942,7 +942,7 @@ function openKillerDetail(id) {
           <div class="md-body">${renderMarkdown(k.addonNotes)}</div>
         </div>` : ""}
       ${(() => {
-        // support new recommendedCombos: [[a,b],[c]] or legacy recommendedAddons: [a,b]
+        
         let combos = k.recommendedCombos;
         if (!combos || !combos.length) {
           if (k.recommendedAddons && k.recommendedAddons.length)
@@ -950,7 +950,7 @@ function openKillerDetail(id) {
           else return "";
         }
         const boxes = combos.map((combo, ci) => {
-          // support {name, addons} or string[]
+          
           const addons = Array.isArray(combo) ? combo : (combo.addons || []);
           const cname = (!Array.isArray(combo) && combo.name) ? combo.name : ("Combo " + (ci + 1));
           const items = addons.map(name => {
@@ -1027,7 +1027,7 @@ function getComboOtzList() {
   if (typeof getOtzAddonsForKiller !== "function") return [];
   const name = document.getElementById("k-name")?.value?.trim() || "";
   const id = document.getElementById("k-id")?.value?.trim() || window._editingKillerId || "";
-  // Prefer full object so ID-based Otz keys can be matched.
+  
   if (id || name) {
     const list = getOtzAddonsForKiller({ id, name }) || [];
     if (list.length) return list;
@@ -1043,7 +1043,7 @@ function renderComboBoxes(killerName) {
   const hint = document.getElementById("k-combo-hint");
   if (!container) return;
   const list = getComboOtzList();
-  // Keep pool for click handler (avoid fragile inline JS with special chars in names)
+  
   window._comboOtzPool = list;
   if (hint) {
     hint.textContent = list.length
@@ -1079,7 +1079,7 @@ function renderComboBoxes(killerName) {
       </div>`;
   }).join("");
 
-  // Event delegation — works with any characters in addon names
+  
   container.querySelectorAll(".addon-pick-btn[data-otz-ai]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -1224,7 +1224,7 @@ function closeKillerDetail() {
   requestAnimationFrame(() => window.scrollTo(0, killersListScrollY || 0));
 }
 
-// ---------- DIAMOND ----------
+
 function perkDiamondHTML(perks, large = false) {
   const slots = ["top", "left", "right", "bottom"];
   const p = perks || [];
@@ -1251,7 +1251,7 @@ function findOtzAddonImg(addonName, killerIds) {
     const found = list.find(a => a.name.toLowerCase() === String(addonName).toLowerCase());
     if (found) return found.img;
   }
-  // global search
+  
   if (typeof OTZ_ADDONS !== "undefined") {
     for (const key of Object.keys(OTZ_ADDONS)) {
       const found = (OTZ_ADDONS[key].addons || []).find(a => a.name.toLowerCase() === String(addonName).toLowerCase());
@@ -1482,7 +1482,6 @@ function deleteDuplicateBuild(role, id) {
   });
 }
 
-// ---------- CHIP HELPERS (tagi / perki) ----------
 function renderChipList(containerId, items, type, kind) {
   const el = document.getElementById(containerId);
   if (!el) return;
@@ -1519,8 +1518,7 @@ function removeFormAddon(i) {
   renderChipList("form-addon-chips", formSelectedAddons.map(x => typeof x === "string" ? x : x.name), "addon");
 }
 
-// Current pool for addon picker (Otz list when single killer)
-let formAddonPool = []; // {name, img?, tier?}
+let formAddonPool = [];
 
 function toggleAllKillers(on) {
   document.querySelectorAll("#b-killers input[type=checkbox]").forEach(cb => {
@@ -1539,7 +1537,6 @@ function refreshBuildAddonPool() {
       formAddonPool = list.map(a => ({ name: a.name, img: a.img, tier: a.tier }));
     }
   }
-  // For universal builds, use the separate Otz catalog as the generic add-on pool.
   if (!formAddonPool.length && checked.length !== 1) {
     const store = typeof getOtzStore === "function" ? getOtzStore() : {};
     const names = [...new Set(Object.values(store || {}).flatMap(entry => (entry && entry.addons || []).map(a => a.name)).filter(Boolean))];
@@ -1673,7 +1670,6 @@ function removeFormPerk(i) {
 }
 
 function setupTagPicker(kind) {
-  // kind: "killer" | "build"
   formTagKind = kind;
   const list = kind === "build" ? getBuildTags() : getKillerTags();
   const grid = document.getElementById("form-tag-grid");
@@ -1744,12 +1740,10 @@ function addFormPerk(name) {
   const drop = document.getElementById("perk-search-dropdown");
   if (input) input.value = "";
   if (drop) { drop.classList.remove("open"); drop.innerHTML = ""; }
-  // immediate preview (no debounce delay)
   try { refreshBuildEditPreview(); } catch (_) {}
   schedulePreviewRefresh();
 }
 
-// ---------- BUILD MODAL ----------
 function refreshBuildEditPreview() {
   const box = document.getElementById("build-edit-preview-body");
   if (!box) return;
@@ -1933,7 +1927,7 @@ function saveBuild(editId) {
   showToast("Build saved");
 }
 
-// ---------- KILLER FORM ----------
+
 function refreshKillerEditPreview() {
   const box = document.getElementById("killer-edit-preview-body");
   if (!box) return;
@@ -1992,9 +1986,9 @@ function schedulePreviewRefresh(immediate) {
     try { refreshKillerEditPreview(); } catch (_) {}
     try { refreshBuildEditPreview(); } catch (_) {}
   };
-  // Always run once immediately so chips/perks appear at once
+  
   run();
-  // Light debounce only for rapid typing in textareas
+  
   if (immediate === false) {
     clearTimeout(window._previewRefreshT);
     window._previewRefreshT = setTimeout(run, 80);
@@ -2178,7 +2172,7 @@ function deleteKiller(id) {
   showToast("Killer deleted");
   });
   return;
-  // old path disabled
+  
   state.killers = state.killers.filter(k => k.id !== id);
   state.builds.forEach(b => { b.killerIds = (b.killerIds || []).filter(kid => kid !== id); });
   saveData();
@@ -2229,7 +2223,7 @@ function deletePerkEditor(role, name) {
   if (CONFIG.perkIcons) delete CONFIG.perkIcons[name];
   saveData(); renderEditor(); renderAll(); showToast("Perk removed locally — download config.js to save it to the project");
 }
-// ---------- EDITOR ----------
+
 
 function setupEditorTabs() {
   document.querySelectorAll(".editor-tab").forEach(btn => {
@@ -2402,7 +2396,7 @@ function updateTagField(kind, i, field, value) {
   arr[i][field] = value;
   if (field === "name") arr[i].id = value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   saveData();
-  // refresh filters / picks without full re-render of inputs (avoid losing focus)
+  
   populateFilterSelects();
 }
 
@@ -2416,7 +2410,7 @@ function deleteEditorTag(kind, i) {
 }
 
 
-// ---------- MERGE data.js / JSON ----------
+
 
 let _lastMergedData = null;
 let _lastMergeReport = null;
@@ -2633,7 +2627,7 @@ function buildMergeReport(sources, merged) {
     if (info.items.length === 1) {
       killersAdded.push({ id, name, from: uniqSrc[0] });
     } else {
-      // pairwise diffs against first source as baseline, also list all sources
+      
       const base = info.items[0].item;
       const allDiffs = [];
       for (let i = 1; i < info.items.length; i++) {
@@ -2648,7 +2642,7 @@ function buildMergeReport(sources, merged) {
           });
         }
       }
-      // unique by key keeping last
+      
       const map = new Map();
       for (const d of allDiffs) map.set(d.key, d);
       const diffs = [...map.values()];
@@ -2808,7 +2802,7 @@ async function runDataMerge() {
       return;
     }
     if ((fa && !fb && !includeLive) || (fb && !fa && !includeLive)) {
-      // single file without live is fine — just normalizes/outputs that file
+      
     }
     setMergeStatus("Reading…");
     let merged = { killers: [], builds: [], killerTags: [], buildTags: [], perks: [] };
@@ -2912,13 +2906,7 @@ function dynamicDataForFile(source) {
 }
 function buildDataJsText() {
   const dynamicData = dynamicDataForFile(state);
-  return `// ============================================
-// DBD KILLER HUB - START DATA
-// Generated: ${new Date().toLocaleString("pl-PL")}
-// Paste this entire file as data/data.js
-// ============================================
-
-const INITIAL_DATA = ${JSON.stringify(dynamicData, null, 2)};
+  return `const INITIAL_DATA = ${JSON.stringify(dynamicData, null, 2)};
 if (typeof window !== "undefined") window.INITIAL_DATA = INITIAL_DATA;
 `;
 }
@@ -2954,7 +2942,7 @@ function downloadGeneratedConfigJs() {
   setTimeout(()=>{URL.revokeObjectURL(link.href);link.remove();},500);showToast("Generated config.js");
 }
 function downloadGeneratedDataJs() {
-  // Always regenerate from current state first, then download
+  
   if (typeof generateConfigCode === "function") generateConfigCode();
   else saveData();
   const text = (document.getElementById("generated-code") && document.getElementById("generated-code").value)
@@ -3027,11 +3015,11 @@ function importJSON(event) {
 
 
 
-// ============================================================
-// OTZ ADDONS — all logic here; data/otz-addons.js is pure data
-// Match rule: OTZ_ADDONS[killer.id]  (same id you paste as key)
-// Fallback: normalized display name
-// ============================================================
+
+
+
+
+
 
 function getOtzStore() {
   try {
@@ -3052,7 +3040,7 @@ function ensureOtzOnWindow() {
   } catch (_) {}
 }
 
-/** Normalize "The Good Guy" → "goodguy" (only used as fallback). */
+
 function normalizeKillerKey(name) {
   if (!name) return "";
   return String(name)
@@ -3062,10 +3050,10 @@ function normalizeKillerKey(name) {
     .replace(/[^a-z0-9]+/g, "");
 }
 
-/**
- * Resolve Otz entry for a killer object or name string.
- * Priority: killer.id → normalized name → displayName parts on Otz entries.
- */
+
+
+
+
 function resolveOtzKey(killerOrName) {
   const store = getOtzStore();
   if (!store) return null;
@@ -3080,14 +3068,14 @@ function resolveOtzKey(killerOrName) {
     id = normalizeKillerKey(name);
   }
 
-  // 1) Exact id (this is the intended path — paste Otz block under this key)
+  
   if (id && store[id]) return id;
 
-  // 2) Normalized name as key
+  
   const n = normalizeKillerKey(name);
   if (n && store[n]) return n;
 
-  // 3) id with spaces stripped vs keys with spaces (pyramid head, skull merchant)
+  
   if (id) {
     const compact = id.replace(/\s+/g, "");
     for (const key of Object.keys(store)) {
@@ -3095,7 +3083,7 @@ function resolveOtzKey(killerOrName) {
     }
   }
 
-  // 4) Match aliases listed in the Otz display name.
+  
   const want = n || id;
   if (want) {
     for (const key of Object.keys(store)) {
@@ -3136,7 +3124,7 @@ function getOtzAddonsForKiller(killerOrName) {
   }));
 }
 
-// Back-compat aliases used elsewhere in app
+
 function getOtzKeyFromKillerName(name) {
   return resolveOtzKey(name);
 }
@@ -3192,11 +3180,11 @@ function formatOtzSnippet(entryKey, data) {
   return `  "${entryKey}": ${indented}`;
 }
 
-/**
- * Fetch Otz page → build paste snippets.
- * entry key = "My killer id" field if set, else Otz folder id.
- * Rule: key in OTZ_ADDONS must equal killer.id on the site.
- */
+
+
+
+
+
 async function fetchOtzKillerSnippet() {
   const idRaw = document.getElementById("otz-fetch-id")?.value || "";
   const myId = (document.getElementById("otz-fetch-mapname")?.value || "").trim().toLowerCase();
@@ -3220,11 +3208,11 @@ async function fetchOtzKillerSnippet() {
         notes.push(`❌ <code>${id}</code> not found`);
         continue;
       }
-      // One Otz id + one my id: use my id as key. Multiple Otz ids: each keeps its Otz key.
+      
       const entryKey = (myId && ids.length === 1) ? myId : id;
       blocks.push(formatOtzSnippet(entryKey, data));
       notes.push(`✅ Otz <code>${id}</code> → file key <code>"${entryKey}"</code> (${data.addons.length} add-ons)`);
-      // merge into live store for this session
+      
       try {
         const store = getOtzStore() || (window.OTZ_ADDONS = {});
         store[entryKey] = { displayName: data.displayName, addons: data.addons };

@@ -279,6 +279,9 @@ function renderCombinedOverview() {
   $('combined-p25').textContent = fmt(levels.filter(level => level >= 25).length);
   $('combined-p50').textContent = fmt(levels.filter(level => level >= 50).length);
   $('combined-offerings').textContent = fmt(totalOfferings);
+  $('combined-summary-chars').textContent = fmt(characters.length) + ' characters';
+  $('combined-summary-prestige').textContent = fmt(totalPrestige) + ' prestige';
+  $('combined-summary-p100').textContent = fmt(levels.filter(level => level >= 100).length) + ' P100';
 }
 
 function filteredCharacters() {

@@ -1,8 +1,8 @@
-/*
-  DBD Inventory Reader
-  --------------------
-  Prototyp działający całkowicie po stronie przeglądarki.
-*/
+
+
+
+
+
 
 const BASE_W = 1920;
 const BASE_H = 1080;
@@ -18,12 +18,12 @@ const copyButton = document.getElementById("copyButton");
 const debugCanvas = document.getElementById("debugCanvas");
 
 let selectedFile = null;
-let isScanning = false; // Zabezpieczenie przed wielokrotnym odpalaniem
+let isScanning = false; 
 
 
-// ============================================================
-// WYBÓR / PRZECIĄGANIE SCREENSHOTU
-// ============================================================
+
+
+
 
 dropZone.addEventListener("click", () => {
     if (isScanning) return;
@@ -59,9 +59,9 @@ dropZone.addEventListener("drop", e => {
 });
 
 
-// ============================================================
-// KOPIOWANIE WYNIKÓW
-// ============================================================
+
+
+
 
 copyButton.addEventListener("click", async () => {
     const values = [...document.querySelectorAll(".slot input")]
@@ -77,9 +77,9 @@ copyButton.addEventListener("click", async () => {
 });
 
 
-// ============================================================
-// WCZYTANIE OBRAZU
-// ============================================================
+
+
+
 
 function loadImage(file) {
     return new Promise((resolve, reject) => {
@@ -91,9 +91,9 @@ function loadImage(file) {
 }
 
 
-// ============================================================
-// WYCINANIE FRAGMENTU SCREENSHOTU
-// ============================================================
+
+
+
 
 function crop(image, x, y, w, h) {
     const sx = image.naturalWidth / BASE_W;
@@ -109,9 +109,9 @@ function crop(image, x, y, w, h) {
 }
 
 
-// ============================================================
-// POWIĘKSZENIE FRAGMENTU
-// ============================================================
+
+
+
 
 function resizeCanvas(source, scale = 5) {
     const canvas = document.createElement("canvas");
@@ -125,9 +125,9 @@ function resizeCanvas(source, scale = 5) {
 }
 
 
-// ============================================================
-// KONWERSJA DO SKALI SZAROŚCI
-// ============================================================
+
+
+
 
 function preprocess(source) {
     const canvas = document.createElement("canvas");
@@ -152,9 +152,9 @@ function preprocess(source) {
 }
 
 
-// ============================================================
-// WYZNACZANIE KOLORU TŁA ADDONU I INTEGRALNOŚĆ
-// ============================================================
+
+
+
 
 const expectedPage1 = [
     'czerwony', 'czerwony', 'fioletowy', 'fioletowy', 'fioletowy', 
@@ -232,9 +232,9 @@ function checkAddonsIntegrity(image, page, positions) {
 }
 
 
-// ============================================================
-// CZYSZCZENIE TEKSTU OCR ORAZ LISTA KILLERÓW
-// ============================================================
+
+
+
 
 function cleanText(text) {
     return (text || "").replace(/\n/g, " ").replace(/\s+/g, " ").trim();
@@ -362,9 +362,9 @@ function drawDebug(image, page) {
 }
 
 
-// ============================================================
-// GŁÓWNA FUNKCJA SKANOWANIA
-// ============================================================
+
+
+
 
 async function scan(file) {
     if (isScanning) return;
@@ -454,7 +454,7 @@ async function scan(file) {
             }
         });
 
-        inventoryEl.innerHTML = ""; // Czyszczenie przed ostatecznym wstawieniem
+        inventoryEl.innerHTML = ""; 
 
         results.forEach(r => {
             const avg = averages[r.colorGroup].count > 1 ? averages[r.colorGroup].sum / averages[r.colorGroup].count : null;

@@ -87,7 +87,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 .filters input { min-width: 160px; }
 .checkbox-label { font-size: 0.88rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.3rem; }
 
-/* ===== KILLER CARDS — FULL PORTRAIT ===== */
+
 .killers-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -167,7 +167,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 }
 .tag .tag-x:hover { opacity: 1; color: #fff; }
 
-/* ===== DIAMOND PERK LAYOUT (jak na screenie) ===== */
+
 .perk-diamond {
   display: grid;
   grid-template-columns: 52px 52px 52px;
@@ -218,7 +218,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 .perk-slot.right  { grid-column: 3; grid-row: 2; }
 .perk-slot.bottom { grid-column: 2; grid-row: 3; }
 
-/* Larger perk diamond in profiles */
+
 .perk-diamond.large {
   grid-template-columns: 64px 64px 64px;
   grid-template-rows: 64px 64px 64px;
@@ -235,7 +235,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 }
 .addon-chip img { width: 100%; height: 100%; object-fit: cover; }
 
-/* BUILD CARDS */
+
 .builds-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
 .build-card {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
@@ -249,7 +249,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 .build-killer-portrait { width:96px; height:128px; object-fit:cover; border-radius:8px; border:0; }
 .build-actions { display: flex; flex-direction: column; gap: 0.3rem; }
 
-/* PROFILE */
+
 .profile-top {
   display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.25rem;
   align-items: flex-start;
@@ -277,7 +277,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   background: #1a2a1a; border: 1px solid #2a5a2a; color: #8e8; border-radius: 4px;
 }
 
-/* CHIP INPUT (tagi / perki) */
+
 .chip-input-wrap { margin-bottom: 0.5rem; }
 .chip-list {
   display: flex; flex-wrap: wrap; gap: 0.35rem; min-height: 32px;
@@ -326,7 +326,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 .build-tag-filter-section + .build-tag-filter-section { border-top:1px solid var(--border); }
 .tag-filter-chip.excluded { opacity:.95; text-decoration:line-through; }
 
-/* EDITOR */
+
 .editor-tabs { display: flex; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .editor-tab {
   background: var(--bg3); border: 1px solid var(--border); color: var(--text-dim);
@@ -404,7 +404,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   .profile-top { flex-direction: column; }
 }
 
-/* ===== KILLER DETAIL (full page, no modal) ===== */
+
 .killer-detail-view { padding-bottom: 2rem; }
 .back-btn { margin-bottom: 1.25rem; }
 .detail-hero {
@@ -423,7 +423,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 }
 .release-line strong { color: var(--text); }
 
-/* Otz-style addon tier row */
+
 .otz-addons-box {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -549,7 +549,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   padding: 0.35rem 0.5rem; border-radius: 6px;
 }
 
-/* Killer card meta – stronger visibility */
+
 .killer-card-body .name {
   font-size: 1.05rem;
   font-weight: 700;
@@ -584,7 +584,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   margin-right: 0.5rem;
 }
 
-/* Tier badge */
+
 .tier-badge {
   display: inline-flex;
   align-items: center;
@@ -597,7 +597,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   letter-spacing: 0.03em;
   line-height: 1.2;
 }
-/* Killer tier spectrum — one hue per letter, +/− share it */
+
 .tier-badge.tier-S {
   background: linear-gradient(145deg, #ff3b4a 0%, #b01020 100%);
   color: #fff;
@@ -654,7 +654,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 }
 .killer-rank-badge { display: none; }
 
-/* Tag filter bar – always visible chips */
+
 .tag-filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -681,7 +681,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   color: #fff;
 }
 
-/* Toast + in-page confirm */
+
 .app-toast {
   position: fixed;
   bottom: 1.5rem;
@@ -735,7 +735,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 }
 
 .modal-overlay {
-  /* backdrop does not close modal — edit safety */
+  
   cursor: default;
 }
 .modal {
@@ -743,7 +743,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   overflow-y: auto;
 }
 
-/* Larger difficulty + tier on killer cards */
+
 .killer-diff-badge {
   top: auto !important;
   bottom: 10px !important;
@@ -928,7 +928,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   justify-content: flex-end;
 }
 
-/* Global scrollbars */
+
 * {
   scrollbar-width: thin;
   scrollbar-color: #5a3a48 #141018;
@@ -951,7 +951,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   padding-right: 0.25rem;
 }
 
-/* Format toolbar */
+
 .fmt-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -1073,7 +1073,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 .settings-steps strong { color: var(--text); }
 
 
-/* Filter dropdown (tags) */
+
 .filter-dropdown { position: relative; display: inline-block; vertical-align: middle; }
 .filter-drop-btn {
   min-width: 6.5rem;
@@ -1158,7 +1158,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   padding: 0.35rem 0.3rem; font-size: 0.85rem;
 }
 
-/* Killer cards redesign */
+
 .killers-grid {
   grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
   gap: 0.85rem;
@@ -1236,11 +1236,11 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 }
 .tag-more { font-size: 0.65rem; color: #888; font-weight: 600; }
 
-/* Hide old badges on portrait that conflict */
+
 .killer-diff-badge, .killer-rank-badge, .killer-tier-on-photo { display: none !important; }
 .name-row { display: none; }
 
-/* Combo title centered */
+
 .my-combo-box h4 {
   text-align: center;
   width: 100%;
@@ -1622,7 +1622,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
 .duplicate-group li small { color: var(--text-dim); }
 .duplicate-empty { margin-bottom: 0; }
 
-/* Cleaner build filter layouts */
+
 .section-header > .build-library-filters { flex:1 0 100%; width:100%; display:grid; grid-template-columns:minmax(180px,2fr) minmax(125px,.9fr) minmax(200px,1.6fr) minmax(140px,1fr) auto minmax(210px,1.2fr) auto; gap:.65rem; align-items:end; padding:.75rem; background:linear-gradient(135deg,#17131a,#110e13); border:1px solid #302630; border-radius:12px; box-sizing:border-box; }
 .build-library-filters > input, .build-library-filters > select, .survivor-build-filters > input, .survivor-build-filters > select, .killer-profile-build-filters > input, .killer-profile-build-filters > select { width:100%; min-width:0; height:36px; box-sizing:border-box; }
 .build-library-filters .perk-filter, .survivor-build-filters .perk-filter, .killer-profile-build-filters .perk-filter { width:100%; min-width:0; max-width:none; }
@@ -1648,7 +1648,7 @@ h3 { font-size: 1rem; margin-bottom: 0.45rem; }
   .build-library-filters .patch-filter-group, .survivor-build-filters .patch-filter-group, .killer-profile-build-filters .patch-filter-group { grid-column:span 2; }
 }
 
-/* Compact item and add-on catalog in the main Survivors tab */
+
 #survivor-detail-content .item-split { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
 #survivor-detail-content .tier-row { gap:.3rem; }
 #survivor-detail-content .tier-tile { width:62px; padding:.18rem .14rem .24rem; border-width:1px; border-radius:6px; }

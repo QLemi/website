@@ -32,7 +32,7 @@ const tiles = [
   }
 ];
 
-// generacja
+
 const container = document.getElementById("tiles");
 
 tiles.forEach(tile => {

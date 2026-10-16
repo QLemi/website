@@ -1,4 +1,4 @@
-/* Survivor hub: preview on the Survivors tab, editing only in Editor. */
+
 let lastHubSurvivorId = "";
 function ensureSurvivorMeta() {
   if (!state.survivorInfo) state.survivorInfo = { count: String((CONFIG.survivorRoster || CONFIG.survivorPortraits || []).length), perkCount: String((CONFIG.survivorPerks || []).length), note: "", patch: "" };

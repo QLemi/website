@@ -6,10 +6,14 @@ const PORTRAIT_MAP = STREAKI_CONFIG.PORTRAIT_MAP;
 const PLACEHOLDER_IMG = STREAKI_CONFIG.PLACEHOLDER_IMG;
 const TAG_LABELS = STREAKI_CONFIG.TAG_LABELS || { K: 'Killer', S: 'Survivor', O: 'Both', P: 'Playthrough' };
 
-let currentView = STREAKI_CONFIG.DEFAULT_VIEW || 'default';
+
+if (document.body) document.body.classList.add('view-default');
 let cachedCharacters = null;
 let enabledTags = { K: true, S: true, O: true, P: false };
 let searchQuery = '';
+let activeOnly = false;
+let historyIdCounter = 0;
+const drawerAnimations = new WeakMap();
 
 function parseCSV(text) {
   const rows = [];
@@ -91,11 +95,6 @@ function escapeHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
-}
-
-function pctOfBest(val, best) {
-  if (!best || best <= 0) return 0;
-  return Math.min(100, Math.round((val / best) * 100));
 }
 
 function typeClass(type) {
@@ -197,21 +196,21 @@ async function loadPlaythroughSheet() {
     return isNaN(n) ? 0 : n;
   };
 
-  /**
-   * Layout (Excel 1-based → 0-based):
-   *   Boxes grow RIGHT: cols B-C (1-2), D-E (3-4), F-G (5-6), ...
-   *   Row 6  name
-   *   Row 7  type
-   *   Row 8  games
-   *   Row 9  4k
-   *   Row 10 3k
-   *   Row 11 2k
-   *   Row 12 1k
-   *   Row 13 0k
-   *   Row 14 note/patch
-   *   Row 15+  value in box col | caption in box col+1  (dates, numbers + labels)
-   * Column A is only human labels — ignored by parser.
-   */
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const out = [];
   const maxCols = Math.max(0, ...rows.map(r => r.length));
 
@@ -228,16 +227,16 @@ async function loadPlaythroughSheet() {
       k1: cell(11, col),
       k0: cell(12, col),
       note: cell(13, col),
-      noteDate: cell(13, col + 1)  // C14 / E14 / … date next to Note
+      noteDate: cell(13, col + 1)  
     };
 
-    // Notes from row 15 (idx 14) down: [value, caption] pairs
+    
     const notes = [];
     for (let r = 14; r < rows.length; r++) {
       const value = cell(r, col);
       const caption = cell(r, col + 1);
       if (!value && !caption) {
-        // end this box notes if both empty (allow single gap)
+        
         const nVal = cell(r + 1, col);
         const nCap = cell(r + 1, col + 1);
         if (!nVal && !nCap) break;
@@ -263,13 +262,13 @@ async function loadPlaythroughSheet() {
 function buildPlayEntry(name, fields, extras, details, isDone, num) {
   const typeRaw = normSafe(fields.type);
   let playType = 'challenge';
-  // session / session-killer / killer-session → session (Session-Killer badge)
+  
   if (
     typeRaw === 'session' || typeRaw === 'sesja' || typeRaw === 'log' ||
     typeRaw === 'session-killer' || typeRaw === 'session killer' ||
     typeRaw === 'killer-session' || typeRaw === 'killer session'
   ) playType = 'session';
-  // survivor / session-survivor → survivor (Session-Survivor badge)
+  
   if (
     typeRaw === 'survivor' || typeRaw === 'surv' || typeRaw === 'surw' ||
     typeRaw === 'session-survivor' || typeRaw === 'session survivor' ||
@@ -283,7 +282,7 @@ function buildPlayEntry(name, fields, extras, details, isDone, num) {
   const note = (fields.note || '').trim();
   const noteDate = (fields.noteDate || '').trim();
 
-  // Survivor: row 4k slot = Escape, 3k slot = Death
+  
   const isSurv = playType === 'survivor';
   const escapes = isSurv ? a4 : 0;
   const deaths = isSurv ? a3 : 0;
@@ -328,7 +327,7 @@ async function loadCharactersFromSheet() {
     loadSheet(SHEET_INNE_GID, 'inne'),
     loadPlaythroughSheet()
   ]);
-  // Drop old P-tagged entries from inne if dedicated play sheet has data
+  
   let inneFiltered = inne;
   if (play.length) {
     inneFiltered = inne.filter(c => !(c.tags && c.tags.length === 1 && c.tags[0] === 'P'));
@@ -336,13 +335,13 @@ async function loadCharactersFromSheet() {
   return [...main, ...inneFiltered, ...play];
 }
 
-/**
- * Group attempts by wincon (category).
- * - best / bestAttempt
- * - activeAttempt: ongoing run that is NOT the best (lower than top)
- * - isBestActive: the best itself is still in progress
- * - attempts: all sorted by value desc
- */
+
+
+
+
+
+
+
 function groupStreaksByCategory(streaks) {
   const map = new Map();
   for (const s of streaks) {
@@ -400,6 +399,7 @@ function filterCharacters(characters) {
     const filteredStreaks = c.streaks.filter(s => {
       const tags = (s.tags && s.tags.length) ? s.tags : ['K'];
       if (!tags.some(t => enabledTags[t])) return false;
+      if (activeOnly && !s.active) return false;
       if (nameMatch) return true;
       return s.category.toLowerCase().includes(q);
     });
@@ -411,7 +411,7 @@ function filterCharacters(characters) {
 }
 
 function updateStats(characters) {
-  // Playthrough entries never count toward header stats
+  
   const streakChars = characters.filter(c => c.type !== 'playthrough' && !c.play);
   const totalGroups = streakChars.reduce((sum, c) => sum + (c.groups ? c.groups.length : 0), 0);
   const activeCount = streakChars.reduce((sum, c) => {
@@ -430,24 +430,165 @@ function updateStats(characters) {
   if (elActive) elActive.textContent = activeCount;
 }
 
-/* ---------- WINCON ROW (modern compact) ---------- */
-function renderWinconBlock(g, idx, charBest, type) {
+
+let steamExportRows = [];
+let steamExportSelected = new Set();
+
+function buildSteamExportRows(characters) {
+  const rows = [];
+  (characters || []).filter(c => !c.play && c.type !== 'playthrough').forEach(c => {
+    const groups = groupStreaksByCategory(c.streaks || []);
+    groups.forEach(g => {
+      const tags = g.tags && g.tags.length ? g.tags : (c.tags || ['K']);
+      rows.push({ id: `best-${rows.length}`, order: rows.length, name: c.name, category: g.category, value: g.best, active: g.isBestActive, tags });
+      if (g.activeAttempt) {
+        rows.push({ id: `current-${rows.length}`, order: rows.length, name: c.name, category: g.category, value: g.activeAttempt.value, active: true, tags });
+      }
+    });
+  });
+  return rows;
+}
+
+function steamExportMatchesFilters(row) {
+  const roles = [...document.querySelectorAll('.steam-export-role-filter input:checked')].map(input => input.value);
+  const statuses = [...document.querySelectorAll('.steam-export-status-filter input:checked')].map(input => input.value);
+  const min = Number(document.getElementById('steam-export-min').value || 0);
+  const max = Number(document.getElementById('steam-export-max').value || 0);
+  const characters = [...document.querySelectorAll('.steam-export-character-options input:checked')].map(input => input.value);
+  const query = document.getElementById('steam-export-search').value.trim().toLowerCase();
+  if (!roles.some(role => row.tags.includes(role))) return false;
+  if (!statuses.includes(row.active ? 'active' : 'completed')) return false;
+  if (row.value < min) return false;
+  if (max > 0 && row.value > max) return false;
+  if (!characters.includes(row.name)) return false;
+  if (query && !`${row.name} ${row.category}`.toLowerCase().includes(query)) return false;
+  return true;
+}
+
+function steamExportFilteredRows() {
+  return steamExportRows.filter(steamExportMatchesFilters);
+}
+
+function steamExportOrderedRows(rows) {
+  const sort = document.getElementById('steam-export-sort').value;
+  return rows.slice().sort((a, b) => {
+    const matchOrder = Number(steamExportMatchesFilters(b)) - Number(steamExportMatchesFilters(a));
+    if (matchOrder) return matchOrder;
+    if (sort === 'high') return b.value - a.value || a.order - b.order;
+    if (sort === 'low') return a.value - b.value || a.order - b.order;
+    if (sort === 'name') return a.name.localeCompare(b.name) || b.value - a.value || a.order - b.order;
+    return a.order - b.order;
+  });
+}
+
+function steamExportText() {
+  const selected = steamExportOrderedRows(steamExportRows.filter(row => steamExportSelected.has(row.id)));
+  const format = document.getElementById('steam-export-format').value;
+  const header = '[h2]You can check my streaks [url=https://qlemi.github.io/website/streaki/streaki.html] HERE [/url][/h2]';
+  if (format === 'compact') {
+    return selected.map(row => `${row.name} — ${row.category}: ${row.value}${row.active ? ' [ONGOING]' : ''}`).join('\n');
+  }
+  if (format === 'role') {
+    const roles = [['K', 'KILLER'], ['S', 'SURVIVOR'], ['O', 'BOTH']];
+    const groupedText = roles.map(([tag, label]) => {
+      const group = selected.filter(row => (row.tags[0] || 'K') === tag);
+      return group.length ? `[h2]${label}[/h2]\n${group.map(formatSteamProfileLine).join('\n')}` : '';
+    }).filter(Boolean).join('\n\n');
+    return groupedText ? `${header}\n\n${groupedText}` : header;
+  }
+  const completed = selected.filter(row => !row.active);
+  const ongoing = selected.filter(row => row.active);
+  let text = header;
+  if (completed.length) text += `\n\n${completed.map(formatSteamProfileLine).join('\n')}`;
+  if (ongoing.length) text += `${completed.length ? '\n\n-----------------------------------------------------------------------------------------------------------\n\n' : '\n\n'}${ongoing.map(formatSteamProfileLine).join('\n')}`;
+  return text;
+}
+
+function formatSteamProfileLine(row) {
+  const title = `[b][u]${row.name} ${row.category} [/u][/b]`;
+  return row.active
+    ? `${title} - (still ongoing) [b]${row.value}[/b]`
+    : `${title} - [b]${row.value}[/b]`;
+}
+
+function updateSteamExport() {
+  const list = document.getElementById('steam-export-list');
+  const rowHtml = row => `
+        <label class="steam-export-row ${row.active ? 'is-ongoing' : ''} ${steamExportMatchesFilters(row) ? '' : 'outside-filter'}" title="${escapeHtml(row.category)}">
+          <input type="checkbox" data-export-id="${row.id}" ${steamExportSelected.has(row.id) ? 'checked' : ''}>
+          <span class="steam-export-row-main"><strong>${escapeHtml(row.category)}</strong></span>
+          <span class="steam-export-row-result">${steamExportMatchesFilters(row) ? (row.active ? 'ONGOING · ' : '') : 'OUTSIDE FILTER · '}${row.value}</span>
+        </label>`;
+  const groupHtml = (rows, heading) => {
+    if (!rows.length) return '';
+    const grouped = new Map();
+    rows.forEach(row => {
+      if (!grouped.has(row.name)) grouped.set(row.name, []);
+      grouped.get(row.name).push(row);
+    });
+    return `<section class="steam-export-match-section"><h3 class="steam-export-section-title">${heading}</h3><div class="steam-export-character-groups">${[...grouped.entries()].map(([name, characterRows]) => `
+      <section class="steam-export-character-group">
+        <h3>${escapeHtml(name)}<span>${characterRows.length} streak${characterRows.length === 1 ? '' : 's'}</span></h3>
+        <div class="steam-export-character-streaks">${characterRows.map(rowHtml).join('')}</div>
+      </section>`).join('')}</div></section>`;
+  };
+  const ordered = steamExportOrderedRows(steamExportRows);
+  const matched = ordered.filter(steamExportMatchesFilters);
+  const unmatched = ordered.filter(row => !steamExportMatchesFilters(row));
+  list.innerHTML = (matched.length ? groupHtml(matched, 'MATCHING FILTERS') : '<p class="steam-export-empty">No streaks match the current filters.</p>')
+    + groupHtml(unmatched, 'OUTSIDE FILTERS');
+  list.querySelectorAll('input[data-export-id]').forEach(input => {
+    input.addEventListener('change', () => {
+      if (input.checked) steamExportSelected.add(input.dataset.exportId);
+      else steamExportSelected.delete(input.dataset.exportId);
+      updateSteamExportPreview();
+    });
+  });
+  updateSteamExportPreview();
+}
+
+function updateSteamExportPreview() {
+  const text = steamExportText();
+  document.getElementById('steam-export-preview').value = text;
+  document.getElementById('steam-export-count').textContent = `${steamExportSelected.size} selected`;
+  document.getElementById('steam-export-feedback').textContent = '';
+}
+
+function openSteamExport() {
+  if (!cachedCharacters) return;
+  steamExportRows = buildSteamExportRows(cachedCharacters);
+  steamExportSelected = new Set(steamExportRows.map(row => row.id));
+  document.querySelectorAll('.steam-export-role-filter input').forEach(input => { input.checked = true; });
+  document.getElementById('steam-export-min').value = '';
+  document.getElementById('steam-export-max').value = '';
+  document.getElementById('steam-export-search').value = '';
+  document.getElementById('steam-export-sort').value = 'profile';
+  document.getElementById('steam-export-format').value = 'profile';
+  document.querySelectorAll('.steam-export-status-filter input').forEach(input => { input.checked = true; });
+  const characterOptions = document.getElementById('steam-export-character-options');
+  const names = [...new Set(steamExportRows.map(row => row.name))].sort((a, b) => a.localeCompare(b));
+  characterOptions.innerHTML = names.map(name => `<label><input type="checkbox" value="${escapeHtml(name)}" checked><span class="steam-character-name">${escapeHtml(name)}</span></label>`).join('');
+  document.getElementById('steam-export-character-summary').textContent = 'All characters';
+  document.querySelector('.steam-export-character-picker').open = false;
+  updateSteamExport();
+  document.getElementById('steam-export-dialog').showModal();
+}
+
+function renderWinconBlock(g, idx, type) {
   const isActive = g.isBestActive;
   const hasCurrent = !!g.activeAttempt;
   const hasHistory = g.hasHistory;
-  const pct = pctOfBest(g.best, charBest);
   const role = typeClass(type).trim() || 'killer';
-
+  const historyId = hasHistory ? `streak-history-${++historyIdCounter}` : '';
   const mainBadge = isActive
     ? '<span class="wc-badge active">ACTIVE</span>'
     : '';
 
-  const expandBtn = hasHistory
-    ? `<button type="button" class="wc-expand" aria-expanded="false" title="Show all attempts">
-         <span class="wc-expand-ico" aria-hidden="true"></span>
-         <span class="wc-expand-count">${g.attemptCount}</span>
-       </button>`
-    : '';
+  const expandBtn = hasHistory ? `<button type="button" class="wc-history-toggle" aria-expanded="false" aria-label="Show previous attempts" aria-controls="${historyId}" title="Show previous attempts">
+       <span class="wc-edge-arrow left" aria-hidden="true"></span>
+       <span class="wc-history-summary">Previous runs</span>
+       <span class="wc-edge-arrow right" aria-hidden="true"></span>
+     </button>` : '';
 
   const currentLine = hasCurrent ? `
     <div class="wc-current">
@@ -455,43 +596,79 @@ function renderWinconBlock(g, idx, charBest, type) {
       <span class="wc-current-val">${g.activeAttempt.value}</span>
     </div>` : '';
 
+  const mainToggleAttrs = hasHistory
+    ? `role="button" tabindex="0" aria-expanded="false" aria-controls="${historyId}" aria-label="Show previous attempts"`
+    : '';
+
   let historyPanel = '';
   if (hasHistory) {
     historyPanel = `
-      <div class="wc-history" hidden>
+      <div class="wc-history" id="${historyId}" hidden>
         ${g.attempts.map((a, i) => `
           <div class="wc-hist-row ${a.active ? 'is-active' : ''} ${i === 0 ? 'is-top' : ''}">
-            <span class="wc-hist-rank">${i === 0 ? '★' : (i + 1)}</span>
-            <span class="wc-hist-bar"><span class="wc-hist-bar-fill" style="width:${pctOfBest(a.value, g.best)}%"></span></span>
+            <span class="wc-hist-rank">${i === 0 ? 'BEST' : `ATTEMPT #${i}`}</span>
             <span class="wc-hist-val">${a.value}</span>
-            <span class="wc-hist-state ${a.active ? 'is-active' : (i === 0 ? 'is-best' : 'is-done')}">${a.active ? 'ACTIVE' : (i === 0 ? 'BEST' : 'DONE')}</span>
+            <span class="wc-hist-state ${a.active ? 'is-active' : (i === 0 ? 'is-best' : 'is-done')}">${a.active ? 'ACTIVE' : (i === 0 ? 'RECORD' : 'COMPLETED')}</span>
           </div>
         `).join('')}
+        <button type="button" class="wc-history-collapse" aria-label="Collapse previous attempts">
+          <span class="wc-edge-arrow" aria-hidden="true"></span>
+          <span class="wc-edge-arrow" aria-hidden="true"></span>
+        </button>
       </div>`;
   }
 
   return `
     <div class="wc-block role-${role} ${isActive ? 'is-active' : ''} ${hasCurrent ? 'has-current' : ''}">
-      <div class="wc-progress" title="${pct}% of character best">
-        <div class="wc-progress-fill ${isActive ? 'active' : ''}" style="width:${pct}%"></div>
-      </div>
-      <div class="wc-main">
+      <div class="wc-main ${hasHistory ? 'wc-main-expandable' : ''}" ${mainToggleAttrs}>
         <div class="wc-left">
           ${mainBadge}
           <span class="wc-name" title="${escapeHtml(g.category)}">${escapeHtml(g.category)}</span>
-          ${expandBtn}
         </div>
-        <div class="wc-right">
+        <div class="wc-result">
           <span class="wc-val ${idx === 0 || isActive ? 'top' : ''}">${g.best}</span>
         </div>
       </div>
       ${currentLine}
-      ${historyPanel}
+      ${hasHistory ? `<div class="wc-drawer">${expandBtn}${historyPanel}</div>` : ''}
     </div>`;
 }
 
+function setDrawerOpen(panel, open) {
+  const previous = drawerAnimations.get(panel);
+  if (previous) previous.cancel();
+
+  if (open) panel.removeAttribute('hidden');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion || typeof panel.animate !== 'function') {
+    panel.hidden = !open;
+    panel.style.transformOrigin = '';
+    panel.style.overflow = '';
+    drawerAnimations.delete(panel);
+    return;
+  }
+
+  panel.style.transformOrigin = 'top center';
+  panel.style.overflow = 'hidden';
+  const animation = panel.animate([
+    { transform: open ? 'scaleY(0.96)' : 'scaleY(1)', opacity: open ? 0 : 1 },
+    { transform: open ? 'scaleY(1)' : 'scaleY(0.96)', opacity: open ? 1 : 0 }
+  ], {
+    duration: 170,
+    easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)'
+  });
+  drawerAnimations.set(panel, animation);
+  animation.onfinish = () => {
+    if (drawerAnimations.get(panel) !== animation) return;
+    panel.style.transformOrigin = '';
+    panel.style.overflow = '';
+    if (!open) panel.setAttribute('hidden', '');
+    drawerAnimations.delete(panel);
+  };
+}
+
 function bindExpanders(root) {
-  root.querySelectorAll('.wc-expand').forEach(btn => {
+  root.querySelectorAll('.wc-history-toggle').forEach(btn => {
     if (btn.dataset.bound) return;
     btn.dataset.bound = '1';
     btn.addEventListener('click', (e) => {
@@ -501,19 +678,47 @@ function bindExpanders(root) {
       if (!block) return;
       const panel = block.querySelector('.wc-history');
       if (!panel) return;
-      const open = panel.hasAttribute('hidden');
+      const open = btn.getAttribute('aria-expanded') !== 'true';
       if (open) {
-        panel.removeAttribute('hidden');
+        btn.classList.remove('is-closing');
       } else {
-        panel.setAttribute('hidden', '');
+        btn.classList.add('is-closing');
+        window.setTimeout(() => btn.classList.remove('is-closing'), 170);
       }
+      setDrawerOpen(panel, open);
+      block.classList.toggle('is-expanded', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const mainToggle = block.querySelector('.wc-main-expandable');
+      if (mainToggle) {
+        mainToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mainToggle.setAttribute('aria-label', open ? 'Hide previous attempts' : 'Show previous attempts');
+      }
       btn.classList.toggle('open', open);
+      btn.setAttribute('aria-label', open ? 'Hide previous attempts' : 'Show previous attempts');
+    });
+
+    const block = btn.closest('.wc-block');
+    const mainToggle = block && block.querySelector('.wc-main-expandable');
+    if (!mainToggle || mainToggle.dataset.bound) return;
+    mainToggle.dataset.bound = '1';
+    mainToggle.addEventListener('click', () => btn.click());
+    mainToggle.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      btn.click();
+    });
+  });
+
+  root.querySelectorAll('.wc-history-collapse').forEach(btn => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', () => {
+      const block = btn.closest('.wc-block');
+      const toggle = block && block.querySelector('.wc-history-toggle');
+      if (toggle) toggle.click();
     });
   });
 }
-
-/* ---------- DEFAULT VIEW ---------- */
 
 function parseResultTone(result) {
   const m = String(result || '').toLowerCase().match(/(\d)\s*k/);
@@ -530,7 +735,6 @@ function parseResultTone(result) {
 function parsePlayDate(raw) {
   if (!raw) return null;
   const s = String(raw).trim();
-  // DD.MM.YYYY or DD.MM.YY or DD.MM
   let m = s.match(/^(\d{1,2})[./-](\d{1,2})(?:[./-](\d{2,4}))?$/);
   if (m) {
     let d = parseInt(m[1], 10), mo = parseInt(m[2], 10) - 1, y = m[3] ? parseInt(m[3], 10) : null;
@@ -539,7 +743,6 @@ function parsePlayDate(raw) {
     const dt = new Date(y, mo, d);
     return isNaN(dt.getTime()) ? null : dt;
   }
-  // YYYY-MM-DD
   m = s.match(/^(\d{4})[./-](\d{1,2})[./-](\d{1,2})$/);
   if (m) {
     const dt = new Date(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10));
@@ -649,12 +852,16 @@ function renderPlayCard(p, i) {
     ${total ? `<div class="play-bar"><div class="play-bar-fill" style="width:${winPct}%"></div></div>` : ''}
     <div class="play-chips">${chips.join('')}</div>
     ${hasDetails ? `
-      <button type="button" class="play-expand wc-expand" aria-expanded="false" data-play-expand="${id}">
-        <span class="wc-expand-ico" aria-hidden="true"></span>
-        <span class="wc-expand-count">${details.length}</span>
-        <span class="play-expand-lab">notes</span>
-      </button>` : ''}
-    ${detailHtml}
+      <div class="play-drawer wc-drawer">
+        <button type="button" class="play-expand wc-history-toggle" aria-expanded="false" aria-label="Show notes" aria-controls="${id}" data-play-expand="${id}">
+          <span class="wc-drawer-grip" aria-hidden="true"></span>
+          <span class="wc-toggle-chevron left" aria-hidden="true"></span>
+          <span class="wc-expand-label">Notes</span>
+          <span class="wc-expand-count">${details.length}</span>
+          <span class="wc-toggle-chevron" aria-hidden="true"></span>
+        </button>
+        ${detailHtml}
+      </div>` : ''}
   `;
   return card;
 }
@@ -669,11 +876,15 @@ function bindPlayExpanders(root) {
       const id = btn.getAttribute('data-play-expand');
       const panel = document.getElementById(id);
       if (!panel) return;
-      const open = panel.hasAttribute('hidden');
-      if (open) panel.removeAttribute('hidden');
-      else panel.setAttribute('hidden', '');
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      setDrawerOpen(panel, open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       btn.classList.toggle('open', open);
+      btn.setAttribute('aria-label', open ? 'Hide notes' : 'Show notes');
+      const label = btn.querySelector('.wc-expand-label');
+      if (label) label.textContent = open ? 'Hide notes' : 'Notes';
+      const count = btn.querySelector('.wc-expand-count');
+      if (count) count.hidden = open;
     });
   });
 }
@@ -694,10 +905,9 @@ function renderDefault(characters) {
 
   rest.forEach((c, i) => {
     const card = document.createElement('article');
-    card.className = 'card' + typeClass(c.type);
-
     const groups = c.groups || [];
-    const body = groups.map((g, idx) => renderWinconBlock(g, idx, c.best, c.type)).join('');
+    card.className = 'card' + typeClass(c.type) + (groups.length >= 5 ? ' streak-density-many' : '');
+    const body = groups.map((g, idx) => renderWinconBlock(g, idx, c.type)).join('');
 
     card.innerHTML = `
       <div class="card-top">
@@ -720,76 +930,6 @@ function renderDefault(characters) {
   });
 }
 
-/* ---------- NEON VIEW ---------- */
-function renderNeon(characters) {
-  // Same layout as default; neon only changes colors via CSS
-  renderDefault(characters);
-  const grid = document.getElementById('streak-grid');
-  if (grid) grid.className = 'grid view-neon';
-  document.querySelectorAll('.grid .card').forEach(el => {
-    if (!el.classList.contains('play-card')) el.classList.add('neon-card');
-  });
-}
-
-/* ---------- SPLIT VIEW (fixed for new grouping) ---------- */
-function renderSplit(characters) {
-  const grid = document.getElementById('streak-grid');
-  grid.className = 'grid view-split';
-  grid.innerHTML = `
-    <div class="split-side" id="split-list"></div>
-    <div class="split-detail" id="split-detail">
-      <p class="split-placeholder">Select a character</p>
-    </div>
-  `;
-
-  const side = document.getElementById('split-list');
-  const detail = document.getElementById('split-detail');
-
-  characters.forEach((c, i) => {
-    const groups = c.groups || [];
-    const item = document.createElement('div');
-    item.className = 'split-item'
-      + (groups.some(g => g.isBestActive || g.activeAttempt) ? ' has-active' : '')
-      + (i === 0 ? ' active' : '')
-      + typeClass(c.type);
-    item.innerHTML = `
-      <img src="${c.image}" alt="" loading="lazy" onerror="this.src='${PLACEHOLDER_IMG}'">
-      <div class="split-item-info">
-        <div class="split-item-name">${escapeHtml(c.name)}</div>
-        <div class="split-item-meta">${groups.length} wincon${groups.length !== 1 ? 's' : ''}</div>
-      </div>
-      <div class="split-item-best">${c.best}</div>
-    `;
-    item.addEventListener('click', () => {
-      side.querySelectorAll('.split-item').forEach(x => x.classList.remove('active'));
-      item.classList.add('active');
-      showSplitDetail(c, detail);
-    });
-    side.appendChild(item);
-  });
-
-  if (characters.length) showSplitDetail(characters[0], detail);
-}
-
-function showSplitDetail(c, detail) {
-  const groups = c.groups || [];
-  detail.innerHTML = `
-    <div class="split-detail-head">
-      <img src="${c.image}" alt="" loading="lazy" onerror="this.src='${PLACEHOLDER_IMG}'">
-      <div class="split-detail-meta">
-        <div class="split-dname">${escapeHtml(c.name)}</div>
-        <div class="split-dtype">${roleLabel(c.type)}</div>
-      </div>
-      <div class="split-dbest">${c.best}<span>BEST</span></div>
-    </div>
-    <div class="split-streaks" id="split-streaks-root">
-      ${groups.map((g, idx) => renderWinconBlock(g, idx, c.best, c.type)).join('')}
-    </div>
-  `;
-  bindExpanders(detail);
-}
-
-/* ---------- CORE ---------- */
 function getVisibleCharacters() {
   if (!cachedCharacters) return [];
   const prepared = prepareCharacters(
@@ -803,19 +943,9 @@ function renderCharacters(characters) {
   const visible = getVisibleCharacters();
   updateStats(visible);
 
-  if (currentView === 'neon') renderNeon(visible);
-  else if (currentView === 'split') renderSplit(visible);
-  else renderDefault(visible);
-
-  const sel = document.getElementById('view-select');
-  if (sel) sel.value = currentView;
-  document.body.className = 'view-' + currentView;
+  renderDefault(visible);
+  document.body.className = 'view-default';
   updateFilterButtons();
-}
-
-function switchView(view) {
-  currentView = view;
-  renderCharacters();
 }
 
 function toggleTag(tag) {
@@ -827,6 +957,16 @@ function updateFilterButtons() {
   document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
     btn.classList.toggle('active', !!enabledTags[btn.dataset.tag]);
   });
+  const activeFilter = document.getElementById('active-only-filter');
+  if (activeFilter) {
+    activeFilter.classList.toggle('active', activeOnly);
+    activeFilter.setAttribute('aria-pressed', String(activeOnly));
+  }
+}
+
+function toggleActiveOnly() {
+  activeOnly = !activeOnly;
+  renderCharacters();
 }
 
 function setSearch(q) {
@@ -836,27 +976,91 @@ function setSearch(q) {
 
 async function refreshData() {
   const grid = document.getElementById('streak-grid');
-  if (grid) grid.innerHTML = '<p class="loading-msg">Loading data from Google Sheets...</p>';
+  if (grid) grid.innerHTML = '<p class="loading-msg">Loading data...</p>';
   try {
     const characters = await loadCharactersFromSheet();
     renderCharacters(characters);
   } catch (err) {
-    if (grid) grid.innerHTML = `<p class="error-msg">Error: ${err.message}</p>`;
+    if (grid) grid.innerHTML = `<p class="error-msg">Unable to load data: ${escapeHtml(err.message)}</p>`;
     console.error(err);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const sel = document.getElementById('view-select');
-  if (sel) sel.addEventListener('change', () => switchView(sel.value));
   document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
     btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
   });
+  const activeFilter = document.getElementById('active-only-filter');
+  if (activeFilter) activeFilter.addEventListener('click', toggleActiveOnly);
   const search = document.getElementById('streak-search');
   if (search) search.addEventListener('input', () => setSearch(search.value));
+  const exportDialog = document.getElementById('steam-export-dialog');
+  document.getElementById('steam-copy-open').addEventListener('click', openSteamExport);
+  document.querySelector('.steam-export-close').addEventListener('click', () => exportDialog.close());
+  ['steam-export-min', 'steam-export-max', 'steam-export-search'].forEach(id => {
+    const control = document.getElementById(id);
+    control.addEventListener('input', () => {
+      const visibleIds = new Set(steamExportFilteredRows().map(row => row.id));
+      steamExportSelected = visibleIds;
+      updateSteamExport();
+    });
+    control.addEventListener('change', () => {
+      const visibleIds = new Set(steamExportFilteredRows().map(row => row.id));
+      steamExportSelected = visibleIds;
+      updateSteamExport();
+    });
+  });
+  document.querySelectorAll('.steam-export-role-filter input').forEach(input => {
+    input.addEventListener('change', () => {
+      steamExportSelected = new Set(steamExportFilteredRows().map(row => row.id));
+      updateSteamExport();
+    });
+  });
+  document.querySelectorAll('.steam-export-status-filter input').forEach(input => {
+    input.addEventListener('change', () => {
+      steamExportSelected = new Set(steamExportFilteredRows().map(row => row.id));
+      updateSteamExport();
+    });
+  });
+  document.getElementById('steam-export-character-options').addEventListener('change', event => {
+    if (!event.target.matches('input[type="checkbox"]')) return;
+    const checked = document.querySelectorAll('.steam-export-character-options input:checked').length;
+    const total = document.querySelectorAll('.steam-export-character-options input').length;
+    document.getElementById('steam-export-character-summary').textContent = checked === total
+      ? 'All characters'
+      : `${checked} of ${total} selected`;
+    steamExportSelected = new Set(steamExportFilteredRows().map(row => row.id));
+    updateSteamExport();
+  });
+  ['steam-export-sort', 'steam-export-format'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateSteamExport);
+  });
+  document.getElementById('steam-export-select-visible').addEventListener('click', () => {
+    steamExportSelected = new Set(steamExportFilteredRows().map(row => row.id));
+    updateSteamExport();
+  });
+  document.getElementById('steam-export-clear').addEventListener('click', () => {
+    steamExportSelected.clear();
+    updateSteamExport();
+  });
+  document.getElementById('steam-export-copy').addEventListener('click', async () => {
+    const text = steamExportText();
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      document.getElementById('steam-export-feedback').textContent = 'Copied — ready to paste into Steam.';
+    } catch (_) {
+      const preview = document.getElementById('steam-export-preview');
+      preview.focus();
+      preview.select();
+      document.getElementById('steam-export-feedback').textContent = 'Select and copy the preview text.';
+    }
+  });
+  exportDialog.addEventListener('click', event => {
+    if (event.target === exportDialog) exportDialog.close();
+  });
   refreshData();
 });
 
 window.refreshData = refreshData;
-window.switchView = switchView;
 window.toggleTag = toggleTag;

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1018">
+  <meta name="theme-color" content="#080808">
   <meta name="description" content="Browse Dead By Daylight character prestige and inventory statistics for Killers and Survivors.">
   <title>Dead By Daylight Stats · Lemi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style_stats.css">
+  <link rel="stylesheet" href="style_stats.css?v=whole-page-theme-3">
   <script src="config_stats.js"></script>
-  <script src="script_stats.js" defer></script>
+  <script src="script_stats.js?v=overview-redesign" defer></script>
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"13025904a55346ff8201f3e4a9a4eb5e"}'></script>
 </head>
 <body class="mode-killers">
@@ -22,6 +22,9 @@
   <header class="site-header page-shell">
     <a class="brand" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" aria-label="Lemi — Steam Profile">
       <span class="brand-text">Lemi</span>
+      <svg class="brand-steam-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0ZM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015s1.35 3.015 3.015 3.015c1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266s-1.017 2.265-2.266 2.265c-1.253 0-2.265-1.014-2.265-2.265z"/>
+      </svg>
     </a>
     <div class="header-actions">
       <button class="button button-quiet" id="refresh-button" type="button"><span aria-hidden="true">↻</span> Refresh</button>
@@ -47,7 +50,12 @@
     </section>
 
     <section class="combined-section" aria-label="Combined Account Totals For Both Roles">
-      <div class="combined-heading">ACCOUNT TOTALS <span>· BOTH ROLES</span></div>
+      <details class="combined-disclosure">
+      <summary class="combined-heading">
+        <span class="combined-heading-title">All-account totals <small>· BOTH ROLES</small></span>
+        <span class="combined-summary-values"><span id="combined-summary-chars">— characters</span><span id="combined-summary-prestige">— prestige</span><span id="combined-summary-p100">— P100</span></span>
+        <span class="combined-disclosure-icon" aria-hidden="true">+</span>
+      </summary>
       <div class="combined-overview">
         <div class="metric-card metric-main"><span class="metric-label">Characters</span><strong id="combined-chars">—</strong><span class="metric-note">Killers + Survivors</span></div>
         <div class="metric-card"><span class="metric-label">Total Prestige</span><strong id="combined-prestige">—</strong><span class="metric-note">Across Both Roles</span></div>
@@ -58,8 +66,10 @@
         <div class="metric-card"><span class="metric-label">P25+ Characters</span><strong id="combined-p25">—</strong><span class="metric-note">Prestige 25 Or Higher</span></div>
         <div class="metric-card"><span class="metric-label">P50+ Characters</span><strong id="combined-p50">—</strong><span class="metric-note">Prestige 50 Or Higher</span></div>
       </div>
+      </details>
     </section>
 
+    <div class="overview-heading"><div><span class="section-kicker">CURRENT VIEW</span><h2>Role Overview</h2></div><span class="overview-heading-note">Selected role</span></div>
     <section class="overview role-overview" aria-label="Role Overview">
       <div class="metric-card metric-main"><span class="metric-label">Characters</span><strong id="stat-chars">—</strong><span class="metric-note">Selected Role</span></div>
       <div class="metric-card"><span class="metric-label">Total Prestige</span><strong id="stat-total-prestige">—</strong><span class="metric-note">Across All Characters</span></div>
@@ -138,7 +148,6 @@
       </div><div class="totals-grid" id="footer-totals"></div></div>
     </section>
 
-    <footer class="page-footer"><span>Dead By Daylight Statistics</span><span>Live Data From Spreadsheet</span></footer>
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>

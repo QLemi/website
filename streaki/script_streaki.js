@@ -9,9 +9,15 @@ const TAG_LABELS = STREAKI_CONFIG.TAG_LABELS || { K: 'Killer', S: 'Survivor', O:
 
 if (document.body) document.body.classList.add('view-default');
 let cachedCharacters = null;
-let enabledTags = { K: true, S: true, O: true, P: false };
+let enabledTags = { K: true, S: true, O: true, P: true };
 let searchQuery = '';
 let activeOnly = false;
+let multipleAttemptsOnly = false;
+let minimumScore = 0;
+let selectedWincons = new Set();
+let availableWincons = new Map();
+let playthroughFirst = false;
+let sortMode = 'best-desc';
 let historyIdCounter = 0;
 const drawerAnimations = new WeakMap();
 
@@ -394,12 +400,25 @@ function prepareCharacters(characters) {
 
 function filterCharacters(characters) {
   const q = searchQuery.trim().toLowerCase();
-  return characters.map(c => {
+  const visible = characters.map(c => {
     const nameMatch = !q || c.name.toLowerCase().includes(q);
+    const categoryFilters = (multipleAttemptsOnly || minimumScore)
+      ? new Set(groupStreaksByCategory(c.streaks)
+        .filter(group => (!multipleAttemptsOnly || group.attemptCount > 1) && (!minimumScore || group.best >= minimumScore))
+        .map(group => group.category.trim().toLowerCase()))
+      : null;
     const filteredStreaks = c.streaks.filter(s => {
       const tags = (s.tags && s.tags.length) ? s.tags : ['K'];
+      const isPlaythrough = c.type === 'playthrough' || c.play;
       if (!tags.some(t => enabledTags[t])) return false;
       if (activeOnly && !s.active) return false;
+      if (categoryFilters && !categoryFilters.has((s.category || '').trim().toLowerCase())) return false;
+      if (selectedWincons.size) {
+        const matchesWincon = isPlaythrough
+          ? selectedWincons.has('playthrough')
+          : selectedWincons.has((s.category || '').trim().toLowerCase());
+        if (!matchesWincon) return false;
+      }
       if (nameMatch) return true;
       return s.category.toLowerCase().includes(q);
     });
@@ -408,6 +427,83 @@ function filterCharacters(characters) {
     if (!groups.length) return null;
     return Object.assign({}, c, { streaks: filteredStreaks, groups, best: groups[0].best });
   }).filter(Boolean);
+  const compare = (a, b) => {
+    if (sortMode === 'best-asc') return a.best - b.best || a.name.localeCompare(b.name, 'en');
+    if (sortMode === 'name') return a.name.localeCompare(b.name, 'en') || b.best - a.best;
+    if (sortMode === 'attempts') {
+      const attemptsA = (a.groups || []).reduce((sum, group) => sum + (group.attemptCount || 1), 0);
+      const attemptsB = (b.groups || []).reduce((sum, group) => sum + (group.attemptCount || 1), 0);
+      return attemptsB - attemptsA || b.best - a.best || a.name.localeCompare(b.name, 'en');
+    }
+    return b.best - a.best || a.name.localeCompare(b.name, 'en');
+  };
+  const playthrough = visible.filter(c => c.type === 'playthrough' || c.play).sort(compare);
+  const regular = visible.filter(c => c.type !== 'playthrough' && !c.play).sort(compare);
+  return playthroughFirst ? [...playthrough, ...regular] : [...regular, ...playthrough];
+}
+
+function updateFilterSummary(characters) {
+  const count = document.getElementById('filter-summary-count');
+  const active = document.getElementById('filter-summary-active');
+  const clear = document.getElementById('clear-filters');
+  if (!count || !active || !clear) return;
+  const streakCharacters = (characters || []).filter(character => character.type !== 'playthrough' && !character.play);
+  const streakCount = streakCharacters.reduce((sum, character) => sum + (character.groups || []).length, 0);
+  count.textContent = `Showing ${streakCharacters.length} ${streakCharacters.length === 1 ? 'character' : 'characters'} · ${streakCount} ${streakCount === 1 ? 'streak' : 'streaks'}`;
+  const filters = [];
+  const roleLabels = [['K', 'Killer'], ['S', 'Survivor'], ['O', 'Both']].filter(([tag]) => enabledTags[tag]).map(([, label]) => label);
+  if (roleLabels.length < 3) filters.push(`Roles: ${roleLabels.join(', ') || 'none'}`);
+  if (activeOnly) filters.push('Active only');
+  if (multipleAttemptsOnly) filters.push('Multiple Attempts');
+  if (minimumScore) filters.push(`Min. score: ${minimumScore}`);
+  selectedWincons.forEach(key => filters.push(`Wincon: ${availableWincons.get(key) || key}`));
+  if (searchQuery.trim()) filters.push(`Search: ${searchQuery.trim()}`);
+  active.innerHTML = filters.map(label => `<span class="filter-summary-chip">${escapeHtml(label)}</span>`).join('');
+  clear.hidden = filters.length === 0;
+}
+
+function updateWinconOptions(characters) {
+  const options = document.getElementById('wincon-filter-options');
+  if (!options) return;
+  availableWincons = new Map();
+  const winconCounts = new Map();
+  (characters || []).filter(character => character.type !== 'playthrough' && !character.play)
+    .forEach(character => (character.streaks || []).forEach(streak => {
+      const label = String(streak.category || '').trim();
+      const key = label.toLowerCase();
+      if (!label || key === 'playthrough') return;
+      if (!availableWincons.has(key)) availableWincons.set(key, label);
+      winconCounts.set(key, (winconCounts.get(key) || 0) + 1);
+    }));
+  const sortedWincons = [...availableWincons.entries()]
+    .sort(([keyA, labelA], [keyB, labelB]) =>
+      (winconCounts.get(keyB) - winconCounts.get(keyA)) || labelA.localeCompare(labelB, 'en'));
+  availableWincons.set('playthrough', 'Playthrough');
+  options.innerHTML = sortedWincons.map(([, label]) => `<option value="${escapeHtml(label)}"></option>`).join('')
+    + '<option value="Playthrough"></option>';
+  selectedWincons = new Set([...selectedWincons].filter(key => availableWincons.has(key)));
+  renderSelectedWincons();
+}
+
+function renderSelectedWincons() {
+  const container = document.getElementById('wincon-filter-selected');
+  if (!container) return;
+  container.innerHTML = [...selectedWincons].map(key => {
+    const label = availableWincons.get(key) || key;
+    return `<button type="button" class="wincon-filter-chip" data-remove-wincon="${escapeHtml(key)}" aria-label="Remove ${escapeHtml(label)} filter"><span>${escapeHtml(label)}</span><b aria-hidden="true">×</b></button>`;
+  }).join('');
+}
+
+function addWinconFilter() {
+  const input = document.getElementById('wincon-filter-input');
+  if (!input) return;
+  const key = input.value.trim().toLowerCase();
+  if (!availableWincons.has(key)) return;
+  selectedWincons.add(key);
+  input.value = '';
+  renderSelectedWincons();
+  renderCharacters();
+  input.focus();
 }
 
 function updateStats(characters) {
@@ -896,14 +992,19 @@ function renderDefault(characters) {
 
   const play = characters.filter(c => c.type === 'playthrough' && c.play);
   const rest = characters.filter(c => !(c.type === 'playthrough' && c.play));
+  if (!characters.length) {
+    grid.innerHTML = `
+      <div class="streak-empty-state">
+        <span class="streak-empty-icon" aria-hidden="true">⌕</span>
+        <h2>No streaks found</h2>
+        <p>Try changing your search or filters to see more results.</p>
+        <button class="streak-empty-clear" type="button">Clear filters</button>
+      </div>`;
+    grid.querySelector('.streak-empty-clear').addEventListener('click', clearFilters);
+    return;
+  }
 
-  play.forEach((c, i) => {
-    const card = renderPlayCard(c, i);
-    grid.appendChild(card);
-  });
-  if (play.length) bindPlayExpanders(grid);
-
-  rest.forEach((c, i) => {
+  const appendStreakCards = () => rest.forEach((c, i) => {
     const card = document.createElement('article');
     const groups = c.groups || [];
     card.className = 'card' + typeClass(c.type) + (groups.length >= 5 ? ' streak-density-many' : '');
@@ -928,6 +1029,19 @@ function renderDefault(characters) {
     grid.appendChild(card);
     bindExpanders(card);
   });
+
+  const appendPlaythroughCards = () => play.forEach((c, i) => {
+    const card = renderPlayCard(c, i);
+    grid.appendChild(card);
+  });
+  if (playthroughFirst) {
+    appendPlaythroughCards();
+    appendStreakCards();
+  } else {
+    appendStreakCards();
+    appendPlaythroughCards();
+  }
+  if (play.length) bindPlayExpanders(grid);
 }
 
 function getVisibleCharacters() {
@@ -939,9 +1053,13 @@ function getVisibleCharacters() {
 }
 
 function renderCharacters(characters) {
-  if (characters) cachedCharacters = characters;
+  if (characters) {
+    cachedCharacters = characters;
+    updateWinconOptions(cachedCharacters);
+  }
   const visible = getVisibleCharacters();
   updateStats(visible);
+  updateFilterSummary(visible);
 
   renderDefault(visible);
   document.body.className = 'view-default';
@@ -956,12 +1074,28 @@ function toggleTag(tag) {
 function updateFilterButtons() {
   document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
     btn.classList.toggle('active', !!enabledTags[btn.dataset.tag]);
+    btn.setAttribute('aria-pressed', String(!!enabledTags[btn.dataset.tag]));
   });
   const activeFilter = document.getElementById('active-only-filter');
   if (activeFilter) {
     activeFilter.classList.toggle('active', activeOnly);
     activeFilter.setAttribute('aria-pressed', String(activeOnly));
   }
+  const historyFilter = document.getElementById('history-only-filter');
+  if (historyFilter) {
+    historyFilter.classList.toggle('active', multipleAttemptsOnly);
+    historyFilter.setAttribute('aria-pressed', String(multipleAttemptsOnly));
+  }
+  const playthroughFilter = document.getElementById('playthrough-position-filter');
+  if (playthroughFilter) {
+    playthroughFilter.classList.toggle('active', playthroughFirst);
+    playthroughFilter.setAttribute('aria-pressed', String(playthroughFirst));
+  }
+}
+
+function togglePlaythroughPosition() {
+  playthroughFirst = !playthroughFirst;
+  renderCharacters();
 }
 
 function toggleActiveOnly() {
@@ -969,8 +1103,30 @@ function toggleActiveOnly() {
   renderCharacters();
 }
 
+function toggleHistoryOnly() {
+  multipleAttemptsOnly = !multipleAttemptsOnly;
+  renderCharacters();
+}
+
 function setSearch(q) {
   searchQuery = q || '';
+  renderCharacters();
+}
+
+function clearFilters() {
+  enabledTags.K = true;
+  enabledTags.S = true;
+  enabledTags.O = true;
+  activeOnly = false;
+  multipleAttemptsOnly = false;
+  minimumScore = 0;
+  selectedWincons.clear();
+  searchQuery = '';
+  const search = document.getElementById('streak-search');
+  const minScore = document.getElementById('streak-min-score');
+  if (search) search.value = '';
+  if (minScore) minScore.value = '';
+  renderSelectedWincons();
   renderCharacters();
 }
 
@@ -992,6 +1148,51 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const activeFilter = document.getElementById('active-only-filter');
   if (activeFilter) activeFilter.addEventListener('click', toggleActiveOnly);
+  const historyFilter = document.getElementById('history-only-filter');
+  if (historyFilter) historyFilter.addEventListener('click', toggleHistoryOnly);
+  const playthroughFilter = document.getElementById('playthrough-position-filter');
+  if (playthroughFilter) playthroughFilter.addEventListener('click', togglePlaythroughPosition);
+  const streakSort = document.getElementById('streak-sort');
+  if (streakSort) streakSort.addEventListener('change', () => {
+    sortMode = streakSort.value;
+    renderCharacters();
+  });
+  const clearFiltersButton = document.getElementById('clear-filters');
+  if (clearFiltersButton) clearFiltersButton.addEventListener('click', clearFilters);
+  const backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    const updateBackToTop = () => {
+      const visible = window.scrollY > 420;
+      backToTop.classList.toggle('is-visible', visible);
+      backToTop.setAttribute('aria-hidden', String(!visible));
+      backToTop.tabIndex = visible ? 0 : -1;
+    };
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+  const minScoreFilter = document.getElementById('streak-min-score');
+  if (minScoreFilter) minScoreFilter.addEventListener('input', () => {
+    minimumScore = Math.max(0, Math.floor(Number(minScoreFilter.value) || 0));
+    renderCharacters();
+  });
+  const winconFilterInput = document.getElementById('wincon-filter-input');
+  const winconFilterAdd = document.getElementById('wincon-filter-add');
+  if (winconFilterAdd) winconFilterAdd.addEventListener('click', addWinconFilter);
+  if (winconFilterInput) winconFilterInput.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      addWinconFilter();
+    }
+  });
+  const selectedWinconContainer = document.getElementById('wincon-filter-selected');
+  if (selectedWinconContainer) selectedWinconContainer.addEventListener('click', event => {
+    const chip = event.target.closest('[data-remove-wincon]');
+    if (!chip) return;
+    selectedWincons.delete(chip.dataset.removeWincon);
+    renderSelectedWincons();
+    renderCharacters();
+  });
   const search = document.getElementById('streak-search');
   if (search) search.addEventListener('input', () => setSearch(search.value));
   const exportDialog = document.getElementById('steam-export-dialog');

@@ -7,9 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style_streaki.css">
+  <link rel="stylesheet" href="style_streaki.css?v=empty-backtop-v1">
   <script src="config_streaki.js"></script>
-  <script src="script_streaki.js" defer></script>
+  <script src="script_streaki.js?v=empty-backtop-v1" defer></script>
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
 </head>
 <body>
@@ -50,21 +50,50 @@
       <button class="tag-filter active" data-tag="S">Survivor</button>
       <button class="tag-filter active" data-tag="O">Both</button>
       <button class="tag-filter active-filter" id="active-only-filter" type="button" aria-pressed="false">Active only</button>
-      <button class="tag-filter tag-filter-p" data-tag="P">
-        Playthrough
-        <span class="mc-splash" aria-hidden="true">NEW!</span>
-      </button>
+      <button class="tag-filter active-filter" id="history-only-filter" type="button" aria-pressed="false">Multiple Attempts</button>
+      <button class="tag-filter tag-filter-p" id="playthrough-position-filter" type="button" aria-pressed="false">Playthrough first</button>
+      <label class="streak-sort-select" for="streak-sort"><span>Sort by</span>
+        <select id="streak-sort" aria-label="Sort streaks">
+          <option value="best-desc">Best score (high to low)</option>
+          <option value="best-asc">Best score (low to high)</option>
+          <option value="name">Character name (A–Z)</option>
+          <option value="attempts">Most attempts</option>
+        </select>
+      </label>
+      <label class="streak-filter-select" for="streak-min-score"><span>Min. score</span>
+        <input id="streak-min-score" type="number" min="0" step="1" inputmode="numeric" placeholder="Any" aria-label="Minimum streak score">
+      </label>
+      <div class="wincon-filter">
+        <label for="wincon-filter-input">Wincon filter</label>
+        <div class="wincon-filter-entry">
+          <input id="wincon-filter-input" type="search" list="wincon-filter-options" placeholder="Type or choose a wincon…" autocomplete="off" aria-label="Choose wincon filter">
+          <datalist id="wincon-filter-options"></datalist>
+          <button id="wincon-filter-add" type="button">Add</button>
+        </div>
+        <div id="wincon-filter-selected" class="wincon-filter-selected" aria-live="polite"></div>
+      </div>
     </div>
   </header>
 
   <main>
-    <div class="section-title">All Streaks</div>
+    <div class="results-heading">
+      <div class="section-title">All Streaks</div>
+    </div>
+    <div class="filter-summary" id="filter-summary" aria-live="polite">
+      <span class="filter-summary-count" id="filter-summary-count"></span>
+      <div class="filter-summary-active" id="filter-summary-active"></div>
+      <button class="clear-filters-btn" id="clear-filters" type="button" hidden>Clear filters</button>
+    </div>
     <div class="grid" id="streak-grid"></div>
   </main>
 
   <footer class="streak-page-footer">
     <button class="steam-copy-btn" id="steam-copy-open" type="button" title="Prepare streak text for Steam">Copy for Steam</button>
   </footer>
+
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top" aria-hidden="true">
+    <span aria-hidden="true">↑</span>
+  </button>
 
   <dialog class="steam-export-dialog" id="steam-export-dialog" aria-labelledby="steam-export-title">
     <div class="steam-export-panel">

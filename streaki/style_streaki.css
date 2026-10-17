@@ -3002,6 +3002,334 @@ body.view-default .tag-filters{
   .steam-export-options .steam-export-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steam-export-role-filter,
   .steam-export-status-filter { grid-column: 1 / -1; }
+}
+
+body.view-default .streak-filter-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 8px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #999;
+  font-size: .76rem;
+  white-space: nowrap;
+}
+body.view-default .streak-filter-select select {
+  min-height: 30px;
+  padding: 0 16px 0 2px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: #eee;
+  color-scheme: dark;
+  font: inherit;
+  cursor: pointer;
+}
+body.view-default .streak-filter-select input {
+  width: 66px;
+  min-height: 30px;
+  padding: 0 2px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #eee;
+  color-scheme: dark;
+  font: inherit;
+}
+body.view-default .streak-filter-select input::-webkit-inner-spin-button,
+body.view-default .streak-filter-select input::-webkit-outer-spin-button {
+  opacity: 1;
+  margin: 0;
+  cursor: pointer;
+  filter: brightness(1.35);
+}
+body.view-default .streak-filter-select input::placeholder { color: #858585; }
+body.view-default .streak-filter-select:focus-within {
+  border-color: rgba(196, 30, 58, .65);
+}
+body.view-default .wincon-filter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 7px;
+  flex: 1 0 100%;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  padding: 9px 10px;
+  border: 1px solid #35383d;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #1b1d21, #151619);
+}
+body.view-default .wincon-filter > label { color: #c1c3c8; font-size: .75rem; font-weight: 650; }
+body.view-default .wincon-filter-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 56px;
+  gap: 6px;
+  min-width: 0;
+}
+body.view-default .wincon-filter-entry input {
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  padding: 0 9px;
+  border: 1px solid #3b3e44;
+  border-radius: 6px;
+  background: #101114;
+  color: #f0f0f1;
+  font: 500 .82rem 'Segoe UI', system-ui, sans-serif;
+}
+body.view-default .wincon-filter-entry input::placeholder { color: #85878d; }
+body.view-default .wincon-filter-entry input:focus { outline: 2px solid rgba(196, 30, 58, .35); border-color: #a13a4a; }
+body.view-default .wincon-filter-entry button {
+  width: 56px;
+  min-height: 32px;
+  padding: 0;
+  border: 1px solid rgba(196, 30, 58, .5);
+  border-radius: 6px;
+  background: rgba(196, 30, 58, .16);
+  color: #f0a0aa;
+  font: 650 .78rem 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+}
+body.view-default .wincon-filter-entry button:hover { background: rgba(196, 30, 58, .28); }
+body.view-default .wincon-filter-selected {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  padding: 1px;
+}
+body.view-default .wincon-filter-selected:empty { display: none; }
+body.view-default .wincon-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 3px 6px;
+  border: 1px solid rgba(196, 30, 58, .36);
+  border-radius: 5px;
+  background: rgba(196, 30, 58, .1);
+  color: #e6b9bf;
+  font: 500 .68rem/1.25 'Segoe UI', system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+body.view-default .wincon-filter-chip span { overflow-wrap: anywhere; }
+body.view-default .wincon-filter-chip b { color: #f28b99; font-size: .85rem; }
+body.view-default .tag-filter-p.active {
+  color: #efc980 !important;
+  background: rgba(165, 119, 39, .18) !important;
+  border-color: rgba(211, 163, 74, .52) !important;
+}
+body.view-default .streak-sort-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #999;
+  font-size: .76rem;
+  white-space: nowrap;
+}
+body.view-default .streak-sort-select::after {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid #c8cbd0;
+  border-bottom: 1.5px solid #c8cbd0;
+  content: '';
+  pointer-events: none;
+  transform: translateY(-70%) rotate(45deg);
+}
+body.view-default .streak-sort-select select {
+  min-width: 205px;
+  max-width: 250px;
+  min-height: 34px;
+  padding: 0 30px 0 10px;
+  border: 1px solid #41454d;
+  border-radius: 7px;
+  outline: 0;
+  appearance: none;
+  background: linear-gradient(180deg, #1c1e22, #141518);
+  color: #e5e7eb;
+  color-scheme: dark;
+  font: 500 .77rem 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+}
+body.view-default .streak-sort-select select option {
+  padding: 8px 10px;
+  background-color: #17191d;
+  color: #e5e7eb;
+}
+body.view-default .streak-sort-select select:hover { border-color: #656a74; background-color: #202226; }
+body.view-default .streak-sort-select select:focus { border-color: rgba(196, 30, 58, .72); box-shadow: 0 0 0 2px rgba(196, 30, 58, .16); }
+body.view-default .results-heading { display: flex; align-items: center; }
+body.view-default .filter-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2px 0 14px;
+  color: #aeb5bf;
+  font: 500 .78rem 'Segoe UI', system-ui, sans-serif;
+}
+body.view-default .filter-summary-count { color: #cbd1d8; white-space: nowrap; }
+body.view-default .filter-summary-active { display: flex; flex-wrap: wrap; gap: 5px; }
+body.view-default .filter-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 7px;
+  border: 1px solid #383c44;
+  border-radius: 999px;
+  background: #1a1d22;
+  color: #c3c8d0;
+  font-size: .7rem;
+}
+body.view-default .clear-filters-btn {
+  min-height: 25px;
+  padding: 2px 9px;
+  border: 1px solid rgba(196, 30, 58, .42);
+  border-radius: 5px;
+  background: rgba(196, 30, 58, .1);
+  color: #e59aa4;
+  font: 600 .7rem 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+}
+body.view-default .clear-filters-btn:hover { background: rgba(196, 30, 58, .2); }
+body.view-default .clear-filters-btn[hidden] { display: none !important; }
+/* Keep the Steam export role and status choices aligned as compact checkbox rows. */
+body.view-default .steam-export-filters .steam-export-role-filter,
+body.view-default .steam-export-filters .steam-export-status-filter {
+  display: grid;
+  align-items: center;
+  min-width: 0;
+  grid-column: 1 / -1;
+  gap: 6px;
+  padding: 0 0 9px;
+}
+body.view-default .steam-export-filters .steam-export-role-filter { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body.view-default .steam-export-filters .steam-export-status-filter { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body.view-default .steam-export-filters .steam-export-role-filter legend,
+body.view-default .steam-export-filters .steam-export-status-filter legend {
+  grid-column: 1 / -1;
+  width: auto;
+  margin: 0 0 2px;
+  padding: 0;
+}
+body.view-default .steam-export-filters .steam-export-role-filter legend span,
+body.view-default .steam-export-filters .steam-export-status-filter legend span { display: inline; margin: 0 0 0 5px; }
+body.view-default .steam-export-filters .steam-export-role-filter label,
+body.view-default .steam-export-filters .steam-export-status-filter label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  min-width: 0;
+  min-height: 34px;
+  margin: 0;
+  padding: 5px 8px;
+  border: 1px solid rgba(145, 167, 184, .17);
+  border-radius: 7px;
+  background: rgba(12, 19, 27, .75);
+  color: #d1dbe2;
+  font: 500 .72rem/1.2 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+body.view-default .steam-export-filters .steam-export-role-filter label:hover,
+body.view-default .steam-export-filters .steam-export-status-filter label:hover {
+  border-color: rgba(105, 197, 221, .42);
+  background: rgba(36, 76, 91, .24);
+}
+body.view-default .steam-export-filters .steam-export-role-filter label:has(input:checked),
+body.view-default .steam-export-filters .steam-export-status-filter label:has(input:checked) {
+  border-color: rgba(105, 197, 221, .32);
+  background: rgba(36, 76, 91, .16);
+  color: #e0edf2;
+}
+body.view-default .steam-export-filters .steam-export-role-filter input[type="checkbox"],
+body.view-default .steam-export-filters .steam-export-status-filter input[type="checkbox"] {
+  display: block;
+  appearance: auto;
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  accent-color: #69c5dd;
+  cursor: pointer;
+}
+.streak-empty-state {
+  grid-column: 1 / -1;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 34px 20px;
+  border: 1px solid rgba(139, 162, 180, .17);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(25, 32, 40, .9), rgba(13, 17, 22, .95));
+  text-align: center;
+}
+.streak-empty-icon { color: #9c6871; font-size: 1.8rem; line-height: 1; }
+.streak-empty-state h2 { margin: 0; color: #e1e5e9; font: 700 1rem 'Orbitron', sans-serif; }
+.streak-empty-state p { margin: 0; color: #9da8b2; font-size: .86rem; }
+.streak-empty-clear {
+  min-height: 32px;
+  margin-top: 4px;
+  padding: 5px 12px;
+  border: 1px solid rgba(196, 30, 58, .45);
+  border-radius: 6px;
+  background: rgba(196, 30, 58, .13);
+  color: #e5a0a9;
+  font: 600 .78rem 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+}
+.streak-empty-clear:hover { background: rgba(196, 30, 58, .23); }
+.back-to-top {
+  position: fixed;
+  right: clamp(14px, 2.5vw, 30px);
+  bottom: clamp(14px, 2.5vw, 28px);
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(145, 167, 184, .32);
+  border-radius: 50%;
+  background: rgba(17, 22, 28, .94);
+  color: #d7e0e6;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, .42), inset 0 1px rgba(255, 255, 255, .06);
+  font: 600 1.45rem/1 'Segoe UI', system-ui, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .18s ease, transform .18s ease, border-color .18s ease, background .18s ease;
+  cursor: pointer;
+}
+.back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-to-top:hover { border-color: rgba(196, 30, 58, .62); background: #20242a; color: #fff; }
+.back-to-top:focus-visible { outline: 2px solid #d46c7a; outline-offset: 3px; }
+@media (max-width: 480px) {
+  body.view-default .steam-export-filters .steam-export-role-filter,
+  body.view-default .steam-export-filters .steam-export-status-filter { grid-column: 1 / -1; }
+  body.view-default .streak-sort-select { justify-content: space-between; flex: 1 1 100%; }
+  body.view-default .streak-sort-select select { min-width: 0; max-width: none; flex: 1; }
+}
+@media (max-width: 760px) {
   .steam-export-selection .steam-export-list { max-height: 40vh; }
 }
 @media (max-width: 480px) {

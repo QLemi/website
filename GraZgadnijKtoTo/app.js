@@ -41,6 +41,15 @@
   function setNotice(message, type = "error") { notice.textContent = message; notice.className = `notice${type === "success" ? " success" : ""}`; notice.hidden = false; }
   function clearNotice() { notice.hidden = true; notice.textContent = ""; }
   function rosterFor(mode) { return ROSTER.filter(character => mode === "mixed" || character.kind === (mode === "killers" ? "killer" : "survivor")); }
+  function updateDeckSizeOptions(mode, preferredSize) {
+    const select = $("#deck-size");
+    if (!select) return;
+    const maxSize = rosterFor(mode).length;
+    const currentSize = Number(preferredSize ?? select.value) || 20;
+    const sizes = [...new Set([12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, currentSize, maxSize].filter(size => size >= 8 && size <= maxSize))].sort((a, b) => a - b);
+    select.innerHTML = sizes.map(size => `<option value="${size}">${size}${size === maxSize ? " · Full roster" : " cards"}</option>`).join("");
+    select.value = String(sizes.includes(currentSize) ? currentSize : Math.min(currentSize, maxSize));
+  }
   function fillCharacterSelect(select, mode, chosen = "") {
     const list = rosterFor(mode);
     select.innerHTML = `<option value="">Choose a character…</option>${list.map(c => `<option value="${esc(c.id)}" ${c.id === chosen ? "selected" : ""}>${esc(c.name)}</option>`).join("")}`;
@@ -610,7 +619,7 @@
     } catch (error) { setNotice(error.message); }
   }
 
-  $("#mode-options").addEventListener("change", event => { if (event.target.name === "mode") { updateChoiceCards(); fillCharacterSelect($("#host-character"), event.target.value); } });
+  $("#mode-options").addEventListener("change", event => { if (event.target.name === "mode") { updateChoiceCards(); updateDeckSizeOptions(event.target.value); fillCharacterSelect($("#host-character"), event.target.value); } });
   $("#mode-options").addEventListener("change", event => {
     if (event.target.name === "mode" && privateContext?.selectId === "host-character") {
       privateContext.mode = event.target.value;
@@ -618,6 +627,7 @@
     }
   });
   fillCharacterSelect($("#host-character"), "mixed");
+  updateDeckSizeOptions("mixed", 20);
   updateChoiceCards();
   syncStreamerControls();
   $("#create-form").addEventListener("submit", createRoom);

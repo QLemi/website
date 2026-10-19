@@ -26,9 +26,19 @@ const tiles = [
     link:  "./kalendarz/kalendarz.html"
   },
   {
+    title: "Harmonogram",
+    image: "./main_image/harmonogram.png",
+    link:  "./harmonogram/harmonogram.html"
+  },
+  {
     title: "DBD Builds & Info",
     image: "./main_image/dbd-killers-info.png",
     link:  "./DBDKillersInfo/DBDKillersInfo.html"
+  },
+  {
+    title: "Zgadnij Kto To *Edycja DBD*",
+    image: "./main_image/guess-who-dbd.png",
+    link: "./GraZgadnijKtoTo/GraZgadnijKtoTo.html"
   }
 ];
 

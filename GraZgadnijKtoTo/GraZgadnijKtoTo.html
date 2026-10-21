@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0c0c0e">
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
-  <title>Guess Who? DBD Edition</title>
+  <title>Guess Who? — DBD Edition</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="polish.css">
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -26,25 +27,47 @@
     <section class="notice" id="notice" role="status" aria-live="polite" hidden></section>
     <section class="room-view" id="room-view" hidden></section>
 
-    <section class="lobby-layout" id="home-view">
+    <section class="home-dashboard" id="home-view">
+      <section class="panel join-panel">
+        <div class="join-panel-title"><span class="eyebrow">JOIN A ROOM</span><h2>Have an invite?</h2></div>
+        <form id="invite-form"><label class="field-label" for="invite-url">Paste an invite link or room code</label><div class="invite-input-row"><input id="invite-url" type="text" inputmode="url" placeholder="Paste the room link…" autocomplete="url" required><button class="secondary-button" type="submit">Join room <span>↗</span></button></div></form>
+      </section>
+
       <section class="panel create-panel">
-        <div class="section-heading"><div><span class="eyebrow">HOST A ROOM</span><h2>Set the challenge</h2></div><span class="step-number">01</span></div>
+        <div class="section-heading"><div><span class="eyebrow">HOST A ROOM</span><h2>Set up your game</h2></div><div class="host-step-indicator" aria-label="Setup steps"><span class="active" data-step-dot="1">01</span><i></i><span data-step-dot="2">02</span></div></div>
         <form id="create-form">
-          <label class="field-label" for="host-name">Your name</label><input id="host-name" name="name" maxlength="20" placeholder="Enter a nickname" required>
-          <label class="field-label">Character pool</label><div class="choice-row" id="mode-options">
-            <label class="choice-card selected"><input type="radio" name="mode" value="mixed" checked><span class="choice-icon">◈</span><span><b>Mixed</b><small>Killers + Survivors</small></span></label>
-            <label class="choice-card"><input type="radio" name="mode" value="killers"><span class="choice-icon killer">✦</span><span><b>Killers</b><small>Killers only</small></span></label>
-            <label class="choice-card"><input type="radio" name="mode" value="survivors"><span class="choice-icon survivor">✧</span><span><b>Survivors</b><small>Survivors only</small></span></label>
-          </div>
-          <div class="field-split"><div><label class="field-label" for="deck-size">Cards on the board</label><select id="deck-size" name="deckSize"><option value="20">20 cards</option></select></div><div><label class="field-label" for="host-character">Your secret character</label><select id="host-character" name="character" required></select><p class="streamer-hidden-note" data-streamer-note hidden>Your choice is hidden from the stream. Select it in the private window.</p></div></div>
-          <label class="streamer-toggle"><input class="streamer-toggle-input" type="checkbox" data-secret-select="host-character"><span class="streamer-switch" aria-hidden="true"></span><span><b>Streamer Mode</b><small>Keep your character off stream</small></span></label>
-          <button class="primary-button full-button" type="submit">Create a room <span>↗</span></button>
+          <section class="host-step" id="host-step-1" data-host-step="1">
+            <div class="host-setup-grid">
+              <div class="host-setup-main">
+                <label class="field-label" for="host-name">Your name</label><input id="host-name" name="name" maxlength="20" placeholder="Enter a nickname" required>
+                <label class="field-label">Character pool</label><div class="choice-row" id="mode-options">
+                  <label class="choice-card selected"><input type="radio" name="mode" value="mixed" checked><span class="choice-icon">◈</span><span><b>Mixed</b><small>Killers + Survivors</small></span></label>
+                  <label class="choice-card"><input type="radio" name="mode" value="killers"><span class="choice-icon killer">✦</span><span><b>Killers</b><small>Killers only</small></span></label>
+                  <label class="choice-card"><input type="radio" name="mode" value="survivors"><span class="choice-icon survivor">✧</span><span><b>Survivors</b><small>Survivors only</small></span></label>
+                </div>
+              </div>
+              <div class="host-setup-side">
+                <div><label class="field-label" for="deck-size">Cards on the board</label><select id="deck-size" name="deckSize"><option value="20">20 cards</option></select></div>
+                <div><label class="field-label" for="host-character">Your secret character</label><select id="host-character" name="character" required></select><p class="streamer-hidden-note" data-streamer-note hidden>Your choice is hidden from the stream. Select it in the private window.</p></div>
+                <label class="streamer-toggle"><input class="streamer-toggle-input" type="checkbox" data-secret-select="host-character"><span class="streamer-switch" aria-hidden="true"></span><span><b>Streamer Mode</b><small>Keep your character off stream</small></span></label>
+              </div>
+            </div>
+            <button class="primary-button full-button" id="host-next-step" type="button">Choose lobby type <span>→</span></button>
+          </section>
+
+          <section class="host-step" id="host-step-2" data-host-step="2" hidden>
+            <div class="lobby-step-intro"><span class="lobby-step-icon">⌂</span><div><h3>How should players join?</h3><p>Choose how your invite link fills the room.</p></div></div>
+            <fieldset class="join-method"><legend class="field-label">Lobby type</legend><div class="join-method-options">
+              <label class="lobby-choice"><input type="radio" name="joinMode" value="first" checked><span class="lobby-choice-icon">↗</span><span><b>First come</b><small>The first player to finish setup joins your game.</small></span><span class="lobby-choice-check">✓</span></label>
+              <label class="lobby-choice"><input type="radio" name="joinMode" value="list"><span class="lobby-choice-icon">☷</span><span><b>Choose from list</b><small>Review players, choose one, then offer quick matches to the rest.</small></span><span class="lobby-choice-check">✓</span></label>
+            </div></fieldset>
+            <div class="host-step-actions"><button class="soft-button" id="host-back-step" type="button">← Back to game setup</button><button class="primary-button" type="submit">Create a room <span>↗</span></button></div>
+          </section>
         </form>
       </section>
 
       <aside class="panel how-panel">
-        <div class="join-by-link"><span class="eyebrow">JOIN A ROOM</span><form id="invite-form"><label class="field-label" for="invite-url">Paste an invite link or room code</label><div class="invite-input-row"><input id="invite-url" type="text" inputmode="url" placeholder="Paste the room link…" autocomplete="url" required><button class="secondary-button" type="submit">Join ↗</button></div></form></div>
-        <div class="section-heading"><div><h2>How to play</h2></div></div>
+        <div class="section-heading"><div><span class="eyebrow">THE BASICS</span><h2>How to play</h2></div><span class="how-panel-mark">?</span></div>
         <ol class="steps-list"><li><span>1</span><div><b>Choose your character</b><p>Each player secretly picks one character from the room's pool.</p></div></li><li><span>2</span><div><b>Ask a question</b><p>Take turns asking a yes-or-no question, or use Voice chat to ask aloud.</p></div></li><li><span>3</span><div><b>Cross them off</b><p>Use your private board to eliminate characters that do not fit.</p></div></li><li><span>4</span><div><b>Make your guess</b><p>A correct guess wins. A wrong guess is marked on your board and passes the turn.</p></div></li></ol>
       </aside>
     </section>

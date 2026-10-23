@@ -507,6 +507,7 @@ select option { color: #f2f1f3; }
 }
 
 #room-view.quiet-refresh *, #room-view.quiet-refresh *::before, #room-view.quiet-refresh *::after { animation: none !important; transition: none !important; }
+#room-view > .room-panel { animation: none; }
 
 .board-heading>.board-counts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
 .board-counter { display: grid; justify-items: center; min-width: 74px; padding: 7px 10px; border: 1px solid rgba(190,198,211,.12); border-radius: 11px; background: rgba(255,255,255,.025); }

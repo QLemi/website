@@ -47,6 +47,11 @@
                 </div>
               </div>
               <div class="host-setup-side">
+                <div class="host-filter-row">
+                  <div><label class="field-label" for="gender-filter">Gender</label><select id="gender-filter" name="genderFilter"><option value="all">Any gender</option><option value="male">Male</option><option value="female">Female</option></select></div>
+                  <div><label class="field-label" for="license-filter">License</label><select id="license-filter" name="licenseFilter"><option value="all">Any license</option><option value="original">Original</option><option value="licensed">Licensed</option></select></div>
+                </div>
+                <p class="roster-match-count" id="roster-match-count" aria-live="polite"></p>
                 <div><label class="field-label" for="deck-size">Cards on the board</label><select id="deck-size" name="deckSize"><option value="20">20 cards</option></select></div>
                 <div><label class="field-label" for="host-character">Your secret character</label><select id="host-character" name="character" required></select><p class="streamer-hidden-note" data-streamer-note hidden>Your choice is hidden from the stream. Select it in the private window.</p></div>
                 <label class="streamer-toggle"><input class="streamer-toggle-input" type="checkbox" data-secret-select="host-character"><span class="streamer-switch" aria-hidden="true"></span><span><b>Streamer Mode</b><small>Keep your character off stream</small></span></label>

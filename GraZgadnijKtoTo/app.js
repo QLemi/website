@@ -9,11 +9,19 @@
   const SURVIVORS = CHARACTER_DATA.survivorRoster || [];
   const KILLERS = Object.entries(KILLER_IMAGES).filter(([name]) => name !== "The Judgement").map(([name, image]) => ({ id: `killer:${slug(name)}`, name, kind: "killer", image }));
   const ROSTER = [...KILLERS, ...SURVIVORS.map(item => ({ id: `survivor:${item.id}`, name: item.name, kind: "survivor", image: item.icon }))];
+  const TAGS = {
+    male: "The Trapper|The Wraith|The Hillbilly|The Shape|The Doctor|The Cannibal|The Nightmare|The Clown|The Legion|The Ghost Face|The Demogorgon|The Oni|The Deathslinger|The Executioner|The Blight|The Trickster|The Nemesis|The Cenobite|The Dredge|The Mastermind|The Knight|The Singularity|The Xenomorph|The Good Guy|The Unknown|The Lich|The Dark Lord|The Ghoul|The Animatronic|The First|The Slasher|Dwight Fairfield|Jake Park|Ace Visconti|Bill Overbeck|David King|Quentin Smith|David Tapp|Adam Francis|Jeff Johansen|Ash Williams|Steve Harrington|Felix Richter|Leon Scott Kennedy|Jonah Vasquez|Yoichi Asakawa|Vittorio Toscano|Renato Lyra|Gabriel Soma|Nicolas Cage|Alan Wake|Baermar Uraz|Trevor Belmont|Rick Grimes|Dustin Henderson|Kwon Tae-young|Shane Wiigwaas",
+    female: "The Nurse|The Hag|The Huntress|The Pig|The Spirit|The Plague|The Twins|The Artist|The Onryo|The Skull Merchant|The Houndmaster|The Krasue|The Judgment|Meg Thomas|Claudette Morel|Nea Karlsson|Laurie Strode|Feng Min|Kate Denson|Jane Romero|Nancy Wheeler|Yui Kimura|Zarina Kassir|Cheryl Mason|Élodie Rakoto|Yun-Jin Lee|Jill Valentine|Mikaela Reid|Haddie Kaur|Ada Wong|Rebecca Chambers|Thalita Lyra|Ellen Ripley|Sable Ward|Aestri Yazar|Lara Croft|Taurie Cain|Orela Rose|Michonne Grimes|Vee Boonyasak|Eleven|Aurora Stardotter"
+  };
+  const LICENSED = new Set("The Shape|The Cannibal|The Nightmare|The Pig|The Ghost Face|The Demogorgon|The Executioner|The Nemesis|The Cenobite|The Onryo|The Mastermind|The Xenomorph|The Good Guy|The Lich|The Dark Lord|The Ghoul|The Animatronic|The First|The Slasher|Laurie Strode|Bill Overbeck|Quentin Smith|David Tapp|Ash Williams|Nancy Wheeler|Steve Harrington|Cheryl Mason|Jill Valentine|Leon Scott Kennedy|Yoichi Asakawa|Ada Wong|Rebecca Chambers|Nicolas Cage|Ellen Ripley|Alan Wake|Aestri Yazar|Baermar Uraz|Lara Croft|Trevor Belmont|Rick Grimes|Michonne Grimes|Dustin Henderson|Eleven".split("|"));
+  const MALE = new Set(TAGS.male.split("|"));
+  ROSTER.forEach(character => { character.gender = MALE.has(character.name) ? "male" : "female"; character.license = LICENSED.has(character.name) ? "licensed" : "original"; });
   const $ = selector => document.querySelector(selector);
   const home = $("#home-view"), room = $("#room-view"), notice = $("#notice");
   let session = readSession();
   let pendingRoomId = "";
   let pendingRoomMode = "mixed";
+  let pendingRoomFilters = { gender: "all", license: "all" };
   let pendingQueueTicket = "";
   let pendingQueueName = "";
   let pendingQueueCharacter = "";
@@ -34,12 +42,13 @@
   let completedAction = null;
   let completedActionTimer = null;
   let wrongNoticeTimer = null;
+  let renderedRoomStatus = "";
 
   function slug(value) { return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   function esc(value) { return String(value ?? "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch])); }
   function readSession() { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || "null"); } catch { return null; } }
   function saveSession(value) { session = value; localStorage.setItem(SESSION_KEY, JSON.stringify(value)); }
-  function clearSession() { closePrivateWindow(); session = null; currentState = null; localEliminated = null; streamerMode = false; localStorage.removeItem(SESSION_KEY); history.replaceState({}, "", location.pathname); stopPolling(); syncStreamerControls(); showHome(); }
+  function clearSession() { closePrivateWindow(); session = null; currentState = null; localEliminated = null; renderedRoomStatus = ""; streamerMode = false; localStorage.removeItem(SESSION_KEY); history.replaceState({}, "", location.pathname); stopPolling(); syncStreamerControls(); showHome(); }
   function randomToken(length, alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789") {
     const bytes = new Uint8Array(length);
     crypto.getRandomValues(bytes);
@@ -54,20 +63,23 @@
     setNotice("This game is no longer available. You have been returned to the homepage.");
     return true;
   }
-  function rosterFor(mode) { return ROSTER.filter(character => mode === "mixed" || character.kind === (mode === "killers" ? "killer" : "survivor")); }
-  function updateDeckSizeOptions(mode, preferredSize) {
-    updateDeckSizeSelect($("#deck-size"), mode, preferredSize);
+  function rosterFor(mode, gender = "all", license = "all") { return ROSTER.filter(character => (mode === "mixed" || character.kind === (mode === "killers" ? "killer" : "survivor")) && (gender === "all" || character.gender === gender) && (license === "all" || character.license === license)); }
+  function currentFilters(scope = document) { return { gender: scope.querySelector("[name='genderFilter']")?.value || "all", license: scope.querySelector("[name='licenseFilter']")?.value || "all" }; }
+  function updateDeckSizeOptions(mode, preferredSize, filters = currentFilters()) {
+    updateDeckSizeSelect($("#deck-size"), mode, preferredSize, filters);
   }
-  function updateDeckSizeSelect(select, mode, preferredSize) {
+  function updateDeckSizeSelect(select, mode, preferredSize, filters = { gender: "all", license: "all" }) {
     if (!select) return;
-    const maxSize = rosterFor(mode).length;
+    const maxSize = rosterFor(mode, filters.gender, filters.license).length;
+    if (!maxSize) { select.innerHTML = `<option value="">No characters match these filters</option>`; select.value = ""; return; }
     const currentSize = Number(preferredSize ?? select.value) || 20;
-    const sizes = [...new Set([12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, currentSize, maxSize].filter(size => size >= 8 && size <= maxSize))].sort((a, b) => a - b);
+    const minimum = Math.min(8, maxSize);
+    const sizes = [...new Set([12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, currentSize, maxSize].filter(size => size >= minimum && size <= maxSize))].sort((a, b) => a - b);
     select.innerHTML = sizes.map(size => `<option value="${size}">${size}${size === maxSize ? " · Full roster" : " cards"}</option>`).join("");
-    select.value = String(sizes.includes(currentSize) ? currentSize : Math.min(currentSize, maxSize));
+    select.value = String(sizes.includes(currentSize) ? currentSize : Math.max(minimum, Math.min(currentSize, maxSize)));
   }
-  function fillCharacterSelect(select, mode, chosen = "") {
-    const list = rosterFor(mode);
+  function fillCharacterSelect(select, mode, chosen = "", filters = { gender: "all", license: "all" }) {
+    const list = rosterFor(mode, filters.gender, filters.license);
     select.innerHTML = `<option value="">Choose a character…</option>${list.map(c => `<option value="${esc(c.id)}" ${c.id === chosen ? "selected" : ""}>${esc(c.name)}</option>`).join("")}`;
   }
   function syncStreamerControls() {
@@ -92,7 +104,8 @@
     privateContext.screen = "picker";
     const mainSelect = document.getElementById(privateContext.selectId);
     const selected = privateContext.pendingChoice ?? mainSelect?.value ?? "";
-    const characters = rosterFor(privateContext.mode);
+    const filters = privateContext.filters || { gender: "all", license: "all" };
+    const characters = rosterFor(privateContext.mode, filters.gender, filters.license);
     privatePopupShell(`<main><span class="eyebrow">PRIVATE WINDOW · NOT SHOWN ON STREAM</span><h1>Choose your character</h1><label for="private-character">Your secret character</label><select id="private-character"><option value="">Choose a character…</option>${characters.map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")}</select><section class="picker-stage"><div class="picker-preview"><div class="picker-art"><span class="preview-question" id="private-empty">?</span><img id="private-portrait" alt="" hidden></div><div class="picker-copy"><small id="private-preview-label">CHARACTER PREVIEW</small><b id="private-name">No character selected</b><p id="private-hint">Your selection will be kept private from the stream.</p></div></div></section><button class="picker-save" id="private-save" type="button" disabled>Save selection privately</button><div class="feedback" id="private-feedback" aria-live="polite"></div></main>`);
     const popupSelect = privateWindow.document.getElementById("private-character");
     popupSelect.value = selected;
@@ -168,8 +181,11 @@
       if (document.getElementById(selectId)) {
         const pickerMode = session.seat === "host" && !currentState.hostReady ? session.rematchDraft?.mode || currentState.mode : currentState.mode;
         const select = document.getElementById(selectId);
-        if (privateContext?.screen !== "picker" || privateContext.selectId !== selectId || privateContext.mode !== pickerMode) privateContext = { screen: "picker", selectId, mode: pickerMode, pendingChoice: select.value || "" };
-        const signature = JSON.stringify([selectId, pickerMode, select.value, privateContext.pendingChoice, privateContext.savedChoice]);
+        const pickerFilters = session.seat === "host" && !currentState.hostReady ? session.rematchDraft || currentState : currentState;
+        const filters = { gender: pickerFilters.genderFilter || "all", license: pickerFilters.licenseFilter || "all" };
+        if (privateContext?.screen !== "picker" || privateContext.selectId !== selectId || privateContext.mode !== pickerMode) privateContext = { screen: "picker", selectId, mode: pickerMode, filters, pendingChoice: select.value || "" };
+        else privateContext.filters = filters;
+        const signature = JSON.stringify([selectId, pickerMode, filters, select.value, privateContext.pendingChoice, privateContext.savedChoice]);
         if (privateContext.signature !== signature) { privateContext.signature = signature; renderPrivatePicker(); }
       } else renderPrivateCharacter();
       return;
@@ -237,7 +253,7 @@
     });
     back.addEventListener("click", () => { clearNotice(); setHostStep(1); });
   }
-  function showHome() { room.hidden = true; home.hidden = false; $("#hero").hidden = false; if (pollTimer) stopPolling(); }
+  function showHome() { room.hidden = true; home.hidden = false; $("#hero").hidden = false; setHostStep(1); if (pollTimer) stopPolling(); }
   function showRoom() { home.hidden = true; room.hidden = false; $("#hero").hidden = true; }
   function showJoiningRoom(id) {
     showRoom();
@@ -314,8 +330,8 @@
     const previousStatus = currentState?.status;
     if (session && session.seat !== "queue" && next.ownCharacter) session.character = next.ownCharacter;
     if (session && next.status === "rematch") {
-      if ((previousStatus && previousStatus !== "rematch") || !session.rematchDraft) session.rematchDraft = { mode: next.mode, deckSize: Number(next.deckSize), character: next.ownCharacter || "" };
-      else if (currentState && currentState.status === "rematch" && currentState.mode !== next.mode) session.rematchDraft = { mode: next.mode, deckSize: Number(next.deckSize), character: next.ownCharacter || "" };
+      if ((previousStatus && previousStatus !== "rematch") || !session.rematchDraft) session.rematchDraft = { mode: next.mode, deckSize: Number(next.deckSize), genderFilter: next.genderFilter || "all", licenseFilter: next.licenseFilter || "all", character: next.ownCharacter || "" };
+      else if (currentState && currentState.status === "rematch" && (currentState.mode !== next.mode || currentState.genderFilter !== next.genderFilter || currentState.licenseFilter !== next.licenseFilter)) session.rematchDraft = { mode: next.mode, deckSize: Number(next.deckSize), genderFilter: next.genderFilter || "all", licenseFilter: next.licenseFilter || "all", character: next.ownCharacter || "" };
       if (Object.prototype.hasOwnProperty.call(next, "ownCharacter")) session.character = next.ownCharacter || "";
     } else if (next.status === "playing" && previousStatus === "rematch" && session) session.rematchDraft = null;
     if (session && ["playing", "finished"].includes(next.status)) trackWrongGuessNotice(next);
@@ -646,7 +662,11 @@
     const guessDraft = previousGuess?.value || "";
     const historyWasOpen = $(".question-history")?.open || false;
     showRoom();
-    room.classList.toggle("quiet-refresh", Boolean(options.quiet));
+    room.classList.remove("quiet-refresh");
+    if (options.quiet) {
+      room.classList.add("quiet-refresh");
+      requestAnimationFrame(() => room.classList.remove("quiet-refresh"));
+    }
     const state = currentState;
     const selfName = session.seat === "host" ? state.hostName : state.guestName;
     const otherSeat = session.seat === "host" ? "guest" : "host";
@@ -666,10 +686,45 @@
     else body = renderResult();
     const history = renderQuestionHistory();
     const reopenPrivate = streamerMode && (!privateWindow || privateWindow.closed) ? `<button class="secondary-button" data-action="reopen-private">Open private window</button>` : "";
-    room.innerHTML = `<div class="panel room-panel">${header}${players}${link}${body}${history}${reopenPrivate}</div>`;
+    const roomMarkup = `${header}${players}${link}${body}${history}${reopenPrivate}`;
+    let roomPanel = room.querySelector(":scope > .room-panel");
+    let partialGameRefresh = false;
+    if (roomPanel) {
+      roomPanel.className = "panel room-panel";
+      if (options.quiet && renderedRoomStatus === "playing" && state.status === "playing") {
+        const nextPanel = document.createElement("div");
+        nextPanel.innerHTML = roomMarkup;
+        const oldTurnPanel = roomPanel.querySelector(".turn-panel");
+        const nextTurnPanel = nextPanel.querySelector(".turn-panel");
+        if (oldTurnPanel && nextTurnPanel) {
+          oldTurnPanel.replaceWith(nextTurnPanel);
+          bindRoomActions(nextTurnPanel);
+          partialGameRefresh = true;
+        }
+        const nextHistory = nextPanel.querySelector(".question-history");
+        const oldHistory = roomPanel.querySelector(".question-history");
+        if (oldHistory && nextHistory) oldHistory.replaceWith(nextHistory);
+        else if (oldHistory) oldHistory.remove();
+        else if (nextHistory) roomPanel.append(nextHistory);
+        if (nextHistory) nextHistory.open = historyWasOpen;
+        const nextCounts = new Map([...nextPanel.querySelectorAll(".player-board-counts")].map(box => [box.dataset.boardSeat, box]));
+        roomPanel.querySelectorAll(".player-board-counts").forEach(box => {
+          const fresh = nextCounts.get(box.dataset.boardSeat);
+          if (!fresh) return;
+          ["[data-count-eliminated]", "[data-count-available]"].forEach(selector => {
+            const currentValue = box.querySelector(selector), freshValue = fresh.querySelector(selector);
+            if (currentValue && freshValue) currentValue.textContent = freshValue.textContent;
+          });
+        });
+      }
+      if (!partialGameRefresh) roomPanel.innerHTML = roomMarkup;
+    } else {
+      room.innerHTML = `<div class="panel room-panel">${roomMarkup}</div>`;
+    }
+    renderedRoomStatus = state.status;
     const historyDetails = $(".question-history");
     if (historyDetails) historyDetails.open = historyWasOpen;
-    bindRoomActions();
+    if (!partialGameRefresh) bindRoomActions();
     syncStreamerControls();
     syncPrivateWindow();
     updateRequestControls();
@@ -687,11 +742,12 @@
 
   function renderRematchSetup() {
     const hostMode = session.seat === "host";
-    const draft = session.rematchDraft || { mode: currentState.mode, deckSize: currentState.deckSize, character: session.character };
+    const draft = session.rematchDraft || { mode: currentState.mode, deckSize: currentState.deckSize, genderFilter: currentState.genderFilter || "all", licenseFilter: currentState.licenseFilter || "all", character: session.character };
     const readyForSeat = hostMode ? currentState.hostReady : currentState.guestReady;
     const setupMode = hostMode && !currentState.hostReady ? draft.mode : currentState.mode;
     const selectedCandidate = readyForSeat ? session.character : draft.character;
-    const selected = selectedCandidate && rosterFor(setupMode).some(item => item.id === selectedCandidate) ? selectedCandidate : "";
+    const filters = { gender: draft.genderFilter || currentState.genderFilter || "all", license: draft.licenseFilter || currentState.licenseFilter || "all" };
+    const selected = selectedCandidate && rosterFor(setupMode, filters.gender, filters.license).some(item => item.id === selectedCandidate) ? selectedCandidate : "";
     const selectedName = characterById(selected)?.name || "No character selected";
     const modeOptions = [["mixed", "Mixed pool"], ["killers", "Killers only"], ["survivors", "Survivors only"]].map(([value, label]) => `<option value="${value}" ${setupMode === value ? "selected" : ""}>${label}</option>`).join("");
     const characterSelect = (id, label) => `<label class="field-label" for="${id}">${label}</label><select id="${id}" required data-secret-select="${id}"></select><p class="streamer-hidden-note" data-streamer-note hidden>Your choice is hidden from the stream. Select it in the private window.</p><label class="streamer-toggle"><input class="streamer-toggle-input" type="checkbox" data-secret-select="${id}"><span class="streamer-switch" aria-hidden="true"></span><span><b>Streamer Mode</b><small>Keep your character off stream</small></span></label>`;
@@ -701,7 +757,7 @@
     const setup = hostMode
       ? mineReady
         ? `<div class="rematch-ready-card"><span class="ready-check">✓</span><div><b>Setup locked · you are ready</b><small>${esc(currentState.modeLabel)} · ${Number(currentState.deckSize)} cards · ${streamerMode ? "Your pick is private" : `Your pick: ${esc(selectedName)}`}</small></div></div>`
-        : `<form id="rematch-host-form" class="rematch-form"><div class="rematch-fields"><div><label class="field-label" for="rematch-mode">Character pool</label><select id="rematch-mode">${modeOptions}</select></div><div><label class="field-label" for="rematch-deck-size">Cards</label><select id="rematch-deck-size"></select></div></div>${characterSelect("rematch-host-character", "Your secret character")}<button class="primary-button full-button" type="submit" data-form-action="rematch-setup">Ready for next round</button></form>`
+        : `<form id="rematch-host-form" class="rematch-form"><div class="rematch-fields"><div><label class="field-label" for="rematch-mode">Character pool</label><select id="rematch-mode">${modeOptions}</select></div><div><label class="field-label" for="rematch-deck-size">Cards</label><select id="rematch-deck-size"></select></div><div><label class="field-label" for="rematch-gender">Gender</label><select id="rematch-gender"><option value="all">Any gender</option><option value="male">Male</option><option value="female">Female</option></select></div><div><label class="field-label" for="rematch-license">License</label><select id="rematch-license"><option value="all">Any license</option><option value="original">Original</option><option value="licensed">Licensed</option></select></div></div>${characterSelect("rematch-host-character", "Your secret character")}<button class="primary-button full-button" type="submit" data-form-action="rematch-setup">Ready for next round</button></form>`
       : mineReady
         ? myReadyMarkup
         : `<form id="rematch-guest-form" class="rematch-form">${characterSelect("rematch-guest-character", "Your secret character")}<button class="primary-button full-button" type="submit" data-form-action="rematch-character">Ready for next round</button></form>`;
@@ -796,7 +852,7 @@
     const myStats = currentState.myStats || {};
     const stats = `<div class="round-stats"><span>YOUR STATS<b>${Number(myStats.questions || 0)} questions · ${Number(myStats.answers || 0)} answers</b><b>${Number(myStats.guesses || 0)} guesses · ${Number(myStats.wrongGuesses || 0)} wrong</b></span></div>`;
     const wrongAnnouncement = currentState.lastGuess && !currentState.lastGuessCorrect && Date.now() < Number(session.wrongNoticeUntil || 0) ? `<div class="wrong-guess-note" role="status"><b>Wrong guess</b><span>${esc(displaySeatName(currentState.lastGuessBy))} guessed ${esc(characterById(currentState.lastGuess)?.name || "a character")}. It was incorrect, so the turn has passed to ${esc(displaySeatName(currentState.currentTurn))}.</span></div>` : "";
-    return `<div class="game-layout"><section class="board-panel"><div class="board-heading"><div><span class="eyebrow">YOUR PRIVATE BOARD</span><h3>Characters</h3></div><div class="board-counts"><span class="board-counter available"><b data-board-count="available">${candidates.length}</b><small>Available</small></span><span class="board-counter eliminated"><b data-board-count="eliminated">${eliminated.size}</b><small>Eliminated</small></span><span class="board-counter wrong"><b data-board-count="wrong">${wrong.size}</b><small>Wrong guess</small></span></div></div><div class="board-legend"><span><i class="legend-dot available"></i>Available</span><span><i class="legend-dot eliminated"></i>Eliminated</span><span><i class="legend-dot wrong"></i>Wrong guess</span></div><div class="character-grid">${(currentState.deck || []).map(item => `<button class="character-card ${wrong.has(item.id) ? "incorrect-guess" : eliminated.has(item.id) ? "eliminated" : ""}" data-action="eliminate" data-id="${esc(item.id)}" title="${esc(item.name)}" ${wrong.has(item.id) ? "disabled aria-label='Incorrect guess: permanently marked'" : ""}>${characterPortrait(item.id)}<span>${esc(item.name)}</span></button>`).join("")} </div><p class="board-instruction">Select a card to eliminate it from your possibilities. Select it again to restore it.</p></section><aside class="turn-panel"><div class="turn-overview"><div class="turn-banner ${isMyTurn() ? "yours" : ""}"><span class="turn-indicator"></span><span>${turnText}</span></div>${wrongAnnouncement}<div class="turn-context-grid">${secretPanel}${questionBlock}</div></div><div class="turn-actions"><div class="turn-actions-heading"><span class="eyebrow">YOUR MOVE</span></div>${answerPrompt}<div class="game-action-grid">${questionComposer}${guessComposer}</div></div>${stats}</aside></div>`;
+    return `<div class="game-layout"><section class="board-panel"><div class="board-heading"><div><span class="eyebrow">YOUR PRIVATE BOARD</span><h3>Characters</h3></div><div class="board-counts"><span class="board-counter available"><b data-board-count="available">${candidates.length}</b><small>Available</small></span><span class="board-counter eliminated"><b data-board-count="eliminated">${eliminated.size}</b><small>Eliminated</small></span><span class="board-counter wrong"><b data-board-count="wrong">${wrong.size}</b><small>Wrong guess</small></span></div></div><div class="board-legend"><span><i class="legend-dot available"></i>Available</span><span><i class="legend-dot eliminated"></i>Eliminated</span><span><i class="legend-dot wrong"></i>Wrong guess</span></div><div class="character-grid">${(currentState.deck || []).map(item => { const character = characterById(item.id); return `<button class="character-card ${wrong.has(item.id) ? "incorrect-guess" : eliminated.has(item.id) ? "eliminated" : ""}" data-action="eliminate" data-id="${esc(item.id)}" title="${esc(item.name)}" ${wrong.has(item.id) ? "disabled aria-label='Incorrect guess: permanently marked'" : ""}>${characterPortrait(item.id)}<span>${esc(item.name)}</span><small class="character-tags"><i class="gender-tag ${character.gender}">${character.gender}</i><i class="license-tag ${character.license}">${character.license === "licensed" ? "Licensed" : "Original"}</i></small></button>`; }).join("")} </div><p class="board-instruction">Select a card to eliminate it from your possibilities. Select it again to restore it.</p></section><aside class="turn-panel"><div class="turn-overview"><div class="turn-banner ${isMyTurn() ? "yours" : ""}"><span class="turn-indicator"></span><span>${turnText}</span></div>${wrongAnnouncement}<div class="turn-context-grid">${secretPanel}${questionBlock}</div></div><div class="turn-actions"><div class="turn-actions-heading"><span class="eyebrow">YOUR MOVE</span></div>${answerPrompt}<div class="game-action-grid">${questionComposer}${guessComposer}</div></div>${stats}</aside></div>`;
   }
 
   function renderResult() {
@@ -808,36 +864,34 @@
     return `<section class="result-simple ${won ? "result-win" : "result-loss"}"><div class="result-emblem" aria-hidden="true">${won ? "✓" : "×"}</div><span class="eyebrow">ROUND COMPLETE</span><h3>${won ? "Victory" : "Defeat"}</h3><p class="result-caption">${won ? "You guessed the hidden character." : "Your opponent guessed your character."}</p><div class="result-picks"><article class="result-pick-card"><span class="result-pick-label">YOUR PICK</span>${myCharacter ? characterPortrait(myCharacter.id, "result-portrait") : ""}<b>${esc(mySecret)}</b></article><article class="result-pick-card"><span class="result-pick-label">OPPONENT’S PICK</span>${opponentCharacter ? characterPortrait(opponentCharacter.id, "result-portrait") : ""}<b>${esc(opponent)}</b></article></div><div class="room-actions result-actions"><button class="primary-button" data-action="rematch">Play again</button><button class="soft-button" data-action="exit">Exit</button></div></section>`;
   }
 
-  function bindRoomActions() {
-    const hostForm = $("#rematch-host-form");
+  function bindRoomActions(scope = room) {
+    const hostForm = scope.querySelector("#rematch-host-form");
     if (hostForm) {
-      const modeSelect = $("#rematch-mode"), deckSelect = $("#rematch-deck-size"), characterSelect = $("#rematch-host-character");
-      const draft = session.rematchDraft || { mode: currentState.mode, deckSize: currentState.deckSize, character: session.character };
+      const modeSelect = scope.querySelector("#rematch-mode"), deckSelect = scope.querySelector("#rematch-deck-size"), characterSelect = scope.querySelector("#rematch-host-character"), genderSelect = scope.querySelector("#rematch-gender"), licenseSelect = scope.querySelector("#rematch-license");
+      const draft = session.rematchDraft || { mode: currentState.mode, deckSize: currentState.deckSize, genderFilter: currentState.genderFilter || "all", licenseFilter: currentState.licenseFilter || "all", character: session.character };
       modeSelect.value = draft.mode;
-      updateDeckSizeSelect(deckSelect, modeSelect.value, draft.deckSize);
-      fillCharacterSelect(characterSelect, modeSelect.value, draft.character);
-      const saveDraft = () => { session.rematchDraft = { mode: modeSelect.value, deckSize: Number(deckSelect.value), character: characterSelect.value }; saveSession(session); };
+      genderSelect.value = draft.genderFilter || "all"; licenseSelect.value = draft.licenseFilter || "all";
+      const filtersNow = () => ({ gender: genderSelect.value, license: licenseSelect.value });
+      updateDeckSizeSelect(deckSelect, modeSelect.value, draft.deckSize, filtersNow());
+      fillCharacterSelect(characterSelect, modeSelect.value, draft.character, filtersNow());
+      const saveDraft = () => { session.rematchDraft = { mode: modeSelect.value, deckSize: Number(deckSelect.value), genderFilter: genderSelect.value, licenseFilter: licenseSelect.value, character: characterSelect.value }; saveSession(session); };
+      const refreshRematchRoster = () => { updateDeckSizeSelect(deckSelect, modeSelect.value, deckSelect.value, filtersNow()); fillCharacterSelect(characterSelect, modeSelect.value, "", filtersNow()); saveDraft(); if (privateContext?.selectId === "rematch-host-character") { privateContext.mode = modeSelect.value; privateContext.filters = filtersNow(); privateContext.pendingChoice = ""; renderPrivatePicker(); } };
       deckSelect.addEventListener("change", saveDraft);
       characterSelect.addEventListener("change", saveDraft);
-      modeSelect.addEventListener("change", () => {
-        updateDeckSizeSelect(deckSelect, modeSelect.value);
-        fillCharacterSelect(characterSelect, modeSelect.value);
-        saveDraft();
-        if (privateContext?.selectId === "rematch-host-character") { privateContext.mode = modeSelect.value; privateContext.pendingChoice = ""; renderPrivatePicker(); }
-      });
+      modeSelect.addEventListener("change", refreshRematchRoster); genderSelect.addEventListener("change", refreshRematchRoster); licenseSelect.addEventListener("change", refreshRematchRoster);
       hostForm.addEventListener("submit", event => {
         event.preventDefault();
         const button = hostForm.querySelector("button[type=submit]");
-        const fields = { mode: modeSelect.value, deckSize: Number(deckSelect.value), hostCharacter: characterSelect.value };
+        const fields = { mode: modeSelect.value, deckSize: Number(deckSelect.value), genderFilter: genderSelect.value, licenseFilter: licenseSelect.value, hostCharacter: characterSelect.value };
         if (!fields.hostCharacter) { setNotice("Choose your secret character first, using the private window if Streamer Mode is on."); return; }
         withBusy(button, () => perform("rematchSetup", fields), "Saving setup…");
       });
     }
-    const guestForm = $("#rematch-guest-form");
+    const guestForm = scope.querySelector("#rematch-guest-form");
     if (guestForm) {
-      const characterSelect = $("#rematch-guest-character");
+      const characterSelect = scope.querySelector("#rematch-guest-character");
       const draft = session.rematchDraft || { mode: currentState.mode, deckSize: currentState.deckSize, character: session.character };
-      fillCharacterSelect(characterSelect, currentState.mode, draft.character);
+      fillCharacterSelect(characterSelect, currentState.mode, draft.character, { gender: currentState.genderFilter || "all", license: currentState.licenseFilter || "all" });
       characterSelect.addEventListener("change", () => { session.rematchDraft = { mode: currentState.mode, deckSize: Number(currentState.deckSize), character: characterSelect.value }; saveSession(session); });
       guestForm.addEventListener("submit", event => {
         event.preventDefault();
@@ -846,12 +900,12 @@
         withBusy(button, () => perform("rematchCharacter", { guestCharacter }), "Saving character…");
       });
     }
-    const voiceToggle = $("#voice-chat-toggle");
+    const voiceToggle = scope.querySelector("#voice-chat-toggle");
     if (voiceToggle) voiceToggle.addEventListener("change", () => {
       const enabled = voiceToggle.checked;
       submitOptimistic("voiceChat", { enabled }, () => { currentState.voiceChat = enabled; });
     });
-    room.querySelectorAll("[data-action]").forEach(button => button.addEventListener("click", () => {
+    scope.querySelectorAll("[data-action]").forEach(button => button.addEventListener("click", () => {
       const action = button.dataset.action;
       if (action === "reopen-private") { setStreamerMode(true, { screen: "game" }); return; }
       if (action === "select-guest") { withBusy(button, () => perform("selectGuest", { playerTicket: button.dataset.ticket }), "Starting selected game…"); return; }
@@ -869,7 +923,7 @@
         if (backgroundMutation || busy) return;
         let fields = {};
         if (action === "ask") {
-          const question = currentState.voiceChat ? `Question #${Number(currentState.questionNumber || 0) + 1}` : $("#question-input")?.value.trim();
+          const question = currentState.voiceChat ? `Question #${Number(currentState.questionNumber || 0) + 1}` : scope.querySelector("#question-input")?.value.trim();
           if (!question) { setNotice("Write a question first."); return; }
           fields = { question };
         } else if (action === "answer") fields = { answer: button.dataset.value };
@@ -884,7 +938,7 @@
       }
       withBusy(button, async () => {
         if (action === "copy-link") { await navigator.clipboard.writeText(shareUrl()); setNotice("Invite link copied.", "success"); return; }
-        if (action === "guess") { const characterId = $("#guess-select").value; if (!characterId) throw new Error("Choose a character for your guess."); return perform("guess", { characterId }); }
+        if (action === "guess") { const characterId = scope.querySelector("#guess-select")?.value; if (!characterId) throw new Error("Choose a character for your guess."); return perform("guess", { characterId }); }
         if (action === "start") { if (backgroundMutation) throw new Error("Wait for the lobby setting to finish saving, then start the game."); return perform("start"); }
         if (action === "kick") { await perform("kick"); setNotice("The player has been removed. The invite link is open again.", "success"); return; }
         if (action === "rematch") return perform("rematch");
@@ -896,7 +950,8 @@
   async function createRoom(event) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const data = { hostName: String(form.get("name")).trim(), mode: form.get("mode"), deckSize: Number(form.get("deckSize")), hostCharacter: $("#host-character").value, joinMode: form.get("joinMode") || "first" };
+    const filters = currentFilters(event.currentTarget);
+    const data = { hostName: String(form.get("name")).trim(), mode: form.get("mode"), deckSize: Number(form.get("deckSize")), genderFilter: filters.gender, licenseFilter: filters.license, hostCharacter: $("#host-character").value, joinMode: form.get("joinMode") || "first" };
     if (!data.hostCharacter) return setNotice("Choose your secret character first.");
     const button = event.currentTarget.querySelector("button[type=submit]");
     await withBusy(button, async () => {
@@ -948,6 +1003,7 @@
       const result = await callApi("preview", { id });
       const state = result.state;
       const listJoin = state.joinMode === "list";
+      pendingRoomFilters = { gender: state.genderFilter || "all", license: state.licenseFilter || "all" };
       const savedQueue = session?.id === id && session.seat === "queue" ? session : null;
       if ((state.status !== "waiting" && !(listJoin && savedQueue?.joinFormPending)) || (!listJoin && state.guestName)) { showJoinError("This room is already full or the game has started. Ask the host for an available room link."); return; }
       pendingQueueName = savedQueue?.queueName || "";
@@ -959,10 +1015,10 @@
       }
       pendingRoomMode = state.mode;
       home.hidden = true; $("#hero").hidden = true; room.hidden = false;
-      const allowed = rosterFor(state.mode);
+      const allowed = rosterFor(state.mode, state.genderFilter || "all", state.licenseFilter || "all");
       const savedName = pendingQueueName || "";
       const savedCharacter = pendingQueueCharacter || "";
-      room.innerHTML = `<div class="panel room-panel"><div class="room-top"><div><span class="eyebrow">JOIN ROOM · ${esc(state.modeLabel)}</span><h2>Choose your character</h2><span class="room-code">ROOM ${esc(state.id)}</span></div><button class="soft-button" id="cancel-join">Cancel</button></div><p class="subtle" style="margin:14px 0 20px">${listJoin ? "You’re on the host’s player list. Finish setup to show your name and become ready." : "Pick the character your opponent will try to identify. Your choice stays hidden until the round ends."}</p><form id="join-form"><label class="field-label" for="guest-name">Your name</label><input id="guest-name" name="name" maxlength="20" placeholder="Enter a nickname" value="${esc(savedName)}" required><label class="field-label" for="guest-character">Your secret character</label><select id="guest-character" name="character" required><option value="">Choose a character…</option>${allowed.map(c => `<option value="${esc(c.id)}" ${c.id === savedCharacter ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select><p class="streamer-hidden-note" data-streamer-note hidden>Your choice is hidden from the stream. Select it in the private window.</p><label class="streamer-toggle"><input class="streamer-toggle-input" type="checkbox" data-secret-select="guest-character"><span class="streamer-switch" aria-hidden="true"></span><span><b>Streamer Mode</b><small>Keep your character off stream</small></span></label><button class="primary-button full-button" type="submit">${listJoin ? "Save setup and get ready ✓" : "Join and get ready ✓"}</button></form></div>`;
+      room.innerHTML = `<div class="panel room-panel"><div class="room-top"><div><span class="eyebrow">JOIN ROOM · ${esc(state.modeLabel)}</span><h2>Choose your character</h2><span class="room-code">ROOM ${esc(state.id)}</span></div><button class="soft-button" id="cancel-join">Cancel</button></div><p class="subtle" style="margin:14px 0 20px">${listJoin ? "You’re on the host’s player list. Finish setup to show your name and become ready." : "Pick the character your opponent will try to identify. Your choice stays hidden until the round ends."}<br>Roster filters: ${esc((state.genderFilter || "all") === "all" ? "Any gender" : state.genderFilter)} · ${esc((state.licenseFilter || "all") === "all" ? "Any license" : state.licenseFilter)}</p><form id="join-form"><label class="field-label" for="guest-name">Your name</label><input id="guest-name" name="name" maxlength="20" placeholder="Enter a nickname" value="${esc(savedName)}" required><label class="field-label" for="guest-character">Your secret character</label><select id="guest-character" name="character" required><option value="">Choose a character…</option>${allowed.map(c => `<option value="${esc(c.id)}" ${c.id === savedCharacter ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select><p class="streamer-hidden-note" data-streamer-note hidden>Your choice is hidden from the stream. Select it in the private window.</p><label class="streamer-toggle"><input class="streamer-toggle-input" type="checkbox" data-secret-select="guest-character"><span class="streamer-switch" aria-hidden="true"></span><span><b>Streamer Mode</b><small>Keep your character off stream</small></span></label><button class="primary-button full-button" type="submit">${listJoin ? "Save setup and get ready ✓" : "Join and get ready ✓"}</button></form></div>`;
       syncStreamerControls();
       $("#guest-name").addEventListener("input", () => { if (session?.seat === "queue") { session.queueName = $("#guest-name").value; saveSession(session); } });
       $("#guest-character").addEventListener("change", () => { if (session?.seat === "queue") { session.character = $("#guest-character").value; saveSession(session); } });
@@ -971,15 +1027,28 @@
     } catch (error) { showJoinError(error.message || "The room link could not be loaded."); }
   }
 
-  $("#mode-options").addEventListener("change", event => { if (event.target.name === "mode") { updateChoiceCards(); updateDeckSizeOptions(event.target.value); fillCharacterSelect($("#host-character"), event.target.value); } });
+  $("#mode-options").addEventListener("change", event => { if (event.target.name === "mode") { updateChoiceCards(); const filters = currentFilters($("#create-form")); updateDeckSizeOptions(event.target.value, undefined, filters); fillCharacterSelect($("#host-character"), event.target.value, "", filters); updateRosterMatchCount(); } });
   $("#mode-options").addEventListener("change", event => {
     if (event.target.name === "mode" && privateContext?.selectId === "host-character") {
       privateContext.mode = event.target.value;
+      privateContext.filters = currentFilters($("#create-form"));
       renderPrivatePicker();
     }
   });
-  fillCharacterSelect($("#host-character"), "mixed");
-  updateDeckSizeOptions("mixed", 20);
+  function updateRosterMatchCount() {
+    const filters = currentFilters($("#create-form")), mode = $("#mode-options input[name='mode']:checked")?.value || "mixed", count = rosterFor(mode, filters.gender, filters.license).length;
+    const label = $("#roster-match-count"); if (label) label.textContent = `${count} characters match · maximum ${count} cards`;
+  }
+  function refreshHostFilters() {
+    const mode = $("#mode-options input[name='mode']:checked")?.value || "mixed", filters = currentFilters($("#create-form"));
+    updateDeckSizeOptions(mode, undefined, filters); fillCharacterSelect($("#host-character"), mode, "", filters); updateRosterMatchCount();
+    if (privateContext?.selectId === "host-character") { privateContext.filters = filters; privateContext.pendingChoice = ""; renderPrivatePicker(); }
+  }
+  $("#gender-filter").addEventListener("change", refreshHostFilters);
+  $("#license-filter").addEventListener("change", refreshHostFilters);
+  fillCharacterSelect($("#host-character"), "mixed", "", { gender: "all", license: "all" });
+  updateDeckSizeOptions("mixed", 20, { gender: "all", license: "all" });
+  updateRosterMatchCount();
   updateChoiceCards();
   setHostStep(1);
   initHostSteps();
@@ -991,7 +1060,8 @@
     if (!toggle.checked) { setStreamerMode(false); return; }
     const selectId = toggle.dataset.secretSelect;
     const mode = selectId === "host-character" ? document.querySelector('input[name="mode"]:checked')?.value || "mixed" : selectId === "rematch-host-character" ? session?.rematchDraft?.mode || currentState?.mode || "mixed" : selectId === "rematch-guest-character" ? currentState?.mode || "mixed" : pendingRoomMode;
-    setStreamerMode(true, { selectId, mode });
+    const filters = selectId === "host-character" ? currentFilters($("#create-form")) : selectId.startsWith("rematch-") ? { gender: session?.rematchDraft?.genderFilter || currentState?.genderFilter || "all", license: session?.rematchDraft?.licenseFilter || currentState?.licenseFilter || "all" } : pendingRoomFilters;
+    setStreamerMode(true, { selectId, mode, filters });
   });
   $("#invite-form").addEventListener("submit", event => {
     event.preventDefault();

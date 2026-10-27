@@ -6,43 +6,24 @@
   <meta name="theme-color" content="#0c0c0e">
   <meta name="robots" content="noindex">
   <title>Error · Lemi</title>
-  <link id="shared-style" rel="stylesheet">
+  <link rel="stylesheet" href="/website/SharedFiles/dbd-layout.css?v=dbd-layout-7">
+  <link rel="stylesheet" href="/website/SharedFiles/error-page.css?v=error-2">
   <style>
-    * { box-sizing: border-box; }
-    body.page-error { display: grid; place-items: center; min-height: 100svh; margin: 0; padding: 24px; background: #0c0c0e; color: #e9e9eb; font: 14px/1.5 "Segoe UI", system-ui, sans-serif; }
-    body.page-error .error-panel { position: relative; width: min(460px, 100%); padding: 52px 32px; border: 0; border-radius: 10px; background: #101013; text-align: center; box-shadow: inset 0 -1px 0 #ffffff09; }
-    .error-panel::before, .error-panel::after { position: absolute; content: ""; pointer-events: none; }
-    .error-panel::before { top: 0; left: 0; width: 130px; height: 44px; border-top: 1px solid #8f3046; border-left: 1px solid #8f3046; border-top-left-radius: 10px; }
-    .error-panel::after { right: 0; bottom: 0; width: 100px; height: 28px; border-right: 1px solid #b7354e; border-bottom: 2px solid #b7354e; border-bottom-right-radius: 10px; }
-    body.page-error h1 { margin: 0 0 30px; font: 650 clamp(36px, 8vw, 48px)/1.2 "Segoe UI", system-ui, sans-serif; letter-spacing: -.5px; }
-    .page-error .error-home { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 11px 20px; border: 1px solid #b52b40; border-bottom: 2px solid #691423; border-radius: 6px; background: #a61f34; color: #fff; font: 500 14px/1.4 "Segoe UI", system-ui, sans-serif; text-decoration: none; transition: background-color .15s, border-color .15s; }
-    .page-error .error-home:hover { background: #c02a41; border-color: #d3546a; }
-    .page-error .error-home:focus-visible { outline: 2px solid #dc7084; outline-offset: 4px; }
-    @media (prefers-reduced-motion: reduce) { .page-error .error-home { transition: none; } }
+    body.page-error { display: grid; place-items: center; min-height: 100svh; margin: 0; padding: 24px; background: #0c0c0e; color: #e9e9eb; font-family: "Segoe UI", system-ui, sans-serif; }
+    .page-error .error-shell { width: min(540px, 100%); box-sizing: border-box; }
+    .page-error .error-home { color: #fff; }
   </style>
 </head>
 <body class="dbd-layout page-error">
-  <main class="panel error-panel" aria-labelledby="error-title">
-    <h1 id="error-title">Error</h1>
-    <a class="button primary error-home" id="home-link" href="/index.html"><span aria-hidden="true">←</span> Back to main page</a>
+  <main class="error-shell" aria-labelledby="error-title" aria-describedby="error-description">
+    <p class="error-brand">Lemi <span aria-hidden="true">/</span> DBD tools</p>
+    <div class="error-heading">
+      <span class="error-mark" aria-hidden="true">!</span>
+      <h1 class="error-title" id="error-title">Error</h1>
+    </div>
+    <p class="error-intro">We couldn't open this page.</p>
+    <p class="error-description" id="error-description">The link may be incorrect or outdated, or the page may have been moved or removed. You can find all available tools on the main page.</p>
+    <a class="error-home" id="home-link" href="https://qlemi.github.io/website/"><span aria-hidden="true">←</span> Back to main page</a>
   </main>
-  <script>
-    (async () => {
-      const first = location.pathname.split('/').filter(Boolean)[0];
-      const roots = [...new Set([location.hostname.endsWith('.github.io') && first ? '/' + first + '/' : '/', '/'])];
-      for (const root of roots) {
-        try {
-          const base = new URL(root, location.origin);
-          const response = await fetch(new URL('SharedFiles/navigation.json', base), { signal: AbortSignal.timeout(2500) });
-          if (!response.ok) continue;
-          const data = await response.json();
-          if (data.schemaVersion !== 1 || data.home?.path !== 'index.html' || !Array.isArray(data.pages) || !data.pages.some(page => page.id === 'stats' && page.path === 'stats/stats.html')) continue;
-          document.getElementById('home-link').href = new URL(data.home.path, base).href;
-          document.getElementById('shared-style').href = new URL('SharedFiles/dbd-layout.css?v=dbd-layout-7', base).href;
-          break;
-        } catch {}
-      }
-    })();
-  </script>
 </body>
 </html>

@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "strimersy",
+      "name": "Strimersy",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_bloodyPartyStreamers.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "puddingi",
+      "name": "Puddingi",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_survivorPudding.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "muszle",
+      "name": "Muszle",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_hollowShell.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "cake",
+      "name": "Cake",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_escapeCake.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "frightful-flan-anniversary-6",
+      "name": "Frightful Flan (Anniversary 6)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_frightfulFlan.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "terrormisu-anniversary-7",
+      "name": "Terrormisu (Anniversary 7)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_terrormisu.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "screech-cobbler-anniversary-8",
+      "name": "Screech Cobbler (Anniversary 8)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_screechCobbler.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "coconut-scream-pie-anniversary-9",
+      "name": "Coconut Scream Pie (Anniversary 9)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsFavors_9thAnniversary.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "toothy-torte-anniversary-10",
+      "name": "Toothy Torte (Anniversary 10)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsFavors_10thAnniversary.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "bloodshot-eye-blood-moon",
+      "name": "Bloodshot Eye (Blood Moon)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_bloodshotEye.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "mistle-toes-bone-chill",
+      "name": "Mistle Toes (Bone Chill)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsFavors_Winter.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "red-envelope-chinski-nowy-rok",
+      "name": "Red Envelope (Chinski nowy rok)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_redEnvelope.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    },
+    {
+      "id": "arcane-dowsing-rod-halloween",
+      "name": "Arcane Dowsing Rod (Halloween)",
+      "aliases": [],
+      "roles": null,
+      "rarity": null,
+      "eventId": null,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconFavors_arcaneDousingRod.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": null,
+      "category": null
+    }
+  ]
+}

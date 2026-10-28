@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "base-game",
+      "name": "Base Game",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-1-the-last-breath",
+      "name": "Chapter 1: The Last Breath",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-2-the-halloween-chapter",
+      "name": "Chapter 2: The HALLOWEEN® Chapter",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-3-of-flesh-and-mud",
+      "name": "Chapter 3: Of Flesh and Mud",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-4-spark-of-madness",
+      "name": "Chapter 4: Spark of Madness",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-5-a-lullaby-for-the-dark",
+      "name": "Chapter 5: A Lullaby for the Dark",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-5-5-leatherface",
+      "name": "Chapter 5.5: LEATHERFACE™",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-6-a-nightmare-on-elm-street",
+      "name": "Chapter 6: A Nightmare on Elm Street™",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-7-the-saw-chapter",
+      "name": "Chapter 7: The SAW™ Chapter",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-8-curtain-call",
+      "name": "Chapter 8: Curtain Call",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-9-shattered-bloodline",
+      "name": "Chapter 9: Shattered Bloodline",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-10-darkness-among-us",
+      "name": "Chapter 10: Darkness Among Us",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-11-demise-of-the-faithful",
+      "name": "Chapter 11: Demise of the Faithful",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-12-ghost-face",
+      "name": "Chapter 12: Ghost Face®",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-13-stranger-things",
+      "name": "Chapter 13: Stranger Things",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-14-cursed-legacy",
+      "name": "Chapter 14: Cursed Legacy",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-15-chains-of-hate",
+      "name": "Chapter 15: Chains of Hate",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-16-silent-hill",
+      "name": "Chapter 16: Silent Hill",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-17-descend-beyond",
+      "name": "Chapter 17: Descend Beyond",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-18-a-binding-of-kin",
+      "name": "Chapter 18: A Binding of Kin",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-19-all-kill",
+      "name": "Chapter 19: All-Kill",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-20-resident-evil",
+      "name": "Chapter 20: Resident Evil",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-21-hellraiser",
+      "name": "Chapter 21: Hellraiser™",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-22-portrait-of-a-murder",
+      "name": "Chapter 22: Portrait of a Murder",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-23-sadako-rising",
+      "name": "Chapter 23: Sadako Rising",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-24-roots-of-dread",
+      "name": "Chapter 24: Roots of Dread",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-25-resident-evil-project-w",
+      "name": "Chapter 25: Resident Evil™: PROJECT W",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-26-forged-in-fog",
+      "name": "Chapter 26: Forged in Fog",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-27-tools-of-torment",
+      "name": "Chapter 27: Tools of Torment",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-28-end-transmission",
+      "name": "Chapter 28: End Transmission",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-29-alien",
+      "name": "Chapter 29: Alien",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-30-chucky",
+      "name": "Chapter 30: Chucky",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-31-all-things-wicked",
+      "name": "Chapter 31: All Things Wicked",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-32-dungeons-dragons",
+      "name": "Chapter 32: Dungeons & Dragons",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-33-castlevania",
+      "name": "Chapter 33: Castlevania",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-34-doomed-course",
+      "name": "Chapter 34: Doomed Course",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-35-tokyo-ghoul",
+      "name": "Chapter 35: Tokyo Ghoul",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-36-five-nights-at-freddy-s",
+      "name": "Chapter 36: Five Nights at Freddy's",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-37-sinister-grace",
+      "name": "Chapter 37: Sinister Grace",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-38-stranger-things-chapter-2",
+      "name": "Chapter 38: Stranger Things Chapter 2",
+      "releaseDate": null
+    },
+    {
+      "id": "chapter-jason",
+      "name": "Chapter: Jason",
+      "releaseDate": null
+    }
+  ]
+}

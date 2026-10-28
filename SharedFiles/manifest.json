@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "2026-10-26.1",
+  "imagePolicy": {
+    "primary": "remote",
+    "fallback": "images/fallback.webp",
+    "localFormat": "webp"
+  },
+  "files": {
+    "killers": "characters/killers.json",
+    "survivors": "characters/survivors.json",
+    "killerPerks": "perks/killer-perks.json",
+    "survivorPerks": "perks/survivor-perks.json",
+    "items": "inventory/items.json",
+    "itemAddons": "inventory/item-addons.json",
+    "offerings": "inventory/offerings.json",
+    "chapters": "metadata/chapters.json",
+    "events": "metadata/events.json",
+    "categories": "metadata/categories.json",
+    "prestige": "metadata/prestige.json"
+  }
+}

@@ -1,0 +1,1127 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "dwight-fairfield",
+      "name": "Dwight Fairfield",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S01_DwightFairfield_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 1,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:dwight-fairfield"
+    },
+    {
+      "id": "meg-thomas",
+      "name": "Meg Thomas",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S02_MegThomas_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 2,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:meg-thomas"
+    },
+    {
+      "id": "claudette-morel",
+      "name": "Claudette Morel",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S03_ClaudetteMorel_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 3,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:claudette-morel"
+    },
+    {
+      "id": "jake-park",
+      "name": "Jake Park",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S04_JakePark_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 4,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:jake-park"
+    },
+    {
+      "id": "nea-karlsson",
+      "name": "Nea Karlsson",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S05_NeaKarlsson_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 5,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:nea-karlsson"
+    },
+    {
+      "id": "laurie-strode",
+      "name": "Laurie Strode",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S06_LaurieStrode_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 6,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:laurie-strode"
+    },
+    {
+      "id": "ace-visconti",
+      "name": "Ace Visconti",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S07_AceVisconti_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 7,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:ace-visconti"
+    },
+    {
+      "id": "bill-overbeck",
+      "name": "Bill Overbeck",
+      "aliases": [
+        "William Bill Overbeck"
+      ],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S08_BillOverbeck_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 8,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:bill-overbeck"
+    },
+    {
+      "id": "feng-min",
+      "name": "Feng Min",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S09_FengMin_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 9,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:feng-min"
+    },
+    {
+      "id": "david-king",
+      "name": "David King",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S10_DavidKing_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 10,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:david-king"
+    },
+    {
+      "id": "quentin-smith",
+      "name": "Quentin Smith",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S11_QuentinSmith_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 11,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:quentin-smith"
+    },
+    {
+      "id": "david-tapp",
+      "name": "David Tapp",
+      "aliases": [
+        "Detective Tapp"
+      ],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S12_DavidTapp_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 12,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:david-tapp"
+    },
+    {
+      "id": "kate-denson",
+      "name": "Kate Denson",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S13_KateDenson_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 13,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:kate-denson"
+    },
+    {
+      "id": "adam-francis",
+      "name": "Adam Francis",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S14_AdamFrancis_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 14,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:adam-francis"
+    },
+    {
+      "id": "jeff-johansen",
+      "name": "Jeff Johansen",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S15_JeffJohansen_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 15,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:jeff-johansen"
+    },
+    {
+      "id": "jane-romero",
+      "name": "Jane Romero",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S16_JaneRomero_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 16,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:jane-romero"
+    },
+    {
+      "id": "ash-williams",
+      "name": "Ash Williams",
+      "aliases": [
+        "Ash J. Williams"
+      ],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S17_AshWilliams_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 17,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:ash-williams"
+    },
+    {
+      "id": "nancy-wheeler",
+      "name": "Nancy Wheeler",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S18_NancyWheeler_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 18,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:nancy-wheeler"
+    },
+    {
+      "id": "steve-harrington",
+      "name": "Steve Harrington",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S19_SteveHarrington_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 19,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:steve-harrington"
+    },
+    {
+      "id": "yui-kimura",
+      "name": "Yui Kimura",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S20_YuiKimura_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 20,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:yui-kimura"
+    },
+    {
+      "id": "zarina-kassir",
+      "name": "Zarina Kassir",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S21_ZarinaKassir_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 21,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:zarina-kassir"
+    },
+    {
+      "id": "cheryl-mason",
+      "name": "Cheryl Mason",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S22_CherylMason_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 22,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:cheryl-mason"
+    },
+    {
+      "id": "felix-richter",
+      "name": "Felix Richter",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S23_FelixRichter_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 23,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:felix-richter"
+    },
+    {
+      "id": "elodie-rakoto",
+      "name": "Élodie Rakoto",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S24_ElodieRakoto_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 24,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:elodie-rakoto"
+    },
+    {
+      "id": "yun-jin-lee",
+      "name": "Yun-Jin Lee",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S25_YunJinLee_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S25_LeeYun-jin_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 25,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:yun-jin-lee"
+    },
+    {
+      "id": "jill-valentine",
+      "name": "Jill Valentine",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S26_JillValentine_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 26,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:jill-valentine"
+    },
+    {
+      "id": "leon-scott-kennedy",
+      "name": "Leon Scott Kennedy",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S27_LeonScottKennedy_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 27,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:leon-scott-kennedy"
+    },
+    {
+      "id": "mikaela-reid",
+      "name": "Mikaela Reid",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S28_MikaelaReid_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 28,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:mikaela-reid"
+    },
+    {
+      "id": "jonah-vasquez",
+      "name": "Jonah Vasquez",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S29_JonahVasquez_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 29,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:jonah-vasquez"
+    },
+    {
+      "id": "yoichi-asakawa",
+      "name": "Yoichi Asakawa",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S30_YoichiAsakawa_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 30,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:yoichi-asakawa"
+    },
+    {
+      "id": "haddie-kaur",
+      "name": "Haddie Kaur",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S31_HaddieKaur_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 31,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:haddie-kaur"
+    },
+    {
+      "id": "ada-wong",
+      "name": "Ada Wong",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S32_AdaWong_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 32,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:ada-wong"
+    },
+    {
+      "id": "rebecca-chambers",
+      "name": "Rebecca Chambers",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S33_RebeccaChambers_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 33,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:rebecca-chambers"
+    },
+    {
+      "id": "vittorio-toscano",
+      "name": "Vittorio Toscano",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S34_VittorioToscano_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 34,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:vittorio-toscano"
+    },
+    {
+      "id": "thalita-lyra",
+      "name": "Thalita Lyra",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S35_ThalitaLyra_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 35,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:thalita-lyra"
+    },
+    {
+      "id": "renato-lyra",
+      "name": "Renato Lyra",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S36_RenatoLyra_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 36,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:renato-lyra"
+    },
+    {
+      "id": "gabriel-soma",
+      "name": "Gabriel Soma",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S37_GabrielSoma_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 37,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:gabriel-soma"
+    },
+    {
+      "id": "nicolas-cage",
+      "name": "Nicolas Cage",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S38_NicolasCage_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 38,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:nicolas-cage"
+    },
+    {
+      "id": "ellen-ripley",
+      "name": "Ellen Ripley",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S39_EllenRipley_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 39,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:ellen-ripley"
+    },
+    {
+      "id": "alan-wake",
+      "name": "Alan Wake",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S40_AlanWake_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 40,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:alan-wake"
+    },
+    {
+      "id": "sable-ward",
+      "name": "Sable Ward",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S41_SableWard_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 41,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:sable-ward"
+    },
+    {
+      "id": "aestri-yazar",
+      "name": "Aestri Yazar",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S42_TheTroupe_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 42,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:aestri-yazar"
+    },
+    {
+      "id": "baermar-uraz",
+      "name": "Baermar Uraz",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S42_TheTroupe_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 43,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:baermar-uraz"
+    },
+    {
+      "id": "lara-croft",
+      "name": "Lara Croft",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S43_LaraCroft_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 44,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:lara-croft"
+    },
+    {
+      "id": "trevor-belmont",
+      "name": "Trevor Belmont",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S44_TrevorBelmont_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 45,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:trevor-belmont"
+    },
+    {
+      "id": "taurie-cain",
+      "name": "Taurie Cain",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S45_TaurieCain_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 46,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:taurie-cain"
+    },
+    {
+      "id": "orela-rose",
+      "name": "Orela Rose",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S46_OrelaRose_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 47,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:orela-rose"
+    },
+    {
+      "id": "rick-grimes",
+      "name": "Rick Grimes",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S47_RickGrimes_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 48,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:rick-grimes"
+    },
+    {
+      "id": "michonne-grimes",
+      "name": "Michonne Grimes",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/S48_MichonneGrimes_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 49,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:michonne-grimes"
+    },
+    {
+      "id": "vee-boonyasak",
+      "name": "Vee Boonyasak",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_S49_VeeBoonyasak_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S49_VeeBoonyasak_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 50,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:vee-boonyasak"
+    },
+    {
+      "id": "dustin-henderson",
+      "name": "Dustin Henderson",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_S50_DustinHenderson_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S50_DustinHenderson_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 51,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "survivor:dustin-henderson"
+    },
+    {
+      "id": "eleven",
+      "name": "Eleven",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_S51_Eleven_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S51_Eleven_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 52,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "survivor:eleven"
+    },
+    {
+      "id": "kwon-tae-young",
+      "name": "Kwon Tae-young",
+      "aliases": [
+        "Kwon Tae-Young"
+      ],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_S52_KwonTaeYoung_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S52_KwonTae-young_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 53,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:kwon-tae-young"
+    },
+    {
+      "id": "shane-wiigwaas",
+      "name": "Shane Wiigwaas",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_S53_ShaneWiigwaas_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S53_ShaneWiigwaas_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 54,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "male",
+      "license": "original",
+      "gameId": "survivor:shane-wiigwaas"
+    },
+    {
+      "id": "aurora-stardotter",
+      "name": "Aurora Stardotter",
+      "aliases": [],
+      "role": "survivor",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_S54_Aurora_Portrait.png",
+        "alternatives": [
+          "https://deadbydaylight.wiki.gg/images/S54_AuroraStardotter_Portrait.png"
+        ],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 55,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "survivor:aurora-stardotter"
+    }
+  ]
+}

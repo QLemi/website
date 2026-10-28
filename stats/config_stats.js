@@ -1,0 +1,7 @@
+const STATS_CONFIG = {
+  "SHEET_ID": "1Lwf_RFJEeCRRUUbo6eCKwxCU1HHPSghIJpn8wfqs57c",
+  "SHEET_KILLERS_GID": "0",
+  "SHEET_SURVIVORS_GID": "322786289",
+  "DEFAULT_MODE": "killers",
+  "SHOW_CATEGORY_ICONS": true
+};

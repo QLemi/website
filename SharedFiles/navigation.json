@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "home": {
+    "label": "All tools",
+    "path": "index.html"
+  },
+  "pages": [
+    {
+      "id": "streaks",
+      "label": "Streaks",
+      "path": "streaki/streaki.html"
+    },
+    {
+      "id": "stats",
+      "label": "Account Stats",
+      "path": "stats/stats.html"
+    },
+    {
+      "id": "prestige",
+      "label": "Prestige Planner",
+      "path": "prestige-planner/index.html"
+    },
+    {
+      "id": "builds",
+      "label": "Builds & Info",
+      "path": "DBDKillersInfo/DBDKillersInfo.html"
+    },
+    {
+      "id": "randomizer",
+      "label": "Randomizer",
+      "path": "fortune-wheel/index.html"
+    },
+    {
+      "id": "guess-who",
+      "label": "Guess Who",
+      "path": "GraZgadnijKtoTo/GraZgadnijKtoTo.html"
+    },
+    {
+      "id": "cards",
+      "label": "Player Cards",
+      "path": "player-card-creator/index.html"
+    },
+    {
+      "id": "loadout",
+      "label": "Loadout Checker",
+      "path": "loadout/loadout.html"
+    }
+  ]
+}

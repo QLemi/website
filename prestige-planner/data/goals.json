@@ -1,0 +1,316 @@
+{
+  "app": "dbd-prestige-goals",
+  "version": 2,
+  "goals": [
+    {
+      "id": "bab9a820-d43a-45a1-ae19-939b32b15dce",
+      "character": "gabriel-soma",
+      "category": "temporary",
+      "start": 20,
+      "target": 26,
+      "priority": 5,
+      "expires": "2026-11-03T15:00:00.000Z",
+      "note": "Halloween"
+    },
+    {
+      "id": "c5b46925-411d-491f-9d3d-308e9606f002",
+      "character": "kwon-tae-young",
+      "category": "temporary",
+      "start": 21,
+      "target": 26,
+      "priority": 5,
+      "expires": "2026-11-03T15:00:00.000Z",
+      "note": "Halloween"
+    },
+    {
+      "id": "77f9fed7-a2a5-42d2-b03a-e5016d737709",
+      "character": "goodguy",
+      "category": "general",
+      "start": 22,
+      "target": 31,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "6665b87c-60c4-4845-a9a2-9777e2fa7e67",
+      "character": "nightmare",
+      "category": "general",
+      "start": 22,
+      "target": 26,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "7c4fafee-ba30-4a33-a158-eb2f5c12f6f8",
+      "character": "gabriel-soma",
+      "category": "long-term",
+      "start": 20,
+      "target": 100,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "d141e61f-4c6d-4d7e-9c53-0b7c1f335839",
+      "character": "kwon-tae-young",
+      "category": "long-term",
+      "start": 21,
+      "target": 100,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "2af55c27-d92a-44b8-b7f8-42094c322d02",
+      "character": "goodguy",
+      "category": "long-term",
+      "start": 22,
+      "target": 51,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "51596b03-36dd-4541-97bd-2a26f9253572",
+      "character": "slasher",
+      "category": "long-term",
+      "start": 32,
+      "target": 51,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "35e9c7fc-5979-4c4d-8c9d-2af2c2de5d25",
+      "character": "nightmare",
+      "category": "long-term",
+      "start": 22,
+      "target": 51,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "9be02008-b4a3-4803-b47b-603257bea00c",
+      "character": "pig",
+      "category": "long-term",
+      "start": 21,
+      "target": 51,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "d7f7a13e-c12b-4c76-8d70-99e8a29781ba",
+      "character": "demogorgon",
+      "category": "short-term",
+      "start": 16,
+      "target": 21,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "e54f0d7b-91c7-410a-8c51-0e3c48e470fa",
+      "character": "legion",
+      "category": "short-term",
+      "start": 23,
+      "target": 26,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "61e431f3-fcd5-4c0b-b5e4-f736f235c10c",
+      "character": "singularity",
+      "category": "short-term",
+      "start": 14,
+      "target": 16,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "ebeb524e-f883-4839-b56c-e9ac684f962a",
+      "character": "xenomorph",
+      "category": "short-term",
+      "start": 14,
+      "target": 16,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "d16f66c8-0b27-4de2-bd54-f6ad37a0d157",
+      "character": "unknown",
+      "category": "general",
+      "start": 26,
+      "target": 31,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "8e2ea0b1-3bcb-4821-a534-d6a471522e20",
+      "character": "darklord",
+      "category": "short-term",
+      "start": 25,
+      "target": 26,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "f5634feb-7e07-4962-aa16-568160c75a89",
+      "character": "slasher",
+      "category": "general",
+      "start": 32,
+      "target": 36,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "94fadc41-c5bc-4c24-9d22-cbb8f7d6758a",
+      "character": "plague",
+      "category": "long-term",
+      "start": 22,
+      "target": 51,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "7cd9d144-d098-441a-81a0-b46032abf9a7",
+      "character": "spirit",
+      "category": "long-term",
+      "start": 53,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "4fceb16f-b1ce-4443-95fb-350e8fab00f7",
+      "character": "shape",
+      "category": "general",
+      "start": 21,
+      "target": 26,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "d1607bc6-1c0b-4cbc-b109-e86bd31b210b",
+      "character": "cannibal",
+      "category": "general",
+      "start": 18,
+      "target": 21,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "237db398-56c4-48d1-b97a-04c6185fef0a",
+      "character": "demogorgon",
+      "category": "long-term",
+      "start": 16,
+      "target": 51,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "965059b7-5d90-41ff-a5a1-2d44af493099",
+      "character": "oni",
+      "category": "general",
+      "start": 17,
+      "target": 26,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "04679c08-5308-45a9-b479-d094dc6d9f57",
+      "character": "shape",
+      "category": "long-term",
+      "start": 21,
+      "target": 51,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "058f7253-2181-4932-a86a-92a8ead25298",
+      "character": "darklord",
+      "category": "long-term",
+      "start": 25,
+      "target": 51,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "77d8b050-575d-41ef-83a0-e4ecc8734316",
+      "character": "lich",
+      "category": "general",
+      "start": 14,
+      "target": 16,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "cc791bef-c185-4c45-beff-98357f74ffb1",
+      "character": "vee-boonyasak",
+      "category": "long-term",
+      "start": 3,
+      "target": 21,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "2bb6d9fe-d4b6-4293-a321-2c91cfbd703b",
+      "character": "taurie-cain",
+      "category": "long-term",
+      "start": 4,
+      "target": 21,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "dbd31daf-9ce2-4894-8ecd-dee94be29620",
+      "character": "krasue",
+      "category": "general",
+      "start": 14,
+      "target": 21,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "dcb87d2d-96e0-472d-898f-6281e5c8a7ff",
+      "character": "mastermind",
+      "category": "general",
+      "start": 19,
+      "target": 21,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "b877b0dc-3b93-4660-9f50-e55d5d6fb3c1",
+      "character": "plague",
+      "category": "general",
+      "start": 22,
+      "target": 31,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    }
+  ]
+}

@@ -1,69 +1,136 @@
-
-
-
-
+let startupSavingEnabled = false;
+function stableData(value) {
+  if (Array.isArray(value)) return value.map(stableData);
+  if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort().map(key => [key, stableData(value[key])]));
+  return value;
+}
+async function chooseStartupData() {
+  let saved = null;
+  let storageAvailable = true;
+  try {
+    saved = localStorage.getItem(STORAGE_KEY);
+  } catch {
+    storageAvailable = false;
+  }
+  const baseConfig = JSON.parse(JSON.stringify(CONFIG));
+  const prepare = raw => {
+    Object.keys(CONFIG).forEach(key => delete CONFIG[key]);
+    Object.assign(CONFIG, JSON.parse(JSON.stringify(baseConfig)));
+    state = {
+      killers: [],
+      builds: []
+    };
+    loadData(raw);
+    if (typeof ensureSurvivorMeta === 'function') ensureSurvivorMeta();
+    applyCoreConfigToDraft();
+    return {
+      state: JSON.parse(JSON.stringify(state)),
+      config: JSON.parse(JSON.stringify(CONFIG))
+    };
+  };
+  const fileData = prepare(null);
+  let browserData = null;
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      if (parsed && Array.isArray(parsed.killers) && Array.isArray(parsed.builds)) browserData = prepare(saved);
+    } catch {}
+  }
+  let chosen = browserData || fileData;
+  const different = saved && (!browserData || JSON.stringify(stableData(fileData.state)) !== JSON.stringify(stableData(browserData.state)));
+  if (different) {
+    const dialog = document.createElement('dialog');
+    dialog.id = 'startup-data-choice';
+    dialog.className = 'startup-data-choice';
+    const heading = document.createElement('h2');
+    heading.id = 'startup-data-choice-title';
+    heading.textContent = 'Wybierz źródło danych';
+    dialog.setAttribute('aria-labelledby', heading.id);
+    const description = document.createElement('p');
+    description.textContent = browserData ? 'Dane zapisane w przeglądarce różnią się od danych w plikach strony.' : 'Dane zapisane w przeglądarce mają nieprawidłowy format.';
+    const warning = document.createElement('p');
+    warning.className = 'startup-data-warning';
+    warning.textContent = 'Wybór danych z plików strony usunie dotychczasowy zapis przeglądarki i nadpisze go danymi z plików.';
+    const actions = document.createElement('div');
+    actions.className = 'settings-actions';
+    const fileButton = document.createElement('button');
+    fileButton.type = 'button';
+    fileButton.className = 'btn btn-danger';
+    fileButton.id = 'startup-use-file';
+    fileButton.textContent = 'Dane z plików strony — nadpisz zapis';
+    const browserButton = document.createElement('button');
+    browserButton.type = 'button';
+    browserButton.className = 'btn btn-primary';
+    browserButton.id = 'startup-use-browser';
+    browserButton.textContent = 'Zachowaj dane z przeglądarki';
+    browserButton.disabled = !browserData;
+    actions.append(browserButton, fileButton);
+    dialog.append(heading, description, warning, actions);
+    document.body.appendChild(dialog);
+    dialog.addEventListener('cancel', event => event.preventDefault());
+    const useFile = await new Promise(resolve => {
+      fileButton.addEventListener('click', () => resolve(true), {
+        once: true
+      });
+      browserButton.addEventListener('click', () => resolve(false), {
+        once: true
+      });
+      dialog.showModal();
+      (browserData ? browserButton : fileButton).focus();
+    });
+    chosen = useFile ? fileData : browserData;
+    dialog.close();
+    dialog.remove();
+    if (useFile) {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        storageAvailable = false;
+      }
+    }
+  }
+  state = chosen.state;
+  Object.keys(CONFIG).forEach(key => delete CONFIG[key]);
+  Object.assign(CONFIG, chosen.config);
+  startupSavingEnabled = storageAvailable;
+  try {
+    saveData();
+  } catch {
+    startupSavingEnabled = false;
+    showToast('Nie udało się zapisać danych w przeglądarce.');
+  }
+}
+function inlineArgument(value) {
+  return escapeAttr(JSON.stringify(String(value ?? '')));
+}
 const STORAGE_KEY = "dbd_killer_hub_v56";
-
-
-const STARTER_CONFIG = JSON.parse(JSON.stringify(CONFIG));
+let STARTER_CONFIG = JSON.parse(JSON.stringify(CONFIG));
 if (!Array.isArray(STARTER_CONFIG.killerTags)) STARTER_CONFIG.killerTags = [];
 if (!Array.isArray(STARTER_CONFIG.buildTags)) STARTER_CONFIG.buildTags = [];
-const STARTER_PERK_NAMES = new Set([
-  ...((INITIAL_DATA && INITIAL_DATA.perks) || []),
-  ...((STARTER_CONFIG.killerPerks || []).map(p => p.name)),
-  ...((STARTER_CONFIG.survivorPerks || []).map(p => p.name)),
-  ...Object.keys(STARTER_CONFIG.perkIcons || {})
-].filter(Boolean).map(name => String(name).toLowerCase()));
-
-
-let state = { killers: [], builds: [] };
-const CORE_CONFIG_KEYS = ["killerPerks", "survivorPerks", "survivorRoster", "survivorPortraits", "perkIcons", "killerTags", "buildTags", "items", "itemAddons", "itemOrder", "addonOrder", "rarityColors"];
+let STARTER_PERK_NAMES = new Set([...(INITIAL_DATA && INITIAL_DATA.perks || []), ...(STARTER_CONFIG.killerPerks || []).map(p => p.name), ...(STARTER_CONFIG.survivorPerks || []).map(p => p.name), ...Object.keys(STARTER_CONFIG.perkIcons || {})].filter(Boolean).map(name => String(name).toLowerCase()));
+let state = {
+  killers: [],
+  builds: []
+};
+const CORE_CONFIG_KEYS = ["killerTags", "buildTags", "itemOrder", "addonOrder"];
 function coreConfigSnapshot(source = CONFIG) {
-  const out = {};
-  CORE_CONFIG_KEYS.forEach(key => { out[key] = JSON.parse(JSON.stringify(source[key] || (key.endsWith("Perks") || key.endsWith("Tags") || key.endsWith("Roster") || key === "survivorPortraits" || key === "items" || key === "itemAddons" ? [] : {}))); });
-  ["killerTags", "buildTags"].forEach(key => out[key].forEach(tag => delete tag._locked));
-  return out;
+  const result = SharedDbd.localConfig(source);
+  delete result.SHOW_OWNER_UI;
+  for (const key of ['killerTags', 'buildTags']) (result[key] || []).forEach(tag => delete tag._locked);
+  return result;
 }
 function configForFile() {
-  const out = JSON.parse(JSON.stringify(CONFIG));
-  const core = coreConfigSnapshot(CONFIG);
-  CORE_CONFIG_KEYS.forEach(key => { out[key] = core[key]; });
-  return out;
+  return SharedDbd.localConfig(CONFIG);
 }
-const STARTER_CORE_CONFIG = coreConfigSnapshot(STARTER_CONFIG);
+let STARTER_CORE_CONFIG = coreConfigSnapshot(STARTER_CONFIG);
 function applyCoreConfigDraft() {
-  if (state._coreConfig) {
-    CORE_CONFIG_KEYS.forEach(key => {
-      if (state._coreConfig[key] !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(state._coreConfig[key]));
-    });
-    return;
-  }
-  
-  const legacyKillerTags = state.killerTags || [];
-  const legacyBuildTags = state.buildTags || [];
-  const starterKillerTags = STARTER_CONFIG.killerTags || [];
-  const starterBuildTags = STARTER_CONFIG.buildTags || [];
-  if (legacyKillerTags.length && JSON.stringify(legacyKillerTags) !== JSON.stringify(starterKillerTags)) CONFIG.killerTags = JSON.parse(JSON.stringify(legacyKillerTags));
-  if (legacyBuildTags.length && JSON.stringify(legacyBuildTags) !== JSON.stringify(starterBuildTags)) CONFIG.buildTags = JSON.parse(JSON.stringify(legacyBuildTags));
-  CONFIG.killerTags = CONFIG.killerTags || [];
-  CONFIG.buildTags = CONFIG.buildTags || [];
-  if (!CONFIG.itemOrder || !Object.keys(CONFIG.itemOrder).length) CONFIG.itemOrder = JSON.parse(JSON.stringify(state.itemOrder || CONFIG.itemOrder || {}));
-  if (!CONFIG.addonOrder || !Object.keys(CONFIG.addonOrder).length) CONFIG.addonOrder = JSON.parse(JSON.stringify(state.addonOrder || CONFIG.addonOrder || {}));
-  const removed = new Set((state._removedPerks || []).map(n => String(n).toLowerCase()));
-  if (removed.size) {
-    CONFIG.killerPerks = (CONFIG.killerPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
-    CONFIG.survivorPerks = (CONFIG.survivorPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
-    Object.keys(CONFIG.perkIcons || {}).forEach(n => { if (removed.has(n.toLowerCase())) delete CONFIG.perkIcons[n]; });
-  }
-  (state._customPerks || []).forEach(p => {
-    if (!p || !p.name || removed.has(String(p.name).toLowerCase())) return;
-    const pool = p.role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
-    if (!pool.some(x => x.name.toLowerCase() === p.name.toLowerCase())) pool.push({ name: p.name, icon: p.icon || CONFIG.placeholderPerk });
-  });
-  CONFIG.perkIcons = CONFIG.perkIcons || {};
-  Object.assign(CONFIG.perkIcons, state._perkIcons || {}, state._pendingPerkIcons || {});
+  const draft = state._coreConfig || state;
+  for (const key of CORE_CONFIG_KEYS) if (draft[key] !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(draft[key]));
+  SharedDbd.applyConfig();
 }
-function applyCoreConfigToDraft() { state._coreConfig = coreConfigSnapshot(CONFIG); }
+function applyCoreConfigToDraft() {
+  state._coreConfig = coreConfigSnapshot(CONFIG);
+}
 function clearLegacyCoreMetadata() {
   delete state._perkIcons;
   delete state._customPerks;
@@ -76,98 +143,96 @@ function clearLegacyCoreMetadata() {
   delete state.addonOrder;
   delete state.addons;
 }
-
-
 let formSelectedTags = [];
 let formSelectedPerks = [];
 let formSelectedAddons = [];
 let formSelectedCombos = [];
-
-
-
-
-
 let activeFilterTags = [];
 let activeBuildFilterTags = [];
 let excludedBuildFilterTags = [];
-const buildPerkFilters = { builds: [], "killer-profile": [] };
+const buildPerkFilters = {
+  builds: [],
+  "killer-profile": []
+};
 let killersListScrollY = 0;
 let showAllKillerTags = false;
-
-
-
-function getKillerTags() { return CONFIG.killerTags || []; }
-function getBuildTags() { return CONFIG.buildTags || []; }
+function getKillerTags() {
+  return CONFIG.killerTags || [];
+}
+function getBuildTags() {
+  return CONFIG.buildTags || [];
+}
 function findTagMeta(name, list) {
   return (list || []).find(x => x.id === name || x.name === name);
 }
-
-const TIER_RANKS = ["S+","S","S-","A+","A","A-","B+","B","B-","C+","C","C-","D+","D","D-","E+","E","E-","F+","F",""];
-const TIER_SORT_ORDER = { "S+":0,"S":1,"S-":2,"A+":3,"A":4,"A-":5,"B+":6,"B":7,"B-":8,"C+":9,"C":10,"C-":11,"D+":12,"D":13,"D-":14,"E+":15,"E":16,"E-":17,"F+":18,"F":19,"":99 };
-
+const TIER_RANKS = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "E+", "E", "E-", "F+", "F", ""];
+const TIER_SORT_ORDER = {
+  "S+": 0,
+  "S": 1,
+  "S-": 2,
+  "A+": 3,
+  "A": 4,
+  "A-": 5,
+  "B+": 6,
+  "B": 7,
+  "B-": 8,
+  "C+": 9,
+  "C": 10,
+  "C-": 11,
+  "D+": 12,
+  "D": 13,
+  "D-": 14,
+  "E+": 15,
+  "E": 16,
+  "E-": 17,
+  "F+": 18,
+  "F": 19,
+  "": 99
+};
 function tierRankValue(t) {
   if (!t) return 99;
   const key = String(t).toUpperCase();
   return TIER_SORT_ORDER[key] !== undefined ? TIER_SORT_ORDER[key] : 99;
 }
-
 function formatReleaseDate(iso) {
   if (!iso || iso === "—") return "—";
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (m) return m[3] + "." + m[2] + "." + m[1];
   return String(iso);
 }
-
-
 function renderMarkdown(raw) {
   if (!raw || raw === "placeholder") return "";
   let t = escapeHtml(String(raw));
-  
   t = t.replace(/```([\s\S]*?)```/g, (_, c) => `<pre class="md-pre">${c}</pre>`);
-  
   t = t.replace(/`([^`]+)`/g, '<code class="md-code">$1</code>');
-  
   t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a class="md-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-  
-  t = t.replace(/\[(red|orange|yellow|green|blue|purple|pink|gray|grey|white|cyan)\]([\s\S]*?)\[\/\1\]/gi,
-    (_, c, body) => `<span class="md-color md-${c.toLowerCase()}">${body}</span>`);
-  
+  t = t.replace(/\[(red|orange|yellow|green|blue|purple|pink|gray|grey|white|cyan)\]([\s\S]*?)\[\/\1\]/gi, (_, c, body) => `<span class="md-color md-${c.toLowerCase()}">${body}</span>`);
   t = t.replace(/^### (.+)$/gm, '<h5 class="md-h3">$1</h5>');
   t = t.replace(/^## (.+)$/gm, '<h4 class="md-h2">$1</h4>');
   t = t.replace(/^# (.+)$/gm, '<h3 class="md-h1">$1</h3>');
-  
   t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  
   t = t.replace(/__([^_]+)__/g, '<span class="md-u">$1</span>');
-  
   t = t.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  
   t = t.replace(/~~([^~]+)~~/g, '<s>$1</s>');
-  
   t = t.replace(/\|\|([^|]+)\|\|/g, '<span class="md-spoiler" title="Click to reveal" onclick="this.classList.toggle(\'revealed\')">$1</span>');
-  
   t = t.replace(/^&gt; (.+)$/gm, '<blockquote class="md-quote">$1</blockquote>');
-  
   t = t.replace(/^- (.+)$/gm, '<li class="md-li">$1</li>');
-  t = t.replace(/(<li class="md-li">[\s\S]*?<\/li>)(?:\s*<li class="md-li">[\s\S]*?<\/li>)*/g, (m) => `<ul class="md-ul">${m}</ul>`);
-  
+  t = t.replace(/(<li class="md-li">[\s\S]*?<\/li>)(?:\s*<li class="md-li">[\s\S]*?<\/li>)*/g, m => `<ul class="md-ul">${m}</ul>`);
   t = t.replace(/\n/g, '<br>');
-  
   t = t.replace(/<(h[3-5]|ul|li|blockquote|pre)([^>]*)><br>/g, '<$1$2>');
   t = t.replace(/<br><\/(h[3-5]|ul|blockquote|pre)>/g, '</$1>');
   return t;
 }
-
 function formatToolbarHTML(textareaId) {
   return `<div class="fmt-toolbar">
-    <button type="button" class="fmt-btn" title="Bold" onclick="wrapFmt('${textareaId}','**','**')"><b>B</b></button>
-    <button type="button" class="fmt-btn" title="Italic" onclick="wrapFmt('${textareaId}','*','*')"><i>I</i></button>
-    <button type="button" class="fmt-btn" title="Underline" onclick="wrapFmt('${textareaId}','__','__')"><span style="text-decoration:underline">U</span></button>
-    <button type="button" class="fmt-btn" title="Strikethrough" onclick="wrapFmt('${textareaId}','~~','~~')"><s>S</s></button>
-    <button type="button" class="fmt-btn" title="Heading" onclick="wrapFmt('${textareaId}','# ','')">H</button>
-    <button type="button" class="fmt-btn" title="Link" onclick="insertLinkFmt('${textareaId}')">Link</button>
-    <button type="button" class="fmt-btn" title="Spoiler" onclick="wrapFmt('${textareaId}','||','||')">||</button>
-    <select class="fmt-color" onchange="if(this.value){wrapFmt('${textareaId}','['+this.value+']','[/'+this.value+']');this.value=''}" title="Color">
+    <button type="button" class="fmt-btn" title="Bold" onclick="wrapFmt(${inlineArgument(textareaId)},'**','**')"><b>B</b></button>
+    <button type="button" class="fmt-btn" title="Italic" onclick="wrapFmt(${inlineArgument(textareaId)},'*','*')"><i>I</i></button>
+    <button type="button" class="fmt-btn" title="Underline" onclick="wrapFmt(${inlineArgument(textareaId)},'__','__')"><span style="text-decoration:underline">U</span></button>
+    <button type="button" class="fmt-btn" title="Strikethrough" onclick="wrapFmt(${inlineArgument(textareaId)},'~~','~~')"><s>S</s></button>
+    <button type="button" class="fmt-btn" title="Heading" onclick="wrapFmt(${inlineArgument(textareaId)},'# ','')">H</button>
+    <button type="button" class="fmt-btn" title="Link" onclick="insertLinkFmt(${inlineArgument(textareaId)})">Link</button>
+    <button type="button" class="fmt-btn" title="Spoiler" onclick="wrapFmt(${inlineArgument(textareaId)},'||','||')">||</button>
+    <select class="fmt-color" onchange="if(this.value){wrapFmt(${inlineArgument(textareaId)},'['+this.value+']','[/'+this.value+']');this.value=''}" title="Color">
       <option value="">Color</option>
       <option value="red">Red</option>
       <option value="orange">Orange</option>
@@ -180,7 +245,7 @@ function formatToolbarHTML(textareaId) {
       <option value="gray">Gray</option>
       <option value="white">White</option>
     </select>
-    <button type="button" class="fmt-btn fmt-info" title="Formatting help" onclick="toggleFmtHelp('${textareaId}')">?</button>
+    <button type="button" class="fmt-btn fmt-info" title="Formatting help" onclick="toggleFmtHelp(${inlineArgument(textareaId)})">?</button>
   </div>
   <div class="fmt-help" id="fmt-help-${textareaId}" hidden>
     <strong>Formatting</strong>
@@ -197,7 +262,6 @@ function formatToolbarHTML(textareaId) {
     </ul>
   </div>`;
 }
-
 function wrapFmt(id, before, after) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -210,7 +274,6 @@ function wrapFmt(id, before, after) {
   el.setSelectionRange(start + before.length, start + before.length + sel.length);
   schedulePreviewRefresh();
 }
-
 function insertLinkFmt(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -220,25 +283,19 @@ function insertLinkFmt(id) {
   const snippet = `[${sel}](https://)`;
   el.value = el.value.slice(0, start) + snippet + el.value.slice(end);
   el.focus();
-  
   const urlStart = start + sel.length + 3;
   el.setSelectionRange(urlStart, urlStart + 8);
 }
-
 function toggleFmtHelp(id) {
   const h = document.getElementById("fmt-help-" + id);
   if (h) h.hidden = !h.hidden;
 }
-
-
 function tierBadgeHTML(tier) {
   if (!tier) return `<span class="tier-badge tier-none">—</span>`;
   const t = String(tier).toUpperCase();
   const letter = t.charAt(0);
   return `<span class="tier-badge tier-${letter}">${escapeHtml(t)}</span>`;
 }
-
-
 function showToast(msg, ms = 2200) {
   let el = document.getElementById("app-toast");
   if (!el) {
@@ -252,11 +309,10 @@ function showToast(msg, ms = 2200) {
   clearTimeout(el._t);
   el._t = setTimeout(() => el.classList.remove("show"), ms);
 }
-
 function showConfirm(message, onYes) {
   const existing = document.getElementById("app-confirm");
   if (existing) existing.remove();
-  const box = document.createElement("div");
+  const box = document.createElement("dialog");
   box.id = "app-confirm";
   box.className = "app-confirm-overlay";
   box.innerHTML = `
@@ -268,14 +324,16 @@ function showConfirm(message, onYes) {
       </div>
     </div>`;
   document.body.appendChild(box);
-  box.querySelector("#app-confirm-no").onclick = () => box.remove();
-  box.querySelector("#app-confirm-yes").onclick = () => { box.remove(); onYes && onYes(); };
-  box.onclick = (e) => { if (e.target === box) box.remove(); };
+  box.querySelector("#app-confirm-no").onclick = () => box.close();
+  box.querySelector("#app-confirm-yes").onclick = () => {
+    box.close();
+    onYes && onYes();
+  };
+  box.onclick = e => {
+    if (e.target === box) box.close();
+  };
+  showManagedDialog(box, () => box.remove(), box.querySelector('#app-confirm-no'));
 }
-
-
-
-
 function ensureOtzOnWindow() {
   try {
     if (typeof OTZ_ADDONS !== "undefined" && OTZ_ADDONS && Object.keys(OTZ_ADDONS).length) {
@@ -285,52 +343,82 @@ function ensureOtzOnWindow() {
     }
   } catch (_) {}
 }
-
-function init() {
-  ensureOtzOnWindow();
-  loadData();
-  applyOwnerUiVisibility();
-  setupNavigation();
-  setupEditorTabs();
-  renderAll();
+async function init() {
+  const app = document.getElementById('app');
+  app.inert = true;
+  try {
+    await SharedDbd.initialize();
+    STARTER_CONFIG = JSON.parse(JSON.stringify(CONFIG));
+    STARTER_CORE_CONFIG = coreConfigSnapshot(STARTER_CONFIG);
+    STARTER_PERK_NAMES = new Set([...(CONFIG.killerPerks || []), ...(CONFIG.survivorPerks || [])].map(perk => perk.name.toLowerCase()));
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && !localStorage.getItem(STORAGE_KEY + '_before_shared_v1')) {
+        const old = JSON.parse(saved);
+        if (old._coreConfig?.killerPerks || old._customPerks?.length) localStorage.setItem(STORAGE_KEY + '_before_shared_v1', saved);
+      }
+    } catch {}
+    ensureOtzOnWindow();
+    await chooseStartupData();
+    SharedDbd.applyConfig();
+    SharedDbd.hydrate(state);
+    applyOwnerUiVisibility();
+    setupNavigation();
+    setupEditorTabs();
+    renderAll();
+    app.inert = false;
+  } catch (error) {
+    console.error(error);
+    const message = document.createElement('p');
+    message.className = 'shared-data-error';
+    message.setAttribute('role', 'alert');
+    message.textContent = 'Shared definitions could not be loaded. Check the connection and reload this page. Your saved data has not been reset.';
+    app.before(message);
+  }
 }
-
-function loadData() {
-  const saved = localStorage.getItem(STORAGE_KEY);
+function loadData(saved) {
   if (saved) {
     try {
       state = JSON.parse(saved);
       state.builds.forEach(b => {
-        if (b.killerId && !b.killerIds) { b.killerIds = [b.killerId]; delete b.killerId; }
+        if (b.killerId && !b.killerIds) {
+          b.killerIds = [b.killerId];
+          delete b.killerId;
+        }
         if (!b.killerIds) b.killerIds = [];
       });
       state.killers.forEach(k => {
         if (k.patch === undefined) k.patch = "";
         if (k.skillFloor === undefined && k.skill !== undefined) {
-          k.skillFloor = k.skill; k.skillCeiling = k.skill; delete k.skill;
+          k.skillFloor = k.skill;
+          k.skillCeiling = k.skill;
+          delete k.skill;
         }
         if (k.fun2play === undefined && k.desire !== undefined) {
-          k.fun2play = k.desire; delete k.desire;
+          k.fun2play = k.desire;
+          delete k.desire;
         }
         if (k.skillFloor === undefined) k.skillFloor = 0;
         if (k.skillCeiling === undefined) k.skillCeiling = 0;
         if (k.fun2play === undefined) k.fun2play = 0;
-        
         const diffMap = {
-          "Very Easy": "Beginner", "Easy": "Easy", "Medium": "Medium",
-          "Hard": "Hard", "Very Hard": "Very Hard", "Nightmare": "Extremely Hard",
-          "Intermediate": "Medium", "Advanced": "Hard", "Expert": "Very Hard", "Master": "Extremely Hard"
+          "Very Easy": "Beginner",
+          "Easy": "Easy",
+          "Medium": "Medium",
+          "Hard": "Hard",
+          "Very Hard": "Very Hard",
+          "Nightmare": "Extremely Hard",
+          "Intermediate": "Medium",
+          "Advanced": "Hard",
+          "Expert": "Very Hard",
+          "Master": "Extremely Hard"
         };
         if (diffMap[k.difficulty]) k.difficulty = diffMap[k.difficulty];
-        
         if (!k.recommendedCombos && k.recommendedAddons && k.recommendedAddons.length) {
           k.recommendedCombos = [k.recommendedAddons];
         }
-
-        
         if (k.tier === undefined) {
           if (typeof k.personalRank === "number" && k.personalRank > 0) {
-            
             k.tier = "";
           } else if (typeof k.personalRank === "string") {
             k.tier = k.personalRank;
@@ -338,19 +426,15 @@ function loadData() {
             k.tier = k.tier || "";
           }
         }
-
       });
-      
       if (!state.killerTags) state.killerTags = [];
       if (!state.buildTags) state.buildTags = [];
       if (state.tags && state.tags.length && !state.killerTags.length && !state.buildTags.length) {
-        
-        
         state.killerTags = JSON.parse(JSON.stringify(state.tags));
       }
-      
-
-    } catch (e) { seedInitial(); }
+    } catch (e) {
+      seedInitial();
+    }
   } else seedInitial();
   applyCoreConfigDraft();
   mergeCatalogPerks();
@@ -358,12 +442,14 @@ function loadData() {
   applyCoreConfigToDraft();
   saveData();
 }
-
 function seedInitial() {
   if (typeof INITIAL_DATA !== "undefined") {
     state = JSON.parse(JSON.stringify(INITIAL_DATA));
   } else {
-    state = { killers: [], builds: [] };
+    state = {
+      killers: [],
+      builds: []
+    };
   }
   if (!state.killerTags) state.killerTags = [];
   if (!state.buildTags) state.buildTags = [];
@@ -375,18 +461,22 @@ function seedInitial() {
     if (k.skillFloor === undefined) k.skillFloor = 0;
     if (k.skillCeiling === undefined) k.skillCeiling = 0;
     if (k.fun2play === undefined) k.fun2play = 0;
-        
-        const diffMap = {
-          "Very Easy": "Beginner", "Easy": "Easy", "Medium": "Medium",
-          "Hard": "Hard", "Very Hard": "Very Hard", "Nightmare": "Extremely Hard",
-          "Intermediate": "Medium", "Advanced": "Hard", "Expert": "Very Hard", "Master": "Extremely Hard"
-        };
-        if (diffMap[k.difficulty]) k.difficulty = diffMap[k.difficulty];
-        
-        if (!k.recommendedCombos && k.recommendedAddons && k.recommendedAddons.length) {
-          k.recommendedCombos = [k.recommendedAddons];
-        }
-
+    const diffMap = {
+      "Very Easy": "Beginner",
+      "Easy": "Easy",
+      "Medium": "Medium",
+      "Hard": "Hard",
+      "Very Hard": "Very Hard",
+      "Nightmare": "Extremely Hard",
+      "Intermediate": "Medium",
+      "Advanced": "Hard",
+      "Expert": "Very Hard",
+      "Master": "Extremely Hard"
+    };
+    if (diffMap[k.difficulty]) k.difficulty = diffMap[k.difficulty];
+    if (!k.recommendedCombos && k.recommendedAddons && k.recommendedAddons.length) {
+      k.recommendedCombos = [k.recommendedAddons];
+    }
   });
   applyCoreConfigDraft();
   mergeCatalogPerks();
@@ -394,43 +484,23 @@ function seedInitial() {
   applyCoreConfigToDraft();
   saveData();
 }
-
 function mergeCatalogPerks() {
-  if (!state.perks) state.perks = [];
-  state._perkIcons = state._perkIcons || {};
-  state._customPerks = state._customPerks || [];
-  state._removedPerks = state._removedPerks || [];
-  const removed = new Set(state._removedPerks.map(n => String(n).toLowerCase()));
-  if (typeof CONFIG !== "undefined") {
-    Object.keys(CONFIG.perkIcons || {}).forEach(n => { if (removed.has(n.toLowerCase())) delete CONFIG.perkIcons[n]; });
-    CONFIG.killerPerks = (CONFIG.killerPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
-    CONFIG.survivorPerks = (CONFIG.survivorPerks || []).filter(p => !removed.has(String(p.name).toLowerCase()));
-    state._customPerks.forEach(p => {
-      if (!p || !p.name || removed.has(String(p.name).toLowerCase())) return;
-      const pool = p.role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
-      if (!pool.some(x => x.name.toLowerCase() === p.name.toLowerCase())) pool.push({ name: p.name, icon: p.icon || CONFIG.placeholderPerk });
-    });
-  }
-  const names = new Set(state.perks.map(x => String(x).toLowerCase()));
-  const extra = [];
-  if (typeof CONFIG !== "undefined") {
-    (CONFIG.killerPerks || []).forEach(p => extra.push(p.name));
-    (CONFIG.survivorPerks || []).forEach(p => extra.push(p.name));
-  }
-  extra.forEach(n => { if (!removed.has(n.toLowerCase()) && !names.has(n.toLowerCase())) { state.perks.push(n); names.add(n.toLowerCase()); } });
-  if (!state.survivorBuilds) state.survivorBuilds = [];
-  if (!state.loadouts) state.loadouts = [];
+  SharedDbd.applyConfig();
+  SharedDbd.hydrate(state);
+  state.perks = [...new Set([...(CONFIG.killerPerks || []), ...(CONFIG.survivorPerks || [])].map(perk => perk.name))];
+  state.survivorBuilds ||= [];
+  state.loadouts ||= [];
 }
 function saveData() {
-  (state.killers || []).forEach(k => ["notes", "guide", "vsNotes", "contentSections"].forEach(key => delete k[key]));
+  SharedDbd.applyConfig();
+  SharedDbd.hydrate(state);
+  (state.killers || []).forEach(k => ['notes', 'guide', 'vsNotes', 'contentSections'].forEach(key => delete k[key]));
   applyCoreConfigToDraft();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (startupSavingEnabled) localStorage.setItem(STORAGE_KEY, JSON.stringify(SharedDbd.serialize(state)));
 }
-
 function getBaseline() {
-  return (typeof INITIAL_DATA !== "undefined") ? INITIAL_DATA : { killers: [], builds: [], perks: [], killerTags: [], buildTags: [] };
+  return SharedDbd.baseline(INITIAL_DATA);
 }
-
 function isLocalOnlyKiller(k) {
   const base = getBaseline().killers || [];
   return !base.some(ik => ik.id === k.id);
@@ -438,9 +508,16 @@ function isLocalOnlyKiller(k) {
 function isDirtyKiller(k) {
   const base = (getBaseline().killers || []).find(ik => ik.id === k.id);
   if (!base) return true;
-  const pick = (x) => JSON.stringify({
-    name: x.name, difficulty: x.difficulty, skillFloor: x.skillFloor, skillCeiling: x.skillCeiling,
-    fun2play: x.fun2play, tier: x.tier || "", tags: x.tags || [], addonNotes: x.addonNotes, patch: x.patch || ""
+  const pick = x => JSON.stringify({
+    name: x.name,
+    difficulty: x.difficulty,
+    skillFloor: x.skillFloor,
+    skillCeiling: x.skillCeiling,
+    fun2play: x.fun2play,
+    tier: x.tier || "",
+    tags: x.tags || [],
+    addonNotes: x.addonNotes,
+    patch: x.patch || ""
   });
   return pick(k) !== pick(base);
 }
@@ -451,9 +528,14 @@ function isLocalOnlyBuild(b) {
 function isDirtyBuild(b) {
   const base = (getBaseline().builds || []).find(ib => ib.id === b.id);
   if (!base) return true;
-  const pick = (x) => JSON.stringify({
-    name: x.name, killerIds: x.killerIds || [], perks: x.perks || [], tags: x.tags || [],
-    addons: x.addons || [], description: x.description || "", patch: x.patch || ""
+  const pick = x => JSON.stringify({
+    name: x.name,
+    killerIds: x.killerIds || [],
+    perks: x.perks || [],
+    tags: x.tags || [],
+    addons: x.addons || [],
+    description: x.description || "",
+    patch: x.patch || ""
   });
   return pick(b) !== pick(base);
 }
@@ -478,7 +560,7 @@ function findPerkIconInMap(map, name) {
 function baselinePerkIcon(name) {
   const data = getBaseline();
   const custom = (data._customPerks || []).find(p => String(p && p.name || "").toLowerCase() === String(name || "").toLowerCase());
-  return findPerkIconInMap(data._perkIcons, name) || (custom && custom.icon) || findPerkIconInConfig(STARTER_CONFIG, name);
+  return findPerkIconInMap(data._perkIcons, name) || custom && custom.icon || findPerkIconInConfig(STARTER_CONFIG, name);
 }
 function isDirtyPerkIcon(name) {
   if (isLocalOnlyPerk(name)) return false;
@@ -486,7 +568,7 @@ function isDirtyPerkIcon(name) {
   return !!current && current !== baselinePerkIcon(name);
 }
 function isLocalOnlyTag(kind, t) {
-  const arr = kind === "build" ? (STARTER_CONFIG.buildTags || []) : (STARTER_CONFIG.killerTags || []);
+  const arr = kind === "build" ? STARTER_CONFIG.buildTags || [] : STARTER_CONFIG.killerTags || [];
   return !arr.some(x => x.id === t.id || x.name === t.name);
 }
 function unsavedBadge(title) {
@@ -495,7 +577,6 @@ function unsavedBadge(title) {
 function dirtyBadge(title) {
   return `<span class="dirty-badge" title="${escapeAttr(title || "Changed locally — export to data.js")}">●</span>`;
 }
-
 function updateEditorUnsavedBanner() {
   const el = document.getElementById("editor-unsaved-banner");
   if (!el) return;
@@ -518,12 +599,9 @@ function updateEditorUnsavedBanner() {
   el.innerHTML = `
     <strong>Unsaved to files</strong>
     <span>${localK ? localK + " new killer(s) " : ""}${dirtyK ? dirtyK + " edited killer(s) " : ""}${localB ? localB + " new build(s) " : ""}${dirtyB ? dirtyB + " edited build(s) " : ""}${localP ? localP + " new perk(s) " : ""}${dirtyP ? dirtyP + " edited perk icon(s) " : ""}${removedP ? removedP + " removed perk(s) " : ""}${coreDirty ? "core catalog changes (config.js)" : ""}</span>
-    <span class="hint-inline">Download config.js for catalog changes and data.js for killer, rating, and build changes; replace those files in the project.</span>
+    <span class="hint-inline">Shared definitions come from SharedFiles. Download config.js for local tags and rankings, and data.js for local ratings, notes and builds.</span>
   `;
 }
-
-
-
 function applyOwnerUiVisibility() {
   const show = typeof CONFIG !== "undefined" && Number(CONFIG.SHOW_OWNER_UI) === 1;
   document.querySelectorAll('.nav-btn[data-tab="editor"], .nav-btn[data-tab="settings"]').forEach(btn => {
@@ -538,13 +616,11 @@ function applyOwnerUiVisibility() {
     }
   }
 }
-
 function setupNavigation() {
   document.querySelectorAll(".nav-btn").forEach(btn => {
     btn.addEventListener("click", () => switchTab(btn.dataset.tab));
   });
 }
-
 function switchTab(tabName) {
   document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -555,27 +631,23 @@ function switchTab(tabName) {
   if (tabName === "survivors" && typeof renderSurvivorDetail === "function") renderSurvivorDetail(true);
   if (tabName === "editor") renderEditor();
 }
-
 function renderAll() {
   populateFilterSelects();
   renderKillers();
   renderBuilds();
   if (typeof renderSurvivorBits === "function") renderSurvivorBits();
 }
-
 function populateFilterSelects() {
   renderTagFilterUI();
   const bk = document.getElementById("build-killer-filter");
   if (bk) {
     const cur = bk.value;
-    bk.innerHTML = `<option value="">All killers</option>` +
-      state.killers.map(k => `<option value="${k.id}">${escapeHtml(k.name)}</option>`).join("");
+    bk.innerHTML = `<option value="">All killers</option>` + state.killers.map(k => `<option value="${k.id}">${escapeHtml(k.name)}</option>`).join("");
     if (cur) bk.value = cur;
   }
   renderBuildTagFilterUI();
   populateBuildPatchFilter();
 }
-
 function renderTagFilterUI() {
   const panel = document.getElementById("filter-tags-panel");
   const countEl = document.getElementById("filter-tags-count");
@@ -586,19 +658,15 @@ function renderTagFilterUI() {
     panel.innerHTML = `<p class="filter-panel-empty">No tags yet</p>`;
     return;
   }
-  panel.innerHTML =
-    `<div class="filter-panel-head">
+  panel.innerHTML = `<div class="filter-panel-head">
       <span>Filter by tags</span>
       ${activeFilterTags.length ? `<button type="button" class="btn btn-sm" onclick="event.stopPropagation();activeFilterTags=[];renderTagFilterUI();renderKillers();">Clear</button>` : ""}
     </div>
-    <div class="filter-panel-chips">` +
-    tags.map(t => {
-      const on = activeFilterTags.includes(t.name) || activeFilterTags.includes(t.id);
-      return `<button type="button" class="tag-filter-chip ${on ? "on" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleFilterTag('${escapeAttr(t.name)}')">${escapeHtml(t.name)}</button>`;
-    }).join("") +
-    `</div>`;
+    <div class="filter-panel-chips">` + tags.map(t => {
+    const on = activeFilterTags.includes(t.name) || activeFilterTags.includes(t.id);
+    return `<button type="button" class="tag-filter-chip ${on ? "on" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleFilterTag(${inlineArgument(t.name)})">${escapeHtml(t.name)}</button>`;
+  }).join("") + `</div>`;
 }
-
 function toggleShowAllTags() {
   showAllKillerTags = !showAllKillerTags;
   const btn = document.getElementById("btn-show-all-tags");
@@ -608,7 +676,6 @@ function toggleShowAllTags() {
   }
   renderKillers();
 }
-
 function toggleKillerTagsPanel(e) {
   e && e.stopPropagation();
   const panel = document.getElementById("filter-tags-panel");
@@ -618,29 +685,22 @@ function toggleKillerTagsPanel(e) {
   panel.hidden = !open;
   if (!panel.hidden) renderTagFilterUI();
 }
-
 function renderBuildTagFilterUI() {
   const panel = document.getElementById("build-filter-tags-panel");
   const countEl = document.getElementById("build-filter-tags-count");
-  if (countEl) countEl.textContent = (activeBuildFilterTags.length + excludedBuildFilterTags.length) ? `(${activeBuildFilterTags.length + excludedBuildFilterTags.length})` : "";
+  if (countEl) countEl.textContent = activeBuildFilterTags.length + excludedBuildFilterTags.length ? `(${activeBuildFilterTags.length + excludedBuildFilterTags.length})` : "";
   if (!panel) return;
   const tags = getBuildTags();
   if (!tags.length) {
     panel.innerHTML = `<p class="filter-panel-empty">No tags yet</p>`;
     return;
   }
-  panel.innerHTML =
-    `<div class="filter-panel-head">
+  panel.innerHTML = `<div class="filter-panel-head">
       <span>Build must contain / must not contain</span>
-      ${(activeBuildFilterTags.length || excludedBuildFilterTags.length) ? `<button type="button" class="btn btn-sm" onclick="event.stopPropagation();activeBuildFilterTags=[];excludedBuildFilterTags=[];renderBuildTagFilterUI();renderBuilds();">Clear</button>` : ""}
+      ${activeBuildFilterTags.length || excludedBuildFilterTags.length ? `<button type="button" class="btn btn-sm" onclick="event.stopPropagation();activeBuildFilterTags=[];excludedBuildFilterTags=[];renderBuildTagFilterUI();renderBuilds();">Clear</button>` : ""}
     </div>
-    <div class="build-tag-filter-section"><span>Must contain</span><div class="filter-panel-chips">` +
-    tags.map(t => `<button type="button" class="tag-filter-chip ${activeBuildFilterTags.includes(t.name) || activeBuildFilterTags.includes(t.id) ? "on" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleBuildFilterTag('${escapeAttr(t.name)}')">${escapeHtml(t.name)}</button>`).join("") +
-    `</div></div><div class="build-tag-filter-section"><span>Must not contain</span><div class="filter-panel-chips">` +
-    tags.map(t => `<button type="button" class="tag-filter-chip ${excludedBuildFilterTags.includes(t.name) || excludedBuildFilterTags.includes(t.id) ? "on excluded" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleExcludedBuildFilterTag('${escapeAttr(t.name)}')">${escapeHtml(t.name)}</button>`).join("") +
-    `</div></div>`;
+    <div class="build-tag-filter-section"><span>Must contain</span><div class="filter-panel-chips">` + tags.map(t => `<button type="button" class="tag-filter-chip ${activeBuildFilterTags.includes(t.name) || activeBuildFilterTags.includes(t.id) ? "on" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleBuildFilterTag(${inlineArgument(t.name)})">${escapeHtml(t.name)}</button>`).join("") + `</div></div><div class="build-tag-filter-section"><span>Must not contain</span><div class="filter-panel-chips">` + tags.map(t => `<button type="button" class="tag-filter-chip ${excludedBuildFilterTags.includes(t.name) || excludedBuildFilterTags.includes(t.id) ? "on excluded" : ""}" style="--tc:${t.color || "#888"}" onclick="event.stopPropagation();toggleExcludedBuildFilterTag(${inlineArgument(t.name)})">${escapeHtml(t.name)}</button>`).join("") + `</div></div>`;
 }
-
 function toggleBuildTagsPanel(e) {
   e && e.stopPropagation();
   const panel = document.getElementById("build-filter-tags-panel");
@@ -650,37 +710,31 @@ function toggleBuildTagsPanel(e) {
   panel.hidden = !open;
   if (!panel.hidden) renderBuildTagFilterUI();
 }
-
 function closeAllFilterPanels() {
   ["filter-tags-panel", "build-filter-tags-panel"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.hidden = true;
   });
 }
-
 function populateBuildPatchFilter() {
   const sel = document.getElementById("build-patch-value");
   if (!sel) return;
   const cur = sel.value;
   const patches = [...new Set((state.builds || []).map(b => (b.patch || "").trim()).filter(Boolean))];
   patches.sort(comparePatchVersions);
-  sel.innerHTML = `<option value="">Patch</option>` + patches.map(p =>
-    `<option value="${escapeAttr(p)}" ${p === cur ? "selected" : ""}>${escapeHtml(p)}</option>`
-  ).join("");
+  sel.innerHTML = `<option value="">Patch</option>` + patches.map(p => `<option value="${escapeAttr(p)}" ${p === cur ? "selected" : ""}>${escapeHtml(p)}</option>`).join("");
 }
-
-
 function comparePatchVersions(a, b) {
   const pa = String(a).split(/[^0-9]+/).filter(Boolean).map(Number);
   const pb = String(b).split(/[^0-9]+/).filter(Boolean).map(Number);
   const n = Math.max(pa.length, pb.length);
   for (let i = 0; i < n; i++) {
-    const x = pa[i] || 0, y = pb[i] || 0;
+    const x = pa[i] || 0,
+      y = pb[i] || 0;
     if (x !== y) return x - y;
   }
   return String(a).localeCompare(String(b));
 }
-
 function patchMatches(buildPatch, op, filterPatch) {
   if (!filterPatch) return true;
   const bp = (buildPatch || "").trim();
@@ -693,71 +747,64 @@ function patchMatches(buildPatch, op, filterPatch) {
   if (op === "<=") return cmp <= 0;
   return cmp === 0;
 }
-
 function resetBuildFilters() {
   activeBuildFilterTags = [];
   excludedBuildFilterTags = [];
-  const s = document.getElementById("build-search"); if (s) s.value = "";
-  const k = document.getElementById("build-killer-filter"); if (k) k.value = "";
-  const op = document.getElementById("build-patch-op"); if (op) op.value = "=";
-  const pv = document.getElementById("build-patch-value"); if (pv) pv.value = "";
-  const sort = document.getElementById("build-sort"); if (sort) sort.value = "name";
-  buildPerkFilters.builds = []; renderPerkFilterChips("builds");
+  const s = document.getElementById("build-search");
+  if (s) s.value = "";
+  const k = document.getElementById("build-killer-filter");
+  if (k) k.value = "";
+  const op = document.getElementById("build-patch-op");
+  if (op) op.value = "=";
+  const pv = document.getElementById("build-patch-value");
+  if (pv) pv.value = "";
+  const sort = document.getElementById("build-sort");
+  if (sort) sort.value = "name";
+  buildPerkFilters.builds = [];
+  renderPerkFilterChips("builds");
   renderBuildTagFilterUI();
   populateBuildPatchFilter();
   renderBuilds();
 }
-
-
 function toggleFilterTag(name) {
   const i = activeFilterTags.indexOf(name);
-  if (i >= 0) activeFilterTags.splice(i, 1);
-  else activeFilterTags.push(name);
+  if (i >= 0) activeFilterTags.splice(i, 1);else activeFilterTags.push(name);
   renderTagFilterUI();
   renderKillers();
 }
-
 function toggleBuildFilterTag(name) {
   const i = activeBuildFilterTags.indexOf(name);
-  if (i >= 0) activeBuildFilterTags.splice(i, 1);
-  else activeBuildFilterTags.push(name);
+  if (i >= 0) activeBuildFilterTags.splice(i, 1);else activeBuildFilterTags.push(name);
   renderBuildTagFilterUI();
   renderBuilds();
 }
-
 function toggleExcludedBuildFilterTag(name) {
   const i = excludedBuildFilterTags.indexOf(name);
-  if (i >= 0) excludedBuildFilterTags.splice(i, 1);
-  else excludedBuildFilterTags.push(name);
+  if (i >= 0) excludedBuildFilterTags.splice(i, 1);else excludedBuildFilterTags.push(name);
   renderBuildTagFilterUI();
   renderBuilds();
 }
-
-
-
-
-
-
 function resetKillerFilters() {
-  const s = document.getElementById("killer-search"); if (s) s.value = "";
-  const d = document.getElementById("filter-difficulty"); if (d) d.value = "";
-  const f = document.getElementById("filter-fun"); if (f) f.value = "";
-  const sk = document.getElementById("filter-skill"); if (sk) sk.value = "";
-  const so = document.getElementById("sort-by"); if (so) so.value = "releaseDate";
+  const s = document.getElementById("killer-search");
+  if (s) s.value = "";
+  const d = document.getElementById("filter-difficulty");
+  if (d) d.value = "";
+  const f = document.getElementById("filter-fun");
+  if (f) f.value = "";
+  const sk = document.getElementById("filter-skill");
+  if (sk) sk.value = "";
+  const so = document.getElementById("sort-by");
+  if (so) so.value = "releaseDate";
   activeFilterTags = [];
   renderTagFilterUI();
   renderKillers();
   showToast("Filters reset");
 }
-
-
 function renderKillers() {
   const search = (document.getElementById("killer-search")?.value || "").toLowerCase();
   const diff = document.getElementById("filter-difficulty")?.value || "";
   const funF = document.getElementById("filter-fun")?.value || "";
-  
-    const sortBy = document.getElementById("sort-by")?.value || "releaseDate";
-
+  const sortBy = document.getElementById("sort-by")?.value || "releaseDate";
   let list = [...state.killers];
   if (search) list = list.filter(k => k.name.toLowerCase().includes(search));
   if (diff) list = list.filter(k => k.difficulty === diff);
@@ -782,25 +829,23 @@ function renderKillers() {
   if (skillF === "floor3+") list = list.filter(k => (k.skillFloor || 0) >= 3);
   if (skillF === "easy-entry") list = list.filter(k => (k.skillFloor || 0) > 0 && (k.skillFloor || 0) <= 4);
   if (skillF === "high-skill") list = list.filter(k => (k.skillCeiling || 0) >= 8);
-  if (skillF === "wide-range") list = list.filter(k => ((k.skillCeiling || 0) - (k.skillFloor || 0)) >= 4);
-  if (skillF === "narrow") list = list.filter(k => ((k.skillCeiling || 0) - (k.skillFloor || 0)) <= 2 && (k.skillCeiling || 0) > 0);
-
+  if (skillF === "wide-range") list = list.filter(k => (k.skillCeiling || 0) - (k.skillFloor || 0) >= 4);
+  if (skillF === "narrow") list = list.filter(k => (k.skillCeiling || 0) - (k.skillFloor || 0) <= 2 && (k.skillCeiling || 0) > 0);
   if (activeFilterTags.length) {
-    list = list.filter(k => activeFilterTags.every(t =>
-      (k.tags || []).includes(t) || (k.tags || []).some(kt => kt.toLowerCase() === t.toLowerCase())
-    ));
+    list = list.filter(k => activeFilterTags.every(t => (k.tags || []).includes(t) || (k.tags || []).some(kt => kt.toLowerCase() === t.toLowerCase())));
   }
-
   list.sort((a, b) => {
     if (sortBy === "releaseDate") {
-      const da = a.releaseDate || "9999", db = b.releaseDate || "9999";
+      const da = a.releaseDate || "9999",
+        db = b.releaseDate || "9999";
       if (da !== db) return da.localeCompare(db);
       return (a.releaseOrder || 999) - (b.releaseOrder || 999);
     }
     if (sortBy === "name") return a.name.localeCompare(b.name);
     if (sortBy === "personalRank" || sortBy === "tier") {
-      const ar = tierRankValue(a.tier), br = tierRankValue(b.tier);
-      if (ar !== br) return ar - br; 
+      const ar = tierRankValue(a.tier),
+        br = tierRankValue(b.tier);
+      if (ar !== br) return ar - br;
       return a.name.localeCompare(b.name);
     }
     if (sortBy === "skillCeiling") return (b.skillCeiling || 0) - (a.skillCeiling || 0);
@@ -808,49 +853,50 @@ function renderKillers() {
     if (sortBy === "fun2play") return (b.fun2play || 0) - (a.fun2play || 0);
     if (sortBy === "funAsc") return (a.fun2play || 0) - (b.fun2play || 0);
     if (sortBy === "difficulty") {
-      const order = ["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"];
+      const order = ["Beginner", "Easy", "Medium", "Hard", "Very Hard", "Extremely Hard"];
       return order.indexOf(a.difficulty) - order.indexOf(b.difficulty);
     }
     if (sortBy === "difficultyDesc") {
-      const order = ["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"];
+      const order = ["Beginner", "Easy", "Medium", "Hard", "Very Hard", "Extremely Hard"];
       return order.indexOf(b.difficulty) - order.indexOf(a.difficulty);
     }
     if (sortBy === "nameDesc") return b.name.localeCompare(a.name);
     if (sortBy === "releaseDesc") {
-      const da = a.releaseDate || "", db = b.releaseDate || "";
+      const da = a.releaseDate || "",
+        db = b.releaseDate || "";
       if (da !== db) return db.localeCompare(da);
       return (b.releaseOrder || 0) - (a.releaseOrder || 0);
     }
     if (sortBy === "chapter") {
-      const ca = String(a.chapter || ""), cb = String(b.chapter || "");
-      if (ca !== cb) return ca.localeCompare(cb, undefined, {numeric: true});
+      const ca = String(a.chapter || ""),
+        cb = String(b.chapter || "");
+      if (ca !== cb) return ca.localeCompare(cb, undefined, {
+        numeric: true
+      });
       return a.name.localeCompare(b.name);
     }
     return 0;
   });
-
   const container = document.getElementById("killers-container");
   if (!container) return;
-
   container.innerHTML = list.map(k => {
     const src = getKillerPortrait(k.name);
-    const sf = Number(k.skillFloor) || 0, sc = Number(k.skillCeiling) || 0;
-    const skillShow = (sf > 0 || sc > 0) ? `${sf.toFixed(1)}–${sc.toFixed(1)}` : "—";
+    const sf = Number(k.skillFloor) || 0,
+      sc = Number(k.skillCeiling) || 0;
+    const skillShow = sf > 0 || sc > 0 ? `${sf.toFixed(1)}–${sc.toFixed(1)}` : "—";
     const funShow = (Number(k.fun2play) || 0) > 0 ? Number(k.fun2play).toFixed(1) : "—";
     const allTags = k.tags || [];
     const tagList = showAllKillerTags ? allTags : allTags.slice(0, 3);
     const moreN = showAllKillerTags ? 0 : Math.max(0, allTags.length - tagList.length);
-    const topTags = tagList.length
-      ? `<div class="card-tags ${showAllKillerTags ? "card-tags-expanded" : ""}">${tagList.map(t => {
-          const tg = findTagMeta(t, getKillerTags());
-          const col = (tg && tg.color) || "#666";
-          return `<span class="tag-dot" style="--tc:${col}" title="${escapeAttr(t)}">${escapeHtml(t)}</span>`;
-        }).join("")}${moreN > 0 ? `<span class="tag-more">+${moreN}</span>` : ""}</div>`
-      : "";
+    const topTags = tagList.length ? `<div class="card-tags ${showAllKillerTags ? "card-tags-expanded" : ""}">${tagList.map(t => {
+      const tg = findTagMeta(t, getKillerTags());
+      const col = tg && tg.color || "#666";
+      return `<span class="tag-dot" style="--tc:${col}" title="${escapeAttr(t)}">${escapeHtml(t)}</span>`;
+    }).join("")}${moreN > 0 ? `<span class="tag-more">+${moreN}</span>` : ""}</div>` : "";
     return `
-      <div class="killer-card" onclick="openKillerDetail('${k.id}')">
+      <div class="killer-card" onclick="openKillerDetail(${inlineArgument(k.id)})">
         <div class="killer-card-portrait">
-          <img src="${src}" alt="${escapeAttr(k.name)}" loading="lazy" onerror="this.src=CONFIG.placeholderPortrait">
+          <img src="${src}" alt="${escapeAttr(k.name)}" loading="lazy">
           <div class="killer-card-overlay">
             <span class="kc-tier">${tierBadgeHTML(k.tier)}</span>
             <span class="kc-diff">${escapeHtml(k.difficulty || "—")}</span>
@@ -867,7 +913,6 @@ function renderKillers() {
       </div>`;
   }).join("") || "";
 }
-
 function openKillerDetail(id) {
   killersListScrollY = window.scrollY || document.documentElement.scrollTop || 0;
   const k = state.killers.find(x => x.id === id);
@@ -876,42 +921,41 @@ function openKillerDetail(id) {
   window._currentKillerDetailId = id;
   const killerPatches = [...new Set(killerBuilds.map(b => (b.patch || "").trim()).filter(Boolean))].sort(comparePatchVersions);
   const src = getKillerPortrait(k.name);
-
-  const releaseStr = k.releaseDate
-    ? `${formatReleaseDate(k.releaseDate)}${k.chapter ? " · " + k.chapter : ""}${k.update ? " · Update " + k.update : ""}`
-    : "—";
-
-  const sf = Number(k.skillFloor) || 0, sc = Number(k.skillCeiling) || 0;
-  const skillStr = (sf > 0 || sc > 0) ? `${sf.toFixed(1)} – ${sc.toFixed(1)}` : "—";
+  const releaseStr = k.releaseDate ? `${formatReleaseDate(k.releaseDate)}${k.chapter ? " · " + k.chapter : ""}${k.update ? " · Update " + k.update : ""}` : "—";
+  const sf = Number(k.skillFloor) || 0,
+    sc = Number(k.skillCeiling) || 0;
+  const skillStr = sf > 0 || sc > 0 ? `${sf.toFixed(1)} – ${sc.toFixed(1)}` : "—";
   const funStr = (Number(k.fun2play) || 0) > 0 ? Number(k.fun2play).toFixed(1) : "—";
-
   let otzList = [];
   if (typeof getOtzAddonsForKiller === "function") {
     otzList = getOtzAddonsForKiller(k.name) || [];
     if (!otzList.length && k.id) otzList = getOtzAddonsForKiller(k.id) || [];
     if (!otzList.length && k.name) otzList = getOtzAddonsForKiller(String(k.name).replace(/^The\s+/i, "")) || [];
   }
-  const tierOrder = { S: 0, A: 1, B: 2, C: 3, D: 4 };
+  const tierOrder = {
+    S: 0,
+    A: 1,
+    B: 2,
+    C: 3,
+    D: 4
+  };
   const sortedOtz = [...otzList].sort((a, b) => (tierOrder[a.tier] ?? 9) - (tierOrder[b.tier] ?? 9));
-  const otzRow = sortedOtz.length
-    ? sortedOtz.map((a, i) => `
+  const otzRow = sortedOtz.length ? sortedOtz.map((a, i) => `
         <div class="otz-addon-item tier-${a.tierClass || a.tier}" data-otz-idx="${i}"
           onmouseenter="showOtzTooltip(event, ${i})" onmouseleave="hideOtzTooltip()" onclick="pinOtzTooltip(event, ${i})">
-          <img src="${a.img}" alt="${escapeAttr(a.name)}" loading="lazy" onerror="this.style.opacity=0.3">
+          <img src="${a.img}" alt="${escapeAttr(a.name)}" loading="lazy">
           <span class="otz-tier-badge">${a.tier}</span>
           <span class="otz-addon-name">${escapeHtml(a.name)}</span>
-        </div>`).join("")
-    : `<p style="color:var(--text-dim)">No Otz data for this killer.
+        </div>`).join("") : `<p style="color:var(--text-dim)">No Otz data for this killer.
       <br><span style="font-size:0.8rem">Name: <code>${escapeHtml(k.name)}</code>
-      · Otz key: <code>${escapeHtml(String(typeof getOtzKeyFromKillerName==="function"?getOtzKeyFromKillerName(k.name):"?"))}</code>
-      · Keys: <code>${(typeof getOtzStore==="function"&&getOtzStore())?Object.keys(getOtzStore()).length:(window.OTZ_ADDONS?Object.keys(window.OTZ_ADDONS).length:0)}</code></span>
+      · Otz key: <code>${escapeHtml(String(typeof getOtzKeyFromKillerName === "function" ? getOtzKeyFromKillerName(k.name) : "?"))}</code>
+      · Keys: <code>${typeof getOtzStore === "function" && getOtzStore() ? Object.keys(getOtzStore()).length : window.OTZ_ADDONS ? Object.keys(window.OTZ_ADDONS).length : 0}</code></span>
       <br><span style="font-size:0.78rem">If key is null, update/replace <code>otz-addons.js</code>. Hard-refresh (Ctrl+F5).</span></p>`;
   window._currentOtzList = sortedOtz;
-
   const html = `
     <div class="detail-hero">
       <div class="detail-portrait">
-        <img src="${src}" alt="" onerror="this.src=CONFIG.placeholderPortrait">
+        <img src="${src}" alt="">
       </div>
       <div class="detail-hero-info">
         <h1>${escapeHtml(k.name)}</h1>
@@ -924,10 +968,10 @@ function openKillerDetail(id) {
           <span class="profile-stat">Fun to Play <strong>${funStr}</strong></span>
         </div>
         <div class="tags" style="margin-top:0.5rem">${(k.tags || []).map(t => {
-          const tg = findTagMeta(t, getKillerTags()) || findTagMeta(t, getBuildTags());
-          const col = tg?.color || "#5a2a2a";
-          return `<span class="tag" style="border-color:${col};color:${col}">${escapeHtml(t)}</span>`;
-        }).join("")}</div>
+    const tg = findTagMeta(t, getKillerTags()) || findTagMeta(t, getBuildTags());
+    const col = tg?.color || "#5a2a2a";
+    return `<span class="tag" style="border-color:${col};color:${col}">${escapeHtml(t)}</span>`;
+  }).join("")}</div>
       </div>
     </div>
 
@@ -942,29 +986,25 @@ function openKillerDetail(id) {
           <div class="md-body">${renderMarkdown(k.addonNotes)}</div>
         </div>` : ""}
       ${(() => {
-        
-        let combos = k.recommendedCombos;
-        if (!combos || !combos.length) {
-          if (k.recommendedAddons && k.recommendedAddons.length)
-            combos = [k.recommendedAddons];
-          else return "";
-        }
-        const boxes = combos.map((combo, ci) => {
-          
-          const addons = Array.isArray(combo) ? combo : (combo.addons || []);
-          const cname = (!Array.isArray(combo) && combo.name) ? combo.name : ("Combo " + (ci + 1));
-          const items = addons.map(name => {
-            const found = sortedOtz.find(a => a.name.toLowerCase() === String(name).toLowerCase());
-            const img = found?.img || findOtzAddonImg(name, [k.id]);
-            return `<div class="my-combo-item" title="${escapeAttr(name)}">
+    let combos = k.recommendedCombos;
+    if (!combos || !combos.length) {
+      if (k.recommendedAddons && k.recommendedAddons.length) combos = [k.recommendedAddons];else return "";
+    }
+    const boxes = combos.map((combo, ci) => {
+      const addons = Array.isArray(combo) ? combo : combo.addons || [];
+      const cname = !Array.isArray(combo) && combo.name ? combo.name : "Combo " + (ci + 1);
+      const items = addons.map(name => {
+        const found = sortedOtz.find(a => a.name.toLowerCase() === String(name).toLowerCase());
+        const img = found?.img || findOtzAddonImg(name, [k.id]);
+        return `<div class="my-combo-item" title="${escapeAttr(name)}">
               ${img ? `<img src="${img}" alt="">` : ""}
               <span>${escapeHtml(name)}</span>
             </div>`;
-          }).join("");
-          return `<div class="my-combo-box"><h4>${escapeHtml(cname)}</h4><div class="my-combo-row">${items}</div></div>`;
-        }).join("");
-        return `<div class="my-combos-wrap">${boxes}</div>`;
-      })()}
+      }).join("");
+      return `<div class="my-combo-box"><h4>${escapeHtml(cname)}</h4><div class="my-combo-row">${items}</div></div>`;
+    }).join("");
+    return `<div class="my-combos-wrap">${boxes}</div>`;
+  })()}
     </div>
 
     <div class="detail-section">
@@ -979,14 +1019,15 @@ function openKillerDetail(id) {
       <div id="killer-profile-builds-container" class="profile-builds"></div>
     </div>
   `;
-
   document.getElementById("killers-list-view").hidden = true;
   document.getElementById("killer-detail-view").hidden = false;
   document.getElementById("killer-detail-content").innerHTML = html;
   renderKillerProfileBuilds();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
-
 function renderKillerProfileBuilds() {
   const box = document.getElementById("killer-profile-builds-container");
   if (!box) return;
@@ -997,58 +1038,66 @@ function renderKillerProfileBuilds() {
   builds = applyBuildSearchSort(builds, document.getElementById("killer-profile-build-search")?.value || "", document.getElementById("killer-profile-build-sort")?.value || "name", buildPerkFilters["killer-profile"]);
   box.innerHTML = builds.length ? builds.map(b => buildCardHTML(b, true)).join("") : "<p style='color:var(--text-dim)'>No builds.</p>";
 }
-
 function ensureComboBoxes() {
-  if (!formSelectedCombos.length) formSelectedCombos = [{ name: "", addons: [] }];
+  if (!formSelectedCombos.length) formSelectedCombos = [{
+    name: "",
+    addons: []
+  }];
   formSelectedCombos = formSelectedCombos.map(c => {
-    if (Array.isArray(c)) return { name: "", addons: [...c] };
-    return { name: c.name || "", addons: [...(c.addons || [])] };
+    if (Array.isArray(c)) return {
+      name: "",
+      addons: [...c]
+    };
+    return {
+      name: c.name || "",
+      addons: [...(c.addons || [])]
+    };
   });
 }
-
 function addComboBox() {
-  formSelectedCombos.push({ name: "", addons: [] });
+  formSelectedCombos.push({
+    name: "",
+    addons: []
+  });
   renderComboBoxes(document.getElementById("k-name")?.value);
 }
-
 function removeComboBox(ci) {
   formSelectedCombos.splice(ci, 1);
-  if (!formSelectedCombos.length) formSelectedCombos = [{ name: "", addons: [] }];
+  if (!formSelectedCombos.length) formSelectedCombos = [{
+    name: "",
+    addons: []
+  }];
   renderComboBoxes(document.getElementById("k-name")?.value);
 }
-
 function setComboName(ci, val) {
   ensureComboBoxes();
   if (formSelectedCombos[ci]) formSelectedCombos[ci].name = val;
   schedulePreviewRefresh();
 }
-
 function getComboOtzList() {
   if (typeof getOtzAddonsForKiller !== "function") return [];
   const name = document.getElementById("k-name")?.value?.trim() || "";
   const id = document.getElementById("k-id")?.value?.trim() || window._editingKillerId || "";
-  
   if (id || name) {
-    const list = getOtzAddonsForKiller({ id, name }) || [];
+    const list = getOtzAddonsForKiller({
+      id,
+      name
+    }) || [];
     if (list.length) return list;
   }
   if (name) return getOtzAddonsForKiller(name) || [];
   if (id) return getOtzAddonsForKiller(id) || [];
   return [];
 }
-
 function renderComboBoxes(killerName) {
   ensureComboBoxes();
   const container = document.getElementById("combo-boxes-container");
   const hint = document.getElementById("k-combo-hint");
   if (!container) return;
   const list = getComboOtzList();
-  
   window._comboOtzPool = list;
   if (hint) {
-    hint.textContent = list.length
-      ? "Name each combo and pick up to 2 addons (click again to remove)."
-      : "No Otz addons for this killer — check killer.id matches OTZ_ADDONS key.";
+    hint.textContent = list.length ? "Name each combo and pick up to 2 addons (click again to remove)." : "No Otz addons for this killer — check killer.id matches OTZ_ADDONS key.";
   }
   container.innerHTML = formSelectedCombos.map((combo, ci) => {
     const selected = (combo.addons || []).map(x => String(x).toLowerCase());
@@ -1078,10 +1127,8 @@ function renderComboBoxes(killerName) {
         <div class="addon-picker-grid">${grid || (list.length ? "" : '<span style="color:var(--text-dim);font-size:0.8rem">No list</span>')}</div>
       </div>`;
   }).join("");
-
-  
   container.querySelectorAll(".addon-pick-btn[data-otz-ai]").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", e => {
       e.preventDefault();
       e.stopPropagation();
       const ci = +btn.dataset.comboCi;
@@ -1093,7 +1140,7 @@ function renderComboBoxes(killerName) {
     });
   });
   container.querySelectorAll(".chip-x[data-combo-ci]").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", e => {
       e.preventDefault();
       e.stopPropagation();
       const ci = +btn.dataset.comboCi;
@@ -1106,27 +1153,28 @@ function renderComboBoxes(killerName) {
     });
   });
 }
-
 function toggleComboAddon(ci, name) {
   ensureComboBoxes();
-  if (!formSelectedCombos[ci]) formSelectedCombos[ci] = { name: "", addons: [] };
+  if (!formSelectedCombos[ci]) formSelectedCombos[ci] = {
+    name: "",
+    addons: []
+  };
   const arr = formSelectedCombos[ci].addons;
   const i = arr.findIndex(x => String(x).toLowerCase() === String(name).toLowerCase());
-  if (i >= 0) arr.splice(i, 1);
-  else {
-    if (arr.length >= 2) { showToast("Max 2 addons per combo"); return; }
+  if (i >= 0) arr.splice(i, 1);else {
+    if (arr.length >= 2) {
+      showToast("Max 2 addons per combo");
+      return;
+    }
     arr.push(name);
   }
   renderComboBoxes();
   schedulePreviewRefresh();
 }
-
 function setupKillerComboPicker(killerName) {
   renderComboBoxes(killerName);
 }
-
 let otzTooltipPinned = false;
-
 function positionOtzTooltip(tip, anchorEl) {
   const rect = anchorEl.getBoundingClientRect();
   const tipW = Math.min(340, window.innerWidth - 16);
@@ -1134,7 +1182,7 @@ function positionOtzTooltip(tip, anchorEl) {
   let left = rect.left + rect.width / 2 - tipW / 2;
   left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
   tip.style.left = left + "px";
-  tip.style.top = (rect.bottom + 8) + "px";
+  tip.style.top = rect.bottom + 8 + "px";
   requestAnimationFrame(() => {
     const h = tip.offsetHeight;
     if (rect.bottom + 8 + h > window.innerHeight - 8) {
@@ -1142,7 +1190,6 @@ function positionOtzTooltip(tip, anchorEl) {
     }
   });
 }
-
 function fillOtzTooltip(tip, a) {
   tip.innerHTML = `
     <div class="otz-tip-head">
@@ -1156,7 +1203,6 @@ function fillOtzTooltip(tip, a) {
     <div class="otz-tip-foot">${otzTooltipPinned ? "Click outside to close" : "Click addon to pin"}</div>
   `;
 }
-
 function showOtzTooltip(ev, idx) {
   const list = window._currentOtzList || [];
   const a = list[idx];
@@ -1174,12 +1220,10 @@ function showOtzTooltip(ev, idx) {
   tip.classList.remove("pinned");
   positionOtzTooltip(tip, ev.currentTarget);
 }
-
 function hideOtzTooltip() {
   if (otzTooltipPinned) return;
   document.getElementById("otz-tooltip")?.classList.remove("show");
 }
-
 function pinOtzTooltip(ev, idx) {
   ev.preventDefault();
   ev.stopPropagation();
@@ -1198,10 +1242,9 @@ function pinOtzTooltip(ev, idx) {
   tip.classList.add("show", "pinned");
   positionOtzTooltip(tip, ev.currentTarget);
 }
-
 if (!window._otzOutsideBound) {
   window._otzOutsideBound = true;
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", e => {
     if (!otzTooltipPinned) return;
     const tip = document.getElementById("otz-tooltip");
     if (!tip) return;
@@ -1211,7 +1254,6 @@ if (!window._otzOutsideBound) {
     tip.classList.remove("show", "pinned");
   });
 }
-
 function closeKillerDetail() {
   const list = document.getElementById("killers-list-view");
   const detail = document.getElementById("killer-detail-view");
@@ -1223,24 +1265,21 @@ function closeKillerDetail() {
   }
   requestAnimationFrame(() => window.scrollTo(0, killersListScrollY || 0));
 }
-
-
 function perkDiamondHTML(perks, large = false) {
   const slots = ["top", "left", "right", "bottom"];
   const p = perks || [];
   return `
     <div class="perk-diamond ${large ? "large" : ""}">
       ${slots.map((cls, i) => {
-        const name = p[i];
-        if (!name) return `<div class="perk-slot ${cls} empty" title="Pusty slot"></div>`;
-        return `<div class="perk-slot ${cls}" title="${escapeAttr(name)}">
-          <img src="${getPerkIcon(name)}" alt="${escapeAttr(name)}" onerror="this.src=CONFIG.placeholderPerk">
+    const name = p[i];
+    if (!name) return `<div class="perk-slot ${cls} empty" title="Pusty slot"></div>`;
+    return `<div class="perk-slot ${cls}" title="${escapeAttr(name)}">
+          <img src="${getPerkIcon(name)}" alt="${escapeAttr(name)}">
         </div>`;
-      }).join("")}
+  }).join("")}
     </div>
   `;
 }
-
 function findOtzAddonImg(addonName, killerIds) {
   if (typeof getOtzAddonsForKiller !== "function") return null;
   const ids = killerIds || [];
@@ -1251,7 +1290,6 @@ function findOtzAddonImg(addonName, killerIds) {
     const found = list.find(a => a.name.toLowerCase() === String(addonName).toLowerCase());
     if (found) return found.img;
   }
-  
   if (typeof OTZ_ADDONS !== "undefined") {
     for (const key of Object.keys(OTZ_ADDONS)) {
       const found = (OTZ_ADDONS[key].addons || []).find(a => a.name.toLowerCase() === String(addonName).toLowerCase());
@@ -1260,16 +1298,11 @@ function findOtzAddonImg(addonName, killerIds) {
   }
   return null;
 }
-
 function buildCardHTML(b, compact = false) {
   const killerNames = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(", ");
   const hasKillers = !!(b.killerIds && b.killerIds.length);
-  const assignedKiller = !compact && (b.killerIds || []).length === 1
-    ? state.killers.find(k => k.id === b.killerIds[0])
-    : null;
-  const killerPortrait = assignedKiller
-    ? `<img class="build-killer-portrait" src="${escapeAttr(getKillerPortrait(assignedKiller.name))}" alt="${escapeAttr(assignedKiller.name)}" onerror="this.src=CONFIG.placeholderPortrait">`
-    : "";
+  const assignedKiller = !compact && (b.killerIds || []).length === 1 ? state.killers.find(k => k.id === b.killerIds[0]) : null;
+  const killerPortrait = assignedKiller ? `<img class="build-killer-portrait" src="${escapeAttr(getKillerPortrait(assignedKiller.name))}" alt="${escapeAttr(assignedKiller.name)}">` : "";
   return `
     <div class="build-card ${killerPortrait ? "has-killer-portrait" : ""}" style="${compact ? "padding:0.75rem;grid-template-columns:auto 1fr auto" : ""}">
       ${killerPortrait}
@@ -1281,47 +1314,46 @@ function buildCardHTML(b, compact = false) {
           ${hasKillers && b.patch ? ` • <span class="patch-badge">${escapeHtml(b.patch)}</span>` : ""}
         </div>
         ${!hasKillers ? `<div class="universal-build-label">Universal build (no specific killer)</div>` : ""}
-        ${(b.addons && b.addons.length) ? `
+        ${b.addons && b.addons.length ? `
           <div class="addon-row addon-row-icons">
             ${b.addons.map((a, i) => {
-              const img = (b.addonImages && b.addonImages[i]) || findOtzAddonImg(a, b.killerIds);
-              return `<div class="addon-icon-block" title="${escapeAttr(a)}">
-                ${img ? `<img src="${img}" alt="" onerror="this.style.display='none'">` : ""}
+    const img = b.addonImages && b.addonImages[i] || findOtzAddonImg(a, b.killerIds);
+    return `<div class="addon-icon-block" title="${escapeAttr(a)}">
+                ${img ? `<img src="${img}" alt="">` : ""}
                 <span>${escapeHtml(a)}</span>
               </div>`;
-            }).join("")}
+  }).join("")}
           </div>
-        ` : (hasKillers ? `<div class="universal-build-label">Universal build (no specific addons)</div>` : "")}
+        ` : hasKillers ? `<div class="universal-build-label">Universal build (no specific addons)</div>` : ""}
         <div class="tags" style="margin-top:0.3rem">${(b.tags || []).map(t => {
-          const tg = findTagMeta(t, getKillerTags()) || findTagMeta(t, getBuildTags());
-          const col = tg?.color || "#5a2a2a";
-          return `<span class="tag" style="border-color:${col};color:${col}">${escapeHtml(t)}</span>`;
-        }).join("")}</div>
+    const tg = findTagMeta(t, getKillerTags()) || findTagMeta(t, getBuildTags());
+    const col = tg?.color || "#5a2a2a";
+    return `<span class="tag" style="border-color:${col};color:${col}">${escapeHtml(t)}</span>`;
+  }).join("")}</div>
         ${b.description ? `<p class="desc">${escapeHtml(b.description)}</p>` : ""}
       </div>
       <div class="build-actions">
-        <button class="btn btn-sm" onclick="event.stopPropagation();copyBuild('${b.id}')" title="Copy">📋 Copy</button>
+        <button class="btn btn-sm" onclick="event.stopPropagation();copyBuild(${inlineArgument(b.id)})" title="Copy">📋 Copy</button>
       </div>
     </div>
   `;
 }
-
 function renderPerkFilterSuggestions(scope, role, openOnClick = false) {
   const input = document.getElementById(`${scope}-perk-search`);
   const drop = document.getElementById(`${scope}-perk-dropdown`);
   if (!input || !drop) return;
   if (!openOnClick && !drop.classList.contains("open")) return;
   const side = document.getElementById("build-side")?.value || "killer";
-  const pool = role === "killer-profile" || (scope === "builds" && side === "killer")
-    ? (CONFIG.killerPerks || []).map(p => p.name)
-    : role === "survivor" || side === "survivor"
-      ? (CONFIG.survivorPerks || []).map(p => p.name)
-      : [...(CONFIG.killerPerks || []), ...(CONFIG.survivorPerks || [])].map(p => p.name);
+  const pool = role === "killer-profile" || scope === "builds" && side === "killer" ? (CONFIG.killerPerks || []).map(p => p.name) : role === "survivor" || side === "survivor" ? (CONFIG.survivorPerks || []).map(p => p.name) : [...(CONFIG.killerPerks || []), ...(CONFIG.survivorPerks || [])].map(p => p.name);
   const selected = buildPerkFilters[scope] || [];
   const query = input.value.trim().toLowerCase();
   const available = [...new Set(pool)].filter(name => name && !selected.includes(name) && (!query || name.toLowerCase().includes(query))).slice(0, 50);
-  if (!available.length) { drop.innerHTML = ""; drop.classList.remove("open"); return; }
-  drop.innerHTML = available.map((name, i) => `<div class="chip-dropdown-item" data-perk-index="${i}"><img src="${getPerkIcon(name)}" alt="" onerror="this.src=CONFIG.placeholderPerk">${escapeHtml(name)}</div>`).join("");
+  if (!available.length) {
+    drop.innerHTML = "";
+    drop.classList.remove("open");
+    return;
+  }
+  drop.innerHTML = available.map((name, i) => `<div class="chip-dropdown-item" data-perk-index="${i}"><img src="${getPerkIcon(name)}" alt="">${escapeHtml(name)}</div>`).join("");
   drop.querySelectorAll("[data-perk-index]").forEach(row => row.onclick = event => {
     event.preventDefault();
     event.stopPropagation();
@@ -1332,43 +1364,33 @@ function renderPerkFilterSuggestions(scope, role, openOnClick = false) {
     renderPerkFilterChips(scope);
     drop.classList.remove("open");
     drop.innerHTML = "";
-    if (scope === "builds") renderBuilds();
-    else if (scope === "killer-profile") renderKillerProfileBuilds();
-    else if (scope === "survivor-hub") renderSurvivorBuilds();
+    if (scope === "builds") renderBuilds();else if (scope === "killer-profile") renderKillerProfileBuilds();else if (scope === "survivor-hub") renderSurvivorBuilds();
   });
   drop.classList.add("open");
 }
-
 function renderPerkFilterChips(scope) {
   const host = document.getElementById(`${scope}-perk-chips`);
   if (!host) return;
-  host.innerHTML = (buildPerkFilters[scope] || []).map((name, i) => `<span class="chip perk-filter-chip">${escapeHtml(name)}<button type="button" aria-label="Remove ${escapeAttr(name)}" onclick="removePerkFilter('${scope}',${i})">×</button></span>`).join("");
+  host.innerHTML = (buildPerkFilters[scope] || []).map((name, i) => `<span class="chip perk-filter-chip">${escapeHtml(name)}<button type="button" aria-label="Remove ${escapeAttr(name)}" onclick="removePerkFilter(${inlineArgument(scope)},${i})">×</button></span>`).join("");
 }
-
 function removePerkFilter(scope, index) {
   if (!buildPerkFilters[scope]) return;
   buildPerkFilters[scope].splice(index, 1);
   renderPerkFilterChips(scope);
-  if (scope === "builds") renderBuilds();
-  else if (scope === "killer-profile") renderKillerProfileBuilds();
-  else if (scope === "survivor-hub") renderSurvivorBuilds();
+  if (scope === "builds") renderBuilds();else if (scope === "killer-profile") renderKillerProfileBuilds();else if (scope === "survivor-hub") renderSurvivorBuilds();
 }
-
 function applyBuildSearchSort(list, query, sort, selectedPerks) {
   let out = list;
   const q = (query || "").trim().toLowerCase();
-  if (q) out = out.filter(b => [b.name,b.item,b.patch,b.description,...(b.perks || []),...(b.addons || []),...(b.tags || [])].join(" ").toLowerCase().includes(q));
+  if (q) out = out.filter(b => [b.name, b.item, b.patch, b.description, ...(b.perks || []), ...(b.addons || []), ...(b.tags || [])].join(" ").toLowerCase().includes(q));
   if (selectedPerks?.length) out = out.filter(b => selectedPerks.every(p => (b.perks || []).includes(p)));
   out = [...out];
-  if (sort === "nameDesc") out.sort((a,b) => String(b.name || "").localeCompare(String(a.name || "")));
-  else if (sort === "patch" || sort === "patchDesc") out.sort((a,b) => {
+  if (sort === "nameDesc") out.sort((a, b) => String(b.name || "").localeCompare(String(a.name || "")));else if (sort === "patch" || sort === "patchDesc") out.sort((a, b) => {
     const d = comparePatchVersions(a.patch || "", b.patch || "");
     return sort === "patchDesc" ? -d : d;
-  });
-  else out.sort((a,b) => String(a.name || "").localeCompare(String(b.name || "")));
+  });else out.sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
   return out;
 }
-
 function renderBuilds() {
   const search = (document.getElementById("build-search")?.value || "").toLowerCase();
   const killerF = document.getElementById("build-killer-filter")?.value || "";
@@ -1377,7 +1399,7 @@ function renderBuilds() {
   const side = document.getElementById("build-side")?.value || "killer";
   const sort = document.getElementById("build-sort")?.value || "name";
   const selectedPerks = buildPerkFilters.builds || [];
-  const matchesSearch = b => !search || [b.name,b.item,b.patch,b.description,...(b.perks || []),...(b.addons || []),...(b.tags || [])].join(" ").toLowerCase().includes(search);
+  const matchesSearch = b => !search || [b.name, b.item, b.patch, b.description, ...(b.perks || []), ...(b.addons || []), ...(b.tags || [])].join(" ").toLowerCase().includes(search);
   const matchesTags = b => {
     const tags = (b.tags || []).map(tag => tag.toLowerCase());
     return activeBuildFilterTags.every(tag => tags.includes(tag.toLowerCase())) && !excludedBuildFilterTags.some(tag => tags.includes(tag.toLowerCase()));
@@ -1398,20 +1420,15 @@ function renderBuilds() {
   if (side !== "killer" && typeof survivorBuildCardHTML === "function") cards.push(...survivorBuilds.map(survivorBuildCardHTML));
   container.innerHTML = cards.join("") || '<p class="hint">No builds match these filters.</p>';
 }
-
 function copyBuild(id) {
   const b = state.builds.find(x => x.id === id);
   if (!b) return;
   const killers = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(", ");
-  const lines = [
-    killers || b.name,
-    (b.perks || []).join(", "),
-  ];
+  const lines = [killers || b.name, (b.perks || []).join(", ")];
   if (b.addons && b.addons.length) lines.push(b.addons.join(", "));
   const text = lines.filter(Boolean).join("\n");
   navigator.clipboard.writeText(text).then(() => showToast("Copied!")).catch(() => prompt("Copy:", text));
 }
-
 function deleteBuild(id) {
   showConfirm("Delete this build?", () => {
     state.builds = state.builds.filter(b => b.id !== id);
@@ -1421,12 +1438,13 @@ function deleteBuild(id) {
     showToast("Build deleted");
   });
 }
-
 function normalizedBuildParts(build) {
   const normalize = values => (values || []).map(value => String(value || "").trim().toLocaleLowerCase()).filter(Boolean).sort();
-  return { perks: normalize(build.perks), addons: normalize(build.addons) };
+  return {
+    perks: normalize(build.perks),
+    addons: normalize(build.addons)
+  };
 }
-
 function findDuplicateBuildGroups() {
   const groups = new Map();
   const add = (role, build) => {
@@ -1434,14 +1452,19 @@ function findDuplicateBuildGroups() {
     if (!parts.perks.length && !parts.addons.length) return;
     const item = role === "survivor" ? String(build.item || "").trim().toLocaleLowerCase() : "";
     const key = JSON.stringify([role, parts.perks, parts.addons, item]);
-    if (!groups.has(key)) groups.set(key, { role, perks: parts.perks, addons: parts.addons, item, builds: [] });
+    if (!groups.has(key)) groups.set(key, {
+      role,
+      perks: parts.perks,
+      addons: parts.addons,
+      item,
+      builds: []
+    });
     groups.get(key).builds.push(build);
   };
   (state.builds || []).forEach(build => add("killer", build));
   (state.survivorBuilds || []).forEach(build => add("survivor", build));
   return [...groups.values()].filter(group => group.builds.length > 1);
 }
-
 function renderDuplicateBuildReport() {
   const host = document.getElementById("duplicate-build-results");
   if (!host) return;
@@ -1456,23 +1479,20 @@ function renderDuplicateBuildReport() {
       <p><strong>Perks:</strong> ${escapeHtml(group.perks.join(", ") || "None")}<br>
       <strong>Add-ons:</strong> ${escapeHtml(group.addons.join(", ") || "None")}${group.role === "survivor" ? `<br><strong>Item:</strong> ${escapeHtml(group.item || "None")}` : ""}</p>
       <ul>${group.builds.map(build => `<li><span>${escapeHtml(build.name || "Untitled")} <small>(${escapeHtml(build.patch || "no patch")})</small></span>
-        <button class="btn btn-sm btn-danger" type="button" onclick="deleteDuplicateBuild('${group.role}','${escapeAttr(build.id)}')">Delete</button></li>`).join("")}</ul>
+        <button class="btn btn-sm btn-danger" type="button" onclick="deleteDuplicateBuild(${inlineArgument(group.role)},${inlineArgument(build.id)})">Delete</button></li>`).join("")}</ul>
     </section>`).join("");
 }
-
 function checkDuplicateBuilds() {
   renderDuplicateBuildReport();
   const count = findDuplicateBuildGroups().reduce((sum, group) => sum + group.builds.length, 0);
   showToast(count ? `${count} builds in duplicate groups` : "No duplicate builds found");
 }
-
 function deleteDuplicateBuild(role, id) {
-  const collection = role === "survivor" ? (state.survivorBuilds || []) : (state.builds || []);
+  const collection = role === "survivor" ? state.survivorBuilds || [] : state.builds || [];
   const build = collection.find(item => String(item.id) === String(id));
   if (!build) return;
   showConfirm(`Delete “${build.name || "Untitled"}”?`, () => {
-    if (role === "survivor") state.survivorBuilds = (state.survivorBuilds || []).filter(item => String(item.id) !== String(id));
-    else state.builds = (state.builds || []).filter(item => String(item.id) !== String(id));
+    if (role === "survivor") state.survivorBuilds = (state.survivorBuilds || []).filter(item => String(item.id) !== String(id));else state.builds = (state.builds || []).filter(item => String(item.id) !== String(id));
     saveData();
     renderBuilds();
     if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
@@ -1481,7 +1501,6 @@ function deleteDuplicateBuild(role, id) {
     showToast("Build deleted");
   });
 }
-
 function renderChipList(containerId, items, type, kind) {
   const el = document.getElementById(containerId);
   if (!el) return;
@@ -1504,29 +1523,25 @@ function renderChipList(containerId, items, type, kind) {
   } else {
     el.innerHTML = items.map((p, i) => `
       <span class="chip" style="background:#2a1a3a;border-color:#6b3a9e;color:#d4b0ff">
-        <img src="${getPerkIcon(p)}" onerror="this.src=CONFIG.placeholderPerk" alt="">
+        <img src="${getPerkIcon(p)}" alt="">
         ${escapeHtml(p)}
         <button type="button" class="chip-x" onclick="removeFormPerk(${i})">×</button>
       </span>
     `).join("");
   }
 }
-
 function removeFormAddon(i) {
   formSelectedAddons.splice(i, 1);
   schedulePreviewRefresh();
   renderChipList("form-addon-chips", formSelectedAddons.map(x => typeof x === "string" ? x : x.name), "addon");
 }
-
 let formAddonPool = [];
-
 function toggleAllKillers(on) {
   document.querySelectorAll("#b-killers input[type=checkbox]").forEach(cb => {
     cb.checked = !!on;
   });
   refreshBuildAddonPool();
 }
-
 function refreshBuildAddonPool() {
   const checked = [...document.querySelectorAll("#b-killers input:checked")].map(el => el.value);
   formAddonPool = [];
@@ -1534,26 +1549,30 @@ function refreshBuildAddonPool() {
     const killer = state.killers.find(k => k.id === checked[0]);
     if (killer && typeof getOtzAddonsForKiller === "function") {
       const list = getOtzAddonsForKiller(killer) || getOtzAddonsForKiller(killer.name) || [];
-      formAddonPool = list.map(a => ({ name: a.name, img: a.img, tier: a.tier }));
+      formAddonPool = list.map(a => ({
+        name: a.name,
+        img: a.img,
+        tier: a.tier
+      }));
     }
   }
   if (!formAddonPool.length && checked.length !== 1) {
     const store = typeof getOtzStore === "function" ? getOtzStore() : {};
     const names = [...new Set(Object.values(store || {}).flatMap(entry => (entry && entry.addons || []).map(a => a.name)).filter(Boolean))];
-    formAddonPool = names.map(name => ({ name, img: findOtzAddonImg(name, []), tier: null }));
+    formAddonPool = names.map(name => ({
+      name,
+      img: findOtzAddonImg(name, []),
+      tier: null
+    }));
   }
   updateAddonPickerHint(checked.length);
   renderAddonPickerGrid();
 }
-
 function updateAddonPickerHint(count) {
   const hint = document.getElementById("addon-picker-hint");
   if (!hint) return;
-  if (count === 1) hint.textContent = "Otz addons for selected killer — click to add (max 2)";
-  else if (count === 0) hint.textContent = "Select exactly 1 killer to load Otz addons";
-  else hint.textContent = "Multiple killers selected — addons optional / universal";
+  if (count === 1) hint.textContent = "Otz addons for selected killer — click to add (max 2)";else if (count === 0) hint.textContent = "Select exactly 1 killer to load Otz addons";else hint.textContent = "Multiple killers selected — addons optional / universal";
 }
-
 function renderAddonPickerGrid() {
   const grid = document.getElementById("form-addon-grid");
   if (!grid) return;
@@ -1587,7 +1606,6 @@ function renderAddonPickerGrid() {
     };
   });
 }
-
 function setupAddonSearch(inputId, dropdownId) {
   const input = document.getElementById(inputId);
   const drop = document.getElementById(dropdownId);
@@ -1603,10 +1621,12 @@ function setupAddonSearch(inputId, dropdownId) {
     refreshBuildAddonPool();
     const q = input.value.trim().toLowerCase();
     const selectedNames = formSelectedAddons.map(x => typeof x === "string" ? x : x.name);
-    const available = formAddonPool.filter(a =>
-      !selectedNames.includes(a.name) && (!q || a.name.toLowerCase().includes(q))
-    ).slice(0, 50);
-    if (!available.length) { drop.classList.remove("open"); drop.innerHTML = ""; return; }
+    const available = formAddonPool.filter(a => !selectedNames.includes(a.name) && (!q || a.name.toLowerCase().includes(q))).slice(0, 50);
+    if (!available.length) {
+      drop.classList.remove("open");
+      drop.innerHTML = "";
+      return;
+    }
     drop.innerHTML = available.map((a, idx) => `
       <div class="chip-dropdown-item" data-addon-idx="${idx}">
         ${a.img ? `<img src="${a.img}" alt="" style="width:28px;height:28px;border-radius:4px;object-fit:cover">` : ""}
@@ -1622,26 +1642,35 @@ function setupAddonSearch(inputId, dropdownId) {
   input.onfocus = showAddonSuggestions;
   input.onclick = showAddonSuggestions;
   input.oninput = showAddonSuggestions;
-  input.onkeydown = (e) => {
+  input.onkeydown = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       const q = input.value.trim().toLowerCase();
       if (!q) return;
       refreshBuildAddonPool();
       const found = formAddonPool.find(a => a.name.toLowerCase() === q);
-      if (found) addFormAddon(found);
-      else if (input.value.trim().length > 1) addFormAddon({ name: input.value.trim(), img: null, tier: null });
+      if (found) addFormAddon(found);else if (input.value.trim().length > 1) addFormAddon({
+        name: input.value.trim(),
+        img: null,
+        tier: null
+      });
       input.value = "";
       drop.classList.remove("open");
     }
   };
 }
-
 function addFormAddon(addon) {
-  if (typeof addon === "string") addon = { name: addon, img: null, tier: null };
+  if (typeof addon === "string") addon = {
+    name: addon,
+    img: null,
+    tier: null
+  };
   if (!addon || !addon.name) return;
   if (formSelectedAddons.some(x => String(typeof x === "string" ? x : x.name).toLowerCase() === String(addon.name).toLowerCase())) return;
-  if (formSelectedAddons.length >= 2) { showToast("Max 2 addons"); return; }
+  if (formSelectedAddons.length >= 2) {
+    showToast("Max 2 addons");
+    return;
+  }
   formSelectedAddons.push(addon);
   renderChipList("form-addon-chips", formSelectedAddons.map(x => typeof x === "string" ? x : x.name), "addon");
   renderAddonPickerGrid();
@@ -1650,10 +1679,11 @@ function addFormAddon(addon) {
   const input = document.getElementById("addon-search-input");
   const drop = document.getElementById("addon-search-dropdown");
   if (input) input.value = "";
-  if (drop) { drop.classList.remove("open"); drop.innerHTML = ""; }
+  if (drop) {
+    drop.classList.remove("open");
+    drop.innerHTML = "";
+  }
 }
-
-
 let formTagKind = "killer";
 function removeFormTag(i) {
   formSelectedTags.splice(i, 1);
@@ -1661,14 +1691,14 @@ function removeFormTag(i) {
   setupTagPicker(formTagKind);
   schedulePreviewRefresh();
 }
-
 function removeFormPerk(i) {
   formSelectedPerks.splice(i, 1);
-  try { refreshBuildEditPreview(); } catch (_) {}
+  try {
+    refreshBuildEditPreview();
+  } catch (_) {}
   schedulePreviewRefresh();
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
 }
-
 function setupTagPicker(kind) {
   formTagKind = kind;
   const list = kind === "build" ? getBuildTags() : getKillerTags();
@@ -1684,15 +1714,13 @@ function setupTagPicker(kind) {
     btn.onclick = () => {
       const name = btn.dataset.tag;
       const i = formSelectedTags.indexOf(name);
-      if (i >= 0) formSelectedTags.splice(i, 1);
-      else formSelectedTags.push(name);
+      if (i >= 0) formSelectedTags.splice(i, 1);else formSelectedTags.push(name);
       renderChipList("form-tag-chips", formSelectedTags, "tag", kind);
       setupTagPicker(kind);
       schedulePreviewRefresh();
     };
   });
 }
-
 function setupPerkSearch(inputId, dropdownId) {
   const input = document.getElementById(inputId);
   const drop = document.getElementById(dropdownId);
@@ -1700,13 +1728,15 @@ function setupPerkSearch(inputId, dropdownId) {
   const perkPool = (CONFIG.killerPerks || []).map(p => p.name).filter(Boolean);
   const showPerkSuggestions = () => {
     const q = input.value.trim().toLowerCase();
-    const available = perkPool.filter(p =>
-      !formSelectedPerks.includes(p) && (!q || p.toLowerCase().includes(q))
-    ).slice(0, 60);
-    if (!available.length) { drop.classList.remove("open"); drop.innerHTML = ""; return; }
+    const available = perkPool.filter(p => !formSelectedPerks.includes(p) && (!q || p.toLowerCase().includes(q))).slice(0, 60);
+    if (!available.length) {
+      drop.classList.remove("open");
+      drop.innerHTML = "";
+      return;
+    }
     drop.innerHTML = available.map((p, idx) => `
       <div class="chip-dropdown-item" data-perk-idx="${idx}">
-        <img src="${getPerkIcon(p)}" onerror="this.src=CONFIG.placeholderPerk" alt="">
+        <img src="${getPerkIcon(p)}" alt="">
         ${escapeHtml(p)}
       </div>
     `).join("");
@@ -1718,7 +1748,7 @@ function setupPerkSearch(inputId, dropdownId) {
   input.onfocus = showPerkSuggestions;
   input.onclick = showPerkSuggestions;
   input.oninput = showPerkSuggestions;
-  input.onkeydown = (e) => {
+  input.onkeydown = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       const q = input.value.trim();
@@ -1730,20 +1760,26 @@ function setupPerkSearch(inputId, dropdownId) {
     }
   };
 }
-
 function addFormPerk(name) {
   if (!name || formSelectedPerks.includes(name)) return;
-  if (formSelectedPerks.length >= 4) { showToast("Max 4 perks"); return; }
+  if (formSelectedPerks.length >= 4) {
+    showToast("Max 4 perks");
+    return;
+  }
   formSelectedPerks.push(name);
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
   const input = document.getElementById("perk-search-input");
   const drop = document.getElementById("perk-search-dropdown");
   if (input) input.value = "";
-  if (drop) { drop.classList.remove("open"); drop.innerHTML = ""; }
-  try { refreshBuildEditPreview(); } catch (_) {}
+  if (drop) {
+    drop.classList.remove("open");
+    drop.innerHTML = "";
+  }
+  try {
+    refreshBuildEditPreview();
+  } catch (_) {}
   schedulePreviewRefresh();
 }
-
 function refreshBuildEditPreview() {
   const box = document.getElementById("build-edit-preview-body");
   if (!box) return;
@@ -1756,24 +1792,20 @@ function refreshBuildEditPreview() {
   const addons = (formSelectedAddons || []).map(x => typeof x === "string" ? x : x.name);
   const tags = (formSelectedTags || []).map(t => {
     const tg = findTagMeta(t, getBuildTags());
-    const col = (tg && tg.color) || "#9b59b6";
+    const col = tg && tg.color || "#9b59b6";
     return `<span class="tag-dot" style="--tc:${col}">${escapeHtml(t)}</span>`;
   }).join("");
-  const perkDiamond = perks.length
-    ? perkDiamondHTML(perks, false)
-    : `<p style="color:#666;font-size:0.85rem">No perks yet</p>`;
-  const portrait = killerIds.length === 1
-    ? `<img class="build-preview-killer" src="${escapeAttr(getKillerPortrait(killerNames[0]))}" alt="" onerror="this.src=CONFIG.placeholderPortrait">`
-    : "";
+  const perkDiamond = perks.length ? perkDiamondHTML(perks, false) : `<p style="color:#666;font-size:0.85rem">No perks yet</p>`;
+  const portrait = killerIds.length === 1 ? `<img class="build-preview-killer" src="${escapeAttr(getKillerPortrait(killerNames[0]))}" alt="">` : "";
   const addonRow = addons.length ? `
     <div class="addon-row addon-row-icons" style="margin-top:0.5rem">
       ${addons.map((a, i) => {
-        const img = (formSelectedAddons[i] && formSelectedAddons[i].img) || findOtzAddonImg(a, killerIds);
-        return `<div class="addon-icon-block" title="${escapeAttr(a)}">
+    const img = formSelectedAddons[i] && formSelectedAddons[i].img || findOtzAddonImg(a, killerIds);
+    return `<div class="addon-icon-block" title="${escapeAttr(a)}">
           ${img ? `<img src="${img}" alt="">` : ""}
           <span>${escapeHtml(a)}</span>
         </div>`;
-      }).join("")}
+  }).join("")}
     </div>` : `<p style="color:#666;font-size:0.8rem;margin-top:0.4rem">${killerIds.length ? "Universal (no specific addons)" : "No specific killer selected"}</p>`;
   box.innerHTML = `
     <div class="build-card-preview ${portrait ? "has-killer-portrait" : ""}">
@@ -1790,24 +1822,22 @@ function refreshBuildEditPreview() {
       </div>
     </div>`;
 }
-
 function openBuildModal(editId = null) {
   const b = editId ? state.builds.find(x => x.id === editId) : null;
   formSelectedTags = [...(b?.tags || [])];
   formSelectedPerks = [...(b?.perks || [])];
   formSelectedAddons = (b?.addons || []).map((name, i) => ({
     name,
-    img: (b.addonImages && b.addonImages[i]) || null,
+    img: b.addonImages && b.addonImages[i] || null,
     tier: null
   }));
   const selectedKillers = new Set(b?.killerIds || []);
-
   const html = `
     <div class="edit-modal-topbar">
       <h2 style="margin:0">${b ? "Edit build" : "New build"}</h2>
       <div class="edit-modal-actions">
         <button class="btn" type="button" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-primary" type="button" onclick="saveBuild('${editId || ""}')">Save</button>
+        <button class="btn btn-primary" type="button" onclick="saveBuild(${inlineArgument(editId || "")})">Save</button>
       </div>
     </div>
     <div class="killer-edit-layout">
@@ -1867,22 +1897,27 @@ function openBuildModal(editId = null) {
         </div>
         <div class="modal-actions">
           <button class="btn" type="button" onclick="closeModal()">Cancel</button>
-          <button class="btn btn-primary" type="button" onclick="saveBuild('${editId || ""}')">Save</button>
+          <button class="btn btn-primary" type="button" onclick="saveBuild(${inlineArgument(editId || "")})">Save</button>
         </div>
       </div>
       <div class="killer-edit-preview">
         <div class="preview-top-actions">
           <button class="btn" type="button" onclick="closeModal()">Cancel</button>
-          <button class="btn btn-primary" type="button" onclick="saveBuild('${editId || ""}')">Save</button>
+          <button class="btn btn-primary" type="button" onclick="saveBuild(${inlineArgument(editId || "")})">Save</button>
         </div>
         <h3 class="preview-label">Live preview</h3>
         <div id="build-edit-preview-body"></div>
       </div>
     </div>
   `;
-  showModal(html, { wide: true });
+  showModal(html, {
+    wide: true
+  });
   const patchPicker = document.getElementById("b-patch-pick");
-  if (patchPicker) patchPicker.onchange = () => { if (patchPicker.value) document.getElementById("b-patch").value = patchPicker.value; schedulePreviewRefresh(); };
+  if (patchPicker) patchPicker.onchange = () => {
+    if (patchPicker.value) document.getElementById("b-patch").value = patchPicker.value;
+    schedulePreviewRefresh();
+  };
   formTagKind = "build";
   renderChipList("form-tag-chips", formSelectedTags, "tag", "build");
   renderChipList("form-perk-chips", formSelectedPerks, "perk");
@@ -1892,18 +1927,20 @@ function openBuildModal(editId = null) {
   setupAddonSearch("addon-search-input", "addon-search-dropdown");
   refreshBuildEditPreview();
 }
-
 function saveBuild(editId) {
   const name = document.getElementById("b-name").value.trim();
-  if (!name) { showToast("Enter a name"); return; }
+  if (!name) {
+    showToast("Enter a name");
+    return;
+  }
   const killerIds = [...document.querySelectorAll("#b-killers input:checked")].map(el => el.value);
-
   const data = {
-    name, killerIds,
+    name,
+    killerIds,
     perks: [...formSelectedPerks].slice(0, 4),
     tags: [...formSelectedTags],
     addons: formSelectedAddons.slice(0, 2).map(x => typeof x === "string" ? x : x.name),
-    addonImages: formSelectedAddons.slice(0, 2).map(x => (typeof x === "object" && x.img) ? x.img : null).filter(Boolean),
+    addonImages: formSelectedAddons.slice(0, 2).map(x => typeof x === "object" && x.img ? x.img : null).filter(Boolean),
     description: document.getElementById("b-desc")?.value.trim() || "",
     patch: document.getElementById("b-patch")?.value.trim() || "",
     version: "",
@@ -1911,10 +1948,12 @@ function saveBuild(editId) {
     currentlyUsing: false,
     changes: ""
   };
-
   if (editId) {
     const idx = state.builds.findIndex(x => x.id === editId);
-    if (idx >= 0) state.builds[idx] = { ...state.builds[idx], ...data };
+    if (idx >= 0) state.builds[idx] = {
+      ...state.builds[idx],
+      ...data
+    };
   } else {
     data.id = "b" + Date.now();
     state.builds.push(data);
@@ -1926,8 +1965,6 @@ function saveBuild(editId) {
   if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
   showToast("Build saved");
 }
-
-
 function refreshKillerEditPreview() {
   const box = document.getElementById("killer-edit-preview-body");
   if (!box) return;
@@ -1943,10 +1980,10 @@ function refreshKillerEditPreview() {
   const src = getKillerPortrait(name);
   const tags = (formSelectedTags || []).map(t => {
     const tg = findTagMeta(t, getKillerTags());
-    const col = (tg && tg.color) || "#666";
+    const col = tg && tg.color || "#666";
     return `<span class="tag-dot" style="--tc:${col}">${escapeHtml(t)}</span>`;
   }).join("");
-const addonNotesEl = document.getElementById("k-addon-notes");
+  const addonNotesEl = document.getElementById("k-addon-notes");
   const addonNotes = addonNotesEl ? String(addonNotesEl.value || "").trim() : "";
   const killerId = window._editingKillerId || "";
   const comboHtml = (formSelectedCombos || []).filter(c => (c.addons || []).length || (c.name || "").trim()).map((combo, ci) => {
@@ -1957,12 +1994,11 @@ const addonNotesEl = document.getElementById("k-addon-notes");
         <span>${escapeHtml(n)}</span>
       </div>`;
     }).join("");
-    return `<div class="my-combo-box"><h4>${escapeHtml(combo.name || ("Combo " + (ci + 1)))}</h4><div class="my-combo-row">${items || "—"}</div></div>`;
+    return `<div class="my-combo-box"><h4>${escapeHtml(combo.name || "Combo " + (ci + 1))}</h4><div class="my-combo-row">${items || "—"}</div></div>`;
   }).join("");
   box.innerHTML = `
     <div style="display:flex;gap:0.75rem;align-items:flex-start">
-      <img src="${src}" alt="" style="width:72px;height:96px;object-fit:cover;border-radius:8px;border:1px solid #333"
-        onerror="this.src=CONFIG.placeholderPortrait">
+      <img src="${src}" alt="" style="width:72px;height:96px;object-fit:cover;border-radius:8px;border:1px solid #333">
       <div style="flex:1;min-width:0">
         <div style="display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;margin-bottom:0.35rem">
           <strong style="font-size:1.05rem">${escapeHtml(name)}</strong>
@@ -1980,61 +2016,68 @@ const addonNotesEl = document.getElementById("k-addon-notes");
     ${comboHtml ? `<div class="my-combos-wrap" style="margin-top:0.75rem">${comboHtml}</div>` : ""}
     `;
 }
-
 function schedulePreviewRefresh(immediate) {
   const run = () => {
-    try { refreshKillerEditPreview(); } catch (_) {}
-    try { refreshBuildEditPreview(); } catch (_) {}
+    try {
+      refreshKillerEditPreview();
+    } catch (_) {}
+    try {
+      refreshBuildEditPreview();
+    } catch (_) {}
   };
-  
   run();
-  
   if (immediate === false) {
     clearTimeout(window._previewRefreshT);
     window._previewRefreshT = setTimeout(run, 80);
   }
 }
-
-
-
 function openDetailedKillerForm(editId = null) {
   try {
-  const k = editId ? state.killers.find(x => x.id === editId) : null;
-  formSelectedTags = [...(k?.tags || [])];
-  window._editingKillerId = k?.id || "";
-
-  if (k?.recommendedCombos && k.recommendedCombos.length) {
-    formSelectedCombos = k.recommendedCombos.map(c => {
-      if (Array.isArray(c)) return { name: "", addons: [...c] };
-      return { name: c.name || "", addons: [...(c.addons || [])] };
-    });
-  } else if (k?.recommendedAddons && k.recommendedAddons.length) {
-    formSelectedCombos = [{ name: "", addons: [...k.recommendedAddons] }];
-  } else {
-    formSelectedCombos = [{ name: "", addons: [] }];
-  }
-
-  const addonNotesVal = (k?.addonNotes && k.addonNotes !== "placeholder") ? k.addonNotes : "";
-
-  const html = `
+    const k = editId ? state.killers.find(x => x.id === editId) : null;
+    formSelectedTags = [...(k?.tags || [])];
+    window._editingKillerId = k?.id || "";
+    if (k?.recommendedCombos && k.recommendedCombos.length) {
+      formSelectedCombos = k.recommendedCombos.map(c => {
+        if (Array.isArray(c)) return {
+          name: "",
+          addons: [...c]
+        };
+        return {
+          name: c.name || "",
+          addons: [...(c.addons || [])]
+        };
+      });
+    } else if (k?.recommendedAddons && k.recommendedAddons.length) {
+      formSelectedCombos = [{
+        name: "",
+        addons: [...k.recommendedAddons]
+      }];
+    } else {
+      formSelectedCombos = [{
+        name: "",
+        addons: []
+      }];
+    }
+    const addonNotesVal = k?.addonNotes && k.addonNotes !== "placeholder" ? k.addonNotes : "";
+    const html = `
     <div class="edit-modal-topbar">
       <h2 style="margin:0">${k ? "Edit killer" : "New killer"}</h2>
       <div class="edit-modal-actions">
-        ${k ? `<button class="btn btn-danger" type="button" onclick="deleteKiller('${k.id}')">Delete</button>` : ""}
+        ${k ? `<button class="btn btn-danger" type="button" onclick="deleteKiller(${inlineArgument(k.id)})">Reset local details</button>` : ""}
         <button class="btn" type="button" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-primary" type="button" onclick="saveKiller('${editId || ""}')">Save</button>
+        <button class="btn btn-primary" type="button" onclick="saveKiller(${inlineArgument(editId || "")})">Save</button>
       </div>
     </div>
     <div class="killer-edit-layout">
       <div class="killer-edit-form edit-form-panel">
         <div class="edit-block">
-          <h3 class="edit-block-title">Identity</h3>
+          <h3 class="edit-block-title">Identity</h3><p class="hint">Shared definition. Edit your ratings, tags and notes below.</p>
           <div class="form-group"><label>Name *</label>
             <input id="k-name" value="${escapeAttr(k?.name || "")}" oninput="schedulePreviewRefresh()">
           </div>
           <div class="form-row-3">
             <div class="form-group"><label>Release date</label>
-              <input type="date" id="k-release" value="${escapeAttr((k?.releaseDate || "").slice(0,10))}" oninput="schedulePreviewRefresh()">
+              <input type="date" id="k-release" value="${escapeAttr((k?.releaseDate || "").slice(0, 10))}" oninput="schedulePreviewRefresh()">
             </div>
             <div class="form-group"><label>Chapter</label>
               <input id="k-chapter" value="${escapeAttr(k?.chapter != null ? String(k.chapter) : "")}" placeholder="e.g. 1 or 32" oninput="schedulePreviewRefresh()">
@@ -2049,8 +2092,7 @@ function openDetailedKillerForm(editId = null) {
           <div class="form-row-3">
             <div class="form-group"><label>Difficulty</label>
               <select id="k-difficulty" onchange="schedulePreviewRefresh()">
-                ${["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"].map(d =>
-                  `<option value="${d}" ${k?.difficulty === d ? "selected" : ""}>${d}</option>`).join("")}
+                ${["Beginner", "Easy", "Medium", "Hard", "Very Hard", "Extremely Hard"].map(d => `<option value="${d}" ${k?.difficulty === d ? "selected" : ""}>${d}</option>`).join("")}
               </select>
             </div>
             <div class="form-group"><label>Skill floor</label>
@@ -2093,43 +2135,49 @@ function openDetailedKillerForm(editId = null) {
           </div>
         </div>
         <div class="modal-actions">
-          ${k ? `<button class="btn btn-danger" style="margin-right:auto" type="button" onclick="deleteKiller('${k.id}')">Delete</button>` : ""}
+          ${k ? `<button class="btn btn-danger" style="margin-right:auto" type="button" onclick="deleteKiller(${inlineArgument(k.id)})">Reset local details</button>` : ""}
           <button class="btn" type="button" onclick="closeModal()">Cancel</button>
-          <button class="btn btn-primary" type="button" onclick="saveKiller('${editId || ""}')">Save</button>
+          <button class="btn btn-primary" type="button" onclick="saveKiller(${inlineArgument(editId || "")})">Save</button>
         </div>
       </div>
       <div class="killer-edit-preview">
         <div class="preview-top-actions">
           <button class="btn" type="button" onclick="closeModal()">Cancel</button>
-          <button class="btn btn-primary" type="button" onclick="saveKiller('${editId || ""}')">Save</button>
+          <button class="btn btn-primary" type="button" onclick="saveKiller(${inlineArgument(editId || "")})">Save</button>
         </div>
         <h3 class="preview-label">Live preview</h3>
         <div id="killer-edit-preview-body"></div>
       </div>
     </div>
   `;
-  showModal(html, { wide: true });
-  formTagKind = "killer";
-  renderChipList("form-tag-chips", formSelectedTags, "tag", "killer");
-  setupTagPicker("killer");
-  setupKillerComboPicker(k?.name || "");
-  refreshKillerEditPreview();
-  document.getElementById("k-name")?.addEventListener("change", () => setupKillerComboPicker(document.getElementById("k-name").value));
+    showModal(html, {
+      wide: true
+    });
+    formTagKind = "killer";
+    renderChipList("form-tag-chips", formSelectedTags, "tag", "killer");
+    setupTagPicker("killer");
+    setupKillerComboPicker(k?.name || "");
+    SharedDbd.guardEditor();
+    refreshKillerEditPreview();
+    document.getElementById("k-name")?.addEventListener("change", () => setupKillerComboPicker(document.getElementById("k-name").value));
   } catch (err) {
     console.error(err);
     showToast("Could not open editor: " + err.message);
   }
 }
-
 function saveKiller(editId) {
+  if (!editId || !SharedDbd.characterData(editId)) return showToast("Choose an existing SharedFiles character.");
   const name = document.getElementById("k-name").value.trim();
-  if (!name) { showToast("Enter a name"); return; }
+  if (!name) {
+    showToast("Enter a name");
+    return;
+  }
   let id = editId || name.toLowerCase().replace(/^the\s+/i, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (!editId && state.killers.some(k => k.id === id)) id = id + "-" + Date.now();
   const addonNotes = (document.getElementById("k-addon-notes")?.value || "").trim() || "placeholder";
-
   const data = {
-    id, name,
+    id,
+    name,
     difficulty: document.getElementById("k-difficulty")?.value || "Medium",
     skillFloor: Math.round((+document.getElementById("k-skill-floor")?.value || 0) * 10) / 10,
     skillCeiling: Math.round((+document.getElementById("k-skill-ceiling")?.value || 0) * 10) / 10,
@@ -2137,19 +2185,21 @@ function saveKiller(editId) {
     tier: document.getElementById("k-tier")?.value || "",
     tags: [...formSelectedTags],
     addonNotes,
-
-    recommendedCombos: (formSelectedCombos || [])
-      .map(c => ({ name: (c.name || "").trim(), addons: [...(c.addons || [])] }))
-      .filter(c => c.addons.length || c.name),
+    recommendedCombos: (formSelectedCombos || []).map(c => ({
+      name: (c.name || "").trim(),
+      addons: [...(c.addons || [])]
+    })).filter(c => c.addons.length || c.name),
     patch: document.getElementById("k-patch")?.value.trim() || "",
     releaseDate: document.getElementById("k-release")?.value || "",
     chapter: document.getElementById("k-chapter")?.value.trim() || "",
     releaseOrder: Math.max(0, parseInt(document.getElementById("k-release-order")?.value, 10) || 0)
   };
-
   if (editId) {
     const idx = state.killers.findIndex(x => x.id === editId);
-    if (idx >= 0) state.killers[idx] = { ...state.killers[idx], ...data };
+    if (idx >= 0) state.killers[idx] = {
+      ...state.killers[idx],
+      ...data
+    };
   } else {
     state.killers.push(data);
   }
@@ -2160,71 +2210,26 @@ function saveKiller(editId) {
   if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
   showToast("Killer saved");
 }
-
 function deleteKiller(id) {
-  showConfirm("Delete this killer?", () => {
-  state.killers = state.killers.filter(k => k.id !== id);
-  state.builds.forEach(b => { b.killerIds = (b.killerIds || []).filter(kid => kid !== id); });
-  saveData();
-  closeModal();
-  renderAll();
-  if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
-  showToast("Killer deleted");
+  if (!SharedDbd.characterData(id)) return;
+  showConfirm('Reset local ratings, tags and notes for this killer?', () => {
+    state.killers = state.killers.filter(k => k.id !== id);
+    saveData();
+    closeModal();
+    renderAll();
+    renderEditor();
+    showToast('Local details reset');
   });
-  return;
-  
-  state.killers = state.killers.filter(k => k.id !== id);
-  state.builds.forEach(b => { b.killerIds = (b.killerIds || []).filter(kid => kid !== id); });
-  saveData();
-  closeModal();
-  renderAll();
-  renderEditor();
 }
-
-function openPerkEditor(role, name = "", trigger = null) {
-  const panel = document.getElementById(role === "killer" ? "editor-kperks" : "editor-sperks");
-  if (!panel) return;
-  panel.querySelector("#perk-editor-inline")?.remove();
-  const pool = role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
-  const perk = name ? pool.find(p => p.name.toLowerCase() === name.toLowerCase()) : null;
-  const icon = (perk && perk.icon) || findPerkIconInConfig(CONFIG, name) || "";
-  const list = panel.querySelector(role === "killer" ? "#editor-kperks-list" : "#editor-sperks-list");
-  const form = document.createElement("div");
-  form.id = "perk-editor-inline"; form.className = "perk-editor-inline";
-  form.innerHTML = "<h3>" + (name ? "Edit perk" : "Add perk") + "</h3>" +
-    '<label>Name<input id="perk-edit-name" value="' + escapeAttr(name) + '" ' + (name ? "readonly" : "") + "></label>" +
-    '<label>Image URL<input id="perk-edit-icon" type="url" value="' + escapeAttr(icon) + '" placeholder="https://..."></label>' +
-    '<div class="settings-actions"><button class="btn btn-primary" onclick="savePerkEditor(\'' + role + '\',\'' + escapeAttr(name) + '\')">Save</button>' +
-    (name ? '<button class="btn btn-danger" onclick="deletePerkEditor(\'' + role + '\',\'' + escapeAttr(name) + '\')">Delete</button>' : "") +
-    '<button class="btn" onclick="document.getElementById(\'perk-editor-inline\').remove()">Cancel</button></div>';
-  const row = trigger && trigger.closest(".editor-item");
-  if (row) row.insertAdjacentElement("afterend", form);
-  else list.before(form);
+function openPerkEditor() {
+  showToast('Shared perk definitions are read-only. Update SharedFiles to change them.');
 }
-function savePerkEditor(role, oldName = "") {
-  const name = document.getElementById("perk-edit-name").value.trim();
-  const icon = document.getElementById("perk-edit-icon").value.trim();
-  if (!name || !icon) return showToast("Enter a name and image URL");
-  const pool = role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
-  const perk = oldName && pool.find(p => p.name.toLowerCase() === oldName.toLowerCase());
-  if (!oldName && pool.some(p => p.name.toLowerCase() === name.toLowerCase())) return showToast("Perk already exists");
-  CONFIG.perkIcons = CONFIG.perkIcons || {};
-  if (perk) { perk.icon = icon; CONFIG.perkIcons[perk.name] = icon; }
-  else {
-    pool.push({ name, icon }); CONFIG.perkIcons[name] = icon; state.perks = state.perks || [];
-    if (!state.perks.some(p => String(p).toLowerCase() === name.toLowerCase())) state.perks.push(name);
-  }
-  saveData(); renderEditor(); renderAll(); showToast("Perk saved");
+function savePerkEditor() {
+  showToast('Shared perk definitions are read-only. Update SharedFiles to change them.');
 }
-function deletePerkEditor(role, name) {
-  state.perks = (state.perks || []).filter(p => String(p).toLowerCase() !== name.toLowerCase());
-  const pool = role === "killer" ? CONFIG.killerPerks : CONFIG.survivorPerks;
-  const i = pool.findIndex(p => p.name.toLowerCase() === name.toLowerCase()); if (i >= 0) pool.splice(i,1);
-  if (CONFIG.perkIcons) delete CONFIG.perkIcons[name];
-  saveData(); renderEditor(); renderAll(); showToast("Perk removed locally — download config.js to save it to the project");
+function deletePerkEditor() {
+  showToast('Shared perk definitions are read-only. Update SharedFiles to change them.');
 }
-
-
 function setupEditorTabs() {
   document.querySelectorAll(".editor-tab").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -2235,7 +2240,6 @@ function setupEditorTabs() {
     });
   });
 }
-
 function renderEditor() {
   const kList = document.getElementById("editor-killers-list");
   if (kList) {
@@ -2243,13 +2247,7 @@ function renderEditor() {
     const sort = document.getElementById("ed-killer-sort")?.value || "name";
     let list = state.killers.slice();
     if (q) {
-      list = list.filter(k =>
-        (k.name || "").toLowerCase().includes(q) ||
-        (k.id || "").toLowerCase().includes(q) ||
-        (k.difficulty || "").toLowerCase().includes(q) ||
-        (k.tier || "").toLowerCase().includes(q) ||
-        (k.tags || []).some(t => String(t).toLowerCase().includes(q))
-      );
+      list = list.filter(k => (k.name || "").toLowerCase().includes(q) || (k.id || "").toLowerCase().includes(q) || (k.difficulty || "").toLowerCase().includes(q) || (k.tier || "").toLowerCase().includes(q) || (k.tags || []).some(t => String(t).toLowerCase().includes(q)));
     }
     list.sort((a, b) => {
       if (sort === "nameDesc") return b.name.localeCompare(a.name);
@@ -2258,14 +2256,15 @@ function renderEditor() {
         return d !== 0 ? d : a.name.localeCompare(b.name);
       }
       if (sort === "difficulty" || sort === "difficultyDesc") {
-        const order = ["Beginner","Easy","Medium","Hard","Very Hard","Extremely Hard"];
+        const order = ["Beginner", "Easy", "Medium", "Hard", "Very Hard", "Extremely Hard"];
         const d = order.indexOf(a.difficulty) - order.indexOf(b.difficulty);
         return sort === "difficultyDesc" ? -d : d;
       }
       if (sort === "fun2play") return (b.fun2play || 0) - (a.fun2play || 0);
       if (sort === "skillCeiling") return (b.skillCeiling || 0) - (a.skillCeiling || 0);
       if (sort === "release") {
-        const da = a.releaseDate || "", db = b.releaseDate || "";
+        const da = a.releaseDate || "",
+          db = b.releaseDate || "";
         if (da !== db) return da.localeCompare(db);
         return (a.releaseOrder || 0) - (b.releaseOrder || 0);
       }
@@ -2273,15 +2272,14 @@ function renderEditor() {
     });
     kList.innerHTML = list.map(k => `
       <div class="editor-item">
-        <img src="${getKillerPortrait(k.name)}" style="width:40px;height:40px;border-radius:6px;object-fit:cover" onerror="this.src=CONFIG.placeholderPortrait">
+        <img src="${getKillerPortrait(k.name)}" style="width:40px;height:40px;border-radius:6px;object-fit:cover">
         <strong style="min-width:140px">${escapeHtml(k.name)}</strong>
         <span style="font-size:0.78rem;color:var(--text-dim)">${k.difficulty} • ${k.skillFloor ?? 0}–${k.skillCeiling ?? 0} • Fun ${k.fun2play ?? 0} • ${tierBadgeHTML(k.tier)}</span>
-        ${isLocalOnlyKiller(k) ? unsavedBadge("New killer — not in data.js") : (isDirtyKiller(k) ? dirtyBadge("Edited — export to data.js") : "")}
-        <button class="btn btn-sm" style="margin-left:auto" onclick="openDetailedKillerForm('${k.id}')">Edit</button>
+        ${isLocalOnlyKiller(k) ? unsavedBadge("New killer — not in data.js") : isDirtyKiller(k) ? dirtyBadge("Edited — export to data.js") : ""}
+        <button class="btn btn-sm" style="margin-left:auto" onclick="openDetailedKillerForm(${inlineArgument(k.id)})">Edit</button>
       </div>
     `).join("") || "<p style='color:var(--text-dim)'>None</p>";
   }
-
   const bList = document.getElementById("editor-builds-list");
   if (bList) {
     const q = (document.getElementById("ed-build-search")?.value || "").trim().toLowerCase();
@@ -2290,16 +2288,15 @@ function renderEditor() {
     if (q) {
       list = list.filter(b => {
         const names = (b.killerIds || []).map(id => state.killers.find(k => k.id === id)?.name || id).join(" ").toLowerCase();
-        return (b.name || "").toLowerCase().includes(q) || names.includes(q) ||
-          (b.patch || "").toLowerCase().includes(q) ||
-          (b.tags || []).some(t => String(t).toLowerCase().includes(q)) ||
-          (b.perks || []).some(p => String(p).toLowerCase().includes(q));
+        return (b.name || "").toLowerCase().includes(q) || names.includes(q) || (b.patch || "").toLowerCase().includes(q) || (b.tags || []).some(t => String(t).toLowerCase().includes(q)) || (b.perks || []).some(p => String(p).toLowerCase().includes(q));
       });
     }
     list.sort((a, b) => {
       if (sort === "nameDesc") return b.name.localeCompare(a.name);
       if (sort === "patch" || sort === "patchDesc") {
-        const d = String(a.patch || "").localeCompare(String(b.patch || ""), undefined, { numeric: true });
+        const d = String(a.patch || "").localeCompare(String(b.patch || ""), undefined, {
+          numeric: true
+        });
         return sort === "patchDesc" ? -d : d;
       }
       if (sort === "killer" || sort === "killerDesc") {
@@ -2316,36 +2313,52 @@ function renderEditor() {
         <div class="editor-item">
           <strong style="min-width:140px">${escapeHtml(b.name)}</strong>
           <span style="font-size:0.78rem;color:var(--text-dim)">${escapeHtml(names) || "—"} ${b.patch ? "· " + escapeHtml(b.patch) : ""}</span>
-          ${isLocalOnlyBuild(b) ? unsavedBadge("New build — not in data.js") : (isDirtyBuild(b) ? dirtyBadge("Edited — export to data.js") : "")}
-          <button class="btn btn-sm" style="margin-left:auto" onclick="openBuildModal('${b.id}')">Edit</button>
-          <button class="btn btn-sm btn-danger" onclick="deleteBuild('${b.id}')">X</button>
+          ${isLocalOnlyBuild(b) ? unsavedBadge("New build — not in data.js") : isDirtyBuild(b) ? dirtyBadge("Edited — export to data.js") : ""}
+          <button class="btn btn-sm" style="margin-left:auto" onclick="openBuildModal(${inlineArgument(b.id)})">Edit</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteBuild(${inlineArgument(b.id)})">X</button>
         </div>
       `;
     }).join("") || "<p style='color:var(--text-dim)'>No builds</p>";
   }
-
   const ktList = document.getElementById("editor-killer-tags-list");
   if (ktList) {
     const q = (document.getElementById("ed-ktag-search")?.value || "").trim().toLowerCase();
-    const tags = getKillerTags().map((t, i) => ({ t, i })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
-    ktList.innerHTML = tags.map(({ t, i }) => tagEditRowHTML("killer", t, i)).join("") || "<p style='color:var(--text-dim)'>No killer tags</p>";
+    const tags = getKillerTags().map((t, i) => ({
+      t,
+      i
+    })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
+    ktList.innerHTML = tags.map(({
+      t,
+      i
+    }) => tagEditRowHTML("killer", t, i)).join("") || "<p style='color:var(--text-dim)'>No killer tags</p>";
   }
   const btList = document.getElementById("editor-build-tags-list");
   if (btList) {
     const q = (document.getElementById("ed-btag-search")?.value || "").trim().toLowerCase();
-    const tags = getBuildTags().map((t, i) => ({ t, i })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
-    btList.innerHTML = tags.map(({ t, i }) => tagEditRowHTML("build", t, i)).join("") || "<p style='color:var(--text-dim)'>No build tags</p>";
+    const tags = getBuildTags().map((t, i) => ({
+      t,
+      i
+    })).filter(x => !q || String(x.t.name || "").toLowerCase().includes(q));
+    btList.innerHTML = tags.map(({
+      t,
+      i
+    }) => tagEditRowHTML("build", t, i)).join("") || "<p style='color:var(--text-dim)'>No build tags</p>";
   }
-  const perkNames = (q, role) => (state.perks || []).map((p, i) => ({ p, i })).filter(x => {
-    const name = typeof x.p === "string" ? x.p : (x.p && x.p.name);
+  const perkNames = (q, role) => (state.perks || []).map((p, i) => ({
+    p,
+    i
+  })).filter(x => {
+    const name = typeof x.p === "string" ? x.p : x.p && x.p.name;
     if (q && !String(name || "").toLowerCase().includes(q)) return false;
     if (!role || typeof CONFIG === "undefined") return true;
-    const pool = role === "killer" ? (CONFIG.killerPerks || []) : (CONFIG.survivorPerks || []);
+    const pool = role === "killer" ? CONFIG.killerPerks || [] : CONFIG.survivorPerks || [];
     return pool.some(pk => pk.name.toLowerCase() === String(name || "").toLowerCase());
   });
-  const perkRow = ({ p }, role) => {
-    const name = typeof p === "string" ? p : (p && p.name) || "";
-    return `<div class="editor-item"><img src="${getPerkIcon(name)}" style="width:36px;height:36px;border-radius:4px" onerror="this.style.opacity=0.3"><strong>${escapeHtml(name)}</strong><button class="btn btn-sm" style="margin-left:auto" onclick="openPerkEditor('${role}','${escapeAttr(name)}',this)">Edit</button></div>`;
+  const perkRow = ({
+    p
+  }, role) => {
+    const name = typeof p === "string" ? p : p && p.name || "";
+    return `<div class="editor-item"><img src="${getPerkIcon(name)}" style="width:36px;height:36px;border-radius:4px"><strong>${escapeHtml(name)}</strong><span class="hint" style="margin-left:auto">SharedFiles</span></div>`;
   };
   const kPerks = document.getElementById("editor-kperks-list");
   if (kPerks) {
@@ -2359,21 +2372,18 @@ function renderEditor() {
   }
   updateEditorUnsavedBanner();
 }
-
-
 function tagEditRowHTML(kind, t, i) {
   const locked = t._locked !== false;
   return `
     <div class="editor-item tag-edit-row ${locked ? "locked" : ""}">
       <button type="button" class="btn btn-sm lock-btn" title="${locked ? "Unlock to edit" : "Lock"}"
-        onclick="toggleTagLock('${kind}',${i})">${locked ? "🔒" : "🔓"}</button>
-      <input type="color" value="${t.color}" ${locked ? "disabled" : ""} onchange="updateTagField('${kind}',${i},'color',this.value)" title="Color">
-      <input type="text" class="tag-name-input" value="${escapeAttr(t.name)}" ${locked ? "readonly" : ""} onchange="updateTagField('${kind}',${i},'name',this.value)">
+        onclick="toggleTagLock(${inlineArgument(kind)},${i})">${locked ? "🔒" : "🔓"}</button>
+      <input type="color" value="${t.color}" ${locked ? "disabled" : ""} onchange="updateTagField(${inlineArgument(kind)},${i},'color',this.value)" title="Color">
+      <input type="text" class="tag-name-input" value="${escapeAttr(t.name)}" ${locked ? "readonly" : ""} onchange="updateTagField(${inlineArgument(kind)},${i},'name',this.value)">
       ${isLocalOnlyTag(kind, t) ? unsavedBadge("New tag — not in config.js") : ""}
-      <button class="btn btn-sm btn-danger" ${locked ? "disabled" : ""} onclick="deleteEditorTag('${kind}',${i})">Del</button>
+      <button class="btn btn-sm btn-danger" ${locked ? "disabled" : ""} onclick="deleteEditorTag(${inlineArgument(kind)},${i})">Del</button>
     </div>`;
 }
-
 function toggleTagLock(kind, i) {
   const arr = kind === "build" ? CONFIG.buildTags : CONFIG.killerTags;
   if (!arr[i]) return;
@@ -2382,44 +2392,40 @@ function toggleTagLock(kind, i) {
   saveData();
   renderEditor();
 }
-
 function addEditorTag(kind) {
-  const arr = kind === "build" ? (CONFIG.buildTags = CONFIG.buildTags || []) : (CONFIG.killerTags = CONFIG.killerTags || []);
+  const arr = kind === "build" ? CONFIG.buildTags = CONFIG.buildTags || [] : CONFIG.killerTags = CONFIG.killerTags || [];
   const id = "tag-" + Date.now();
-  arr.push({ id, name: "new-tag", color: kind === "build" ? "#9b59b6" : "#4a9eff" });
-  saveData(); renderEditor();
+  arr.push({
+    id,
+    name: "new-tag",
+    color: kind === "build" ? "#9b59b6" : "#4a9eff"
+  });
+  saveData();
+  renderEditor();
 }
-
 function updateTagField(kind, i, field, value) {
   const arr = kind === "build" ? CONFIG.buildTags : CONFIG.killerTags;
   if (!arr[i]) return;
   arr[i][field] = value;
   if (field === "name") arr[i].id = value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   saveData();
-  
   populateFilterSelects();
 }
-
 function deleteEditorTag(kind, i) {
   const arr = kind === "build" ? CONFIG.buildTags : CONFIG.killerTags;
   showConfirm("Delete this tag?", () => {
     arr.splice(i, 1);
-    saveData(); renderEditor();
+    saveData();
+    renderEditor();
     showToast("Tag deleted");
   });
 }
-
-
-
-
 let _lastMergedData = null;
 let _lastMergeReport = null;
-
 function setMergeStatus(html) {
   const el = document.getElementById("merge-status");
   if (el) el.innerHTML = html || "";
 }
-
 function parseDataFileText(text, label) {
   text = String(text || "").replace(/^\uFEFF/, "").trim();
   if (!text) throw new Error(label + ": empty file");
@@ -2431,29 +2437,39 @@ function parseDataFileText(text, label) {
   const startSearch = m ? m.index + m[0].length : 0;
   const i = text.indexOf("{", startSearch);
   if (i < 0) throw new Error(label + ": no object found");
-  let depth = 0, inStr = false, esc = false, quote = "";
+  let depth = 0,
+    inStr = false,
+    esc = false,
+    quote = "";
   for (let j = i; j < text.length; j++) {
     const ch = text[j];
     if (inStr) {
-      if (esc) { esc = false; continue; }
-      if (ch === "\\") { esc = true; continue; }
+      if (esc) {
+        esc = false;
+        continue;
+      }
+      if (ch === "\\") {
+        esc = true;
+        continue;
+      }
       if (ch === quote) inStr = false;
       continue;
     }
-    if (ch === '"' || ch === "'" || ch === "`") { inStr = true; quote = ch; continue; }
-    if (ch === "{") depth++;
-    else if (ch === "}") {
+    if (ch === '"' || ch === "'" || ch === "`") {
+      inStr = true;
+      quote = ch;
+      continue;
+    }
+    if (ch === "{") depth++;else if (ch === "}") {
       depth--;
       if (depth === 0) {
         const slice = text.slice(i, j + 1);
-        try { return JSON.parse(slice); }
-        catch (_) { return (new Function("return (" + slice + ")"))(); }
+        return JSON.parse(slice);
       }
     }
   }
   throw new Error(label + ": could not parse object");
 }
-
 function readFileAsText(file) {
   return new Promise((resolve, reject) => {
     if (!file) return reject(new Error("No file selected"));
@@ -2463,18 +2479,16 @@ function readFileAsText(file) {
     r.readAsText(file);
   });
 }
-
 function normalizeDataShape(d) {
-  d = d || {};
+  d = SharedDbd.hydrate(JSON.parse(JSON.stringify(d || {})), false);
   return {
     killers: Array.isArray(d.killers) ? d.killers.slice() : [],
     builds: Array.isArray(d.builds) ? d.builds.slice() : [],
-    killerTags: Array.isArray(d.killerTags) ? d.killerTags.slice() : (Array.isArray(d.tags) ? d.tags.slice() : []),
+    killerTags: Array.isArray(d.killerTags) ? d.killerTags.slice() : Array.isArray(d.tags) ? d.tags.slice() : [],
     buildTags: Array.isArray(d.buildTags) ? d.buildTags.slice() : [],
     perks: Array.isArray(d.perks) ? d.perks.slice() : []
   };
 }
-
 function isEmptyVal(v) {
   if (v == null) return true;
   if (typeof v === "string") return !v.trim() || v === "placeholder";
@@ -2482,13 +2496,13 @@ function isEmptyVal(v) {
   if (typeof v === "number") return false;
   return false;
 }
-
 function mergeRecord(a, b) {
   if (!a) return b ? JSON.parse(JSON.stringify(b)) : null;
   if (!b) return JSON.parse(JSON.stringify(a));
   const out = JSON.parse(JSON.stringify(a));
   for (const key of Object.keys(b)) {
-    const bv = b[key], av = out[key];
+    const bv = b[key],
+      av = out[key];
     if (isEmptyVal(bv)) continue;
     if (isEmptyVal(av)) {
       out[key] = JSON.parse(JSON.stringify(bv));
@@ -2510,21 +2524,21 @@ function mergeRecord(a, b) {
   }
   return out;
 }
-
 function mergeTagLists(a, b) {
   const map = new Map();
   for (const t of [...(a || []), ...(b || [])]) {
     if (!t || !t.name) continue;
     const k = String(t.name).toLowerCase();
-    if (!map.has(k)) map.set(k, { name: t.name, color: t.color || "#5a2a2a" });
-    else {
+    if (!map.has(k)) map.set(k, {
+      name: t.name,
+      color: t.color || "#5a2a2a"
+    });else {
       const cur = map.get(k);
       if (t.color && (!cur.color || cur.color === "#5a2a2a")) cur.color = t.color;
     }
   }
   return [...map.values()];
 }
-
 function mergeDataSets(a, b) {
   a = normalizeDataShape(a);
   b = normalizeDataShape(b);
@@ -2545,7 +2559,7 @@ function mergeDataSets(a, b) {
   const perkSet = new Set();
   const perks = [];
   for (const p of [...a.perks, ...b.perks]) {
-    const name = typeof p === "string" ? p : (p && p.name);
+    const name = typeof p === "string" ? p : p && p.name;
     if (!name) continue;
     const key = String(name).toLowerCase();
     if (perkSet.has(key)) continue;
@@ -2560,11 +2574,8 @@ function mergeDataSets(a, b) {
     perks
   };
 }
-
-const KILLER_DIFF_KEYS = ["name","tier","difficulty","skillFloor","skillCeiling","fun2play","addonNotes","patch","tags","chapter","releaseDate","releaseOrder","recommendedCombos"];
-const BUILD_DIFF_KEYS = ["name","description","perks","addons","tags","patch","killerIds"];
-
-
+const KILLER_DIFF_KEYS = ["name", "tier", "difficulty", "skillFloor", "skillCeiling", "fun2play", "addonNotes", "patch", "tags", "chapter", "releaseDate", "releaseOrder", "recommendedCombos"];
+const BUILD_DIFF_KEYS = ["name", "description", "perks", "addons", "tags", "patch", "killerIds"];
 function shortVal(v) {
   if (v == null) return "—";
   if (typeof v === "string") {
@@ -2582,22 +2593,28 @@ function shortVal(v) {
     return "[" + v.length + " items]";
   }
   if (typeof v === "object") {
-    try { return JSON.stringify(v).slice(0, 90); } catch (_) { return "{…}"; }
+    try {
+      return JSON.stringify(v).slice(0, 90);
+    } catch (_) {
+      return "{…}";
+    }
   }
   return String(v);
 }
-
 function fieldDiffs(a, b, keys) {
   const out = [];
   for (const key of keys) {
     const av = a ? a[key] : undefined;
     const bv = b ? b[key] : undefined;
     if (JSON.stringify(av ?? null) === JSON.stringify(bv ?? null)) continue;
-    out.push({ key, from: shortVal(av), to: shortVal(bv) });
+    out.push({
+      key,
+      from: shortVal(av),
+      to: shortVal(bv)
+    });
   }
   return out;
 }
-
 function buildMergeReport(sources, merged) {
   const byKiller = new Map();
   const byBuild = new Map();
@@ -2605,29 +2622,44 @@ function buildMergeReport(sources, merged) {
     for (const k of src.data.killers || []) {
       if (!k || !k.id) continue;
       const id = String(k.id);
-      if (!byKiller.has(id)) byKiller.set(id, { sources: [], items: [] });
+      if (!byKiller.has(id)) byKiller.set(id, {
+        sources: [],
+        items: []
+      });
       const e = byKiller.get(id);
       e.sources.push(src.label);
-      e.items.push({ label: src.label, item: k });
+      e.items.push({
+        label: src.label,
+        item: k
+      });
     }
     for (const b of src.data.builds || []) {
       if (!b || !b.id) continue;
       const id = String(b.id);
-      if (!byBuild.has(id)) byBuild.set(id, { sources: [], items: [] });
+      if (!byBuild.has(id)) byBuild.set(id, {
+        sources: [],
+        items: []
+      });
       const e = byBuild.get(id);
       e.sources.push(src.label);
-      e.items.push({ label: src.label, item: b });
+      e.items.push({
+        label: src.label,
+        item: b
+      });
     }
   }
   const killersAdded = [];
   const killersModified = [];
   for (const [id, info] of byKiller) {
-    const name = (info.items[0] && info.items[0].item.name) || id;
+    const name = info.items[0] && info.items[0].item.name || id;
     const uniqSrc = [...new Set(info.sources)];
     if (info.items.length === 1) {
-      killersAdded.push({ id, name, from: uniqSrc[0] });
+      killersAdded.push({
+        id,
+        name,
+        from: uniqSrc[0]
+      });
     } else {
-      
       const base = info.items[0].item;
       const allDiffs = [];
       for (let i = 1; i < info.items.length; i++) {
@@ -2642,42 +2674,61 @@ function buildMergeReport(sources, merged) {
           });
         }
       }
-      
       const map = new Map();
       for (const d of allDiffs) map.set(d.key, d);
       const diffs = [...map.values()];
       if (diffs.length) {
-        killersModified.push({ id, name, from: uniqSrc.join(" + "), diffs });
+        killersModified.push({
+          id,
+          name,
+          from: uniqSrc.join(" + "),
+          diffs
+        });
       }
     }
   }
   const buildsAdded = [];
   const buildsModified = [];
   for (const [id, info] of byBuild) {
-    const name = (info.items[0] && info.items[0].item.name) || id;
+    const name = info.items[0] && info.items[0].item.name || id;
     const uniqSrc = [...new Set(info.sources)];
     if (info.items.length === 1) {
-      buildsAdded.push({ id, name, from: uniqSrc[0] });
+      buildsAdded.push({
+        id,
+        name,
+        from: uniqSrc[0]
+      });
     } else {
       const base = info.items[0].item;
       const map = new Map();
       for (let i = 1; i < info.items.length; i++) {
         for (const x of fieldDiffs(base, info.items[i].item, BUILD_DIFF_KEYS)) {
           map.set(x.key, {
-            key: x.key, from: x.from, to: x.to,
-            fromSrc: info.items[0].label, toSrc: info.items[i].label
+            key: x.key,
+            from: x.from,
+            to: x.to,
+            fromSrc: info.items[0].label,
+            toSrc: info.items[i].label
           });
         }
       }
       const diffs = [...map.values()];
-      if (diffs.length) buildsModified.push({ id, name, from: uniqSrc.join(" + "), diffs });
+      if (diffs.length) buildsModified.push({
+        id,
+        name,
+        from: uniqSrc.join(" + "),
+        diffs
+      });
     }
   }
   const allTagNames = new Map();
   sources.forEach(s => {
     (s.data.killerTags || []).forEach(t => {
       const k = String(t.name).toLowerCase();
-      if (!allTagNames.has(k)) allTagNames.set(k, { name: t.name, src: [] });
+      if (!allTagNames.has(k)) allTagNames.set(k, {
+        name: t.name,
+        src: []
+      });
       allTagNames.get(k).src.push(s.label);
     });
   });
@@ -2686,7 +2737,10 @@ function buildMergeReport(sources, merged) {
   sources.forEach(s => {
     (s.data.buildTags || []).forEach(t => {
       const k = String(t.name).toLowerCase();
-      if (!buildTagMaps.has(k)) buildTagMaps.set(k, { name: t.name, src: [] });
+      if (!buildTagMaps.has(k)) buildTagMaps.set(k, {
+        name: t.name,
+        src: []
+      });
       buildTagMaps.get(k).src.push(s.label);
     });
   });
@@ -2697,16 +2751,22 @@ function buildMergeReport(sources, merged) {
       const name = typeof p === "string" ? p : p.name;
       if (!name) return;
       const k = String(name).toLowerCase();
-      if (!perkMaps.has(k)) perkMaps.set(k, { name, src: [] });
+      if (!perkMaps.has(k)) perkMaps.set(k, {
+        name,
+        src: []
+      });
       perkMaps.get(k).src.push(s.label);
     });
   });
   const perksNew = [...perkMaps.values()].filter(t => t.src.length === 1);
-
   return {
-    killersAdded, killersModified,
-    buildsAdded, buildsModified,
-    tagsNew, buildTagsNew, perksNew,
+    killersAdded,
+    killersModified,
+    buildsAdded,
+    buildsModified,
+    tagsNew,
+    buildTagsNew,
+    perksNew,
     sources: sources.map(s => s.label),
     totals: {
       killers: (merged && merged.killers || []).length,
@@ -2714,48 +2774,30 @@ function buildMergeReport(sources, merged) {
     }
   };
 }
-
 function renderMergeReportHTML(r) {
   if (!r) return "<p>No report</p>";
   const li = (cls, html) => `<li class="${cls}">${html}</li>`;
   let html = `<div class="merge-summary">Sources: <strong>${(r.sources || []).map(escapeHtml).join(" · ")}</strong></div>`;
-
   html += `<h4>Killers added <span class="merge-count">${r.killersAdded.length}</span></h4>`;
-  if (!r.killersAdded.length) html += `<p class="ch-same">None</p>`;
-  else html += "<ul>" + r.killersAdded.map(x =>
-    li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <code>${escapeHtml(x.id)}</code> <span class="ch-src">from ${escapeHtml(x.from)}</span>`)
-  ).join("") + "</ul>";
-
+  if (!r.killersAdded.length) html += `<p class="ch-same">None</p>`;else html += "<ul>" + r.killersAdded.map(x => li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <code>${escapeHtml(x.id)}</code> <span class="ch-src">from ${escapeHtml(x.from)}</span>`)).join("") + "</ul>";
   html += `<h4>Killers changed <span class="merge-count">${r.killersModified.length}</span></h4>`;
-  if (!r.killersModified.length) html += `<p class="ch-same">None</p>`;
-  else html += "<ul>" + r.killersModified.map(x => {
-    const diffs = (x.diffs || []).map(d =>
-      `<div class="merge-diff-row"><code>${escapeHtml(d.key)}</code>
+  if (!r.killersModified.length) html += `<p class="ch-same">None</p>`;else html += "<ul>" + r.killersModified.map(x => {
+    const diffs = (x.diffs || []).map(d => `<div class="merge-diff-row"><code>${escapeHtml(d.key)}</code>
         <span class="diff-from" title="${escapeAttr(d.fromSrc || "")}">${escapeHtml(d.from)}</span>
         <span class="diff-arrow">→</span>
-        <span class="diff-to" title="${escapeAttr(d.toSrc || "")}">${escapeHtml(d.to)}</span></div>`
-    ).join("");
+        <span class="diff-to" title="${escapeAttr(d.toSrc || "")}">${escapeHtml(d.to)}</span></div>`).join("");
     return li("ch-mod", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">${escapeHtml(x.from)}</span>${diffs ? `<div class="merge-diff-list">${diffs}</div>` : ""}`);
   }).join("") + "</ul>";
-
   html += `<h4>Builds added <span class="merge-count">${r.buildsAdded.length}</span></h4>`;
-  if (!r.buildsAdded.length) html += `<p class="ch-same">None</p>`;
-  else html += "<ul>" + r.buildsAdded.map(x =>
-    li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <code>${escapeHtml(x.id)}</code> <span class="ch-src">from ${escapeHtml(x.from)}</span>`)
-  ).join("") + "</ul>";
-
+  if (!r.buildsAdded.length) html += `<p class="ch-same">None</p>`;else html += "<ul>" + r.buildsAdded.map(x => li("ch-add", `<strong>${escapeHtml(x.name)}</strong> <code>${escapeHtml(x.id)}</code> <span class="ch-src">from ${escapeHtml(x.from)}</span>`)).join("") + "</ul>";
   html += `<h4>Builds changed <span class="merge-count">${r.buildsModified.length}</span></h4>`;
-  if (!r.buildsModified.length) html += `<p class="ch-same">None</p>`;
-  else html += "<ul>" + r.buildsModified.map(x => {
-    const diffs = (x.diffs || []).map(d =>
-      `<div class="merge-diff-row"><code>${escapeHtml(d.key)}</code>
+  if (!r.buildsModified.length) html += `<p class="ch-same">None</p>`;else html += "<ul>" + r.buildsModified.map(x => {
+    const diffs = (x.diffs || []).map(d => `<div class="merge-diff-row"><code>${escapeHtml(d.key)}</code>
         <span class="diff-from">${escapeHtml(d.from)}</span>
         <span class="diff-arrow">→</span>
-        <span class="diff-to">${escapeHtml(d.to)}</span></div>`
-    ).join("");
+        <span class="diff-to">${escapeHtml(d.to)}</span></div>`).join("");
     return li("ch-mod", `<strong>${escapeHtml(x.name)}</strong> <span class="ch-src">${escapeHtml(x.from)}</span>${diffs ? `<div class="merge-diff-list">${diffs}</div>` : ""}`);
   }).join("") + "</ul>";
-
   html += `<h4>Tags / perks only in one source</h4>`;
   html += `<ul class="merge-side">`;
   html += `<li><strong>Killer tags:</strong> ${r.tagsNew.length ? r.tagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
@@ -2764,11 +2806,13 @@ function renderMergeReportHTML(r) {
   html += `</ul>`;
   return html;
 }
-
 function toggleMergeChanges() {
   const box = document.getElementById("merge-changes");
   const btn = document.getElementById("btn-merge-changes");
-  if (!box || !_lastMergeReport) { showToast("Run Merge first"); return; }
+  if (!box || !_lastMergeReport) {
+    showToast("Run Merge first");
+    return;
+  }
   if (box.hidden) {
     box.innerHTML = renderMergeReportHTML(_lastMergeReport);
     box.hidden = false;
@@ -2778,7 +2822,6 @@ function toggleMergeChanges() {
     if (btn) btn.textContent = "Show changes";
   }
 }
-
 async function runDataMerge() {
   const fa = document.getElementById("merge-file-a") && document.getElementById("merge-file-a").files[0];
   const fb = document.getElementById("merge-file-b") && document.getElementById("merge-file-b").files[0];
@@ -2792,8 +2835,14 @@ async function runDataMerge() {
   if (btnCopy) btnCopy.disabled = true;
   const btnDl0 = document.getElementById("btn-merge-download");
   if (btnDl0) btnDl0.disabled = true;
-  if (btnCh) { btnCh.disabled = true; btnCh.textContent = "Show changes"; }
-  if (chBox) { chBox.hidden = true; chBox.innerHTML = ""; }
+  if (btnCh) {
+    btnCh.disabled = true;
+    btnCh.textContent = "Show changes";
+  }
+  if (chBox) {
+    chBox.hidden = true;
+    chBox.innerHTML = "";
+  }
   _lastMergedData = null;
   _lastMergeReport = null;
   try {
@@ -2801,23 +2850,33 @@ async function runDataMerge() {
       setMergeStatus("Select at least one file (A and/or B). With one file, enable “Also merge current page data” to combine with the live page.");
       return;
     }
-    if ((fa && !fb && !includeLive) || (fb && !fa && !includeLive)) {
-      
-    }
+    if (fa && !fb && !includeLive || fb && !fa && !includeLive) {}
     setMergeStatus("Reading…");
-    let merged = { killers: [], builds: [], killerTags: [], buildTags: [], perks: [] };
+    let merged = {
+      killers: [],
+      builds: [],
+      killerTags: [],
+      buildTags: [],
+      perks: []
+    };
     const notes = [];
     const sources = [];
     if (fa) {
       const da = normalizeDataShape(parseDataFileText(await readFileAsText(fa), "File A"));
       merged = mergeDataSets(merged, da);
-      sources.push({ label: "A:" + fa.name, data: da });
+      sources.push({
+        label: "A:" + fa.name,
+        data: da
+      });
       notes.push("A <code>" + escapeHtml(fa.name) + "</code>: " + da.killers.length + " killers, " + da.builds.length + " builds");
     }
     if (fb) {
       const db = normalizeDataShape(parseDataFileText(await readFileAsText(fb), "File B"));
       merged = mergeDataSets(merged, db);
-      sources.push({ label: "B:" + fb.name, data: db });
+      sources.push({
+        label: "B:" + fb.name,
+        data: db
+      });
       notes.push("B <code>" + escapeHtml(fb.name) + "</code>: " + db.killers.length + " killers, " + db.builds.length + " builds");
     }
     if (includeLive && typeof state !== "undefined" && state) {
@@ -2829,7 +2888,10 @@ async function runDataMerge() {
         perks: state.perks
       });
       merged = mergeDataSets(merged, live);
-      sources.push({ label: "Live", data: live });
+      sources.push({
+        label: "Live",
+        data: live
+      });
       notes.push("Live page: " + live.killers.length + " killers, " + live.builds.length + " builds");
     }
     _lastMergedData = merged;
@@ -2841,15 +2903,7 @@ async function runDataMerge() {
     const btnDl = document.getElementById("btn-merge-download");
     if (btnDl) btnDl.disabled = false;
     const r = _lastMergeReport;
-    setMergeStatus(
-      notes.join("<br>") +
-      "<br><strong>Result:</strong> " + merged.killers.length + " killers, " +
-      merged.builds.length + " builds, " + merged.killerTags.length + " killer tags, " +
-      merged.buildTags.length + " build tags, " + merged.perks.length + " perks." +
-      "<br><span class=\"ch-add\">+" + r.killersAdded.length + " killers</span>, " +
-      "<span class=\"ch-mod\">~" + r.killersModified.length + " killers changed</span>, " +
-      "<span class=\"ch-add\">+" + r.buildsAdded.length + " builds</span> — click <strong>Show changes</strong> for details."
-    );
+    setMergeStatus(notes.join("<br>") + "<br><strong>Result:</strong> " + merged.killers.length + " killers, " + merged.builds.length + " builds, " + merged.killerTags.length + " killer tags, " + merged.buildTags.length + " build tags, " + merged.perks.length + " perks." + "<br><span class=\"ch-add\">+" + r.killersAdded.length + " killers</span>, " + "<span class=\"ch-mod\">~" + r.killersModified.length + " killers changed</span>, " + "<span class=\"ch-add\">+" + r.buildsAdded.length + " builds</span> — click <strong>Show changes</strong> for details.");
     showToast("Merge done");
   } catch (err) {
     console.error(err);
@@ -2857,9 +2911,11 @@ async function runDataMerge() {
     showToast("Merge failed");
   }
 }
-
 function applyMergedToLive() {
-  if (!_lastMergedData) { showToast("Run Merge first"); return; }
+  if (!_lastMergedData) {
+    showToast("Run Merge first");
+    return;
+  }
   showConfirm("Replace current page data with merge result? (LocalStorage will update)", () => {
     state.killers = _lastMergedData.killers;
     state.builds = _lastMergedData.builds;
@@ -2872,37 +2928,40 @@ function applyMergedToLive() {
     setMergeStatus((document.getElementById("merge-status").innerHTML || "") + "<br>Applied locally. Download config.js for merged tags and data.js for killer/build content.");
   });
 }
-
 function copyMergedDataJs() {
   const ta = document.getElementById("merge-result");
-  if (!ta || !ta.value) { showToast("Nothing to copy"); return; }
+  if (!ta || !ta.value) {
+    showToast("Nothing to copy");
+    return;
+  }
   navigator.clipboard.writeText(ta.value).then(() => showToast("Copied data.js")).catch(() => {
     ta.select();
     showToast("Select all → Ctrl+C");
   });
 }
-
 async function mergeAndDownload() {
   await runDataMerge();
   if (!_lastMergedData) return;
-  const text = (document.getElementById("merge-result") && document.getElementById("merge-result").value)
-    || ("const INITIAL_DATA = " + JSON.stringify(dynamicDataForFile(_lastMergedData), null, 2) + ";\nif (typeof window !== 'undefined') window.INITIAL_DATA = INITIAL_DATA;\n");
-  const blob = new Blob([text], { type: "application/javascript;charset=utf-8" });
+  const text = document.getElementById("merge-result") && document.getElementById("merge-result").value || "const INITIAL_DATA = " + JSON.stringify(dynamicDataForFile(_lastMergedData), null, 2) + ";\nif (typeof window !== 'undefined') window.INITIAL_DATA = INITIAL_DATA;\n";
+  const blob = new Blob([text], {
+    type: "application/javascript;charset=utf-8"
+  });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "data.js";
   document.body.appendChild(a);
   a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  setTimeout(() => {
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }, 500);
   showToast("Merged + downloaded data.js");
 }
-
-
 function dynamicDataForFile(source) {
-  const dynamicData = JSON.parse(JSON.stringify(source || {}));
-  ["_coreConfig", "killerTags", "buildTags", "tags", "perks", "addons", "itemOrder", "addonOrder", "_perkIcons", "_customPerks", "_removedPerks", "_pendingPerkIcons"].forEach(key => delete dynamicData[key]);
-  (dynamicData.killers || []).forEach(k => ["notes", "guide", "vsNotes", "contentSections"].forEach(key => delete k[key]));
-  return dynamicData;
+  const data = SharedDbd.serialize(source);
+  ['_coreConfig', 'killerTags', 'buildTags', 'tags', 'perks', 'addons', 'itemOrder', 'addonOrder', '_perkIcons', '_customPerks', '_removedPerks', '_pendingPerkIcons'].forEach(key => delete data[key]);
+  (data.killers || []).forEach(k => ['notes', 'guide', 'vsNotes', 'contentSections'].forEach(key => delete k[key]));
+  return data;
 }
 function buildDataJsText() {
   const dynamicData = dynamicDataForFile(state);
@@ -2910,16 +2969,20 @@ function buildDataJsText() {
 if (typeof window !== "undefined") window.INITIAL_DATA = INITIAL_DATA;
 `;
 }
-
 function generateConfigCode() {
   saveData();
   const ta = document.getElementById("generated-code");
-  if (!ta) { showToast("Open Data Editor tab first"); return; }
+  if (!ta) {
+    showToast("Open Data Editor tab first");
+    return;
+  }
   ta.value = buildDataJsText();
-  ta.scrollIntoView({ behavior: "smooth", block: "center" });
+  ta.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
   showToast("Code generated — Copy or Download");
 }
-
 function copyGeneratedCode() {
   const ta = document.getElementById("generated-code");
   if (!ta) return;
@@ -2929,135 +2992,60 @@ function copyGeneratedCode() {
     showToast("Select all → Ctrl+C");
   });
 }
-
 function downloadGeneratedConfigJs() {
   saveData();
-  const text = "const CONFIG = " + JSON.stringify(configForFile(), null, 2) + ";\n" +
-    "if (typeof window !== 'undefined') window.CONFIG = CONFIG;\n" +
-    "function getKillerPortrait(name){return (CONFIG.killerPortraits&&CONFIG.killerPortraits[name])||CONFIG.placeholderPortrait;}\n" +
-    "function getPerkIcon(name){const o=typeof state!=='undefined'&&state._perkIcons&&state._perkIcons[name];if(o)return o;const a=[...(CONFIG.killerPerks||[]),...(CONFIG.survivorPerks||[])];const p=a.find(x=>x.name.toLowerCase()===String(name||'').toLowerCase());return (p&&p.icon)||CONFIG.placeholderPerk;}\n" +
-    "function getSurvivorPortrait(id){const a=CONFIG.survivorRoster||[];const s=a.find(x=>x.id===String(id||'')||x.name===String(id||''));if(s)return s.icon;const p=CONFIG.survivorPortraits||[];if(!p.length)return CONFIG.placeholderPortrait;let n=0;String(id||'surv').split('').forEach(c=>{n=(n*33+c.charCodeAt(0))>>>0;});return p[n%p.length];}\n";
-  const blob=new Blob([text],{type:"application/javascript;charset=utf-8"}),link=document.createElement("a");
-  link.href=URL.createObjectURL(blob);link.download="config.js";document.body.appendChild(link);link.click();
-  setTimeout(()=>{URL.revokeObjectURL(link.href);link.remove();},500);showToast("Generated config.js");
+  const text = 'const CONFIG = ' + JSON.stringify(configForFile(), null, 2) + ';\nif(typeof window!=="undefined")window.CONFIG=CONFIG;\n';
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(new Blob([text], {
+    type: 'application/javascript;charset=utf-8'
+  }));
+  link.download = 'config.js';
+  document.body.appendChild(link);
+  link.click();
+  setTimeout(() => {
+    URL.revokeObjectURL(link.href);
+    link.remove();
+  }, 500);
+  showToast('Downloaded local tags and settings');
 }
 function downloadGeneratedDataJs() {
-  
-  if (typeof generateConfigCode === "function") generateConfigCode();
-  else saveData();
-  const text = (document.getElementById("generated-code") && document.getElementById("generated-code").value)
-    || buildDataJsText();
-  const blob = new Blob([text], { type: "application/javascript;charset=utf-8" });
+  if (typeof generateConfigCode === "function") generateConfigCode();else saveData();
+  const text = document.getElementById("generated-code") && document.getElementById("generated-code").value || buildDataJsText();
+  const blob = new Blob([text], {
+    type: "application/javascript;charset=utf-8"
+  });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "data.js";
   document.body.appendChild(a);
   a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  setTimeout(() => {
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }, 500);
   showToast("Generated + downloaded data.js");
 }
-
-function importJSON(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const raw = String(e.target.result || "");
-      let data;
-      if (typeof parseDataFileText === "function") {
-        data = parseDataFileText(raw, file.name);
-      } else {
-        data = JSON.parse(raw);
-      }
-      data = data.INITIAL_DATA || data;
-      state = {
-        ...data,
-        killers: data.killers || [],
-        builds: data.builds || [],
-        tags: data.killerTags || data.tags || [],
-        killerTags: data.killerTags || data.tags || [],
-        buildTags: data.buildTags || [],
-        perks: data.perks || [],
-        addons: data.addons || []
-      };
-      if (data._coreConfig) {
-        CORE_CONFIG_KEYS.forEach(key => { if (data._coreConfig[key] !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(data._coreConfig[key])); });
-      } else {
-        if (Array.isArray(data.killerTags)) CONFIG.killerTags = data.killerTags;
-        else if (Array.isArray(data.tags)) CONFIG.killerTags = data.tags;
-        if (Array.isArray(data.buildTags)) CONFIG.buildTags = data.buildTags;
-        if (data.itemOrder) CONFIG.itemOrder = data.itemOrder;
-        if (data.addonOrder) CONFIG.addonOrder = data.addonOrder;
-      }
-      state.builds.forEach(b => {
-        if (b.killerId && !b.killerIds) { b.killerIds = [b.killerId]; delete b.killerId; }
-        if (!b.killerIds) b.killerIds = [];
-      });
-      applyCoreConfigDraft();
-      mergeCatalogPerks();
-      clearLegacyCoreMetadata();
-      applyCoreConfigToDraft();
-      saveData();
-      renderAll();
-      if (document.getElementById("tab-editor")?.classList.contains("active")) renderEditor();
-      showToast("Imported " + file.name);
-    } catch (err) {
-      console.error(err);
-      showToast("Import failed");
-      setMergeStatus && setMergeStatus("Import error: " + (err.message || err));
-    }
-  };
-  reader.readAsText(file);
-  event.target.value = "";
-}
-
-
-
-
-
-
-
-
-
-
 function getOtzStore() {
   try {
-    if (typeof window !== "undefined" && window.OTZ_ADDONS && Object.keys(window.OTZ_ADDONS).length)
-      return window.OTZ_ADDONS;
+    if (typeof window !== "undefined" && window.OTZ_ADDONS && Object.keys(window.OTZ_ADDONS).length) return window.OTZ_ADDONS;
   } catch (_) {}
   try {
-    if (typeof OTZ_ADDONS !== "undefined" && OTZ_ADDONS && Object.keys(OTZ_ADDONS).length)
-      return OTZ_ADDONS;
+    if (typeof OTZ_ADDONS !== "undefined" && OTZ_ADDONS && Object.keys(OTZ_ADDONS).length) return OTZ_ADDONS;
   } catch (_) {}
   return null;
 }
-
 function ensureOtzOnWindow() {
   try {
-    if (typeof OTZ_ADDONS !== "undefined" && OTZ_ADDONS)
-      window.OTZ_ADDONS = OTZ_ADDONS;
+    if (typeof OTZ_ADDONS !== "undefined" && OTZ_ADDONS) window.OTZ_ADDONS = OTZ_ADDONS;
   } catch (_) {}
 }
-
-
 function normalizeKillerKey(name) {
   if (!name) return "";
-  return String(name)
-    .replace(/^The\s+/i, "")
-    .toLowerCase()
-    .replace(/judgment/g, "judgement")
-    .replace(/[^a-z0-9]+/g, "");
+  return String(name).replace(/^The\s+/i, "").toLowerCase().replace(/judgment/g, "judgement").replace(/[^a-z0-9]+/g, "");
 }
-
-
-
-
-
 function resolveOtzKey(killerOrName) {
   const store = getOtzStore();
   if (!store) return null;
-
   let id = "";
   let name = "";
   if (killerOrName && typeof killerOrName === "object") {
@@ -3067,23 +3055,15 @@ function resolveOtzKey(killerOrName) {
     name = String(killerOrName || "");
     id = normalizeKillerKey(name);
   }
-
-  
   if (id && store[id]) return id;
-
-  
   const n = normalizeKillerKey(name);
   if (n && store[n]) return n;
-
-  
   if (id) {
     const compact = id.replace(/\s+/g, "");
     for (const key of Object.keys(store)) {
       if (key.replace(/\s+/g, "") === compact) return key;
     }
   }
-
-  
   const want = n || id;
   if (want) {
     for (const key of Object.keys(store)) {
@@ -3096,22 +3076,13 @@ function resolveOtzKey(killerOrName) {
   }
   return null;
 }
-
-
 function decodeHtmlEntities(str) {
   if (str == null || str === "") return "";
   let s = String(str);
   if (!/[&][#a-zA-Z0-9]+;/.test(s)) return s;
-  s = s.replace(/&#34;|&quot;/gi, '"')
-       .replace(/&#39;|&apos;/gi, "'")
-       .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n))
-       .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
-       .replace(/&lt;/gi, "<")
-       .replace(/&gt;/gi, ">")
-       .replace(/&amp;/gi, "&");
+  s = s.replace(/&#34;|&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n)).replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16))).replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&amp;/gi, "&");
   return s;
 }
-
 function getOtzAddonsForKiller(killerOrName) {
   const store = getOtzStore();
   if (!store) return [];
@@ -3123,21 +3094,23 @@ function getOtzAddonsForKiller(killerOrName) {
     comment: decodeHtmlEntities(a.comment || "")
   }));
 }
-
-
 function getOtzKeyFromKillerName(name) {
   return resolveOtzKey(name);
 }
-
 function setOtzStatus(msg) {
   const el = document.getElementById("otz-update-status");
   if (el) el.innerHTML = msg || "";
 }
-
 function parseSingleOtzKiller(html, otzId) {
   const id = String(otzId).trim().toLowerCase();
   if (!id) return null;
-  const tierMap = { strongest: "S", good: "A", decent: "B", "almost-no-effect": "C", detrimental: "D" };
+  const tierMap = {
+    strongest: "S",
+    good: "A",
+    decent: "B",
+    "almost-no-effect": "C",
+    detrimental: "D"
+  };
   const parts = html.split(/<div class="killerGroup">/).slice(1);
   for (const part of parts) {
     const km = part.match(/<img src="\.\/public\/killers\/([^"]+)"[^>]*alt="([^"]*)"/);
@@ -3150,15 +3123,10 @@ function parseSingleOtzKiller(html, otzId) {
     let m;
     while ((m = re.exec(part)) !== null) {
       const tierClass = m[1].trim();
-      let commentRaw = m[2]
-        .replace(/&#47;/g, "/").replace(/&#39;/g, "'").replace(/&nbsp;/g, " ")
-        .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"');
+      let commentRaw = m[2].replace(/&#47;/g, "/").replace(/&#39;/g, "'").replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"');
       const nameM = commentRaw.match(/<b[^>]*>\s*([^<]+?)\s*<\/b>/i);
       let name = nameM ? nameM[1].trim() : m[3].split("/").pop().replace(/\.png$/i, "");
-      let text = commentRaw
-        .replace(/<br\s*\/?>/gi, "\n")
-        .replace(/<\/?(ul|li|p|i|span|a|b)[^>]*>/gi, (tag) => (tag.startsWith("</") || /li/i.test(tag) ? "\n" : ""))
-        .replace(/<[^>]+>/g, "");
+      let text = commentRaw.replace(/<br\s*\/?>/gi, "\n").replace(/<\/?(ul|li|p|i|span|a|b)[^>]*>/gi, tag => tag.startsWith("</") || /li/i.test(tag) ? "\n" : "").replace(/<[^>]+>/g, "");
       text = text.replace(/\n{3,}/g, "\n\n").trim();
       text = text.replace(new RegExp("^" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s*:?\\s*", "i"), "").trim();
       addons.push({
@@ -3169,22 +3137,22 @@ function parseSingleOtzKiller(html, otzId) {
         comment: text.slice(0, 1200)
       });
     }
-    if (addons.length) return { otzKey: key, displayName: alt, addons };
+    if (addons.length) return {
+      otzKey: key,
+      displayName: alt,
+      addons
+    };
   }
   return null;
 }
-
 function formatOtzSnippet(entryKey, data) {
-  const inner = JSON.stringify({ displayName: data.displayName, addons: data.addons }, null, 2);
-  const indented = inner.split("\n").map((line, i) => (i === 0 ? line : "  " + line)).join("\n");
+  const inner = JSON.stringify({
+    displayName: data.displayName,
+    addons: data.addons
+  }, null, 2);
+  const indented = inner.split("\n").map((line, i) => i === 0 ? line : "  " + line).join("\n");
   return `  "${entryKey}": ${indented}`;
 }
-
-
-
-
-
-
 async function fetchOtzKillerSnippet() {
   const idRaw = document.getElementById("otz-fetch-id")?.value || "";
   const myId = (document.getElementById("otz-fetch-mapname")?.value || "").trim().toLowerCase();
@@ -3197,7 +3165,9 @@ async function fetchOtzKillerSnippet() {
   }
   setOtzStatus("Fetching Otz data…");
   try {
-    const res = await fetch("https://otz-addon-tierlist.pages.dev/", { cache: "no-store" });
+    const res = await fetch("https://otz-addon-tierlist.pages.dev/", {
+      cache: "no-store"
+    });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
     const blocks = [];
@@ -3208,14 +3178,15 @@ async function fetchOtzKillerSnippet() {
         notes.push(`❌ <code>${id}</code> not found`);
         continue;
       }
-      
-      const entryKey = (myId && ids.length === 1) ? myId : id;
+      const entryKey = myId && ids.length === 1 ? myId : id;
       blocks.push(formatOtzSnippet(entryKey, data));
       notes.push(`✅ Otz <code>${id}</code> → file key <code>"${entryKey}"</code> (${data.addons.length} add-ons)`);
-      
       try {
         const store = getOtzStore() || (window.OTZ_ADDONS = {});
-        store[entryKey] = { displayName: data.displayName, addons: data.addons };
+        store[entryKey] = {
+          displayName: data.displayName,
+          addons: data.addons
+        };
         if (typeof OTZ_ADDONS !== "undefined") OTZ_ADDONS[entryKey] = store[entryKey];
       } catch (_) {}
     }
@@ -3225,28 +3196,25 @@ async function fetchOtzKillerSnippet() {
       return;
     }
     if (out) out.value = blocks.join(",\n") + ",";
-    setOtzStatus(
-      notes.join("<br>") +
-      "<br><strong>Paste</strong> into <code>data/otz-addons.js</code> inside <code>var OTZ_ADDONS = { … }</code>. " +
-      "The key <strong>must match</strong> the killer's <code>killer.id</code> so the data can be linked automatically."
-    );
+    setOtzStatus(notes.join("<br>") + "<br><strong>Paste</strong> into <code>data/otz-addons.js</code> inside <code>var OTZ_ADDONS = { … }</code>. " + "The key <strong>must match</strong> the killer's <code>killer.id</code> so the data can be linked automatically.");
     showToast("Snippet gotowy");
   } catch (err) {
     console.error(err);
-    setOtzStatus(
-      "Fetch failed: <code>" + err.message + "</code>. " +
-      "Open the site via a local server (<code>npx serve</code>), not <code>file://</code>."
-    );
+    setOtzStatus("Fetch failed: <code>" + err.message + "</code>. " + "Open the site via a local server (<code>npx serve</code>), not <code>file://</code>.");
     showToast("Fetch failed");
   }
 }
-
 function copyOtzSnippet() {
   const ta = document.getElementById("otz-snippet-out");
-  if (!ta || !ta.value.trim()) { showToast("No snippet to copy"); return; }
-  navigator.clipboard.writeText(ta.value).then(() => showToast("Copied!")).catch(() => { ta.select(); showToast("Press Ctrl+C to copy"); });
+  if (!ta || !ta.value.trim()) {
+    showToast("No snippet to copy");
+    return;
+  }
+  navigator.clipboard.writeText(ta.value).then(() => showToast("Copied!")).catch(() => {
+    ta.select();
+    showToast("Press Ctrl+C to copy");
+  });
 }
-
 function resetAllData() {
   showConfirm("Reset local edits to data.js and config.js? Browser-saved drafts will be cleared.", () => {
     localStorage.removeItem(STORAGE_KEY);
@@ -3258,7 +3226,6 @@ function resetAllData() {
     showToast("Reset complete");
   });
 }
-
 function showModal(html, opts) {
   opts = opts || {};
   const mc = document.getElementById("modal-content");
@@ -3267,30 +3234,42 @@ function showModal(html, opts) {
     mc.innerHTML = html;
     mc.classList.toggle("modal-wide", !!opts.wide);
   }
-  if (ov) ov.classList.add("show");
+  if (ov) {
+    ov.classList.add("show");
+    showManagedDialog(ov, () => {
+      ov.classList.remove('show');
+      mc.innerHTML = '';
+      mc.classList.remove('modal-wide');
+      window._editingKillerId = '';
+    });
+  }
 }
 function closeModal(e) {
   if (e && e.target === document.getElementById("modal-overlay")) return;
   const ov = document.getElementById("modal-overlay");
   const mc = document.getElementById("modal-content");
+  if (ov?.open) ov.close();
   if (ov) ov.classList.remove("show");
-  if (mc) { mc.innerHTML = ""; mc.classList.remove("modal-wide"); }
+  if (mc) {
+    mc.innerHTML = "";
+    mc.classList.remove("modal-wide");
+  }
   window._editingKillerId = "";
-
 }
-
 function escapeHtml(str) {
   if (!str) return "";
-  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 function escapeAttr(str) {
   if (!str) return "";
-  return String(str).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  return String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 document.addEventListener("DOMContentLoaded", init);
-document.addEventListener("click", () => { try { closeAllFilterPanels(); } catch (_) {} });
-
-
+document.addEventListener("click", () => {
+  try {
+    closeAllFilterPanels();
+  } catch (_) {}
+});
 window.toggleShowAllTags = toggleShowAllTags;
 window.toggleKillerTagsPanel = toggleKillerTagsPanel;
 window.toggleBuildTagsPanel = toggleBuildTagsPanel;
@@ -3300,11 +3279,9 @@ window.mergeAndDownload = mergeAndDownload;
 window.toggleMergeChanges = toggleMergeChanges;
 window.applyMergedToLive = applyMergedToLive;
 window.copyMergedDataJs = copyMergedDataJs;
-
 window.refreshKillerEditPreview = refreshKillerEditPreview;
 window.refreshBuildEditPreview = refreshBuildEditPreview;
 window.schedulePreviewRefresh = schedulePreviewRefresh;
-
 window.openDetailedKillerForm = openDetailedKillerForm;
 window.getOtzAddonsForKiller = getOtzAddonsForKiller;
 window.getOtzStore = getOtzStore;

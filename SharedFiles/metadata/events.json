@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "Anniversary2021",
+      "name": "Anniversary2021",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Anniversary2025",
+      "name": "Anniversary2025",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Halloween2025",
+      "name": "Halloween2025",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Anniversary2026",
+      "name": "Anniversary2026",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Lunar2023",
+      "name": "Lunar2023",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Halloween2024",
+      "name": "Halloween2024",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Spring2026",
+      "name": "Spring2026",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Anniversary2019",
+      "name": "Anniversary2019",
+      "startDate": null,
+      "endDate": null
+    },
+    {
+      "id": "Winter2024",
+      "name": "Winter2024",
+      "startDate": null,
+      "endDate": null
+    }
+  ]
+}

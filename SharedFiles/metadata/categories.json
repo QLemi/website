@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "itemTypes": [
+    {
+      "id": "medkit",
+      "name": "Med-Kits"
+    },
+    {
+      "id": "toolbox",
+      "name": "Toolboxes"
+    },
+    {
+      "id": "flashlight",
+      "name": "Flashlights"
+    },
+    {
+      "id": "map",
+      "name": "Maps"
+    },
+    {
+      "id": "key",
+      "name": "Keys"
+    },
+    {
+      "id": "fogvial",
+      "name": "Fog Vials"
+    },
+    {
+      "id": "firecracker",
+      "name": "Firecrackers & event throwables"
+    }
+  ],
+  "rarities": [
+    {
+      "id": "common",
+      "color": "#8a5a2b"
+    },
+    {
+      "id": "uncommon",
+      "color": "#c9a227"
+    },
+    {
+      "id": "rare",
+      "color": "#3d9a4a"
+    },
+    {
+      "id": "veryrare",
+      "color": "#7b3ea1"
+    },
+    {
+      "id": "visceral",
+      "color": "#d24b86"
+    },
+    {
+      "id": "ultrarare",
+      "color": "#d24b86"
+    }
+  ],
+  "perkCategories": [
+    {
+      "id": "tracking",
+      "name": "tracking"
+    },
+    {
+      "id": "enhancement",
+      "name": "enhancement"
+    },
+    {
+      "id": "chasing",
+      "name": "chasing"
+    },
+    {
+      "id": "trickery",
+      "name": "trickery"
+    },
+    {
+      "id": "hinderance",
+      "name": "hinderance"
+    },
+    {
+      "id": "obstruction",
+      "name": "obstruction"
+    },
+    {
+      "id": "cruelty",
+      "name": "cruelty"
+    },
+    {
+      "id": "support",
+      "name": "support"
+    },
+    {
+      "id": "navigation",
+      "name": "navigation"
+    },
+    {
+      "id": "adaptation",
+      "name": "adaptation"
+    },
+    {
+      "id": "perception",
+      "name": "perception"
+    },
+    {
+      "id": "safeguard",
+      "name": "safeguard"
+    },
+    {
+      "id": "concealment",
+      "name": "concealment"
+    },
+    {
+      "id": "strategy",
+      "name": "strategy"
+    }
+  ],
+  "statistics": [
+    {
+      "id": "prestiz",
+      "name": "Prestiż",
+      "aliases": [],
+      "color": "#6b7280",
+      "image": {
+        "url": null,
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "strimersy",
+      "name": "Strimersy",
+      "aliases": [],
+      "color": "#22c55e",
+      "offeringId": "strimersy",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "puddingi",
+      "name": "Puddingi",
+      "aliases": [],
+      "color": "#86efac",
+      "offeringId": "puddingi",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "muszle",
+      "name": "Muszle",
+      "aliases": [],
+      "color": "#4ade80",
+      "offeringId": "muszle",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "cake",
+      "name": "Cake",
+      "aliases": [],
+      "color": "#fde047",
+      "offeringId": "cake",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "frightful-flan-anniversary-6",
+      "name": "Frightful Flan (Anniversary 6)",
+      "aliases": [],
+      "color": "#f97316",
+      "offeringId": "frightful-flan-anniversary-6",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "terrormisu-anniversary-7",
+      "name": "Terrormisu (Anniversary 7)",
+      "aliases": [],
+      "color": "#fb923c",
+      "offeringId": "terrormisu-anniversary-7",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "screech-cobbler-anniversary-8",
+      "name": "Screech Cobbler (Anniversary 8)",
+      "aliases": [],
+      "color": "#fdba74",
+      "offeringId": "screech-cobbler-anniversary-8",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "coconut-scream-pie-anniversary-9",
+      "name": "Coconut Scream Pie (Anniversary 9)",
+      "aliases": [],
+      "color": "#ea580c",
+      "offeringId": "coconut-scream-pie-anniversary-9",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "toothy-torte-anniversary-10",
+      "name": "Toothy Torte (Anniversary 10)",
+      "aliases": [
+        "Toothy Torte  (Anniversary 10)"
+      ],
+      "color": "#c2410c",
+      "offeringId": "toothy-torte-anniversary-10",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "banquet-flashlight-the-black-banquet",
+      "name": "Banquet Flashlight (The Black Banquet)",
+      "aliases": [],
+      "color": "#f97316",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconItems_flashlight_anniversary2026.png",
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "banquet-med-kit-the-black-banquet",
+      "name": "Banquet Med-Kit (The Black Banquet)",
+      "aliases": [],
+      "color": "#fb923c",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconItems_medkit_anniversary2026.png",
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "banquet-toolbox-the-black-banquet",
+      "name": "Banquet Toolbox (The Black Banquet)",
+      "aliases": [],
+      "color": "#fdba74",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconItems_toolbox_anniversary2026.png",
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "masquerade-flashlight-twisted-masquerade",
+      "name": "Masquerade Flashlight (Twisted Masquerade )",
+      "aliases": [],
+      "color": "#ea580c",
+      "offeringId": null,
+      "itemId": "Item_Camper_Flashlight_Anniversary2022",
+      "addonId": null
+    },
+    {
+      "id": "masquerade-med-kit-twisted-masquerade",
+      "name": "Masquerade Med-Kit (Twisted Masquerade )",
+      "aliases": [],
+      "color": "#f97316",
+      "offeringId": null,
+      "itemId": "Item_Camper_Medkit_Anniversary2022",
+      "addonId": null
+    },
+    {
+      "id": "masquerade-toolbox-twisted-masquerade",
+      "name": "Masquerade Toolbox (Twisted Masquerade )",
+      "aliases": [],
+      "color": "#fb923c",
+      "offeringId": null,
+      "itemId": "Item_Camper_Toolbox_Anniversary2022",
+      "addonId": null
+    },
+    {
+      "id": "bloodshot-eye-blood-moon",
+      "name": "Bloodshot Eye (Blood Moon)",
+      "aliases": [],
+      "color": "#ef4444",
+      "offeringId": "bloodshot-eye-blood-moon",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "bloodsense-map-blood-moon",
+      "name": "Bloodsense Map (Blood Moon)",
+      "aliases": [],
+      "color": "#dc2626",
+      "offeringId": null,
+      "itemId": "Item_Camper_Map_Spring2024",
+      "addonId": null
+    },
+    {
+      "id": "mistle-toes-bone-chill",
+      "name": "Mistle Toes (Bone Chill)",
+      "aliases": [],
+      "color": "#fde68a",
+      "offeringId": "mistle-toes-bone-chill",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "winter-party-starter-bone-chill",
+      "name": "Winter Party Starter (Bone Chill)",
+      "aliases": [],
+      "color": "#fbbf24",
+      "offeringId": null,
+      "itemId": "Item_Camper_Firecracker_WinterEvent",
+      "addonId": null
+    },
+    {
+      "id": "red-envelope-chinski-nowy-rok",
+      "name": "Red Envelope (Chinski nowy rok)",
+      "aliases": [],
+      "color": "#eab308",
+      "offeringId": "red-envelope-chinski-nowy-rok",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "chinese-firecracker-chinski-nowy-rok",
+      "name": "Chinese Firecracker (Chinski nowy rok)",
+      "aliases": [],
+      "color": "#facc15",
+      "offeringId": null,
+      "itemId": "Item_Camper_Firecracker_Chinese",
+      "addonId": null
+    },
+    {
+      "id": "festive-toolbox-chinski-nowy-rok",
+      "name": "Festive Toolbox (Chinski nowy rok)",
+      "aliases": [],
+      "color": "#fbbf24",
+      "offeringId": null,
+      "itemId": "Item_Camper_LunarToolbox",
+      "addonId": null
+    },
+    {
+      "id": "arcane-dowsing-rod-halloween",
+      "name": "Arcane Dowsing Rod (Halloween)",
+      "aliases": [],
+      "color": "#a855f7",
+      "offeringId": "arcane-dowsing-rod-halloween",
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "blight-serum-halloween",
+      "name": "Blight Serum (Halloween)",
+      "aliases": [],
+      "color": "#9333ea",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconAddon_blightSerum.png",
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "all-hallows-eve-lunchbox-halloween",
+      "name": "All Hallows' Eve Lunchbox (Halloween)",
+      "aliases": [],
+      "color": "#7c3aed",
+      "offeringId": null,
+      "itemId": "Item_Camper_Medkit05",
+      "addonId": null
+    },
+    {
+      "id": "will-o-wisp-halloween",
+      "name": "Will O' Wisp (Halloween)",
+      "aliases": [],
+      "color": "#8b5cf6",
+      "offeringId": null,
+      "itemId": "Item_Camper_Flashlight04",
+      "addonId": null
+    },
+    {
+      "id": "broken-bulb-halloween",
+      "name": "Broken Bulb (Halloween)",
+      "aliases": [],
+      "color": "#c084fc",
+      "offeringId": null,
+      "itemId": null,
+      "addonId": "Addon_Flashlight_BrokenBulb"
+    },
+    {
+      "id": "refined-serum-halloween",
+      "name": "Refined Serum (Halloween)",
+      "aliases": [],
+      "color": "#a78bfa",
+      "offeringId": null,
+      "itemId": null,
+      "addonId": "Addon_Medkit_BlightedSyringe"
+    },
+    {
+      "id": "cake-rocznicowy-anniversary-10",
+      "name": "Cake Rocznicowy (Anniversary 10)",
+      "aliases": [],
+      "color": "#c2410c",
+      "image": {
+        "url": null,
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "masquerade-flashlight-anniversary",
+      "name": "Masquerade Flashlight (Anniversary)",
+      "aliases": [],
+      "color": "#ea580c",
+      "image": {
+        "url": null,
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "masquerade-med-kit-anniversary",
+      "name": "Masquerade Med-Kit (Anniversary)",
+      "aliases": [],
+      "color": "#f97316",
+      "image": {
+        "url": null,
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    },
+    {
+      "id": "masquerade-toolbox-anniversary",
+      "name": "Masquerade Toolbox (Anniversary)",
+      "aliases": [],
+      "color": "#fb923c",
+      "image": {
+        "url": null,
+        "alternatives": [],
+        "local": null
+      },
+      "offeringId": null,
+      "itemId": null,
+      "addonId": null
+    }
+  ],
+  "offeringPoolCategories": [
+    "Strimersy",
+    "Cake",
+    "Puddingi",
+    "Muszle"
+  ]
+}

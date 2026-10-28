@@ -1,14 +1,55 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moja strona</title>
-  <link rel="stylesheet" href="style.css">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#080a12">
+    <meta name="description" content="Mostly Dead by Daylight content: stats, streaks, games and tools.">
+    <title>Tools &amp; Pages · Lemi</title>
+    <link rel="stylesheet" href="style.css?v=ui-fixes-1">
+    <script>
+    (() => {
+      const showError = () => {
+        const reveal = () => { const status = document.getElementById('script-status'); if (status) status.hidden = false; };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal, { once: true }); else reveal();
+      };
+      window.addEventListener('error', event => { if (event instanceof ErrorEvent || event.target.id === 'page-script') showError(); }, true);
+    })();
+  </script>
+  <script id="page-script" src="script.js?v=ui-fixes-1" defer></script>
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"13025904a55346ff8201f3e4a9a4eb5e"}'></script>
 </head>
-  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
 <body>
-  <main class="grid" id="tiles"></main>
-  <script src="script.js"></script>
-</body>
+  <a class="skip-link" href="#tools">Skip to tools</a>
+  <header class="page-header">
+    <p class="eyebrow"><a class="steam-profile" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" aria-label="Lemi on Steam (opens in a new tab)"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.962 20.518 6.495 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.304 1.25 1.297.554 2.792-.046 3.346-1.342.263-.606.264-1.284.01-1.887a2.417 2.417 0 00-1.342-1.348 2.41 2.41 0 00-1.88-.009l1.523.63a1.775 1.775 0 01-1.488 3.316zm9.191-7.226c-1.405 0-2.548-1.143-2.548-2.548 0-1.404 1.143-2.546 2.548-2.546 1.403 0 2.546 1.142 2.546 2.546 0 1.405-1.143 2.548-2.546 2.548zm0-3.887c-.742 0-1.343.602-1.343 1.34 0 .74.601 1.342 1.343 1.342.739 0 1.34-.602 1.34-1.342 0-.738-.601-1.34-1.34-1.34z"/></svg><span>LEMI</span></a></p>
+      <h1>Tools &amp; Pages</h1>
+      <p>Mostly Dead by Daylight content: stats, streaks, games and tools.</p>
+      <details class="more-pages">
+        <summary aria-label="More pages" title="More pages" aria-controls="planning-links">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+        </summary>
+        <nav aria-label="Planning" id="planning-links">
+          <p class="menu-label">Planning</p>
+          <a href="kalendarz/kalendarz.html"><img src="main_image/kalendarz.webp" alt="" width="40" height="40"><span>Calendar</span></a>
+          <a href="harmonogram/harmonogram.html"><img src="main_image/harmonogram.webp" alt="" width="40" height="40"><span>Schedule</span></a>
+        </nav>
+      </details>
+    </header>
+    <main id="tools">
+      <noscript><p class="page-notice">JavaScript is disabled. You can still use this menu, but some tools require JavaScript.</p></noscript>
+      <p class="page-notice" id="script-status" role="status" hidden>Some scripts could not run. You can still open the pages below.</p>
+      <nav class="grid" aria-label="Available tools" id="tiles">
+        <a class="tile tile-streaks" href="streaki/streaki.html"><img class="tile-image" src="main_image/streaki.webp" srcset="main_image/streaki-384.webp 384w, main_image/streaki.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="eager" fetchpriority="high" decoding="async"><span class="tile-title">Streaks</span></a>
+        <a class="tile tile-stats" href="stats/stats.html"><img class="tile-image" src="main_image/statystyki.webp" srcset="main_image/statystyki-384.webp 384w, main_image/statystyki.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="eager" decoding="async"><span class="tile-title">Account Stats</span></a>
+        <a class="tile tile-wheel" href="fortune-wheel/index.html"><img class="tile-image" src="main_image/fortune-wheel.webp" srcset="main_image/fortune-wheel-384.webp 384w, main_image/fortune-wheel.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">DBD Randomizer</span></a>
+        <a class="tile tile-planner" href="prestige-planner/index.html"><img class="tile-image" src="main_image/prestige-planner.webp" srcset="main_image/prestige-planner-384.webp 384w, main_image/prestige-planner.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">Prestige Planner</span></a>
+        <a class="tile tile-guess" href="GraZgadnijKtoTo/GraZgadnijKtoTo.html"><img class="tile-image" src="main_image/guess-who-neon-simple.webp" srcset="main_image/guess-who-neon-simple-384.webp 384w, main_image/guess-who-neon-simple.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">Guess Who? (DBD Edition)</span></a>
+        <a class="tile tile-builds" href="DBDKillersInfo/DBDKillersInfo.html"><img class="tile-image" src="main_image/dbd-killers-info.webp" srcset="main_image/dbd-killers-info-384.webp 384w, main_image/dbd-killers-info.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">DBD Builds &amp; Info</span></a>
+        <a class="tile tile-creator" href="player-card-creator/index.html"><img class="tile-image" src="main_image/player-card-creator.webp" srcset="main_image/player-card-creator-384.webp 384w, main_image/player-card-creator.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">Player Card Creator</span></a>
+        <a class="tile tile-loadout" href="loadout/loadout.html"><img class="tile-image" src="main_image/loadout-checker.webp" srcset="main_image/loadout-checker-384.webp 384w, main_image/loadout-checker.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">Killer Loadout Checker</span></a>
+        <a class="tile tile-viewers" href="tierlista_widzów/tierlista_widzów.html"><img class="tile-image" src="main_image/tierlista-widzow.webp" srcset="main_image/tierlista-widzow-384.webp 384w, main_image/tierlista-widzow.webp 768w" sizes="(max-width: 347px) calc(100vw - 32px), (max-width: 480px) calc((100vw - 48px) / 2), (max-width: 527px) calc(100vw - 64px), (max-width: 771px) calc((100vw - 88px) / 2), (max-width: 1015px) calc((100vw - 112px) / 3), (max-width: 1259px) calc((100vw - 136px) / 4), (max-width: 1400px) calc((100vw - 160px) / 5), 248px" width="768" height="768" alt="" loading="lazy" decoding="async"><span class="tile-title">Viewer Tier List (De_Destru)</span></a>
+      </nav>
+    </main>
+  </body>
 </html>

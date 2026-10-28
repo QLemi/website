@@ -1,180 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dead by Daylight Streaks</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style_streaki.css?v=empty-backtop-v1">
-  <script src="config_streaki.js"></script>
-  <script src="script_streaki.js?v=empty-backtop-v1" defer></script>
-  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dead by Daylight Streaks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_streaki.css?v=source-notices-1">
+    <script src="../SharedFiles/catalog.js?v=shared-1"></script>
+    <script src="config_streaki.js?v=shared-1"></script>
+    <script src="script_streaki.js?v=source-notices-1" defer></script>
+    <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
+  <link rel="stylesheet" href="../SharedFiles/navigation.css?v=dbd-nav-1">
+<script defer src="../SharedFiles/navigation.js?v=dbd-nav-1"></script>
 </head>
-<body>
-  <div class="bg-layer"></div>
-  <div class="fog"></div>
+  <body>
 
-  <header>
-    <div class="logo-mark">STREAKS</div>
-    <div class="subtitle">Dead by Daylight</div>
-    <div class="stats-bar">
-      <div class="stat">
-        <div class="stat-value" id="total-characters">0</div>
-        <div class="stat-label">Characters</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="total-streaks">0</div>
-        <div class="stat-label">Streaks</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="best-streak">0</div>
-        <div class="stat-label">Best</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="active-count">0</div>
-        <div class="stat-label">Active</div>
-      </div>
-    </div>
-    <div class="controls">
-      <input type="search" id="streak-search" class="streak-search" placeholder="Search..." autocomplete="off" aria-label="Search characters">
-      <a class="steam-chip" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" title="Steam — Lemi">
-        <span class="steam-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.962 20.518 6.495 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.304 1.25 1.297.554 2.792-.046 3.346-1.342.263-.606.264-1.284.01-1.887a2.417 2.417 0 00-1.342-1.348 2.41 2.41 0 00-1.88-.009l1.523.63a1.775 1.775 0 01-1.488 3.316zm9.191-7.226c-1.405 0-2.548-1.143-2.548-2.548 0-1.404 1.143-2.546 2.548-2.546 1.403 0 2.546 1.142 2.546 2.546 0 1.405-1.143 2.548-2.546 2.548zm0-3.887c-.742 0-1.343.602-1.343 1.34 0 .74.601 1.342 1.343 1.342.739 0 1.34-.602 1.34-1.342 0-.738-.601-1.34-1.34-1.34z"/></svg></span>
-        <span class="steam-chip-txt">Lemi</span>
-      </a>
-      <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
-    </div>
-    <div class="tag-filters">
-      <button class="tag-filter active" data-tag="K">Killer</button>
-      <button class="tag-filter active" data-tag="S">Survivor</button>
-      <button class="tag-filter active" data-tag="O">Both</button>
-      <button class="tag-filter active-filter" id="active-only-filter" type="button" aria-pressed="false">Active only</button>
-      <button class="tag-filter active-filter" id="history-only-filter" type="button" aria-pressed="false">Multiple Attempts</button>
-      <button class="tag-filter tag-filter-p" id="playthrough-position-filter" type="button" aria-pressed="false">Playthrough first</button>
-      <label class="streak-sort-select" for="streak-sort"><span>Sort by</span>
-        <select id="streak-sort" aria-label="Sort streaks">
-          <option value="best-desc">Best score (high to low)</option>
-          <option value="best-asc">Best score (low to high)</option>
-          <option value="name">Character name (A–Z)</option>
-          <option value="attempts">Most attempts</option>
-        </select>
-      </label>
-      <label class="streak-filter-select" for="streak-min-score"><span>Min. score</span>
-        <input id="streak-min-score" type="number" min="0" step="1" inputmode="numeric" placeholder="Any" aria-label="Minimum streak score">
-      </label>
-      <div class="wincon-filter">
-        <label for="wincon-filter-input">Wincon filter</label>
-        <div class="wincon-filter-entry">
-          <input id="wincon-filter-input" type="search" list="wincon-filter-options" placeholder="Type or choose a wincon…" autocomplete="off" aria-label="Choose wincon filter">
-          <datalist id="wincon-filter-options"></datalist>
-          <button id="wincon-filter-add" type="button">Add</button>
+
+<a class="dbd-site-skip" href="#dbd-main">Skip to content</a>
+<nav class="dbd-site-nav" aria-label="DBD tools"><div class="dbd-site-inner"><a class="dbd-site-home" href="../index.html"><span aria-hidden="true">←</span><span>All tools</span></a><div class="dbd-site-desktop"><span class="dbd-site-link" aria-current="page">Streaks</span><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><a class="dbd-site-link" href="../DBDKillersInfo/DBDKillersInfo.html">Builds &amp; Info</a><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><a class="dbd-site-link" href="../loadout/loadout.html">Loadout Checker</a></div><details class="dbd-site-menu"><summary aria-label="DBD pages: Streaks"><span class="dbd-site-current">Streaks</span><span class="dbd-site-chevron" aria-hidden="true"></span></summary><div class="dbd-site-mobile-links"><span class="dbd-site-link" aria-current="page">Streaks</span><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><a class="dbd-site-link" href="../DBDKillersInfo/DBDKillersInfo.html">Builds &amp; Info</a><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><a class="dbd-site-link" href="../loadout/loadout.html">Loadout Checker</a></div></details></div></nav>
+
+<div class="bg-layer"></div>
+    <div class="fog"></div>
+
+    <header>
+      <div class="logo-mark">STREAKS</div>
+      <div class="subtitle">Dead by Daylight</div>
+      <div class="stats-bar">
+        <div class="stat">
+          <div class="stat-value" id="total-characters">0</div>
+          <div class="stat-label">Characters</div>
         </div>
-        <div id="wincon-filter-selected" class="wincon-filter-selected" aria-live="polite"></div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="results-heading">
-      <div class="section-title">All Streaks</div>
-    </div>
-    <div class="filter-summary" id="filter-summary" aria-live="polite">
-      <span class="filter-summary-count" id="filter-summary-count"></span>
-      <div class="filter-summary-active" id="filter-summary-active"></div>
-      <button class="clear-filters-btn" id="clear-filters" type="button" hidden>Clear filters</button>
-    </div>
-    <div class="grid" id="streak-grid"></div>
-  </main>
-
-  <footer class="streak-page-footer">
-    <button class="steam-copy-btn" id="steam-copy-open" type="button" title="Prepare streak text for Steam">Copy for Steam</button>
-  </footer>
-
-  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top" aria-hidden="true">
-    <span aria-hidden="true">↑</span>
-  </button>
-
-  <dialog class="steam-export-dialog" id="steam-export-dialog" aria-labelledby="steam-export-title">
-    <div class="steam-export-panel">
-      <div class="steam-export-heading">
-        <div>
-          <p class="steam-export-eyebrow">STEAM PROFILE TEXT</p>
-          <h2 id="steam-export-title">Choose streaks to copy</h2>
+        <div class="stat">
+          <div class="stat-value" id="total-streaks">0</div>
+          <div class="stat-label">Streaks</div>
         </div>
-        <button class="steam-export-close" type="button" aria-label="Close">×</button>
-      </div>
-      <p class="steam-export-help">Filters select matching streaks by default. All streaks stay available below, so you can include or exclude any one manually.</p>
-      <div class="steam-export-workspace">
-      <section class="steam-export-options">
-      <h3 class="steam-export-pane-title">Filters &amp; options</h3>
-      <div class="steam-export-filters">
-        <fieldset class="steam-export-role-filter" id="steam-export-roles">
-          <legend>Roles <span>select any combination</span></legend>
-          <label><input type="checkbox" value="K" checked> Killer</label>
-          <label><input type="checkbox" value="S" checked> Survivor</label>
-          <label><input type="checkbox" value="O" checked> Both</label>
-        </fieldset>
-        <fieldset class="steam-export-status-filter" id="steam-export-statuses">
-          <legend>Status <span>select any combination</span></legend>
-          <label><input type="checkbox" value="completed" checked> Completed</label>
-          <label><input type="checkbox" value="active" checked> Ongoing</label>
-        </fieldset>
-        <label>Minimum result
-          <input id="steam-export-min" type="number" min="0" placeholder="Any">
-        </label>
-        <label>Maximum result
-          <input id="steam-export-max" type="number" min="0" placeholder="Any">
-        </label>
-        <div class="steam-export-filter-field">
-          <span>Characters</span>
-          <details class="steam-export-character-picker">
-            <summary id="steam-export-character-summary">All characters</summary>
-            <div class="steam-export-character-options" id="steam-export-character-options"></div>
-          </details>
+        <div class="stat">
+          <div class="stat-value" id="best-streak">0</div>
+          <div class="stat-label">Best</div>
         </div>
-        <label>Order
-          <select id="steam-export-sort">
-            <option value="profile">Profile order</option>
-            <option value="high">Highest result</option>
-            <option value="low">Lowest result</option>
-            <option value="name">Character A–Z</option>
+        <div class="stat">
+          <div class="stat-value" id="active-count">0</div>
+          <div class="stat-label">Active</div>
+        </div>
+      </div>
+      <div class="controls">
+        <input type="search" id="streak-search" class="streak-search" placeholder="Search..." autocomplete="off" aria-label="Search characters">
+        <a class="steam-chip" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" title="Steam — Lemi">
+          <span class="steam-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.962 20.518 6.495 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.304 1.25 1.297.554 2.792-.046 3.346-1.342.263-.606.264-1.284.01-1.887a2.417 2.417 0 00-1.342-1.348 2.41 2.41 0 00-1.88-.009l1.523.63a1.775 1.775 0 01-1.488 3.316zm9.191-7.226c-1.405 0-2.548-1.143-2.548-2.548 0-1.404 1.143-2.546 2.548-2.546 1.403 0 2.546 1.142 2.546 2.546 0 1.405-1.143 2.548-2.546 2.548zm0-3.887c-.742 0-1.343.602-1.343 1.34 0 .74.601 1.342 1.343 1.342.739 0 1.34-.602 1.34-1.342 0-.738-.601-1.34-1.34-1.34z"/></svg></span>
+          <span class="steam-chip-txt">Lemi</span>
+        </a>
+        <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
+      </div>
+      <div class="tag-filters">
+        <button class="tag-filter active" data-tag="K">Killer</button>
+        <button class="tag-filter active" data-tag="S">Survivor</button>
+        <button class="tag-filter active" data-tag="O">Both</button>
+        <button class="tag-filter active-filter" id="active-only-filter" type="button" aria-pressed="false">Active only</button>
+        <button class="tag-filter active-filter" id="history-only-filter" type="button" aria-pressed="false">Multiple Attempts</button>
+        <button class="tag-filter tag-filter-p" id="playthrough-position-filter" type="button" aria-pressed="false">Playthrough first</button>
+        <label class="streak-sort-select" for="streak-sort"><span>Sort by</span>
+          <select id="streak-sort" aria-label="Sort streaks">
+            <option value="best-desc">Best score (high to low)</option>
+            <option value="best-asc">Best score (low to high)</option>
+            <option value="name">Character name (A–Z)</option>
+            <option value="attempts">Most attempts</option>
           </select>
         </label>
-        <label>Find
-          <input id="steam-export-search" type="search" placeholder="Character or win condition">
+        <label class="streak-filter-select" for="streak-min-score"><span>Min. score</span>
+          <input id="streak-min-score" type="number" min="0" step="1" inputmode="numeric" placeholder="Any" aria-label="Minimum streak score">
         </label>
-        <label>Text layout
-          <select id="steam-export-format">
-            <option value="profile">Profile style</option>
-            <option value="role">Grouped by role</option>
-            <option value="compact">Compact</option>
-          </select>
-        </label>
+        <div class="wincon-filter">
+          <label for="wincon-filter-input">Wincon filter</label>
+          <div class="wincon-filter-entry">
+            <input id="wincon-filter-input" type="search" list="wincon-filter-options" placeholder="Type or choose a wincon…" autocomplete="off" aria-label="Choose wincon filter">
+            <datalist id="wincon-filter-options"></datalist>
+            <button id="wincon-filter-add" type="button">Add</button>
+          </div>
+          <div id="wincon-filter-selected" class="wincon-filter-selected" aria-live="polite"></div>
+        </div>
       </div>
-      <div class="steam-export-list-head">
-        <button type="button" id="steam-export-select-visible">Select filtered</button>
-        <button type="button" id="steam-export-clear">Clear all</button>
+    </header>
+
+    <main id="dbd-main">
+      <section class="source-reports" id="source-reports" aria-label="Data issues" aria-live="polite" hidden></section>
+      <div class="results-heading">
+        <div class="section-title">All Streaks</div>
       </div>
-      </section>
-      <section class="steam-export-selection" aria-label="Streak selection">
-      <div class="steam-export-list-head steam-export-selection-head">
-        <span class="steam-export-pane-title">Streaks</span>
-        <span id="steam-export-count">0 selected</span>
-        <span class="steam-export-match-legend"><i></i> Matches filters</span>
+      <div class="filter-summary" id="filter-summary" aria-live="polite">
+        <span class="filter-summary-count" id="filter-summary-count"></span>
+        <div class="filter-summary-active" id="filter-summary-active"></div>
+        <button class="clear-filters-btn" id="clear-filters" type="button" hidden>Clear filters</button>
       </div>
-      <div class="steam-export-list" id="steam-export-list"></div>
-      </section>
+      <div class="grid" id="streak-grid"></div>
+    </main>
+
+    <footer class="streak-page-footer">
+      <button class="steam-copy-btn" id="steam-copy-open" type="button" title="Prepare streak text for Steam">Copy for Steam</button>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top" aria-hidden="true">
+      <span aria-hidden="true">↑</span>
+    </button>
+
+    <dialog class="steam-export-dialog" id="steam-export-dialog" aria-labelledby="steam-export-title">
+      <div class="steam-export-panel">
+        <div class="steam-export-heading">
+          <div>
+            <p class="steam-export-eyebrow">STEAM PROFILE TEXT</p>
+            <h2 id="steam-export-title">Choose streaks to copy</h2>
+          </div>
+          <button class="steam-export-close" type="button" aria-label="Close">×</button>
+        </div>
+        <p class="steam-export-help">Filters select matching streaks by default. All streaks stay available below, so you can include or exclude any one manually.</p>
+        <div class="steam-export-workspace">
+          <section class="steam-export-options">
+            <h3 class="steam-export-pane-title">Filters &amp; options</h3>
+            <div class="steam-export-filters">
+              <fieldset class="steam-export-role-filter" id="steam-export-roles">
+                <legend>Roles <span>select any combination</span></legend>
+                <label><input type="checkbox" value="K" checked> Killer</label>
+                <label><input type="checkbox" value="S" checked> Survivor</label>
+                <label><input type="checkbox" value="O" checked> Both</label>
+              </fieldset>
+              <fieldset class="steam-export-status-filter" id="steam-export-statuses">
+                <legend>Status <span>select any combination</span></legend>
+                <label><input type="checkbox" value="completed" checked> Completed</label>
+                <label><input type="checkbox" value="active" checked> Ongoing</label>
+              </fieldset>
+              <label>Minimum result
+                <input id="steam-export-min" type="number" min="0" placeholder="Any">
+              </label>
+              <label>Maximum result
+                <input id="steam-export-max" type="number" min="0" placeholder="Any">
+              </label>
+              <div class="steam-export-filter-field">
+                <span>Characters</span>
+                <details class="steam-export-character-picker">
+                  <summary id="steam-export-character-summary">All characters</summary>
+                  <div class="steam-export-character-options" id="steam-export-character-options"></div>
+                </details>
+              </div>
+              <label>Order
+                <select id="steam-export-sort">
+                  <option value="profile">Profile order</option>
+                  <option value="high">Highest result</option>
+                  <option value="low">Lowest result</option>
+                  <option value="name">Character A–Z</option>
+                </select>
+              </label>
+              <label>Find
+                <input id="steam-export-search" type="search" placeholder="Character or win condition">
+              </label>
+              <label>Text layout
+                <select id="steam-export-format">
+                  <option value="profile">Profile style</option>
+                  <option value="role">Grouped by role</option>
+                  <option value="compact">Compact</option>
+                </select>
+              </label>
+            </div>
+            <div class="steam-export-list-head">
+              <button type="button" id="steam-export-select-visible">Select filtered</button>
+              <button type="button" id="steam-export-clear">Clear all</button>
+            </div>
+          </section>
+          <section class="steam-export-selection" aria-label="Streak selection">
+            <div class="steam-export-list-head steam-export-selection-head">
+              <span class="steam-export-pane-title">Streaks</span>
+              <span id="steam-export-count">0 selected</span>
+              <span class="steam-export-match-legend"><i></i> Matches filters</span>
+            </div>
+            <div class="steam-export-list" id="steam-export-list"></div>
+          </section>
+        </div>
+        <section class="steam-export-preview-panel">
+          <label class="steam-export-preview-label" for="steam-export-preview">Steam text preview</label>
+          <textarea id="steam-export-preview" readonly rows="7" placeholder="Select streaks to preview the Steam text"></textarea>
+        </section>
+        <div class="steam-export-actions">
+          <span class="steam-export-feedback" id="steam-export-feedback" aria-live="polite"></span>
+          <button class="steam-export-copy" id="steam-export-copy" type="button">Copy text</button>
+        </div>
       </div>
-      <section class="steam-export-preview-panel">
-        <label class="steam-export-preview-label" for="steam-export-preview">Steam text preview</label>
-        <textarea id="steam-export-preview" readonly rows="7" placeholder="Select streaks to preview the Steam text"></textarea>
-      </section>
-      <div class="steam-export-actions">
-        <span class="steam-export-feedback" id="steam-export-feedback" aria-live="polite"></span>
-        <button class="steam-export-copy" id="steam-export-copy" type="button">Copy text</button>
-      </div>
-    </div>
-  </dialog>
-</body>
+    </dialog>
+  </body>
 </html>

@@ -1,0 +1,140 @@
+.page-error,
+.page-error * {
+  box-sizing: border-box;
+}
+body.page-error {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  margin: 0;
+  padding: 24px;
+  background: #0c0c0e;
+  color: #e9e9eb;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.page-error .error-shell {
+  position: relative;
+  width: min(540px, 100%);
+  padding: 42px;
+  border-radius: 14px;
+  background: #101013;
+  box-shadow: inset 0 -1px 0 #ffffff09, 0 18px 60px #0002;
+}
+.error-shell::before,
+.error-shell::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+.error-shell::before {
+  top: 0;
+  left: 0;
+  width: min(45%, 180px);
+  height: 64px;
+  border-top: 1px solid #8f3046;
+  border-left: 1px solid #8f3046;
+  border-top-left-radius: 14px;
+}
+.error-shell::after {
+  right: 0;
+  bottom: 0;
+  width: min(36%, 140px);
+  height: 44px;
+  border-right: 1px solid #b7354e;
+  border-bottom: 2px solid #b7354e;
+  border-bottom-right-radius: 14px;
+}
+.error-brand {
+  margin: 0 0 28px;
+  color: #a49ba0;
+  font-size: 12px;
+  font-weight: 600;
+}
+.error-brand span {
+  margin: 0 8px;
+  color: #a83b50;
+}
+.error-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.error-mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 48px;
+  border-left: 2px solid #b7354e;
+  border-radius: 5px;
+  background: #b7354e14;
+  color: #e07186;
+  font-size: 28px;
+  font-weight: 600;
+}
+.page-error .error-title {
+  margin: 0;
+  font-size: clamp(40px, 8vw, 54px);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+.error-intro {
+  margin: 26px 0 8px;
+  color: #f0e9ed;
+  font-size: 19px;
+  font-weight: 600;
+}
+.error-description {
+  max-width: 42ch;
+  margin: 0;
+  color: #aaa3aa;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.page-error .error-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  margin-top: 30px;
+  padding: 11px 20px;
+  border: 1px solid #b52b40;
+  border-bottom: 2px solid #691423;
+  border-radius: 7px;
+  background: #a61f34;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .15s, border-color .15s;
+}
+.page-error .error-home:hover {
+  border-color: #d3546a;
+  background: #c02a41;
+}
+.page-error .error-home:focus-visible {
+  outline: 2px solid #dc7084;
+  outline-offset: 4px;
+}
+@media (max-width: 480px) {
+  .page-error .error-shell {
+    padding: 32px 24px;
+  }
+  .error-brand {
+    margin-bottom: 24px;
+  }
+  .error-intro {
+    font-size: 18px;
+  }
+  .page-error .error-home {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-error .error-home {
+    transition: none;
+  }
+}

@@ -1,0 +1,2515 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "NurseCalling",
+      "name": "A Nurse's Calling",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_aNursesCalling.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Agitation",
+      "name": "Agitation",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_agitation.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "K33P03",
+      "name": "Alien Instinct",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_alienInstinct.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K38P01",
+      "name": "All-Shaking Thunder",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_allShakingThunder.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K29P02",
+      "name": "Awakened Awareness",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_awakenedAwareness.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Bamboozle",
+      "name": "Bamboozle",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bamboozle.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing",
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K34P03",
+      "name": "Batteries Included",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_batteriesIncluded.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "BeastOfPrey",
+      "name": "Beast of Prey",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_beastOfPrey.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing"
+      ],
+      "description": null
+    },
+    {
+      "id": "Bitter_Murmur",
+      "name": "Bitter Murmur",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bitterMurmur.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "BloodEcho",
+      "name": "Blood Echo",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bloodEcho.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "BloodWarden",
+      "name": "Blood Warden",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bloodWarden.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery",
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "BloodHound",
+      "name": "Bloodhound",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bloodhound.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Brutal_Strength",
+      "name": "Brutal Strength",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_brutalStrength.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "K27P02",
+      "name": "Call of Brine",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_callOfBrine.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K44P01",
+      "name": "Celestial Witness",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_CelestialWitness.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "CorruptIntervention",
+      "name": "Corrupt Intervention",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_corruptIntervention.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "Coulrophobia",
+      "name": "Coulrophobia",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_coulrophobia.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "K22P03",
+      "name": "Coup de Grâce",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_coupDeGrâce.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "CruelConfinement",
+      "name": "Cruel Limits",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_cruelLimits.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K36P03",
+      "name": "Dark Arrogance",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_darkArrogance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "DarkDevotion",
+      "name": "Dark Devotion",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_darkDevotion.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K28P02",
+      "name": "Darkness Revealed",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_darknessRevealed.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K25P01",
+      "name": "Deadlock",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deadlock.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Deathbound",
+      "name": "Deathbound",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deathbound.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery",
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Deerstalker",
+      "name": "Deerstalker",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deerstalker.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Discordance",
+      "name": "Discordance",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_discordance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K28P01",
+      "name": "Dissolution",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_dissolution.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Distressing",
+      "name": "Distressing",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_distressing.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K37P03",
+      "name": "Dominance",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_Dominance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Dying_Light",
+      "name": "Dying Light",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_dyingLight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "Enduring",
+      "name": "Enduring",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_enduring.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "K24P03",
+      "name": "Eruption",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_eruption.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "FireUp",
+      "name": "Fire Up",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_fireUp.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "K32P02",
+      "name": "Forced Hesitation",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_forcedHesitation.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty",
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "ForcedPenance",
+      "name": "Forced Penance",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_forcedPenance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "K39P02",
+      "name": "Forever Entwined",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_ForeverEntwined.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "FranklinsLoss",
+      "name": "Franklin's Demise",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_franklinsDemise.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "FurtiveChase",
+      "name": "Furtive Chase",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_furtiveChase.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing",
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K31P01",
+      "name": "Game Afoot",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_gameAfoot.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement",
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "Gearhead",
+      "name": "Gearhead",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_gearhead.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K32P01",
+      "name": "Genetic Limits",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_geneticLimits.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "K26P01",
+      "name": "Grim Embrace",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_grimEmbrace.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K40P03",
+      "name": "Haywire",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_Haywire.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K40P01",
+      "name": "Help Wanted",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_HelpWanted.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K23P02",
+      "name": "Hex: Crowd Control",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexCrowdControl.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing"
+      ],
+      "description": null
+    },
+    {
+      "id": "Hex_Devour_Hope",
+      "name": "Hex: Devour Hope",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexDevourHope.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K30P02",
+      "name": "Hex: Face the Darkness",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexFaceTheDarkness.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Hex_HauntedGround",
+      "name": "Hex: Haunted Ground",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexHauntedGround.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K42P03",
+      "name": "Hex: Hive Mind",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_HexHiveMind.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Hex_HuntressLullaby",
+      "name": "Hex: Huntress Lullaby",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexHuntressLullaby.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "No_One_Escapes_Death",
+      "name": "Hex: No One Escapes Death",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexNoOneEscapesDeath.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty",
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K39P01",
+      "name": "Hex: Nothing But Misery",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconPerks_NothingButMisery.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K41P03",
+      "name": "Hex: Overture of Doom",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_HexOvertureOfDoom.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K26P03",
+      "name": "Hex: Pentimento",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexPentimento.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K25P02",
+      "name": "Hex: Plaything",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexPlaything.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "HexRetribution",
+      "name": "Hex: Retribution",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexRetribution.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery",
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Hex_Ruin",
+      "name": "Hex: Ruin",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexRuin.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K43P01",
+      "name": "Hex: Scared to Death",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_ScaredToDeath.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Hex_The_Third_Seal",
+      "name": "Hex: The Third Seal",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexTheThirdSeal.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "Hex_Thrill_Of_The_Hunt",
+      "name": "Hex: Thrill of the Hunt",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexThrillOfTheHunt.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K34P01",
+      "name": "Hex: Two Can Play",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexTwoCanPlay.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K44P02",
+      "name": "Hex: Under Your Thumb",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_HexUnderYourThumb.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "HexUndying",
+      "name": "Hex: Undying",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexUndying.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction",
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K37P01",
+      "name": "Hex: Wretched Fate",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_HexWretchedFate.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K22P01",
+      "name": "Hoarder",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hoarder.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K30P03",
+      "name": "Hubris",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hubris.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K37P02",
+      "name": "Human Greed",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_HumanGreed.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K24P02",
+      "name": "Hysteria",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hysteria.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "ImAllEars",
+      "name": "I'm All Ears",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_imAllEars.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "InfectiousFright",
+      "name": "Infectious Fright",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_infectiousFright.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Insidious",
+      "name": "Insidious",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_insidious.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "Iron_Grasp",
+      "name": "Iron Grasp",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_ironGrasp.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "Ironmaiden",
+      "name": "Iron Maiden",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_ironMaiden.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking",
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "InTheDark",
+      "name": "Knock Out",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_knockOut.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K36P02",
+      "name": "Languid Touch",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_languidTouch.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K44P03",
+      "name": "Lay Waste",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_LayWaste.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K24P01",
+      "name": "Lethal Pursuer",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_lethalPursuer.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K31P03",
+      "name": "Leverage",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_leverage.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "Lightborn",
+      "name": "Lightborn",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_lightborn.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement"
+      ],
+      "description": null
+    },
+    {
+      "id": "K32P03",
+      "name": "Machine Learning",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_machineLearning.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "enhancement",
+        "chasing"
+      ],
+      "description": null
+    },
+    {
+      "id": "MadGrit",
+      "name": "Mad Grit",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_madGrit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "MakeYourChoice",
+      "name": "Make your Choice",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_makeYourChoice.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "K27P03",
+      "name": "Merciless Storm",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_mercilessStorm.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Mindbreaker",
+      "name": "Mindbreaker",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_mindbreaker.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "MonitorAndAbuse",
+      "name": "Monitor & Abuse",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_monitorAndAbuse.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking",
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "Nemesis",
+      "name": "Nemesis",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_nemesis.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery",
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K38P03",
+      "name": "No Quarter",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_noQuarter.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K23P03",
+      "name": "No Way Out",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_noWayOut.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K39P03",
+      "name": "None Are Free",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_NoneAreFree.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K30P01",
+      "name": "Nowhere to Hide",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_nowhereToHide.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K22P02",
+      "name": "Oppression",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_oppression.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "GeneratorOvercharge",
+      "name": "Overcharge",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_overcharge.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "OverwhelmingPresence",
+      "name": "Overwhelming Presence",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_overwhelmingPresence.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "K40P02",
+      "name": "Phantom Fear",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_PhantomFear.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Play_With_Your_Food",
+      "name": "Play With Your Food",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_playWithYourFood.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing"
+      ],
+      "description": null
+    },
+    {
+      "id": "pop_goes_the_weasel",
+      "name": "Pop Goes the Weasel",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_popGoesTheWeasel.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "Predator",
+      "name": "Predator",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_predator.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K43P03",
+      "name": "Rampage",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_Rampage.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Rancor",
+      "name": "Rancor",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_rancor.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K33P02",
+      "name": "Rapid Brutality",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_rapidBrutality.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K41P01",
+      "name": "Ravenous",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_Ravenous.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "RememberMe",
+      "name": "Remember Me",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_rememberMe.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "Save_The_Best_For_Last",
+      "name": "Save the best for last",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_saveTheBestForLast.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "K27P01",
+      "name": "Scourge Hook: Floods of Rage",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookFloodsOfRage.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K25P03",
+      "name": "Scourge Hook: Gift of Pain",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookGiftOfPain.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "HangmansTrick",
+      "name": "Scourge Hook: Hangman's Trick",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookHangmansTrick.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K38P02",
+      "name": "Scourge Hook: Jagged Compass",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookJaggedCompass.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Monstrous_Shrine",
+      "name": "Scourge Hook: Monstrous Shrine",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookMonstrousShrine.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "K26P02",
+      "name": "Scourge Hook: Pain Resonance",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookPainResonance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K42P02",
+      "name": "Secret Project",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_SecretProject.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K28P03",
+      "name": "Septic Touch",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_septicTouch.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Shadowborn",
+      "name": "Shadowborn",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_shadowborn.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "BoonDestroyer",
+      "name": "Shattered Hope",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_shatteredHope.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K43P02",
+      "name": "Silent Shadow",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_SilentShadow.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Sloppy_Butcher",
+      "name": "Sloppy Butcher",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_sloppyButcher.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "Spies_From_The_Shadows",
+      "name": "Spies from the Shadows",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_spiesFromTheShadows.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "SpiritFury",
+      "name": "Spirit Fury",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_spiritFury.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing"
+      ],
+      "description": null
+    },
+    {
+      "id": "K23P01",
+      "name": "Starstruck",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_starstruck.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "Stridor",
+      "name": "Stridor",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_stridor.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "K29P01",
+      "name": "Superior Anatomy",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_superiorAnatomy.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Surge",
+      "name": "Surge",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_surge.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "Surveillance",
+      "name": "Surveillance",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_surveillance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K29P03",
+      "name": "Terminus",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_terminus.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "TerritorialImperative",
+      "name": "Territorial Imperative",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_territorialImperative.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "Thanatophobia",
+      "name": "Thanatophobia",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_thanatophobia.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "ThrillingTremors",
+      "name": "Thrilling Tremors",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_thrillingTremors.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "obstruction"
+      ],
+      "description": null
+    },
+    {
+      "id": "K31P02",
+      "name": "THWACK!",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_thwack.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking",
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "Tinkerer",
+      "name": "Tinkerer",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_tinkerer.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "TrailofTorment",
+      "name": "Trail of Torment",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_trailOfTorment.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "trickery"
+      ],
+      "description": null
+    },
+    {
+      "id": "K42P01",
+      "name": "Turn Back The Clock",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_TurnBackTheClock.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K33P01",
+      "name": "Ultimate Weapon",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_ultimateWeapon.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K35P01",
+      "name": "Unbound",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_unbound.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K35P03",
+      "name": "Undone",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_undone.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K35P02",
+      "name": "Unforeseen",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_unforeseen.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Unnerving_Presence",
+      "name": "Unnerving Presence",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_unnervingPresence.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "hinderance"
+      ],
+      "description": null
+    },
+    {
+      "id": "Unrelenting",
+      "name": "Unrelenting",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_unrelenting.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "cruelty"
+      ],
+      "description": null
+    },
+    {
+      "id": "K41P02",
+      "name": "Wandering Eye",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_WanderingEye.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "K36P01",
+      "name": "Weave Attunement",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_weaveAttunement.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Whispers",
+      "name": "Whispers",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_whispers.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "tracking"
+      ],
+      "description": null
+    },
+    {
+      "id": "ZanshinTactics",
+      "name": "Zanshin Tactics",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_zanshinTactics.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "chasing"
+      ],
+      "description": null
+    },
+    {
+      "id": "killer:barbecue-chilli",
+      "name": "Barbecue & Chilli",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_barbecueAndChilli.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "killer:dead-man-s-switch",
+      "name": "Dead Man's Switch",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deadMansSwitch.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "killer:hex-blood-favour",
+      "name": "Hex: Blood Favour",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hexBloodFavour.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "killer:friends-til-the-end",
+      "name": "Friends 'Til The End",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_friendsTilTheEnd.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "killer:dragon-s-grip",
+      "name": "Dragon's Grip",
+      "aliases": [],
+      "role": "killer",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_dragonsGrip.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    }
+  ]
+}

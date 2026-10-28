@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "trapper",
+      "name": "The Trapper",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K01_TheTrapper_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2016-06-14",
+      "releaseOrder": 1,
+      "catalogOrder": 1,
+      "chapterId": "base-game",
+      "chapterName": "Base Game",
+      "introducedIn": "1.0.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-trapper"
+    },
+    {
+      "id": "wraith",
+      "name": "The Wraith",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K02_TheWraith_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2016-06-14",
+      "releaseOrder": 2,
+      "catalogOrder": 2,
+      "chapterId": "base-game",
+      "chapterName": "Base Game",
+      "introducedIn": "1.0.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-wraith"
+    },
+    {
+      "id": "hillbilly",
+      "name": "The Hillbilly",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K03_TheHillbilly_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2016-06-14",
+      "releaseOrder": 3,
+      "catalogOrder": 3,
+      "chapterId": "base-game",
+      "chapterName": "Base Game",
+      "introducedIn": "1.0.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-hillbilly"
+    },
+    {
+      "id": "nurse",
+      "name": "The Nurse",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K04_TheNurse_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2016-08-18",
+      "releaseOrder": 4,
+      "catalogOrder": 4,
+      "chapterId": "chapter-1-the-last-breath",
+      "chapterName": "Chapter 1: The Last Breath",
+      "introducedIn": "1.1.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-nurse"
+    },
+    {
+      "id": "shape",
+      "name": "The Shape",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K05_TheShape_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2016-10-25",
+      "releaseOrder": 5,
+      "catalogOrder": 5,
+      "chapterId": "chapter-2-the-halloween-chapter",
+      "chapterName": "Chapter 2: The HALLOWEEN® Chapter",
+      "introducedIn": "1.2.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-shape"
+    },
+    {
+      "id": "hag",
+      "name": "The Hag",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K06_TheHag_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2016-12-08",
+      "releaseOrder": 6,
+      "catalogOrder": 6,
+      "chapterId": "chapter-3-of-flesh-and-mud",
+      "chapterName": "Chapter 3: Of Flesh and Mud",
+      "introducedIn": "1.3.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-hag"
+    },
+    {
+      "id": "doctor",
+      "name": "The Doctor",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K07_TheDoctor_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2017-05-11",
+      "releaseOrder": 7,
+      "catalogOrder": 7,
+      "chapterId": "chapter-4-spark-of-madness",
+      "chapterName": "Chapter 4: Spark of Madness",
+      "introducedIn": "1.5.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-doctor"
+    },
+    {
+      "id": "huntress",
+      "name": "The Huntress",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K08_TheHuntress_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2017-07-27",
+      "releaseOrder": 8,
+      "catalogOrder": 8,
+      "chapterId": "chapter-5-a-lullaby-for-the-dark",
+      "chapterName": "Chapter 5: A Lullaby for the Dark",
+      "introducedIn": "1.6.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-huntress"
+    },
+    {
+      "id": "cannibal",
+      "name": "The Cannibal",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K09_TheCannibal_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2017-09-14",
+      "releaseOrder": 9,
+      "catalogOrder": 9,
+      "chapterId": "chapter-5-5-leatherface",
+      "chapterName": "Chapter 5.5: LEATHERFACE™",
+      "introducedIn": "1.7.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-cannibal"
+    },
+    {
+      "id": "nightmare",
+      "name": "The Nightmare",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K10_TheNightmare_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2017-10-26",
+      "releaseOrder": 10,
+      "catalogOrder": 10,
+      "chapterId": "chapter-6-a-nightmare-on-elm-street",
+      "chapterName": "Chapter 6: A Nightmare on Elm Street™",
+      "introducedIn": "1.8.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-nightmare"
+    },
+    {
+      "id": "pig",
+      "name": "The Pig",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K11_ThePig_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2018-01-23",
+      "releaseOrder": 11,
+      "catalogOrder": 11,
+      "chapterId": "chapter-7-the-saw-chapter",
+      "chapterName": "Chapter 7: The SAW™ Chapter",
+      "introducedIn": "1.9.0",
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "killer:the-pig"
+    },
+    {
+      "id": "clown",
+      "name": "The Clown",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K12_TheClown_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2018-06-12",
+      "releaseOrder": 12,
+      "catalogOrder": 12,
+      "chapterId": "chapter-8-curtain-call",
+      "chapterName": "Chapter 8: Curtain Call",
+      "introducedIn": "2.0.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-clown"
+    },
+    {
+      "id": "spirit",
+      "name": "The Spirit",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K13_TheSpirit_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2018-09-18",
+      "releaseOrder": 13,
+      "catalogOrder": 13,
+      "chapterId": "chapter-9-shattered-bloodline",
+      "chapterName": "Chapter 9: Shattered Bloodline",
+      "introducedIn": "2.2.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-spirit"
+    },
+    {
+      "id": "legion",
+      "name": "The Legion",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K14_TheLegion_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2018-12-11",
+      "releaseOrder": 14,
+      "catalogOrder": 14,
+      "chapterId": "chapter-10-darkness-among-us",
+      "chapterName": "Chapter 10: Darkness Among Us",
+      "introducedIn": "2.5.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-legion"
+    },
+    {
+      "id": "plague",
+      "name": "The Plague",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K15_ThePlague_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2019-03-19",
+      "releaseOrder": 15,
+      "catalogOrder": 15,
+      "chapterId": "chapter-11-demise-of-the-faithful",
+      "chapterName": "Chapter 11: Demise of the Faithful",
+      "introducedIn": "2.6.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-plague"
+    },
+    {
+      "id": "ghostface",
+      "name": "The Ghost Face",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K16_TheGhostFace_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2019-06-18",
+      "releaseOrder": 16,
+      "catalogOrder": 16,
+      "chapterId": "chapter-12-ghost-face",
+      "chapterName": "Chapter 12: Ghost Face®",
+      "introducedIn": "3.0.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-ghost-face"
+    },
+    {
+      "id": "demogorgon",
+      "name": "The Demogorgon",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K17_TheDemogorgon_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2019-09-17",
+      "releaseOrder": 17,
+      "catalogOrder": 17,
+      "chapterId": "chapter-13-stranger-things",
+      "chapterName": "Chapter 13: Stranger Things",
+      "introducedIn": "3.2.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-demogorgon"
+    },
+    {
+      "id": "oni",
+      "name": "The Oni",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K18_TheOni_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2019-12-03",
+      "releaseOrder": 18,
+      "catalogOrder": 18,
+      "chapterId": "chapter-14-cursed-legacy",
+      "chapterName": "Chapter 14: Cursed Legacy",
+      "introducedIn": "3.4.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-oni"
+    },
+    {
+      "id": "deathslinger",
+      "name": "The Deathslinger",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K19_TheDeathslinger_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2020-03-10",
+      "releaseOrder": 19,
+      "catalogOrder": 19,
+      "chapterId": "chapter-15-chains-of-hate",
+      "chapterName": "Chapter 15: Chains of Hate",
+      "introducedIn": "3.6.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-deathslinger"
+    },
+    {
+      "id": "executioner",
+      "name": "The Executioner",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K20_TheExecutioner_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2020-06-16",
+      "releaseOrder": 20,
+      "catalogOrder": 20,
+      "chapterId": "chapter-16-silent-hill",
+      "chapterName": "Chapter 16: Silent Hill",
+      "introducedIn": "4.0.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-executioner"
+    },
+    {
+      "id": "blight",
+      "name": "The Blight",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K21_TheBlight_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2020-09-08",
+      "releaseOrder": 21,
+      "catalogOrder": 21,
+      "chapterId": "chapter-17-descend-beyond",
+      "chapterName": "Chapter 17: Descend Beyond",
+      "introducedIn": "4.2.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-blight"
+    },
+    {
+      "id": "twins",
+      "name": "The Twins",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K22_TheTwins_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2020-12-01",
+      "releaseOrder": 22,
+      "catalogOrder": 22,
+      "chapterId": "chapter-18-a-binding-of-kin",
+      "chapterName": "Chapter 18: A Binding of Kin",
+      "introducedIn": "4.4.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-twins"
+    },
+    {
+      "id": "trickster",
+      "name": "The Trickster",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K23_TheTrickster_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2021-03-30",
+      "releaseOrder": 23,
+      "catalogOrder": 23,
+      "chapterId": "chapter-19-all-kill",
+      "chapterName": "Chapter 19: All-Kill",
+      "introducedIn": "4.6.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-trickster"
+    },
+    {
+      "id": "nemesis",
+      "name": "The Nemesis",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K24_TheNemesis_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2021-06-15",
+      "releaseOrder": 24,
+      "catalogOrder": 24,
+      "chapterId": "chapter-20-resident-evil",
+      "chapterName": "Chapter 20: Resident Evil",
+      "introducedIn": "5.0.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-nemesis"
+    },
+    {
+      "id": "cenobite",
+      "name": "The Cenobite",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K25_TheCenobite_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2021-09-07",
+      "releaseOrder": 25,
+      "catalogOrder": 25,
+      "chapterId": "chapter-21-hellraiser",
+      "chapterName": "Chapter 21: Hellraiser™",
+      "introducedIn": "5.2.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-cenobite"
+    },
+    {
+      "id": "artist",
+      "name": "The Artist",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K26_TheArtist_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2021-11-30",
+      "releaseOrder": 26,
+      "catalogOrder": 26,
+      "chapterId": "chapter-22-portrait-of-a-murder",
+      "chapterName": "Chapter 22: Portrait of a Murder",
+      "introducedIn": "5.4.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-artist"
+    },
+    {
+      "id": "onryo",
+      "name": "The Onryo",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K27_TheOnryo_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2022-03-08",
+      "releaseOrder": 27,
+      "catalogOrder": 27,
+      "chapterId": "chapter-23-sadako-rising",
+      "chapterName": "Chapter 23: Sadako Rising",
+      "introducedIn": "5.6.0",
+      "gender": "female",
+      "license": "licensed",
+      "gameId": "killer:the-onryo"
+    },
+    {
+      "id": "dredge",
+      "name": "The Dredge",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K28_TheDredge_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2022-06-07",
+      "releaseOrder": 28,
+      "catalogOrder": 28,
+      "chapterId": "chapter-24-roots-of-dread",
+      "chapterName": "Chapter 24: Roots of Dread",
+      "introducedIn": "6.0.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-dredge"
+    },
+    {
+      "id": "mastermind",
+      "name": "The Mastermind",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K29_TheMastermind_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2022-08-30",
+      "releaseOrder": 29,
+      "catalogOrder": 29,
+      "chapterId": "chapter-25-resident-evil-project-w",
+      "chapterName": "Chapter 25: Resident Evil™: PROJECT W",
+      "introducedIn": "6.2.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-mastermind"
+    },
+    {
+      "id": "knight",
+      "name": "The Knight",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K30_TheKnight_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2022-11-22",
+      "releaseOrder": 30,
+      "catalogOrder": 30,
+      "chapterId": "chapter-26-forged-in-fog",
+      "chapterName": "Chapter 26: Forged in Fog",
+      "introducedIn": "6.4.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-knight"
+    },
+    {
+      "id": "skullmerchant",
+      "name": "The Skull Merchant",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K31_TheSkullMerchant_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2023-03-07",
+      "releaseOrder": 31,
+      "catalogOrder": 31,
+      "chapterId": "chapter-27-tools-of-torment",
+      "chapterName": "Chapter 27: Tools of Torment",
+      "introducedIn": "6.6.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-skull-merchant"
+    },
+    {
+      "id": "singularity",
+      "name": "The Singularity",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K32_TheSingularity_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2023-06-13",
+      "releaseOrder": 32,
+      "catalogOrder": 32,
+      "chapterId": "chapter-28-end-transmission",
+      "chapterName": "Chapter 28: End Transmission",
+      "introducedIn": "7.0.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-singularity"
+    },
+    {
+      "id": "xenomorph",
+      "name": "The Xenomorph",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K33_TheXenomorph_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2023-08-29",
+      "releaseOrder": 33,
+      "catalogOrder": 33,
+      "chapterId": "chapter-29-alien",
+      "chapterName": "Chapter 29: Alien",
+      "introducedIn": "7.2.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-xenomorph"
+    },
+    {
+      "id": "goodguy",
+      "name": "The Good Guy",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K34_TheGoodGuy_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2023-11-28",
+      "releaseOrder": 34,
+      "catalogOrder": 34,
+      "chapterId": "chapter-30-chucky",
+      "chapterName": "Chapter 30: Chucky",
+      "introducedIn": "7.4.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-good-guy"
+    },
+    {
+      "id": "unknown",
+      "name": "The Unknown",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K35_TheUnknown_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2024-03-12",
+      "releaseOrder": 35,
+      "catalogOrder": 35,
+      "chapterId": "chapter-31-all-things-wicked",
+      "chapterName": "Chapter 31: All Things Wicked",
+      "introducedIn": "7.6.0",
+      "gender": "male",
+      "license": "original",
+      "gameId": "killer:the-unknown"
+    },
+    {
+      "id": "lich",
+      "name": "The Lich",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K36_TheLich_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2024-06-03",
+      "releaseOrder": 36,
+      "catalogOrder": 36,
+      "chapterId": "chapter-32-dungeons-dragons",
+      "chapterName": "Chapter 32: Dungeons & Dragons",
+      "introducedIn": "8.0.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-lich"
+    },
+    {
+      "id": "darklord",
+      "name": "The Dark Lord",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K37_TheDarkLord_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2024-08-27",
+      "releaseOrder": 37,
+      "catalogOrder": 37,
+      "chapterId": "chapter-33-castlevania",
+      "chapterName": "Chapter 33: Castlevania",
+      "introducedIn": "8.2.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-dark-lord"
+    },
+    {
+      "id": "houndmaster",
+      "name": "The Houndmaster",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K38_TheHoundmaster_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2024-11-28",
+      "releaseOrder": 38,
+      "catalogOrder": 38,
+      "chapterId": "chapter-34-doomed-course",
+      "chapterName": "Chapter 34: Doomed Course",
+      "introducedIn": "8.4.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-houndmaster"
+    },
+    {
+      "id": "ghoul",
+      "name": "The Ghoul",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K39_TheGhoul_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2025-04-02",
+      "releaseOrder": 39,
+      "catalogOrder": 39,
+      "chapterId": "chapter-35-tokyo-ghoul",
+      "chapterName": "Chapter 35: Tokyo Ghoul",
+      "introducedIn": "8.6.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-ghoul"
+    },
+    {
+      "id": "animatronic",
+      "name": "The Animatronic",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K40_TheAnimatronic_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2025-06-17",
+      "releaseOrder": 40,
+      "catalogOrder": 40,
+      "chapterId": "chapter-36-five-nights-at-freddy-s",
+      "chapterName": "Chapter 36: Five Nights at Freddy's",
+      "introducedIn": "9.0.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-animatronic"
+    },
+    {
+      "id": "krasue",
+      "name": "The Krasue",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K41_TheKrasue_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2025-09-23",
+      "releaseOrder": 41,
+      "catalogOrder": 41,
+      "chapterId": "chapter-37-sinister-grace",
+      "chapterName": "Chapter 37: Sinister Grace",
+      "introducedIn": "9.2.0",
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-krasue"
+    },
+    {
+      "id": "first",
+      "name": "The First",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K42_TheFirst_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2026-01-27",
+      "releaseOrder": 42,
+      "catalogOrder": 42,
+      "chapterId": "chapter-38-stranger-things-chapter-2",
+      "chapterName": "Chapter 38: Stranger Things Chapter 2",
+      "introducedIn": "9.5.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-first"
+    },
+    {
+      "id": "slasher",
+      "name": "The Slasher",
+      "aliases": [],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K43_TheSlasher_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": "2026-06-16",
+      "releaseOrder": 43,
+      "catalogOrder": 43,
+      "chapterId": "chapter-jason",
+      "chapterName": "Chapter: Jason",
+      "introducedIn": "10.0.0",
+      "gender": "male",
+      "license": "licensed",
+      "gameId": "killer:the-slasher"
+    },
+    {
+      "id": "judgment",
+      "name": "The Judgment",
+      "aliases": [
+        "The Judgement"
+      ],
+      "role": "killer",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/K44_TheJudgment_Portrait.png",
+        "alternatives": [],
+        "local": null
+      },
+      "releaseDate": null,
+      "releaseOrder": null,
+      "catalogOrder": 44,
+      "chapterId": null,
+      "chapterName": null,
+      "introducedIn": null,
+      "gender": "female",
+      "license": "original",
+      "gameId": "killer:the-judgment"
+    }
+  ]
+}

@@ -1,14 +1,7 @@
-
-
-
-
-
-
 const INITIAL_DATA = {
   "killers": [
     {
       "id": "trapper",
-      "name": "The Trapper",
       "difficulty": "Beginner",
       "skillFloor": 1,
       "skillCeiling": 4,
@@ -27,10 +20,6 @@ const INITIAL_DATA = {
         "Iridescent Stone"
       ],
       "patch": "10.1.2",
-      "releaseDate": "2016-06-14",
-      "releaseOrder": 1,
-      "chapter": "Base Game",
-      "update": "1.0.0",
       "recommendedCombos": [
         {
           "name": "1st Best Combo",
@@ -57,7 +46,6 @@ const INITIAL_DATA = {
     },
     {
       "id": "wraith",
-      "name": "The Wraith",
       "difficulty": "Beginner",
       "skillFloor": 1,
       "skillCeiling": 5,
@@ -75,15 +63,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2016-06-14",
-      "releaseOrder": 2,
-      "chapter": "Base Game",
-      "update": "1.0.0",
       "recommendedCombos": []
     },
     {
       "id": "hillbilly",
-      "name": "The Hillbilly",
       "difficulty": "Extremely Hard",
       "skillFloor": 7.5,
       "skillCeiling": 10,
@@ -108,10 +91,6 @@ const INITIAL_DATA = {
         "Spiked Boots"
       ],
       "patch": "10.1.2",
-      "releaseDate": "2016-06-14",
-      "releaseOrder": 3,
-      "chapter": "Base Game",
-      "update": "1.0.0",
       "recommendedCombos": [
         {
           "name": "Best Combo",
@@ -124,7 +103,6 @@ const INITIAL_DATA = {
     },
     {
       "id": "nurse",
-      "name": "The Nurse",
       "difficulty": "Very Hard",
       "skillFloor": 6.5,
       "skillCeiling": 8.5,
@@ -143,15 +121,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2016-08-18",
-      "releaseOrder": 4,
-      "chapter": "Chapter 1: The Last Breath",
-      "update": "1.1.0",
       "recommendedCombos": []
     },
     {
       "id": "shape",
-      "name": "The Shape",
       "difficulty": "Medium",
       "skillFloor": 2,
       "skillCeiling": 5,
@@ -173,15 +146,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2016-10-25",
-      "releaseOrder": 5,
-      "chapter": "Chapter 2: The HALLOWEEN® Chapter",
-      "update": "1.2.0",
       "recommendedCombos": []
     },
     {
       "id": "hag",
-      "name": "The Hag",
       "difficulty": "Medium",
       "skillFloor": 4,
       "skillCeiling": 6,
@@ -199,15 +167,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2016-12-08",
-      "releaseOrder": 6,
-      "chapter": "Chapter 3: Of Flesh and Mud",
-      "update": "1.3.0",
       "recommendedCombos": []
     },
     {
       "id": "doctor",
-      "name": "The Doctor",
       "difficulty": "Easy",
       "skillFloor": 2,
       "skillCeiling": 5,
@@ -224,15 +187,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2017-05-11",
-      "releaseOrder": 7,
-      "chapter": "Chapter 4: Spark of Madness",
-      "update": "1.5.0",
       "recommendedCombos": []
     },
     {
       "id": "huntress",
-      "name": "The Huntress",
       "difficulty": "Easy",
       "skillFloor": 2,
       "skillCeiling": 6,
@@ -250,15 +208,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2017-07-27",
-      "releaseOrder": 8,
-      "chapter": "Chapter 5: A Lullaby for the Dark",
-      "update": "1.6.0",
       "recommendedCombos": []
     },
     {
       "id": "cannibal",
-      "name": "The Cannibal",
       "difficulty": "Medium",
       "skillFloor": 3,
       "skillCeiling": 6,
@@ -274,15 +227,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2017-09-14",
-      "releaseOrder": 9,
-      "chapter": "Chapter 5.5: LEATHERFACE™",
-      "update": "1.7.0",
       "recommendedCombos": []
     },
     {
       "id": "nightmare",
-      "name": "The Nightmare",
       "difficulty": "Easy",
       "skillFloor": 2,
       "skillCeiling": 6.2,
@@ -301,15 +249,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2017-10-26",
-      "releaseOrder": 10,
-      "chapter": "Chapter 6: A Nightmare on Elm Street™",
-      "update": "1.8.0",
       "recommendedCombos": []
     },
     {
       "id": "pig",
-      "name": "The Pig",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -327,15 +270,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2018-01-23",
-      "releaseOrder": 11,
-      "chapter": "Chapter 7: The SAW™ Chapter",
-      "update": "1.9.0",
       "recommendedCombos": []
     },
     {
       "id": "clown",
-      "name": "The Clown",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -353,15 +291,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2018-06-12",
-      "releaseOrder": 12,
-      "chapter": "Chapter 8: Curtain Call",
-      "update": "2.0.0",
       "recommendedCombos": []
     },
     {
       "id": "spirit",
-      "name": "The Spirit",
       "difficulty": "Hard",
       "skillFloor": 6.2,
       "skillCeiling": 9.5,
@@ -383,10 +316,6 @@ const INITIAL_DATA = {
         "Muddy Sports Day Cap"
       ],
       "patch": "10.1.2",
-      "releaseDate": "2018-09-18",
-      "releaseOrder": 13,
-      "chapter": "Chapter 9: Shattered Bloodline",
-      "update": "2.2.0",
       "recommendedCombos": [
         {
           "name": "Best Combo",
@@ -399,7 +328,6 @@ const INITIAL_DATA = {
     },
     {
       "id": "legion",
-      "name": "The Legion",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -415,15 +343,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2018-12-11",
-      "releaseOrder": 14,
-      "chapter": "Chapter 10: Darkness Among Us",
-      "update": "2.5.0",
       "recommendedCombos": []
     },
     {
       "id": "plague",
-      "name": "The Plague",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -443,15 +366,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2019-03-19",
-      "releaseOrder": 15,
-      "chapter": "Chapter 11: Demise of the Faithful",
-      "update": "2.6.0",
       "recommendedCombos": []
     },
     {
       "id": "ghostface",
-      "name": "The Ghost Face",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -470,15 +388,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2019-06-18",
-      "releaseOrder": 16,
-      "chapter": "Chapter 12: Ghost Face®",
-      "update": "3.0.0",
       "recommendedCombos": []
     },
     {
       "id": "demogorgon",
-      "name": "The Demogorgon",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -496,15 +409,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2019-09-17",
-      "releaseOrder": 17,
-      "chapter": "Chapter 13: Stranger Things",
-      "update": "3.2.0",
       "recommendedCombos": []
     },
     {
       "id": "oni",
-      "name": "The Oni",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -522,15 +430,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2019-12-03",
-      "releaseOrder": 18,
-      "chapter": "Chapter 14: Cursed Legacy",
-      "update": "3.4.0",
       "recommendedCombos": []
     },
     {
       "id": "deathslinger",
-      "name": "The Deathslinger",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -548,15 +451,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2020-03-10",
-      "releaseOrder": 19,
-      "chapter": "Chapter 15: Chains of Hate",
-      "update": "3.6.0",
       "recommendedCombos": []
     },
     {
       "id": "executioner",
-      "name": "The Executioner",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -574,15 +472,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2020-06-16",
-      "releaseOrder": 20,
-      "chapter": "Chapter 16: Silent Hill",
-      "update": "4.0.0",
       "recommendedCombos": []
     },
     {
       "id": "blight",
-      "name": "The Blight",
       "difficulty": "Very Hard",
       "skillFloor": 5.7,
       "skillCeiling": 10,
@@ -604,15 +497,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2020-09-08",
-      "releaseOrder": 21,
-      "chapter": "Chapter 17: Descend Beyond",
-      "update": "4.2.0",
       "recommendedCombos": []
     },
     {
       "id": "twins",
-      "name": "The Twins",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -633,15 +521,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2020-12-01",
-      "releaseOrder": 22,
-      "chapter": "Chapter 18: A Binding of Kin",
-      "update": "4.4.0",
       "recommendedCombos": []
     },
     {
       "id": "trickster",
-      "name": "The Trickster",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -660,15 +543,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2021-03-30",
-      "releaseOrder": 23,
-      "chapter": "Chapter 19: All-Kill",
-      "update": "4.6.0",
       "recommendedCombos": []
     },
     {
       "id": "nemesis",
-      "name": "The Nemesis",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -683,15 +561,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2021-06-15",
-      "releaseOrder": 24,
-      "chapter": "Chapter 20: Resident Evil",
-      "update": "5.0.0",
       "recommendedCombos": []
     },
     {
       "id": "cenobite",
-      "name": "The Cenobite",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -709,15 +582,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2021-09-07",
-      "releaseOrder": 25,
-      "chapter": "Chapter 21: Hellraiser™",
-      "update": "5.2.0",
       "recommendedCombos": []
     },
     {
       "id": "artist",
-      "name": "The Artist",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -733,15 +601,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2021-11-30",
-      "releaseOrder": 26,
-      "chapter": "Chapter 22: Portrait of a Murder",
-      "update": "5.4.0",
       "recommendedCombos": []
     },
     {
       "id": "onryo",
-      "name": "The Onryo",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -761,15 +624,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2022-03-08",
-      "releaseOrder": 27,
-      "chapter": "Chapter 23: Sadako Rising",
-      "update": "5.6.0",
       "recommendedCombos": []
     },
     {
       "id": "dredge",
-      "name": "The Dredge",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -788,15 +646,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2022-06-07",
-      "releaseOrder": 28,
-      "chapter": "Chapter 24: Roots of Dread",
-      "update": "6.0.0",
       "recommendedCombos": []
     },
     {
       "id": "mastermind",
-      "name": "The Mastermind",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -815,15 +668,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2022-08-30",
-      "releaseOrder": 29,
-      "chapter": "Chapter 25: Resident Evil™: PROJECT W",
-      "update": "6.2.0",
       "recommendedCombos": []
     },
     {
       "id": "knight",
-      "name": "The Knight",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -840,15 +688,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2022-11-22",
-      "releaseOrder": 30,
-      "chapter": "Chapter 26: Forged in Fog",
-      "update": "6.4.0",
       "recommendedCombos": []
     },
     {
       "id": "skullmerchant",
-      "name": "The Skull Merchant",
       "difficulty": "Beginner",
       "skillFloor": 1,
       "skillCeiling": 5.5,
@@ -866,15 +709,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2023-03-07",
-      "releaseOrder": 31,
-      "chapter": "Chapter 27: Tools of Torment",
-      "update": "6.6.0",
       "recommendedCombos": []
     },
     {
       "id": "singularity",
-      "name": "The Singularity",
       "difficulty": "Very Hard",
       "skillFloor": 7.2,
       "skillCeiling": 8.5,
@@ -895,15 +733,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2023-06-13",
-      "releaseOrder": 32,
-      "chapter": "Chapter 28: End Transmission",
-      "update": "7.0.0",
       "recommendedCombos": []
     },
     {
       "id": "xenomorph",
-      "name": "The Xenomorph",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -921,15 +754,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2023-08-29",
-      "releaseOrder": 33,
-      "chapter": "Chapter 29: Alien",
-      "update": "7.2.0",
       "recommendedCombos": []
     },
     {
       "id": "goodguy",
-      "name": "The Good Guy",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -947,15 +775,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2023-11-28",
-      "releaseOrder": 34,
-      "chapter": "Chapter 30: Chucky",
-      "update": "7.4.0",
       "recommendedCombos": []
     },
     {
       "id": "unknown",
-      "name": "The Unknown",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -975,15 +798,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2024-03-12",
-      "releaseOrder": 35,
-      "chapter": "Chapter 31: All Things Wicked",
-      "update": "7.6.0",
       "recommendedCombos": []
     },
     {
       "id": "lich",
-      "name": "The Lich",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -999,15 +817,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2024-06-03",
-      "releaseOrder": 36,
-      "chapter": "Chapter 32: Dungeons & Dragons",
-      "update": "8.0.0",
       "recommendedCombos": []
     },
     {
       "id": "darklord",
-      "name": "The Dark Lord",
       "difficulty": "Hard",
       "skillFloor": 5.2,
       "skillCeiling": 8.4,
@@ -1029,10 +842,6 @@ const INITIAL_DATA = {
         "Lapis Lazuli"
       ],
       "patch": "10.1.2",
-      "releaseDate": "2024-08-27",
-      "releaseOrder": 37,
-      "chapter": "Chapter 33: Castlevania",
-      "update": "8.2.0",
       "recommendedCombos": [
         {
           "name": "",
@@ -1045,7 +854,6 @@ const INITIAL_DATA = {
     },
     {
       "id": "houndmaster",
-      "name": "The Houndmaster",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -1063,15 +871,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2024-11-28",
-      "releaseOrder": 38,
-      "chapter": "Chapter 34: Doomed Course",
-      "update": "8.4.0",
       "recommendedCombos": []
     },
     {
       "id": "ghoul",
-      "name": "The Ghoul",
       "difficulty": "Easy",
       "skillFloor": 3,
       "skillCeiling": 9.2,
@@ -1089,15 +892,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "10.1.2",
-      "releaseDate": "2025-04-02",
-      "releaseOrder": 39,
-      "chapter": "Chapter 35: Tokyo Ghoul",
-      "update": "8.6.0",
       "recommendedCombos": []
     },
     {
       "id": "animatronic",
-      "name": "The Animatronic",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -1117,15 +915,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2025-06-17",
-      "releaseOrder": 40,
-      "chapter": "Chapter 36: Five Nights at Freddy's",
-      "update": "9.0.0",
       "recommendedCombos": []
     },
     {
       "id": "krasue",
-      "name": "The Krasue",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -1144,15 +937,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2025-09-23",
-      "releaseOrder": 41,
-      "chapter": "Chapter 37: Sinister Grace",
-      "update": "9.2.0",
       "recommendedCombos": []
     },
     {
       "id": "first",
-      "name": "The First",
       "difficulty": "Hard",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -1171,15 +959,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2026-01-27",
-      "releaseOrder": 42,
-      "chapter": "Chapter 38: Stranger Things Chapter 2",
-      "update": "9.5.0",
       "recommendedCombos": []
     },
     {
       "id": "slasher",
-      "name": "The Slasher",
       "difficulty": "Medium",
       "skillFloor": 0,
       "skillCeiling": 0,
@@ -1200,15 +983,10 @@ const INITIAL_DATA = {
       "addonNotes": "placeholder",
       "recommendedAddons": [],
       "patch": "",
-      "releaseDate": "2026-06-16",
-      "releaseOrder": 43,
-      "chapter": "Chapter: Jason",
-      "update": "10.0.0",
       "recommendedCombos": []
     },
     {
       "id": "judgment",
-      "name": "The Judgment",
       "difficulty": "Extremely Hard",
       "skillFloor": 7.8,
       "skillCeiling": 10,
@@ -1237,12 +1015,6 @@ const INITIAL_DATA = {
       "killerIds": [
         "trapper"
       ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Agitation",
-        "Turn Back the Clock"
-      ],
       "tags": [
         "GenRegression",
         "GenBlocking"
@@ -1257,19 +1029,19 @@ const INITIAL_DATA = {
       "favorite": false,
       "currentlyUsing": false,
       "changes": "",
-      "id": "b1790005623137"
+      "id": "b1790005623137",
+      "perkIds": [
+        "K26P02",
+        "CorruptIntervention",
+        "Agitation",
+        "K42P01"
+      ]
     },
     {
       "id": "hens_animatronic_1",
       "name": "Best Animatronic Without Limitations",
       "killerIds": [
         "animatronic"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Mindbreaker"
       ],
       "tags": [
         "Hens",
@@ -1287,19 +1059,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "Mindbreaker"
+      ]
     },
     {
       "id": "hens_animatronic_2",
       "name": "Funny Animatronic",
       "killerIds": [
         "animatronic"
-      ],
-      "perks": [
-        "Batteries Included",
-        "Furtive Chase",
-        "Machine Learning",
-        "Unbound"
       ],
       "tags": [
         "Hens",
@@ -1321,19 +1093,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K34P03",
+        "FurtiveChase",
+        "K32P03",
+        "K35P01"
+      ]
     },
     {
       "id": "hens_animatronic_3",
       "name": "Best Beginner Animatronic",
       "killerIds": [
         "animatronic"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Tinkerer",
-        "Phantom Fear",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -1352,19 +1124,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "Tinkerer",
+        "K40P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_artist_4",
       "name": "Best Artist Without Limitations",
       "killerIds": [
         "artist"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch",
-        "Rapid Brutality"
       ],
       "tags": [
         "Hens",
@@ -1383,19 +1155,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "killer:dead-man-s-switch",
+        "K33P02"
+      ]
     },
     {
       "id": "hens_artist_5",
       "name": "Funny Artist",
       "killerIds": [
         "artist"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Surveillance",
-        "Oppression",
-        "Discordance"
       ],
       "tags": [
         "Hens",
@@ -1414,19 +1186,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "Surveillance",
+        "K22P02",
+        "Discordance"
+      ]
     },
     {
       "id": "hens_artist_6",
       "name": "Best Beginner Artist",
       "killerIds": [
         "artist"
-      ],
-      "perks": [
-        "Hex: Pentimento",
-        "Scourge Hook: Pain Resonance",
-        "Grim Embrace",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -1446,19 +1218,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P03",
+        "K26P02",
+        "K26P01",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_artist_7",
       "name": "Unique Artist — Stagger Shot Artist",
       "killerIds": [
         "artist"
-      ],
-      "perks": [
-        "Discordance",
-        "Oppression",
-        "Surveillance",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -1476,19 +1248,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Discordance",
+        "K22P02",
+        "Surveillance",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_blight_8",
       "name": "Best Blight Without Limitations",
       "killerIds": [
         "blight"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Eruption",
-        "Pop Goes the Weasel"
       ],
       "tags": [
         "Hens",
@@ -1505,19 +1277,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "CorruptIntervention",
+        "K24P03",
+        "pop_goes_the_weasel"
+      ]
     },
     {
       "id": "hens_blight_9",
       "name": "Funny Blight",
       "killerIds": [
         "blight"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Lethal Pursuer",
-        "Awakened Awareness",
-        "Agitation"
       ],
       "tags": [
         "Hens",
@@ -1535,19 +1307,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K24P01",
+        "K29P02",
+        "Agitation"
+      ]
     },
     {
       "id": "hens_blight_10",
       "name": "Best Beginner Blight",
       "killerIds": [
         "blight"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Enduring",
-        "Scourge Hook: Gift of Pain",
-        "Deadlock"
       ],
       "tags": [
         "Hens",
@@ -1566,19 +1338,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "Enduring",
+        "K25P03",
+        "K25P01"
+      ]
     },
     {
       "id": "hens_blight_11",
       "name": "Unique Blight — Stealth Blight",
       "killerIds": [
         "blight"
-      ],
-      "perks": [
-        "A Nurse's Calling",
-        "Gearhead",
-        "Spies from the Shadows",
-        "Tinkerer"
       ],
       "tags": [
         "Hens",
@@ -1595,19 +1367,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "NurseCalling",
+        "Gearhead",
+        "Spies_From_The_Shadows",
+        "Tinkerer"
+      ]
     },
     {
       "id": "hens_cannibal_12",
       "name": "Best Cannibal Without Limitations",
       "killerIds": [
         "cannibal"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Bamboozle"
       ],
       "tags": [
         "Hens",
@@ -1625,19 +1397,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "Bamboozle"
+      ]
     },
     {
       "id": "hens_cannibal_13",
       "name": "Funny Cannibal",
       "killerIds": [
         "cannibal"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Bamboozle",
-        "Unforeseen",
-        "Scourge Hook: Pain Resonance"
       ],
       "tags": [
         "Hens",
@@ -1657,19 +1429,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "Bamboozle",
+        "K35P02",
+        "K26P02"
+      ]
     },
     {
       "id": "hens_cannibal_14",
       "name": "Best Beginner Cannibal",
       "killerIds": [
         "cannibal"
-      ],
-      "perks": [
-        "Enduring",
-        "Bamboozle",
-        "Pop Goes the Weasel",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -1689,19 +1461,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Enduring",
+        "Bamboozle",
+        "pop_goes_the_weasel",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_cannibal_15",
       "name": "Unique Cannibal — Snowball Bubba",
       "killerIds": [
         "cannibal"
-      ],
-      "perks": [
-        "Insidious",
-        "Infectious Fright",
-        "Iron Maiden",
-        "Forced Hesitation"
       ],
       "tags": [
         "Hens",
@@ -1719,19 +1491,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Insidious",
+        "InfectiousFright",
+        "Ironmaiden",
+        "K32P02"
+      ]
     },
     {
       "id": "hens_cenobite_16",
       "name": "Best Cenobite Without Limitations",
       "killerIds": [
         "cenobite"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch",
-        "Corrupt Intervention",
-        "Turn Back the Clock"
       ],
       "tags": [
         "Hens",
@@ -1748,19 +1520,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "killer:dead-man-s-switch",
+        "CorruptIntervention",
+        "K42P01"
+      ]
     },
     {
       "id": "hens_cenobite_17",
       "name": "Funny Cenobite",
       "killerIds": [
         "cenobite"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Sloppy Butcher",
-        "Lethal Pursuer",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -1781,19 +1553,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "Sloppy_Butcher",
+        "K24P01",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_cenobite_18",
       "name": "Best Beginner Cenobite",
       "killerIds": [
         "cenobite"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Deadlock",
-        "Hex: Plaything",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -1814,19 +1586,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "K25P01",
+        "K25P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_cenobite_19",
       "name": "Unique Cenobite — Infinite Chainhunt Pinhead",
       "killerIds": [
         "cenobite"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Barbecue & Chilli",
-        "Lethal Pursuer",
-        "Sloppy Butcher"
       ],
       "tags": [
         "Hens",
@@ -1846,19 +1618,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "killer:barbecue-chilli",
+        "K24P01",
+        "Sloppy_Butcher"
+      ]
     },
     {
       "id": "hens_clown_20",
       "name": "Best Clown Without Limitations",
       "killerIds": [
         "clown"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Dragon's Grip"
       ],
       "tags": [
         "Hens",
@@ -1876,19 +1648,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K24P03",
+        "killer:dragon-s-grip"
+      ]
     },
     {
       "id": "hens_clown_21",
       "name": "Funny Clown",
       "killerIds": [
         "clown"
-      ],
-      "perks": [
-        "Rapid Brutality",
-        "Dead Man's Switch",
-        "Scourge Hook: Pain Resonance",
-        "Brutal Strength"
       ],
       "tags": [
         "Hens",
@@ -1908,19 +1680,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K33P02",
+        "killer:dead-man-s-switch",
+        "K26P02",
+        "Brutal_Strength"
+      ]
     },
     {
       "id": "hens_clown_22",
       "name": "Best Beginner Clown",
       "killerIds": [
         "clown"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Brutal Strength",
-        "Sloppy Butcher",
-        "Bamboozle"
       ],
       "tags": [
         "Hens",
@@ -1939,19 +1711,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "Brutal_Strength",
+        "Sloppy_Butcher",
+        "Bamboozle"
+      ]
     },
     {
       "id": "hens_clown_23",
       "name": "Unique Clown — Speed Clown",
       "killerIds": [
         "clown"
-      ],
-      "perks": [
-        "Rapid Brutality",
-        "Machine Learning",
-        "Coup de Grâce",
-        "Save the Best for Last"
       ],
       "tags": [
         "Hens",
@@ -1970,19 +1742,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K33P02",
+        "K32P03",
+        "K22P03",
+        "Save_The_Best_For_Last"
+      ]
     },
     {
       "id": "hens_darklord_24",
       "name": "Best Dark Lord Without Limitations",
       "killerIds": [
         "darklord"
-      ],
-      "perks": [
-        "Hex: Hive Mind",
-        "Hex: Thrill of the Hunt",
-        "Hex: Ruin",
-        "Hex: Pentimento"
       ],
       "tags": [
         "Hens",
@@ -1999,19 +1771,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K42P03",
+        "Hex_Thrill_Of_The_Hunt",
+        "Hex_Ruin",
+        "K26P03"
+      ]
     },
     {
       "id": "hens_darklord_25",
       "name": "Funny Dark Lord",
       "killerIds": [
         "darklord"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Barbecue & Chilli",
-        "Spies from the Shadows",
-        "Hex: Undying"
       ],
       "tags": [
         "Hens",
@@ -2031,19 +1803,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "killer:barbecue-chilli",
+        "Spies_From_The_Shadows",
+        "HexUndying"
+      ]
     },
     {
       "id": "hens_darklord_26",
       "name": "Best Beginner Dark Lord",
       "killerIds": [
         "darklord"
-      ],
-      "perks": [
-        "Hex: Wretched Fate",
-        "Dominance",
-        "Scourge Hook: Gift of Pain",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -2062,19 +1834,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K37P01",
+        "K37P03",
+        "K25P03",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_darklord_27",
       "name": "Unique Dark Lord — Wolf Dracula",
       "killerIds": [
         "darklord"
-      ],
-      "perks": [
-        "Lethal Pursuer",
-        "Coup de Grâce",
-        "Rapid Brutality",
-        "Unforeseen"
       ],
       "tags": [
         "Hens",
@@ -2094,19 +1866,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K24P01",
+        "K22P03",
+        "K33P02",
+        "K35P02"
+      ]
     },
     {
       "id": "hens_deathslinger_28",
       "name": "Best Deathslinger Without Limitations",
       "killerIds": [
         "deathslinger"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch",
-        "Turn Back the Clock"
       ],
       "tags": [
         "Hens",
@@ -2123,19 +1895,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "killer:dead-man-s-switch",
+        "K42P01"
+      ]
     },
     {
       "id": "hens_deathslinger_29",
       "name": "Funny Deathslinger",
       "killerIds": [
         "deathslinger"
-      ],
-      "perks": [
-        "Unforeseen",
-        "Eruption",
-        "Scourge Hook: Pain Resonance",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -2155,19 +1927,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K35P02",
+        "K24P03",
+        "K26P02",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_deathslinger_30",
       "name": "Best Beginner Deathslinger",
       "killerIds": [
         "deathslinger"
-      ],
-      "perks": [
-        "A Nurse's Calling",
-        "Dead Man's Switch",
-        "Scourge Hook: Gift of Pain",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -2189,19 +1961,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "NurseCalling",
+        "killer:dead-man-s-switch",
+        "K25P03",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_deathslinger_31",
       "name": "Unique Deathslinger — 0 Terror Radius Deathslinger",
       "killerIds": [
         "deathslinger"
-      ],
-      "perks": [
-        "Monitor & Abuse",
-        "Gearhead",
-        "Whispers",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -2219,19 +1991,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "MonitorAndAbuse",
+        "Gearhead",
+        "Whispers",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_demogorgon_32",
       "name": "Best Demogorgon Without Limitations",
       "killerIds": [
         "demogorgon"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Dead Man's Switch"
       ],
       "tags": [
         "Hens",
@@ -2248,19 +2020,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "killer:dead-man-s-switch"
+      ]
     },
     {
       "id": "hens_demogorgon_33",
       "name": "Funny Demogorgon",
       "killerIds": [
         "demogorgon"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Grim Embrace"
       ],
       "tags": [
         "Hens",
@@ -2280,19 +2052,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K26P02",
+        "CorruptIntervention",
+        "K26P01"
+      ]
     },
     {
       "id": "hens_demogorgon_34",
       "name": "Best Beginner Demogorgon",
       "killerIds": [
         "demogorgon"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Enduring",
-        "Pop Goes the Weasel",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -2311,19 +2083,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "Enduring",
+        "pop_goes_the_weasel",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_demogorgon_35",
       "name": "Unique Demogorgon — Devour Demogorgon",
       "killerIds": [
         "demogorgon"
-      ],
-      "perks": [
-        "Hex: Devour Hope",
-        "Hex: Undying",
-        "Hex: Thrill of the Hunt",
-        "Hex: Pentimento"
       ],
       "tags": [
         "Hens",
@@ -2343,19 +2115,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Devour_Hope",
+        "HexUndying",
+        "Hex_Thrill_Of_The_Hunt",
+        "K26P03"
+      ]
     },
     {
       "id": "hens_doctor_36",
       "name": "Best Doctor Without Limitations",
       "killerIds": [
         "doctor"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch",
-        "Rapid Brutality"
       ],
       "tags": [
         "Hens",
@@ -2374,19 +2146,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "killer:dead-man-s-switch",
+        "K33P02"
+      ]
     },
     {
       "id": "hens_doctor_37",
       "name": "Funny Doctor",
       "killerIds": [
         "doctor"
-      ],
-      "perks": [
-        "Rapid Brutality",
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Merciless Storm"
       ],
       "tags": [
         "Hens",
@@ -2406,19 +2178,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K33P02",
+        "CorruptIntervention",
+        "K26P02",
+        "K27P03"
+      ]
     },
     {
       "id": "hens_doctor_38",
       "name": "Best Beginner Doctor",
       "killerIds": [
         "doctor"
-      ],
-      "perks": [
-        "Agitation",
-        "Pop Goes the Weasel",
-        "Brutal Strength",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -2437,19 +2209,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Agitation",
+        "pop_goes_the_weasel",
+        "Brutal_Strength",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_doctor_39",
       "name": "Unique Doctor — Terror Radius Doctor",
       "killerIds": [
         "doctor"
-      ],
-      "perks": [
-        "Merciless Storm",
-        "Unforeseen",
-        "Monitor & Abuse",
-        "Hex: Face the Darkness"
       ],
       "tags": [
         "Hens",
@@ -2467,19 +2239,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K27P03",
+        "K35P02",
+        "MonitorAndAbuse",
+        "K30P02"
+      ]
     },
     {
       "id": "hens_dredge_40",
       "name": "Best Dredge Without Limitations",
       "killerIds": [
         "dredge"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Corrupt Intervention"
       ],
       "tags": [
         "Hens",
@@ -2496,19 +2268,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "K26P02",
+        "K24P03",
+        "CorruptIntervention"
+      ]
     },
     {
       "id": "hens_dredge_41",
       "name": "Funny Dredge",
       "killerIds": [
         "dredge"
-      ],
-      "perks": [
-        "Eruption",
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Sloppy Butcher"
       ],
       "tags": [
         "Hens",
@@ -2527,19 +2299,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K24P03",
+        "CorruptIntervention",
+        "K26P02",
+        "Sloppy_Butcher"
+      ]
     },
     {
       "id": "hens_dredge_42",
       "name": "Best Beginner Dredge",
       "killerIds": [
         "dredge"
-      ],
-      "perks": [
-        "A Nurse's Calling",
-        "Tinkerer",
-        "Brutal Strength",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -2559,19 +2331,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "NurseCalling",
+        "Tinkerer",
+        "Brutal_Strength",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_dredge_43",
       "name": "Unique Dredge — One Shot Dredge",
       "killerIds": [
         "dredge"
-      ],
-      "perks": [
-        "Make Your Choice",
-        "Dragon's Grip",
-        "Hex: Devour Hope",
-        "Friends 'Til The End"
       ],
       "tags": [
         "Hens",
@@ -2592,19 +2364,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "MakeYourChoice",
+        "killer:dragon-s-grip",
+        "Hex_Devour_Hope",
+        "killer:friends-til-the-end"
+      ]
     },
     {
       "id": "hens_executioner_44",
       "name": "Best Executioner Without Limitations",
       "killerIds": [
         "executioner"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Hex: Thrill of the Hunt",
-        "Hex: Pentimento",
-        "Hex: Hive Mind"
       ],
       "tags": [
         "Hens",
@@ -2621,19 +2393,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "Hex_Thrill_Of_The_Hunt",
+        "K26P03",
+        "K42P03"
+      ]
     },
     {
       "id": "hens_executioner_45",
       "name": "Funny Executioner",
       "killerIds": [
         "executioner"
-      ],
-      "perks": [
-        "Trail of Torment",
-        "Dragon's Grip",
-        "A Nurse's Calling",
-        "Mindbreaker"
       ],
       "tags": [
         "Hens",
@@ -2654,19 +2426,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "TrailofTorment",
+        "killer:dragon-s-grip",
+        "NurseCalling",
+        "Mindbreaker"
+      ]
     },
     {
       "id": "hens_executioner_46",
       "name": "Best Beginner Executioner",
       "killerIds": [
         "executioner"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Spies from the Shadows",
-        "Deadlock",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -2686,19 +2458,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "Spies_From_The_Shadows",
+        "K25P01",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_executioner_47",
       "name": "Unique Executioner — Jumpscare One Shot Pyramid Head",
       "killerIds": [
         "executioner"
-      ],
-      "perks": [
-        "Mindbreaker",
-        "Dragon's Grip",
-        "Trail of Torment",
-        "A Nurse's Calling"
       ],
       "tags": [
         "Hens",
@@ -2718,19 +2490,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Mindbreaker",
+        "killer:dragon-s-grip",
+        "TrailofTorment",
+        "NurseCalling"
+      ]
     },
     {
       "id": "hens_first_48",
       "name": "Best First Without Limitations",
       "killerIds": [
         "first"
-      ],
-      "perks": [
-        "Hex: Hive Mind",
-        "Hex: Ruin",
-        "Hex: Thrill of the Hunt",
-        "Hex: Pentimento"
       ],
       "tags": [
         "Hens",
@@ -2747,19 +2519,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K42P03",
+        "Hex_Ruin",
+        "Hex_Thrill_Of_The_Hunt",
+        "K26P03"
+      ]
     },
     {
       "id": "hens_ghostface_49",
       "name": "Best Ghost Face Without Limitations",
       "killerIds": [
         "ghostface"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Play with Your Food",
-        "Turn Back the Clock"
       ],
       "tags": [
         "Hens",
@@ -2779,19 +2551,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "Play_With_Your_Food",
+        "K42P01"
+      ]
     },
     {
       "id": "hens_ghostface_50",
       "name": "Funny Ghost Face",
       "killerIds": [
         "ghostface"
-      ],
-      "perks": [
-        "Surge",
-        "Discordance",
-        "Spies from the Shadows",
-        "Sloppy Butcher"
       ],
       "tags": [
         "Hens",
@@ -2810,19 +2582,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Surge",
+        "Discordance",
+        "Spies_From_The_Shadows",
+        "Sloppy_Butcher"
+      ]
     },
     {
       "id": "hens_ghostface_51",
       "name": "Best Beginner Ghost Face",
       "killerIds": [
         "ghostface"
-      ],
-      "perks": [
-        "Sloppy Butcher",
-        "A Nurse's Calling",
-        "Hex: Ruin",
-        "Deadlock"
       ],
       "tags": [
         "Hens",
@@ -2847,19 +2619,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Sloppy_Butcher",
+        "NurseCalling",
+        "Hex_Ruin",
+        "K25P01"
+      ]
     },
     {
       "id": "hens_ghostface_52",
       "name": "Unique Ghost Face — Jumpscare License Ghostface",
       "killerIds": [
         "ghostface"
-      ],
-      "perks": [
-        "Spies from the Shadows",
-        "Pop Goes the Weasel",
-        "Scourge Hook: Floods of Rage",
-        "Discordance"
       ],
       "tags": [
         "Hens",
@@ -2879,19 +2651,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Spies_From_The_Shadows",
+        "pop_goes_the_weasel",
+        "K27P01",
+        "Discordance"
+      ]
     },
     {
       "id": "hens_ghoul_53",
       "name": "Best Ghoul Without Limitations",
       "killerIds": [
         "ghoul"
-      ],
-      "perks": [
-        "Hex: Hive Mind",
-        "Hex: Ruin",
-        "Hex: Thrill of the Hunt",
-        "Hex: Blood Favour"
       ],
       "tags": [
         "Hens",
@@ -2909,19 +2681,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K42P03",
+        "Hex_Ruin",
+        "Hex_Thrill_Of_The_Hunt",
+        "killer:hex-blood-favour"
+      ]
     },
     {
       "id": "hens_ghoul_54",
       "name": "Funny Ghoul",
       "killerIds": [
         "ghoul"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Barbecue & Chilli",
-        "Surge",
-        "Thanatophobia"
       ],
       "tags": [
         "Hens",
@@ -2941,19 +2713,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "killer:barbecue-chilli",
+        "Surge",
+        "Thanatophobia"
+      ]
     },
     {
       "id": "hens_ghoul_55",
       "name": "Unique Ghoul — Endgame Kaneki",
       "killerIds": [
         "ghoul"
-      ],
-      "perks": [
-        "No Way Out",
-        "None Are Free",
-        "Hex: No One Escapes Death",
-        "Bitter Murmur"
       ],
       "tags": [
         "Hens",
@@ -2976,19 +2748,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K23P03",
+        "K39P03",
+        "No_One_Escapes_Death",
+        "Bitter_Murmur"
+      ]
     },
     {
       "id": "hens_ghoul_56",
       "name": "Best Beginner Ghoul",
       "killerIds": [
         "ghoul"
-      ],
-      "perks": [
-        "Forever Entwined",
-        "Brutal Strength",
-        "Spies from the Shadows",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3007,19 +2779,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K39P02",
+        "Brutal_Strength",
+        "Spies_From_The_Shadows",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_goodguy_57",
       "name": "Best Good Guy Without Limitations",
       "killerIds": [
         "goodguy"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Turn Back the Clock",
-        "Dead Man's Switch"
       ],
       "tags": [
         "Hens",
@@ -3036,19 +2808,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "CorruptIntervention",
+        "K42P01",
+        "killer:dead-man-s-switch"
+      ]
     },
     {
       "id": "hens_goodguy_58",
       "name": "Funny Good Guy",
       "killerIds": [
         "goodguy"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Brutal Strength",
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention"
       ],
       "tags": [
         "Hens",
@@ -3069,19 +2841,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "Brutal_Strength",
+        "K26P02",
+        "CorruptIntervention"
+      ]
     },
     {
       "id": "hens_goodguy_59",
       "name": "Best Beginner Good Guy",
       "killerIds": [
         "goodguy"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Friends 'Til The End",
-        "Hex: Plaything",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3105,19 +2877,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "killer:friends-til-the-end",
+        "K25P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_goodguy_60",
       "name": "Unique Good Guy — Infinite Dash Chucky",
       "killerIds": [
         "goodguy"
-      ],
-      "perks": [
-        "Remember Me",
-        "No Way Out",
-        "Zanshin Tactics",
-        "Terminus"
       ],
       "tags": [
         "Hens",
@@ -3134,19 +2906,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "RememberMe",
+        "K23P03",
+        "ZanshinTactics",
+        "K29P03"
+      ]
     },
     {
       "id": "hens_hag_61",
       "name": "Best Hag Without Limitations",
       "killerIds": [
         "hag"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Turn Back the Clock",
-        "Sloppy Butcher",
-        "Scourge Hook: Pain Resonance"
       ],
       "tags": [
         "Hens",
@@ -3164,19 +2936,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K42P01",
+        "Sloppy_Butcher",
+        "K26P02"
+      ]
     },
     {
       "id": "hens_hag_62",
       "name": "Funny Hag",
       "killerIds": [
         "hag"
-      ],
-      "perks": [
-        "Sloppy Butcher",
-        "Corrupt Intervention",
-        "A Nurse's Calling",
-        "Spies from the Shadows"
       ],
       "tags": [
         "Hens",
@@ -3196,19 +2968,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Sloppy_Butcher",
+        "CorruptIntervention",
+        "NurseCalling",
+        "Spies_From_The_Shadows"
+      ]
     },
     {
       "id": "hens_hag_63",
       "name": "Best Beginner Hag",
       "killerIds": [
         "hag"
-      ],
-      "perks": [
-        "Hex: Thrill of the Hunt",
-        "Hex: Devour Hope",
-        "Hex: Ruin",
-        "Sloppy Butcher"
       ],
       "tags": [
         "Hens",
@@ -3229,19 +3001,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Thrill_Of_The_Hunt",
+        "Hex_Devour_Hope",
+        "Hex_Ruin",
+        "Sloppy_Butcher"
+      ]
     },
     {
       "id": "hens_hag_64",
       "name": "Unique Hag — Chase Hag",
       "killerIds": [
         "hag"
-      ],
-      "perks": [
-        "Unrelenting",
-        "Rapid Brutality",
-        "Save the Best for Last",
-        "Play with Your Food"
       ],
       "tags": [
         "Hens",
@@ -3259,19 +3031,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Unrelenting",
+        "K33P02",
+        "Save_The_Best_For_Last",
+        "Play_With_Your_Food"
+      ]
     },
     {
       "id": "hens_hillbilly_65",
       "name": "Best Hillbilly Without Limitations",
       "killerIds": [
         "hillbilly"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Dead Man's Switch"
       ],
       "tags": [
         "Hens",
@@ -3290,19 +3062,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K26P02",
+        "K42P01",
+        "killer:dead-man-s-switch"
+      ]
     },
     {
       "id": "hens_hillbilly_66",
       "name": "Funny Hillbilly",
       "killerIds": [
         "hillbilly"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Lethal Pursuer",
-        "Awakened Awareness",
-        "Agitation"
       ],
       "tags": [
         "Hens",
@@ -3320,19 +3092,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K24P01",
+        "K29P02",
+        "Agitation"
+      ]
     },
     {
       "id": "hens_hillbilly_67",
       "name": "Best Beginner Hillbilly",
       "killerIds": [
         "hillbilly"
-      ],
-      "perks": [
-        "Enduring",
-        "Bamboozle",
-        "Spies from the Shadows",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3351,19 +3123,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Enduring",
+        "Bamboozle",
+        "Spies_From_The_Shadows",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_hillbilly_68",
       "name": "Unique Hillbilly — Jumpscare Billy",
       "killerIds": [
         "hillbilly"
-      ],
-      "perks": [
-        "Machine Learning",
-        "Mindbreaker",
-        "Trail of Torment",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -3382,19 +3154,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K32P03",
+        "Mindbreaker",
+        "TrailofTorment",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_houndmaster_69",
       "name": "Best Houndmaster Without Limitations",
       "killerIds": [
         "houndmaster"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Starstruck"
       ],
       "tags": [
         "Hens",
@@ -3412,19 +3184,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "K23P01"
+      ]
     },
     {
       "id": "hens_houndmaster_70",
       "name": "Funny Houndmaster",
       "killerIds": [
         "houndmaster"
-      ],
-      "perks": [
-        "Agitation",
-        "Awakened Awareness",
-        "Starstruck",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -3443,19 +3215,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Agitation",
+        "K29P02",
+        "K23P01",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_houndmaster_71",
       "name": "Best Beginner Houndmaster",
       "killerIds": [
         "houndmaster"
-      ],
-      "perks": [
-        "No Quarter",
-        "Brutal Strength",
-        "Spies from the Shadows",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3474,19 +3246,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K38P03",
+        "Brutal_Strength",
+        "Spies_From_The_Shadows",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_huntress_72",
       "name": "Best Huntress Without Limitations",
       "killerIds": [
         "huntress"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch",
-        "Turn Back the Clock"
       ],
       "tags": [
         "Hens",
@@ -3503,19 +3275,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "killer:dead-man-s-switch",
+        "K42P01"
+      ]
     },
     {
       "id": "hens_huntress_73",
       "name": "Funny Huntress",
       "killerIds": [
         "huntress"
-      ],
-      "perks": [
-        "Darkness Revealed",
-        "Barbecue & Chilli",
-        "Lethal Pursuer",
-        "Bitter Murmur"
       ],
       "tags": [
         "Hens",
@@ -3533,19 +3305,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K28P02",
+        "killer:barbecue-chilli",
+        "K24P01",
+        "Bitter_Murmur"
+      ]
     },
     {
       "id": "hens_huntress_74",
       "name": "Best Beginner Huntress",
       "killerIds": [
         "huntress"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Bitter Murmur",
-        "A Nurse's Calling",
-        "Deadlock"
       ],
       "tags": [
         "Hens",
@@ -3565,19 +3337,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "Bitter_Murmur",
+        "NurseCalling",
+        "K25P01"
+      ]
     },
     {
       "id": "hens_huntress_75",
       "name": "Unique Huntress — Jump Scare Melee Huntress",
       "killerIds": [
         "huntress"
-      ],
-      "perks": [
-        "Discordance",
-        "Spies from the Shadows",
-        "Darkness Revealed",
-        "Coup de Grâce"
       ],
       "tags": [
         "Hens",
@@ -3595,19 +3367,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Discordance",
+        "Spies_From_The_Shadows",
+        "K28P02",
+        "K22P03"
+      ]
     },
     {
       "id": "hens_knight_76",
       "name": "Best Knight Without Limitations",
       "killerIds": [
         "knight"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Hex: Hive Mind",
-        "Hex: Thrill of the Hunt",
-        "Hex: Pentimento"
       ],
       "tags": [
         "Hens",
@@ -3624,19 +3396,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "K42P03",
+        "Hex_Thrill_Of_The_Hunt",
+        "K26P03"
+      ]
     },
     {
       "id": "hens_knight_77",
       "name": "Funny Knight",
       "killerIds": [
         "knight"
-      ],
-      "perks": [
-        "Discordance",
-        "Barbecue & Chilli",
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention"
       ],
       "tags": [
         "Hens",
@@ -3656,19 +3428,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Discordance",
+        "killer:barbecue-chilli",
+        "K26P02",
+        "CorruptIntervention"
+      ]
     },
     {
       "id": "hens_knight_78",
       "name": "Best Beginner Knight",
       "killerIds": [
         "knight"
-      ],
-      "perks": [
-        "Nowhere to Hide",
-        "Spies from the Shadows",
-        "Pop Goes the Weasel",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3688,19 +3460,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K30P01",
+        "Spies_From_The_Shadows",
+        "pop_goes_the_weasel",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_knight_79",
       "name": "Unique Knight — Languid Spies Knight",
       "killerIds": [
         "knight"
-      ],
-      "perks": [
-        "Machine Learning",
-        "Spies from the Shadows",
-        "Languid Touch",
-        "Discordance"
       ],
       "tags": [
         "Hens",
@@ -3718,19 +3490,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K32P03",
+        "Spies_From_The_Shadows",
+        "K36P02",
+        "Discordance"
+      ]
     },
     {
       "id": "hens_krasue_80",
       "name": "Best Krasue Without Limitations",
       "killerIds": [
         "krasue"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Hex: Ruin",
-        "Hex: Undying",
-        "Dead Man's Switch"
       ],
       "tags": [
         "Hens",
@@ -3750,19 +3522,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "Hex_Ruin",
+        "HexUndying",
+        "killer:dead-man-s-switch"
+      ]
     },
     {
       "id": "hens_krasue_81",
       "name": "Funny Krasue",
       "killerIds": [
         "krasue"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Barbecue & Chilli",
-        "Hex: Ruin",
-        "Hex: Undying"
       ],
       "tags": [
         "Hens",
@@ -3783,19 +3555,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "killer:barbecue-chilli",
+        "Hex_Ruin",
+        "HexUndying"
+      ]
     },
     {
       "id": "hens_krasue_82",
       "name": "Best Beginner Krasue",
       "killerIds": [
         "krasue"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Spies from the Shadows",
-        "Hex: Plaything",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3816,19 +3588,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "Spies_From_The_Shadows",
+        "K25P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_legion_83",
       "name": "Best Legion Without Limitations",
       "killerIds": [
         "legion"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Bamboozle"
       ],
       "tags": [
         "Hens",
@@ -3846,19 +3618,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "Bamboozle"
+      ]
     },
     {
       "id": "hens_legion_84",
       "name": "Funny Legion",
       "killerIds": [
         "legion"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Enduring",
-        "Spirit Fury"
       ],
       "tags": [
         "Hens",
@@ -3877,19 +3649,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "Enduring",
+        "SpiritFury"
+      ]
     },
     {
       "id": "hens_legion_85",
       "name": "Best Beginner Legion",
       "killerIds": [
         "legion"
-      ],
-      "perks": [
-        "Discordance",
-        "Bamboozle",
-        "Pop Goes the Weasel",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -3909,19 +3681,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Discordance",
+        "Bamboozle",
+        "pop_goes_the_weasel",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_legion_86",
       "name": "Unique Legion — 150% Speed Legion",
       "killerIds": [
         "legion"
-      ],
-      "perks": [
-        "No Way Out",
-        "Hex: No One Escapes Death",
-        "Batteries Included",
-        "Machine Learning"
       ],
       "tags": [
         "Hens",
@@ -3942,19 +3714,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K23P03",
+        "No_One_Escapes_Death",
+        "K34P03",
+        "K32P03"
+      ]
     },
     {
       "id": "hens_lich_87",
       "name": "Best Lich Without Limitations",
       "killerIds": [
         "lich"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Turn Back the Clock",
-        "Deerstalker"
       ],
       "tags": [
         "Hens",
@@ -3974,19 +3746,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "CorruptIntervention",
+        "K42P01",
+        "Deerstalker"
+      ]
     },
     {
       "id": "hens_lich_88",
       "name": "Funny Lich",
       "killerIds": [
         "lich"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Rapid Brutality",
-        "Scourge Hook: Pain Resonance",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4008,19 +3780,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K33P02",
+        "K26P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_lich_89",
       "name": "Best Beginner Lich",
       "killerIds": [
         "lich"
-      ],
-      "perks": [
-        "A Nurse's Calling",
-        "Languid Touch",
-        "Spies from the Shadows",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4039,19 +3811,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "NurseCalling",
+        "K36P02",
+        "Spies_From_The_Shadows",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_lich_90",
       "name": "Unique Lich — Sneak Fake Chest Vecna",
       "killerIds": [
         "lich"
-      ],
-      "perks": [
-        "Trail of Torment",
-        "Rapid Brutality",
-        "Machine Learning",
-        "Dragon's Grip"
       ],
       "tags": [
         "Hens",
@@ -4070,19 +3842,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "TrailofTorment",
+        "K33P02",
+        "K32P03",
+        "killer:dragon-s-grip"
+      ]
     },
     {
       "id": "hens_mastermind_91",
       "name": "Best Mastermind Without Limitations",
       "killerIds": [
         "mastermind"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Grim Embrace"
       ],
       "tags": [
         "Hens",
@@ -4099,19 +3871,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "K26P02",
+        "K24P03",
+        "K26P01"
+      ]
     },
     {
       "id": "hens_mastermind_92",
       "name": "Funny Mastermind",
       "killerIds": [
         "mastermind"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Brutal Strength",
-        "Scourge Hook: Pain Resonance",
-        "Lethal Pursuer"
       ],
       "tags": [
         "Hens",
@@ -4131,19 +3903,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "Brutal_Strength",
+        "K26P02",
+        "K24P01"
+      ]
     },
     {
       "id": "hens_mastermind_93",
       "name": "Best Beginner Mastermind",
       "killerIds": [
         "mastermind"
-      ],
-      "perks": [
-        "Brutal Strength",
-        "Spies from the Shadows",
-        "Hex: Plaything",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4164,19 +3936,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Brutal_Strength",
+        "Spies_From_The_Shadows",
+        "K25P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_mastermind_94",
       "name": "Unique Mastermind — Throw Wesker",
       "killerIds": [
         "mastermind"
-      ],
-      "perks": [
-        "Dominance",
-        "Hex: Undying",
-        "Hex: Blood Favour",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -4196,19 +3968,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K37P03",
+        "HexUndying",
+        "killer:hex-blood-favour",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_nemesis_95",
       "name": "Best Nemesis Without Limitations",
       "killerIds": [
         "nemesis"
-      ],
-      "perks": [
-        "Turn Back the Clock",
-        "Discordance",
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance"
       ],
       "tags": [
         "Hens",
@@ -4226,19 +3998,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K42P01",
+        "Discordance",
+        "CorruptIntervention",
+        "K26P02"
+      ]
     },
     {
       "id": "hens_nemesis_96",
       "name": "Funny Nemesis",
       "killerIds": [
         "nemesis"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Hex: Ruin",
-        "Hex: Undying",
-        "Discordance"
       ],
       "tags": [
         "Hens",
@@ -4259,19 +4031,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "Hex_Ruin",
+        "HexUndying",
+        "Discordance"
+      ]
     },
     {
       "id": "hens_nemesis_97",
       "name": "Best Beginner Nemesis",
       "killerIds": [
         "nemesis"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Eruption",
-        "Lethal Pursuer",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4291,19 +4063,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "K24P03",
+        "K24P01",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_nemesis_98",
       "name": "Unique Nemesis — Speed Zombie Nemesis",
       "killerIds": [
         "nemesis"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Discordance",
-        "Hex: Face the Darkness",
-        "Infectious Fright"
       ],
       "tags": [
         "Hens",
@@ -4322,19 +4094,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "Discordance",
+        "K30P02",
+        "InfectiousFright"
+      ]
     },
     {
       "id": "hens_nightmare_99",
       "name": "Best Nightmare Without Limitations",
       "killerIds": [
         "nightmare"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Pop Goes the Weasel",
-        "Eruption"
       ],
       "tags": [
         "Hens",
@@ -4351,19 +4123,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "pop_goes_the_weasel",
+        "K24P03"
+      ]
     },
     {
       "id": "hens_nightmare_100",
       "name": "Funny Nightmare",
       "killerIds": [
         "nightmare"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Barbecue & Chilli",
-        "Rapid Brutality",
-        "Sloppy Butcher"
       ],
       "tags": [
         "Hens",
@@ -4385,19 +4157,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "killer:barbecue-chilli",
+        "K33P02",
+        "Sloppy_Butcher"
+      ]
     },
     {
       "id": "hens_nightmare_101",
       "name": "Best Beginner Nightmare",
       "killerIds": [
         "nightmare"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Tinkerer",
-        "Brutal Strength",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4417,19 +4189,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "Tinkerer",
+        "Brutal_Strength",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_nightmare_102",
       "name": "Unique Nightmare — Skillcheck Freddy",
       "killerIds": [
         "nightmare"
-      ],
-      "perks": [
-        "Merciless Storm",
-        "Overcharge",
-        "Hex: Huntress Lullaby",
-        "Oppression"
       ],
       "tags": [
         "Hens",
@@ -4447,19 +4219,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K27P03",
+        "GeneratorOvercharge",
+        "Hex_HuntressLullaby",
+        "K22P02"
+      ]
     },
     {
       "id": "hens_nurse_103",
       "name": "Best Nurse Without Limitations",
       "killerIds": [
         "nurse"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Lethal Pursuer",
-        "Nowhere to Hide"
       ],
       "tags": [
         "Hens",
@@ -4477,19 +4249,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "K24P03",
+        "K24P01",
+        "K30P01"
+      ]
     },
     {
       "id": "hens_nurse_104",
       "name": "Funny Nurse",
       "killerIds": [
         "nurse"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Lethal Pursuer",
-        "Scourge Hook: Floods of Rage",
-        "Agitation"
       ],
       "tags": [
         "Hens",
@@ -4507,19 +4279,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K24P01",
+        "K27P01",
+        "Agitation"
+      ]
     },
     {
       "id": "hens_nurse_105",
       "name": "Best Beginner Nurse",
       "killerIds": [
         "nurse"
-      ],
-      "perks": [
-        "Spies from the Shadows",
-        "Thanatophobia",
-        "Predator",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4537,19 +4309,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Spies_From_The_Shadows",
+        "Thanatophobia",
+        "Predator",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_nurse_106",
       "name": "Unique Nurse — 5 Blink Nurse",
       "killerIds": [
         "nurse"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Discordance",
-        "Lethal Pursuer",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -4568,19 +4340,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "Discordance",
+        "K24P01",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_oni_107",
       "name": "Best Oni Without Limitations",
       "killerIds": [
         "oni"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Eruption",
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch"
       ],
       "tags": [
         "Hens",
@@ -4597,19 +4369,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K24P03",
+        "K26P02",
+        "killer:dead-man-s-switch"
+      ]
     },
     {
       "id": "hens_oni_108",
       "name": "Funny Oni",
       "killerIds": [
         "oni"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Brutal Strength"
       ],
       "tags": [
         "Hens",
@@ -4630,19 +4402,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "CorruptIntervention",
+        "K26P02",
+        "Brutal_Strength"
+      ]
     },
     {
       "id": "hens_oni_109",
       "name": "Best Beginner Oni",
       "killerIds": [
         "oni"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Brutal Strength",
-        "Bamboozle",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -4661,19 +4433,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "Brutal_Strength",
+        "Bamboozle",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_oni_110",
       "name": "Unique Oni — All Seeing Oni",
       "killerIds": [
         "oni"
-      ],
-      "perks": [
-        "Machine Learning",
-        "Tinkerer",
-        "Mindbreaker",
-        "Trail of Torment"
       ],
       "tags": [
         "Hens",
@@ -4692,19 +4464,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K32P03",
+        "Tinkerer",
+        "Mindbreaker",
+        "TrailofTorment"
+      ]
     },
     {
       "id": "hens_onryo_111",
       "name": "Best Onryo Without Limitations",
       "killerIds": [
         "onryo"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Sloppy Butcher",
-        "Hex: Ruin",
-        "Hex: Face the Darkness"
       ],
       "tags": [
         "Hens",
@@ -4724,19 +4496,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "Sloppy_Butcher",
+        "Hex_Ruin",
+        "K30P02"
+      ]
     },
     {
       "id": "hens_onryo_112",
       "name": "Funny Onryo",
       "killerIds": [
         "onryo"
-      ],
-      "perks": [
-        "Hex: Face the Darkness",
-        "Sloppy Butcher",
-        "Discordance",
-        "Spies from the Shadows"
       ],
       "tags": [
         "Hens",
@@ -4755,19 +4527,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K30P02",
+        "Sloppy_Butcher",
+        "Discordance",
+        "Spies_From_The_Shadows"
+      ]
     },
     {
       "id": "hens_onryo_113",
       "name": "Best Beginner Onryo",
       "killerIds": [
         "onryo"
-      ],
-      "perks": [
-        "Spies from the Shadows",
-        "Sloppy Butcher",
-        "A Nurse's Calling",
-        "Hex: Ruin"
       ],
       "tags": [
         "Hens",
@@ -4788,19 +4560,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Spies_From_The_Shadows",
+        "Sloppy_Butcher",
+        "NurseCalling",
+        "Hex_Ruin"
+      ]
     },
     {
       "id": "hens_onryo_114",
       "name": "Unique Onryo — Infinite Teleport Onryo",
       "killerIds": [
         "onryo"
-      ],
-      "perks": [
-        "Surveillance",
-        "Oppression",
-        "Sloppy Butcher",
-        "Hex: Face the Darkness"
       ],
       "tags": [
         "Hens",
@@ -4819,19 +4591,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Surveillance",
+        "K22P02",
+        "Sloppy_Butcher",
+        "K30P02"
+      ]
     },
     {
       "id": "hens_pig_115",
       "name": "Best Pig Without Limitations",
       "killerIds": [
         "pig"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Pop Goes the Weasel",
-        "Eruption",
-        "Brutal Strength"
       ],
       "tags": [
         "Hens",
@@ -4848,19 +4620,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "pop_goes_the_weasel",
+        "K24P03",
+        "Brutal_Strength"
+      ]
     },
     {
       "id": "hens_pig_116",
       "name": "Funny Pig",
       "killerIds": [
         "pig"
-      ],
-      "perks": [
-        "Sloppy Butcher",
-        "Scourge Hook: Pain Resonance",
-        "Monitor & Abuse",
-        "Whispers"
       ],
       "tags": [
         "Hens",
@@ -4880,19 +4652,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Sloppy_Butcher",
+        "K26P02",
+        "MonitorAndAbuse",
+        "Whispers"
+      ]
     },
     {
       "id": "hens_pig_117",
       "name": "Best Beginner Pig",
       "killerIds": [
         "pig"
-      ],
-      "perks": [
-        "Whispers",
-        "Brutal Strength",
-        "Scourge Hook: Gift of Pain",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -4913,19 +4685,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Whispers",
+        "Brutal_Strength",
+        "K25P03",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_pig_118",
       "name": "Unique Pig — Scream Pig",
       "killerIds": [
         "pig"
-      ],
-      "perks": [
-        "Hex: Face the Darkness",
-        "Ultimate Weapon",
-        "Infectious Fright",
-        "THWACK!"
       ],
       "tags": [
         "Hens",
@@ -4943,19 +4715,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K30P02",
+        "K33P01",
+        "InfectiousFright",
+        "K31P02"
+      ]
     },
     {
       "id": "hens_plague_119",
       "name": "Best Plague Without Limitations",
       "killerIds": [
         "plague"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Hex: Thrill of the Hunt",
-        "Hex: Blood Favour",
-        "Hex: Pentimento"
       ],
       "tags": [
         "Hens",
@@ -4973,19 +4745,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "Hex_Thrill_Of_The_Hunt",
+        "killer:hex-blood-favour",
+        "K26P03"
+      ]
     },
     {
       "id": "hens_plague_120",
       "name": "Funny Plague",
       "killerIds": [
         "plague"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Trail of Torment"
       ],
       "tags": [
         "Hens",
@@ -5004,19 +4776,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K24P03",
+        "TrailofTorment"
+      ]
     },
     {
       "id": "hens_plague_121",
       "name": "Best Beginner Plague",
       "killerIds": [
         "plague"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Thanatophobia",
-        "Hex: Plaything",
-        "Deadlock"
       ],
       "tags": [
         "Hens",
@@ -5036,19 +4808,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "Thanatophobia",
+        "K25P02",
+        "K25P01"
+      ]
     },
     {
       "id": "hens_plague_122",
       "name": "Unique Plague — Speed Plague",
       "killerIds": [
         "plague"
-      ],
-      "perks": [
-        "Play with Your Food",
-        "Batteries Included",
-        "Furtive Chase",
-        "Machine Learning"
       ],
       "tags": [
         "Hens",
@@ -5069,19 +4841,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Play_With_Your_Food",
+        "K34P03",
+        "FurtiveChase",
+        "K32P03"
+      ]
     },
     {
       "id": "hens_shape_123",
       "name": "Best Shape Without Limitations",
       "killerIds": [
         "shape"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Bamboozle"
       ],
       "tags": [
         "Hens",
@@ -5099,19 +4871,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "Bamboozle"
+      ]
     },
     {
       "id": "hens_shape_124",
       "name": "Funny Shape",
       "killerIds": [
         "shape"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Fire Up",
-        "Superior Anatomy",
-        "Dark Arrogance"
       ],
       "tags": [
         "Hens",
@@ -5128,19 +4900,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "FireUp",
+        "K29P01",
+        "K36P03"
+      ]
     },
     {
       "id": "hens_shape_125",
       "name": "Best Beginner Shape",
       "killerIds": [
         "shape"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Pop Goes the Weasel",
-        "Play with Your Food",
-        "Tinkerer"
       ],
       "tags": [
         "Hens",
@@ -5161,19 +4933,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "pop_goes_the_weasel",
+        "Play_With_Your_Food",
+        "Tinkerer"
+      ]
     },
     {
       "id": "hens_shape_126",
       "name": "Unique Shape — Speed Vault Wallhack Myers",
       "killerIds": [
         "shape"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Superior Anatomy",
-        "Monitor & Abuse",
-        "Hex: Face the Darkness"
       ],
       "tags": [
         "Hens",
@@ -5192,19 +4964,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "K29P01",
+        "MonitorAndAbuse",
+        "K30P02"
+      ]
     },
     {
       "id": "hens_singularity_127",
       "name": "Best Singularity Without Limitations",
       "killerIds": [
         "singularity"
-      ],
-      "perks": [
-        "Rapid Brutality",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Pop Goes the Weasel"
       ],
       "tags": [
         "Hens",
@@ -5222,19 +4994,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K33P02",
+        "K26P02",
+        "K24P03",
+        "pop_goes_the_weasel"
+      ]
     },
     {
       "id": "hens_singularity_128",
       "name": "Funny Singularity",
       "killerIds": [
         "singularity"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Rapid Brutality",
-        "Sloppy Butcher",
-        "Scourge Hook: Pain Resonance"
       ],
       "tags": [
         "Hens",
@@ -5255,19 +5027,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K33P02",
+        "Sloppy_Butcher",
+        "K26P02"
+      ]
     },
     {
       "id": "hens_singularity_129",
       "name": "Best Beginner Singularity",
       "killerIds": [
         "singularity"
-      ],
-      "perks": [
-        "Machine Learning",
-        "Genetic Limits",
-        "A Nurse's Calling",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -5288,19 +5060,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K32P03",
+        "K32P01",
+        "NurseCalling",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_singularity_130",
       "name": "Unique Singularity — Speed Singularity",
       "killerIds": [
         "singularity"
-      ],
-      "perks": [
-        "Enduring",
-        "Hubris",
-        "Coup de Grâce",
-        "Batteries Included"
       ],
       "tags": [
         "Hens",
@@ -5317,19 +5089,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Enduring",
+        "K30P03",
+        "K22P03",
+        "K34P03"
+      ]
     },
     {
       "id": "hens_skullmerchant_131",
       "name": "Best Skull Merchant Without Limitations",
       "killerIds": [
         "skullmerchant"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock",
-        "Dead Man's Switch"
       ],
       "tags": [
         "Hens",
@@ -5346,19 +5118,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "K42P01",
+        "killer:dead-man-s-switch"
+      ]
     },
     {
       "id": "hens_skullmerchant_132",
       "name": "Funny Skull Merchant",
       "killerIds": [
         "skullmerchant"
-      ],
-      "perks": [
-        "Dissolution",
-        "Hex: Ruin",
-        "Hex: Undying",
-        "Barbecue & Chilli"
       ],
       "tags": [
         "Hens",
@@ -5379,19 +5151,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K28P01",
+        "Hex_Ruin",
+        "HexUndying",
+        "killer:barbecue-chilli"
+      ]
     },
     {
       "id": "hens_skullmerchant_133",
       "name": "Best Beginner Skull Merchant",
       "killerIds": [
         "skullmerchant"
-      ],
-      "perks": [
-        "Leverage",
-        "A Nurse's Calling",
-        "Brutal Strength",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -5411,19 +5183,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K31P03",
+        "NurseCalling",
+        "Brutal_Strength",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_skullmerchant_134",
       "name": "Unique Skull Merchant — Wall Beam Skull Merchant",
       "killerIds": [
         "skullmerchant"
-      ],
-      "perks": [
-        "Dissolution",
-        "Rapid Brutality",
-        "Dark Devotion",
-        "Infectious Fright"
       ],
       "tags": [
         "Hens",
@@ -5444,19 +5216,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K28P01",
+        "K33P02",
+        "DarkDevotion",
+        "InfectiousFright"
+      ]
     },
     {
       "id": "hens_spirit_135",
       "name": "Best Spirit Without Limitations",
       "killerIds": [
         "spirit"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Turn Back the Clock",
-        "Genetic Limits"
       ],
       "tags": [
         "Hens",
@@ -5473,19 +5245,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "CorruptIntervention",
+        "K42P01",
+        "K32P01"
+      ]
     },
     {
       "id": "hens_spirit_136",
       "name": "Funny Spirit",
       "killerIds": [
         "spirit"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Scourge Hook: Jagged Compass",
-        "Scourge Hook: Pain Resonance",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -5505,19 +5277,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K38P02",
+        "K26P02",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_spirit_137",
       "name": "Best Beginner Spirit",
       "killerIds": [
         "spirit"
-      ],
-      "perks": [
-        "Hex: Ruin",
-        "Hex: Haunted Ground",
-        "Hex: Devour Hope",
-        "Hex: Thrill of the Hunt"
       ],
       "tags": [
         "Hens",
@@ -5537,19 +5309,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Ruin",
+        "Hex_HauntedGround",
+        "Hex_Devour_Hope",
+        "Hex_Thrill_Of_The_Hunt"
+      ]
     },
     {
       "id": "hens_spirit_138",
       "name": "Unique Spirit — One Shot Spirit",
       "killerIds": [
         "spirit"
-      ],
-      "perks": [
-        "Hubris",
-        "Fire Up",
-        "Brutal Strength",
-        "Enduring"
       ],
       "tags": [
         "Hens",
@@ -5565,19 +5337,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K30P03",
+        "FireUp",
+        "Brutal_Strength",
+        "Enduring"
+      ]
     },
     {
       "id": "hens_trapper_139",
       "name": "Best Trapper Without Limitations",
       "killerIds": [
         "trapper"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Agitation",
-        "Scourge Hook: Pain Resonance",
-        "Turn Back the Clock"
       ],
       "tags": [
         "Hens",
@@ -5594,19 +5366,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "Agitation",
+        "K26P02",
+        "K42P01"
+      ]
     },
     {
       "id": "hens_trapper_140",
       "name": "Funny Trapper",
       "killerIds": [
         "trapper"
-      ],
-      "perks": [
-        "Save the Best for Last",
-        "Agitation",
-        "Fire Up",
-        "Mad Grit"
       ],
       "tags": [
         "Hens",
@@ -5624,19 +5396,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Save_The_Best_For_Last",
+        "Agitation",
+        "FireUp",
+        "MadGrit"
+      ]
     },
     {
       "id": "hens_trapper_141",
       "name": "Best Beginner Trapper",
       "killerIds": [
         "trapper"
-      ],
-      "perks": [
-        "Agitation",
-        "Brutal Strength",
-        "Bamboozle",
-        "Pop Goes the Weasel"
       ],
       "tags": [
         "Hens",
@@ -5654,19 +5426,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Agitation",
+        "Brutal_Strength",
+        "Bamboozle",
+        "pop_goes_the_weasel"
+      ]
     },
     {
       "id": "hens_trapper_142",
       "name": "Unique Trapper — Small Room Trapper",
       "killerIds": [
         "trapper"
-      ],
-      "perks": [
-        "Insidious",
-        "Dragon's Grip",
-        "Agitation",
-        "Mad Grit"
       ],
       "tags": [
         "Hens",
@@ -5683,19 +5455,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Insidious",
+        "killer:dragon-s-grip",
+        "Agitation",
+        "MadGrit"
+      ]
     },
     {
       "id": "hens_trickster_143",
       "name": "Best Trickster Without Limitations",
       "killerIds": [
         "trickster"
-      ],
-      "perks": [
-        "Hex: Pentimento",
-        "Hex: Ruin",
-        "Hex: Thrill of the Hunt",
-        "Hex: Crowd Control"
       ],
       "tags": [
         "Hens",
@@ -5713,19 +5485,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P03",
+        "Hex_Ruin",
+        "Hex_Thrill_Of_The_Hunt",
+        "K23P02"
+      ]
     },
     {
       "id": "hens_trickster_144",
       "name": "Funny Trickster",
       "killerIds": [
         "trickster"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Hex: Blood Favour",
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance"
       ],
       "tags": [
         "Hens",
@@ -5747,19 +5519,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "killer:hex-blood-favour",
+        "CorruptIntervention",
+        "K26P02"
+      ]
     },
     {
       "id": "hens_trickster_145",
       "name": "Best Beginner Trickster",
       "killerIds": [
         "trickster"
-      ],
-      "perks": [
-        "Hex: Crowd Control",
-        "Deadlock",
-        "Scourge Hook: Gift of Pain",
-        "Hex: Plaything"
       ],
       "tags": [
         "Hens",
@@ -5780,19 +5552,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K23P02",
+        "K25P01",
+        "K25P03",
+        "K25P02"
+      ]
     },
     {
       "id": "hens_trickster_146",
       "name": "Unique Trickster — Main Event Trickster",
       "killerIds": [
         "trickster"
-      ],
-      "perks": [
-        "Forced Hesitation",
-        "Batteries Included",
-        "Discordance",
-        "Machine Learning"
       ],
       "tags": [
         "Hens",
@@ -5812,19 +5584,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K32P02",
+        "K34P03",
+        "Discordance",
+        "K32P03"
+      ]
     },
     {
       "id": "hens_twins_147",
       "name": "Best Twins Without Limitations",
       "killerIds": [
         "twins"
-      ],
-      "perks": [
-        "Hex: Pentimento",
-        "Hex: Ruin",
-        "Hex: Hive Mind",
-        "Hex: Thrill of the Hunt"
       ],
       "tags": [
         "Hens",
@@ -5841,19 +5613,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P03",
+        "Hex_Ruin",
+        "K42P03",
+        "Hex_Thrill_Of_The_Hunt"
+      ]
     },
     {
       "id": "hens_twins_148",
       "name": "Funny Twins",
       "killerIds": [
         "twins"
-      ],
-      "perks": [
-        "Deerstalker",
-        "Scourge Hook: Pain Resonance",
-        "Corrupt Intervention",
-        "Forced Hesitation"
       ],
       "tags": [
         "Hens",
@@ -5874,19 +5646,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Deerstalker",
+        "K26P02",
+        "CorruptIntervention",
+        "K32P02"
+      ]
     },
     {
       "id": "hens_twins_149",
       "name": "Best Beginner Twins",
       "killerIds": [
         "twins"
-      ],
-      "perks": [
-        "Hex: Thrill of the Hunt",
-        "Hex: Ruin",
-        "Coup de Grâce",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -5906,19 +5678,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Hex_Thrill_Of_The_Hunt",
+        "Hex_Ruin",
+        "K22P03",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_twins_150",
       "name": "Unique Twins — Insidious Twins",
       "killerIds": [
         "twins"
-      ],
-      "perks": [
-        "Deerstalker",
-        "Insidious",
-        "Forced Hesitation",
-        "Dragon's Grip"
       ],
       "tags": [
         "Hens",
@@ -5938,19 +5710,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Deerstalker",
+        "Insidious",
+        "K32P02",
+        "killer:dragon-s-grip"
+      ]
     },
     {
       "id": "hens_unknown_151",
       "name": "Best Unknown Without Limitations",
       "killerIds": [
         "unknown"
-      ],
-      "perks": [
-        "Corrupt Intervention",
-        "Scourge Hook: Pain Resonance",
-        "Dead Man's Switch",
-        "Eruption"
       ],
       "tags": [
         "Hens",
@@ -5967,19 +5739,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "CorruptIntervention",
+        "K26P02",
+        "killer:dead-man-s-switch",
+        "K24P03"
+      ]
     },
     {
       "id": "hens_unknown_152",
       "name": "Funny Unknown",
       "killerIds": [
         "unknown"
-      ],
-      "perks": [
-        "Scourge Hook: Pain Resonance",
-        "Barbecue & Chilli",
-        "Eruption",
-        "Nowhere to Hide"
       ],
       "tags": [
         "Hens",
@@ -5998,19 +5770,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P02",
+        "killer:barbecue-chilli",
+        "K24P03",
+        "K30P01"
+      ]
     },
     {
       "id": "hens_unknown_153",
       "name": "Best Beginner Unknown",
       "killerIds": [
         "unknown"
-      ],
-      "perks": [
-        "Unforeseen",
-        "Brutal Strength",
-        "A Nurse's Calling",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -6031,19 +5803,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K35P02",
+        "Brutal_Strength",
+        "NurseCalling",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_unknown_154",
       "name": "Unique Unknown — Fake Illusion Unknown",
       "killerIds": [
         "unknown"
-      ],
-      "perks": [
-        "Dragon's Grip",
-        "Insidious",
-        "Discordance",
-        "Scourge Hook: Floods of Rage"
       ],
       "tags": [
         "Hens",
@@ -6062,19 +5834,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:dragon-s-grip",
+        "Insidious",
+        "Discordance",
+        "K27P01"
+      ]
     },
     {
       "id": "hens_wraith_155",
       "name": "Best Wraith Without Limitations",
       "killerIds": [
         "wraith"
-      ],
-      "perks": [
-        "Sloppy Butcher",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Bamboozle"
       ],
       "tags": [
         "Hens",
@@ -6095,19 +5867,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Sloppy_Butcher",
+        "K26P02",
+        "K24P03",
+        "Bamboozle"
+      ]
     },
     {
       "id": "hens_wraith_156",
       "name": "Funny Wraith",
       "killerIds": [
         "wraith"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Sloppy Butcher",
-        "Eruption",
-        "Scourge Hook: Pain Resonance"
       ],
       "tags": [
         "Hens",
@@ -6129,19 +5901,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "Sloppy_Butcher",
+        "K24P03",
+        "K26P02"
+      ]
     },
     {
       "id": "hens_wraith_157",
       "name": "Best Beginner Wraith",
       "killerIds": [
         "wraith"
-      ],
-      "perks": [
-        "Pop Goes the Weasel",
-        "Bamboozle",
-        "A Nurse's Calling",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -6164,19 +5936,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "pop_goes_the_weasel",
+        "Bamboozle",
+        "NurseCalling",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_wraith_158",
       "name": "Unique Wraith — Dissolution Wraith",
       "killerIds": [
         "wraith"
-      ],
-      "perks": [
-        "Dissolution",
-        "Rapid Brutality",
-        "Hex: Crowd Control",
-        "Coup de Grâce"
       ],
       "tags": [
         "Hens",
@@ -6197,19 +5969,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K28P01",
+        "K33P02",
+        "K23P02",
+        "K22P03"
+      ]
     },
     {
       "id": "hens_xenomorph_159",
       "name": "Best Xenomorph Without Limitations",
       "killerIds": [
         "xenomorph"
-      ],
-      "perks": [
-        "Hex: Pentimento",
-        "Hex: Ruin",
-        "Hex: Thrill of the Hunt",
-        "Hex: Blood Favour"
       ],
       "tags": [
         "Hens",
@@ -6227,19 +5999,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "K26P03",
+        "Hex_Ruin",
+        "Hex_Thrill_Of_The_Hunt",
+        "killer:hex-blood-favour"
+      ]
     },
     {
       "id": "hens_xenomorph_160",
       "name": "Funny Xenomorph",
       "killerIds": [
         "xenomorph"
-      ],
-      "perks": [
-        "Barbecue & Chilli",
-        "Scourge Hook: Pain Resonance",
-        "Eruption",
-        "Bamboozle"
       ],
       "tags": [
         "Hens",
@@ -6259,19 +6031,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "killer:barbecue-chilli",
+        "K26P02",
+        "K24P03",
+        "Bamboozle"
+      ]
     },
     {
       "id": "hens_xenomorph_161",
       "name": "Best Beginner Xenomorph",
       "killerIds": [
         "xenomorph"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Spies from the Shadows",
-        "Pop Goes the Weasel",
-        "Scourge Hook: Gift of Pain"
       ],
       "tags": [
         "Hens",
@@ -6291,19 +6063,19 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "Spies_From_The_Shadows",
+        "pop_goes_the_weasel",
+        "K25P03"
+      ]
     },
     {
       "id": "hens_xenomorph_162",
       "name": "Unique Xenomorph — One Shot Xenomorph",
       "killerIds": [
         "xenomorph"
-      ],
-      "perks": [
-        "Bamboozle",
-        "Enduring",
-        "Superior Anatomy",
-        "Spirit Fury"
       ],
       "tags": [
         "Hens",
@@ -6319,7 +6091,13 @@ const INITIAL_DATA = {
       "version": "",
       "favorite": false,
       "currentlyUsing": false,
-      "changes": ""
+      "changes": "",
+      "perkIds": [
+        "Bamboozle",
+        "Enduring",
+        "K29P01",
+        "SpiritFury"
+      ]
     }
   ],
   "survivorBuilds": [],
@@ -6331,3 +6109,4 @@ const INITIAL_DATA = {
     "patch": ""
   }
 };
+if(typeof window!=="undefined")window.INITIAL_DATA=INITIAL_DATA;

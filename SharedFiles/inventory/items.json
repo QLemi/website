@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "Item_Camper_Medkit_Anniversary2020",
+      "name": "Anniversary Med-kit",
+      "aliases": [],
+      "type": "medkit",
+      "rarity": "common",
+      "eventId": "Anniversary2021",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_anniversaryMedKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A festive Med-kit that explodes with confetti upon fully healing a Survivor. Surprise!   24 charges . Increases  the speed that you heal others by  40% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33% . Increases  confetti by  "
+    },
+    {
+      "id": "Item_Camper_MedKit",
+      "name": "Camping Aid Kit",
+      "aliases": [],
+      "type": "medkit",
+      "rarity": "common",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_campingAidKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A rudimentary aid kit which can save lives in emergencies, even if it's lacking some of its supplies.   24 charges . Increases  the speed that you heal others by  35% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33% .  A full h"
+    },
+    {
+      "id": "Item_Camper_Medkit_Anniversary2022",
+      "name": "Masquerade Med-Kit",
+      "aliases": [
+        "Masquerade Med-Kit (Twisted Masquerade )"
+      ],
+      "type": "medkit",
+      "rarity": "common",
+      "eventId": "Anniversary2025",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_masqueradeMedKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A festive Med-Kit with a shocking surprise, giving a whole new meaning to the term \"health scare.\"   24 charges . Increases  the speed that you heal others by  40% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33% . Increases  c"
+    },
+    {
+      "id": "Item_Camper_MedKit02",
+      "name": "First Aid Kit",
+      "aliases": [],
+      "type": "medkit",
+      "rarity": "uncommon",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_firstAidKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A standard first aid kit with all the necessary equipment for treating common to more serious injuries.   24 charges.  Increases  the speed that you heal others by  40% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33% .  A full"
+    },
+    {
+      "id": "Item_Camper_Medkit05",
+      "name": "All Hallows' Eve Lunchbox",
+      "aliases": [
+        "All Hallows' Eve Lunchbox (Halloween)"
+      ],
+      "type": "medkit",
+      "rarity": "rare",
+      "eventId": "Halloween2025",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_allHallowsEveLunchbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A plastic lunchbox with phosphorescent Halloween stickers that has been packed with first-aid equipment.   24 charges.  Increases  the speed that you heal others by  40% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33% .Makes y"
+    },
+    {
+      "id": "Item_Camper_Medkit_Anniversary2026",
+      "name": "Banquet Med-Kit",
+      "aliases": [],
+      "type": "medkit",
+      "rarity": "rare",
+      "eventId": "Anniversary2026",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_banquetMedKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Does it heal indigestion? There’s only one way to find out.   24  charges. Increases  the speed that you heal others by  40% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33%.    A full heal requires  16  charges."
+    },
+    {
+      "id": "Item_Camper_MedKit03",
+      "name": "Emergency Med-kit",
+      "aliases": [],
+      "type": "medkit",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_emergencyMedKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A sturdy and well organized medical kit equipped with top condition emergency supplies.   24 charges . Increases  the speed that you heal others by  45% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by  33% .  A full heal requires  "
+    },
+    {
+      "id": "Item_Camper_MedKit04",
+      "name": "Ranger Med-kit",
+      "aliases": [],
+      "type": "medkit",
+      "rarity": "veryrare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_rangerMedKit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A large metal box containing medical supplies aimed for emergency rescues in hard to reach, often isolated locations.   24 charges . Increases  the speed that you heal others by  50% .Unlocks the  self-healing  action. Decreases  the speed and efficiency when healing yourself by "
+    },
+    {
+      "id": "Item_Camper_AnniversaryToolbox",
+      "name": "Anniversary Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "common",
+      "eventId": "Anniversary2021",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_anniversaryToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A toolbox that’s slightly explosive.   32 charges . Increases  repair speed by  50% .Unlocks the sabotage action. Increases  sabotage speed by  50% .Detonates a firework once depleted. Yay!  Repairing a generator requires  90  charges.  Sabotaging a hook requires  6  charges."
+    },
+    {
+      "id": "Item_Camper_LunarToolbox",
+      "name": "Festive Toolbox",
+      "aliases": [
+        "Festive Toolbox (Chinski nowy rok)"
+      ],
+      "type": "toolbox",
+      "rarity": "common",
+      "eventId": "Lunar2023",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_festiveToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A Toolbox packed to the brim with fireworks, it's prepared to celebrate all your life’s successes... and failures.   32 charges . Increases  repair speed by  50% .Unlocks the  sabotage  action. Increases  sabotage speed by  50% . Great Skill Checks  detonate a small cluster of fi"
+    },
+    {
+      "id": "Item_Camper_Toolbox_Anniversary2022",
+      "name": "Masquerade Toolbox",
+      "aliases": [
+        "Masquerade Toolbox (Twisted Masquerade )"
+      ],
+      "type": "toolbox",
+      "rarity": "common",
+      "eventId": "Anniversary2025",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_masqueradeToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A Toolbox with all of the standard gadgets: wrenches, screwdrivers, fireworks, a hammer...   32 charges .Increases repair speed by  50%. Unlocks the  sabotage  action. Increases  sabotage speed by  50% .Detonates a firework once depleted. Yay!  Repairing a generator requires  90 "
+    },
+    {
+      "id": "Item_Camper_WornoutToolbox",
+      "name": "Worn-out Tools",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "common",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_wornOutTools.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Metal box containing out of condition tools that could break at any moment. Even without training, can be used to repair or break various mechanical components.   16 charges . Increases  repair speed by  50% . Decreases  Skill Check success zone size by  10% .Unlocks the  sabotag"
+    },
+    {
+      "id": "Item_Camper_Toolbox",
+      "name": "Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "uncommon",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_toolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Metal box containing a set of basic tools. Even without training, can be used to repair or break various mechanical components.   20 charges.  Increases  repair speed by  50% .Unlocks the  sabotage  action. Increases  sabotage speed by  15% .  Repairing a generator requires  90  "
+    },
+    {
+      "id": "Item_Camper_Toolbox_Anniversary2026",
+      "name": "Banquet Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "rare",
+      "eventId": "Anniversary2026",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_banquetToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Nothing settles the stomach like manual labor.   32 charges . Increases  repair speed by  50%. Unlocks the  sabotage  action. Increases  sabotage speed by  50%"
+    },
+    {
+      "id": "Item_Camper_CommodiousToolbox",
+      "name": "Commodious Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_commodiousToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A large metal box containing basic tools and extra mechanical parts. Even without training, can be used to repair or break various mechanical components.   32 charges . Increases  repair speed by  50% .Unlocks the  sabotage  action. Increases  sabotage speed by  50% .  Repairing "
+    },
+    {
+      "id": "Item_Camper_MechanicsToolbox",
+      "name": "Mechanic's Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_mechanicsToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Metal box with specialized mechanics tools. Even without training, can be used to repair or break various mechanical components.   16 charges . Increases  repair speed by  75% .Unlocks the  sabotage  action. Increases  sabotage speed by  25% .  Repairing a generator requires  90 "
+    },
+    {
+      "id": "Item_Camper_AlexsToolbox",
+      "name": "Alex's Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "veryrare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_alexsToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A metal box containing mainly saws and vice grips of varying sizes but also other tools. Even though the content of this Toolbox is clearly aimed at destructive deeds, it can be used to repair various mechanical components as well.   18 charges . Increases  repair speed by  10% ."
+    },
+    {
+      "id": "Item_Camper_EngineerToolbox",
+      "name": "Engineer's Toolbox",
+      "aliases": [],
+      "type": "toolbox",
+      "rarity": "veryrare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_engineersToolbox.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Metal box with highly specialized tools meant for engineering. Most of the tools can still be used by neophytes to make fast repairs or break various mechanical components.   16 charges . Increases  repair speed by  100% .Unlocks the  sabotage  action. Increases  sabotage speed b"
+    },
+    {
+      "id": "Item_Camper_Flashlight_Anniversary2020",
+      "name": "Anniversary Flashlight",
+      "aliases": [],
+      "type": "flashlight",
+      "rarity": "common",
+      "eventId": "Anniversary2021",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_anniversaryFlashlight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A festive Flashlight that explodes with confetti upon blinding a Killer. Surprise!   8 Seconds  of use."
+    },
+    {
+      "id": "Item_Camper_Flashlight_Anniversary2022",
+      "name": "Masquerade Flashlight",
+      "aliases": [
+        "Masquerade Flashlight (Twisted Masquerade )"
+      ],
+      "type": "flashlight",
+      "rarity": "common",
+      "eventId": "Anniversary2025",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_masqueradeFlashlight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Not even a mask can protect you from this Flashlight's bright beam.   8 Seconds  of use. Increases  confetti by  100% ."
+    },
+    {
+      "id": "Item_Camper_Flashlight",
+      "name": "Flashlight",
+      "aliases": [],
+      "type": "flashlight",
+      "rarity": "uncommon",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_flashlight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A standard Flashlight. Can be used to light your way in the darkness.   8 seconds  of use."
+    },
+    {
+      "id": "Item_Camper_Flashlight_Anniversary2026",
+      "name": "Banquet Flashlight",
+      "aliases": [],
+      "type": "flashlight",
+      "rarity": "rare",
+      "eventId": "Anniversary2026",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_banquetFlashlight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "It’s time to burn calories...and retinas.  8 seconds  of use."
+    },
+    {
+      "id": "Item_Camper_Flashlight02",
+      "name": "Sport Flashlight",
+      "aliases": [],
+      "type": "flashlight",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_sportFlashlight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A very portable Flashlight with a good grip. Its efficient technology produces a powerful light while consuming less power.   8 Seconds of use . Decreases  Flashlight battery consumption by  11% . Increases  the accuracy of the Flashlight beam by  20% ."
+    },
+    {
+      "id": "Item_Camper_Flashlight04",
+      "name": "Will O' Wisp",
+      "aliases": [
+        "Will O' Wisp (Halloween)"
+      ],
+      "type": "flashlight",
+      "rarity": "rare",
+      "eventId": "Halloween2024",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_willOWisp.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A Flashlight equipped with a special lens cover that adds an orange tint and a little ghost to the beam.   8 Seconds  of use.  Considerably increases  Friendly Ghosts in your life."
+    },
+    {
+      "id": "Item_Camper_Flashlight03",
+      "name": "Utility Flashlight",
+      "aliases": [],
+      "type": "flashlight",
+      "rarity": "veryrare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_utilityFlashlight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A sturdy but heavy Flashlight that packs a lot of power.   12 Seconds of use . Increases  the brightness of the Flashlight beam by  30% . Increases  Blindness duration by  15% . Decreases  the accuracy of the Flashlight beam by  20% ."
+    },
+    {
+      "id": "Item_Camper_FadedMap",
+      "name": "Cryptic Map",
+      "aliases": [],
+      "type": "map",
+      "rarity": "common",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_crypticMap.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Looking at it, the directions make no sense. But merely holding it grants you an uncanny intuition.  Press the Use Item Button to reveal auras of all pallets and vaults within  24 meters  for  10 seconds .Using the secondary interaction creates a beam of light at the Survivor's l"
+    },
+    {
+      "id": "Item_Camper_BeigeMap",
+      "name": "Scribbled Map",
+      "aliases": [],
+      "type": "map",
+      "rarity": "uncommon",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_scribbledMap.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Peering at the parchment, a path appears in your mind. Moments later, you feel lost again.  Press the Use Item Button to reveal auras of all pallets and vaults within  32 meters  for  12 seconds .Using the secondary interaction creates a beam of light at the Survivor's location. "
+    },
+    {
+      "id": "Item_Camper_RainbowMap",
+      "name": "Annotated Map",
+      "aliases": [],
+      "type": "map",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_annotatedMap.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "The sketch is clear and detailed. Strange knowledge flows into you, followed by dread uncertainty.  Press the Use Item Button to reveal auras of all pallets and vaults within  40 meters  for  14 seconds .Using the secondary interaction creates a beam of light at the Survivor's lo"
+    },
+    {
+      "id": "Item_Camper_Map_Spring2024",
+      "name": "Bloodsense Map",
+      "aliases": [
+        "Bloodsense Map (Blood Moon)"
+      ],
+      "type": "map",
+      "rarity": "rare",
+      "eventId": "Spring2026",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_bloodsenseMap.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A bloodstained piece of parchment, hastily rolled and burning with a strange power.  Press the Use Item Button to reveal auras of all pallets, vaults and injured Survivors within  48 meters  for  14 seconds .Using the secondary interaction creates a beam of light at the Survivor'"
+    },
+    {
+      "id": "Item_Camper_BrokenKey",
+      "name": "Broken Key",
+      "aliases": [],
+      "type": "key",
+      "rarity": "common",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_brokenKey.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "The bow and shank of a key, vibrating with power.   Consume a charge to:  Reveal auras of Survivors within  48 meters  for  8 seconds  by holding the Use Item Button.   Begins with  6 charges ."
+    },
+    {
+      "id": "Item_Camper_DullKey",
+      "name": "Dull Key",
+      "aliases": [],
+      "type": "key",
+      "rarity": "uncommon",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_dullKey.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A bent and dull Key that once held great power.   Consume a charge to:  Reveal auras of Survivors within  56 meters  for  9 seconds  by holding the Use Item Button.Unlock Chests quickly. Chests unlocked with this Key have a revealed aura within 42 meters, enabling another Survivo"
+    },
+    {
+      "id": "Item_Camper_Key",
+      "name": "Skeleton Key",
+      "aliases": [],
+      "type": "key",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_skeletonKey.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A tarnished and crooked key, vibrating with ominous power.   Consume a charge to:  Reveal auras of Survivors within  64 meters  for  10 seconds  by holding the Use Item Button.Unlock Chests quickly. Chests unlocked with this Key have a revealed aura within 42 meters, enabling ano"
+    },
+    {
+      "id": "Item_Survivor_MakeshiftFogVial",
+      "name": "Apprentice's Fog Vial",
+      "aliases": [],
+      "type": "fogvial",
+      "rarity": "common",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_apprenticesFogVial.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Made by the hands of a diligent but timid novice.  Releases concentrated Fog.Fog Cloud lasts for  8 seconds Fog Cloud expands to a maximum of  8 meters .While inside a Fog Cloud, auras are suppressed, and Survivors leave no scratch marks and make no sound.Has 4 charges.Recharges "
+    },
+    {
+      "id": "Item_Survivor_PrototypeFogVial",
+      "name": "Artisan's Fog Vial",
+      "aliases": [],
+      "type": "fogvial",
+      "rarity": "uncommon",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_artisansFogVial.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Crafted by an experienced glazier with a love for her craft.Releases concentrated Fog.Fog Cloud lasts for  10 seconds Fog Cloud expands to a maximum of  8 meters .While inside a Fog Cloud, auras are suppressed, and Survivors leave no scratch marks and make no sound.Has 4 charges."
+    },
+    {
+      "id": "Item_Survivor_VigosFogVial",
+      "name": "Vigo's Fog Vial",
+      "aliases": [],
+      "type": "fogvial",
+      "rarity": "rare",
+      "eventId": null,
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_vigosFogVial.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "From the man’s own collection. Impeccable. Unparalleled.Releases concentrated Fog.Fog Cloud lasts for  12 seconds Fog Cloud expands to a maximum of  8 meters .While inside a Fog Cloud, auras are suppressed, and Survivors leave no scratch marks and make no sound.Has 4 charges.Rech"
+    },
+    {
+      "id": "Item_Camper_Firecracker_Chinese",
+      "name": "Chinese Firecracker",
+      "aliases": [
+        "Chinese Firecracker (Chinski nowy rok)"
+      ],
+      "type": "firecracker",
+      "rarity": "common",
+      "eventId": "Lunar2023",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_chineseFirecracker.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A row of small explosive devices wrapped in heavy paper casing. Detonates into loud bangs and intense light flashes. Can be used as a distraction, as a blinding device or to celebrate.   1 charge."
+    },
+    {
+      "id": "Item_Camper_Firecracker_Flashbang",
+      "name": "Flash Grenade",
+      "aliases": [],
+      "type": "firecracker",
+      "rarity": "common",
+      "eventId": null,
+      "availableInBloodweb": false,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_flashGrenade.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A hand grenade that creates a large flash of light and a loud sound on detonation.   Limited items are consumed by The Entity at the trial's end."
+    },
+    {
+      "id": "Item_Camper_Firecracker_Anniversary2019",
+      "name": "Third Year Party Starter",
+      "aliases": [],
+      "type": "firecracker",
+      "rarity": "common",
+      "eventId": "Anniversary2019",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_thirdYearPartyStarter.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A small, highly-explosive dinner table decoration. Detonates into loud bangs, intense light flashes, and playful confetti. Can be used as a distraction, as a blinding device or to celebrate our three years together.   1 charge."
+    },
+    {
+      "id": "Item_Camper_VoidBomb_Halloween2024",
+      "name": "Void Crystal",
+      "aliases": [],
+      "type": "firecracker",
+      "rarity": "common",
+      "eventId": "Halloween2024",
+      "availableInBloodweb": false,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_voidCrystal.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "Cold to the touch, the crystal vibrates from the force contained within. 1 charge.   When shattered, the Void Crystal releases thick smoke with an expanding radius of up to  4 meters . Survivors within 6 meters of the smoke do not leave scratch marks.The smoke dissipates 8 second"
+    },
+    {
+      "id": "Item_Camper_Firecracker_WinterEvent",
+      "name": "Winter Party Starter",
+      "aliases": [
+        "Winter Party Starter (Bone Chill)"
+      ],
+      "type": "firecracker",
+      "rarity": "rare",
+      "eventId": "Winter2024",
+      "availableInBloodweb": true,
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconItems_winterPartyStarter.png",
+        "alternatives": [],
+        "local": null
+      },
+      "description": "A small, highly-explosive dinner table decoration. Detonates into loud bangs and intense light flashes. Can be used as a distraction, as a blinding device or to celebrate.   1 charge."
+    }
+  ]
+}

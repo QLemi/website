@@ -1,15 +1,82 @@
+let latestRefresh = 0;
+let refreshController = null;
+let sourceReports = [];
+function validCount(raw) {
+  const text = String(raw ?? '').trim();
+  if (!/^\d+$/.test(text)) return null;
+  const value = Number(text);
+  return Number.isSafeInteger(value) ? value : null;
+}
+async function fetchSourceCSV(gid, signal) {
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + encodeURIComponent(gid);
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  if (signal?.aborted) abort();else signal?.addEventListener('abort', abort, {
+    once: true
+  });
+  const timer = setTimeout(abort, 15000);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal
+    });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const text = (await response.text()).replace(/^\uFEFF/, '');
+    if (/^\s*</.test(text)) throw new Error('The source returned a page instead of CSV data.');
+    if (!text.trim()) throw new Error('The source returned an empty response.');
+    return parseCSV(text);
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener('abort', abort);
+  }
+}
+function renderSourceReports() {
+  const host = document.getElementById('source-reports');
+  if (!host) return;
+  host.replaceChildren();
+  const issues = sourceReports.filter(report => report.status === 'error' || report.warnings.length);
+  host.hidden = issues.length === 0;
+  issues.forEach(report => {
+    const notice = document.createElement('div');
+    notice.className = 'source-notice source-notice-' + report.status;
+    const message = document.createElement('span');
+    message.textContent = report.name + ': ' + (report.status === 'error' ? report.error : 'Skipped invalid values: ' + report.warnings.length + '.');
+    notice.appendChild(message);
+    if (report.warnings.length) {
+      const details = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = 'Invalid values';
+      const list = document.createElement('ul');
+      report.warnings.forEach(warning => {
+        const item = document.createElement('li');
+        item.textContent = warning;
+        list.appendChild(item);
+      });
+      details.append(summary, list);
+      notice.appendChild(details);
+    }
+    host.appendChild(notice);
+  });
+}
 const SHEET_ID = STREAKI_CONFIG.SHEET_ID;
 const SHEET_MAIN_GID = STREAKI_CONFIG.SHEET_MAIN_GID;
 const SHEET_INNE_GID = STREAKI_CONFIG.SHEET_INNE_GID;
 const SHEET_PLAY_GID = STREAKI_CONFIG.SHEET_PLAY_GID || '821403985';
-const PORTRAIT_MAP = STREAKI_CONFIG.PORTRAIT_MAP;
+let PORTRAIT_MAP = {};
 const PLACEHOLDER_IMG = STREAKI_CONFIG.PLACEHOLDER_IMG;
-const TAG_LABELS = STREAKI_CONFIG.TAG_LABELS || { K: 'Killer', S: 'Survivor', O: 'Both', P: 'Playthrough' };
-
-
+const TAG_LABELS = STREAKI_CONFIG.TAG_LABELS || {
+  K: 'Killer',
+  S: 'Survivor',
+  O: 'Both',
+  P: 'Playthrough'
+};
 if (document.body) document.body.classList.add('view-default');
 let cachedCharacters = null;
-let enabledTags = { K: true, S: true, O: true, P: true };
+let enabledTags = {
+  K: true,
+  S: true,
+  O: true,
+  P: true
+};
 let searchQuery = '';
 let activeOnly = false;
 let multipleAttemptsOnly = false;
@@ -20,7 +87,6 @@ let playthroughFirst = false;
 let sortMode = 'best-desc';
 let historyIdCounter = 0;
 const drawerAnimations = new WeakMap();
-
 function parseCSV(text) {
   const rows = [];
   let current = [];
@@ -30,24 +96,34 @@ function parseCSV(text) {
     const char = text[i];
     const next = text[i + 1];
     if (inQuotes) {
-      if (char === '"' && next === '"') { field += '"'; i++; }
-      else if (char === '"') inQuotes = false;
-      else field += char;
+      if (char === '"' && next === '"') {
+        field += '"';
+        i++;
+      } else if (char === '"') inQuotes = false;else field += char;
     } else {
-      if (char === '"') inQuotes = true;
-      else if (char === ',') { current.push(field); field = ''; }
-      else if (char === '\n' || (char === '\r' && next === '\n')) {
-        current.push(field); rows.push(current); current = []; field = '';
+      if (char === '"') inQuotes = true;else if (char === ',') {
+        current.push(field);
+        field = '';
+      } else if (char === '\n' || char === '\r' && next === '\n') {
+        current.push(field);
+        rows.push(current);
+        current = [];
+        field = '';
         if (char === '\r') i++;
       } else if (char === '\r') {
-        current.push(field); rows.push(current); current = []; field = '';
+        current.push(field);
+        rows.push(current);
+        current = [];
+        field = '';
       } else field += char;
     }
   }
-  if (field || current.length) { current.push(field); rows.push(current); }
+  if (field || current.length) {
+    current.push(field);
+    rows.push(current);
+  }
   return rows;
 }
-
 function parseTags(raw) {
   const up = (raw || '').toUpperCase();
   const tags = [];
@@ -61,7 +137,6 @@ function parseTags(raw) {
   }
   return tags;
 }
-
 function typeFromTags(tags) {
   if (!tags || !tags.length) return 'killer';
   const first = tags[0];
@@ -70,78 +145,69 @@ function typeFromTags(tags) {
   if (first === 'P') return 'playthrough';
   return 'killer';
 }
-
 function mergeTagsOrdered(streaks) {
   const seen = new Set();
   const out = [];
   streaks.forEach(s => {
     (s.tags || []).forEach(t => {
-      if (!seen.has(t)) { seen.add(t); out.push(t); }
+      if (!seen.has(t)) {
+        seen.add(t);
+        out.push(t);
+      }
     });
   });
   return out;
 }
-
 function roleLabel(type) {
   if (type === 'survivor') return 'Survivor';
   if (type === 'other') return 'Both';
   if (type === 'playthrough') return 'Playthrough';
   return 'Killer';
 }
-
 function tagsHtml(tags) {
-  return (tags || []).map(t =>
-    `<span class="role-tag tag-${t}">${TAG_LABELS[t] || t}</span>`
-  ).join('');
+  return (tags || []).map(t => `<span class="role-tag tag-${t}">${TAG_LABELS[t] || t}</span>`).join('');
 }
-
 function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-
 function typeClass(type) {
   if (type === 'survivor') return ' survivor';
   if (type === 'other') return ' other';
   if (type === 'playthrough') return ' playthrough';
   return '';
 }
-
-async function loadSheet(gid, mode) {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Failed to load sheet gid=${gid} (HTTP ${response.status})`);
-
-  const rows = parseCSV(await response.text());
-  if (rows.length < 2) return [];
-
+async function loadSheet(gid, mode, signal, warnings = []) {
+  const rows = await fetchSourceCSV(gid, signal);
+  if (rows.length < 2) throw new Error('The source does not contain a data table.');
   let headerRowIndex = -1;
   for (let i = 0; i < Math.min(rows.length, 15); i++) {
     const names = rows[i].filter(c => c && c.trim().length > 2);
-    if (names.length >= 2) { headerRowIndex = i; break; }
+    if (names.length >= 2) {
+      headerRowIndex = i;
+      break;
+    }
   }
-  if (headerRowIndex === -1) return [];
-
+  if (headerRowIndex === -1) throw new Error('Could not recognize the source table.');
   const header = rows[headerRowIndex];
   const dataStart = headerRowIndex + 1;
   const step = mode === 'inne' ? 4 : 3;
-
   const positions = [];
   for (let col = 0; col < header.length; col++) {
     const name = (header[col] || '').trim();
-    if (name) positions.push({ col, name });
+    if (name) positions.push({
+      col,
+      name
+    });
   }
-
   const characters = [];
-  for (const { col, name } of positions) {
+  for (const {
+    col,
+    name
+  } of positions) {
     const streaks = [];
     for (let r = dataStart; r < rows.length; r++) {
       const row = rows[r];
       while (row.length <= col + step) row.push('');
-
       let category, valueRaw, checkRaw, tags;
       if (mode === 'inne') {
         tags = parseTags(row[col]);
@@ -156,15 +222,20 @@ async function loadSheet(gid, mode) {
         valueRaw = (row[col + 1] || '').trim();
         checkRaw = (row[col + 2] || '').trim().toUpperCase();
       }
-
       if (!valueRaw) continue;
-      const value = parseInt(valueRaw, 10);
-      if (isNaN(value)) continue;
-
-      const isFinished = (checkRaw === 'TRUE' || checkRaw === 'CHECKED' || checkRaw === '\u2713' || checkRaw === 'YES');
-      streaks.push({ category: category || 'Streak', value, active: !isFinished, tags });
+      const value = validCount(valueRaw);
+      if (value === null) {
+        warnings.push('Row ' + (r + 1) + ', ' + name + ': ' + valueRaw);
+        continue;
+      }
+      const isFinished = checkRaw === 'TRUE' || checkRaw === 'CHECKED' || checkRaw === '\u2713' || checkRaw === 'YES';
+      streaks.push({
+        category: category || 'Streak',
+        value,
+        active: !isFinished,
+        tags
+      });
     }
-
     if (streaks.length > 0) {
       const charTags = mode === 'inne' ? mergeTagsOrdered(streaks) : ['K'];
       characters.push({
@@ -178,52 +249,22 @@ async function loadSheet(gid, mode) {
   }
   return characters;
 }
-
-
-async function loadPlaythroughSheet() {
+async function loadPlaythroughSheet(signal, warnings = []) {
   if (!SHEET_PLAY_GID) return [];
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_PLAY_GID}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    console.warn('Playthrough sheet failed', response.status);
-    return [];
-  }
-  const rows = parseCSV(await response.text());
-  if (!rows.length) return [];
-
+  const rows = await fetchSourceCSV(SHEET_PLAY_GID, signal);
+  if (rows.length < 6) throw new Error('Could not recognize the playthrough table.');
   const cell = (r, c) => {
     if (r < 0 || r >= rows.length) return '';
     const row = rows[r] || [];
     return (row[c] || '').trim();
   };
   const isDone = () => false;
-  const num = (v) => {
-    const n = parseFloat(String(v || '').replace(',', '.'));
-    return isNaN(n) ? 0 : n;
-  };
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const num = value => String(value ?? '').trim() ? validCount(value) : 0;
   const out = [];
   const maxCols = Math.max(0, ...rows.map(r => r.length));
-
   for (let col = 1; col < maxCols; col += 2) {
     const name = cell(5, col);
     if (!name) continue;
-
     const fields = {
       type: cell(6, col),
       games: cell(7, col),
@@ -233,16 +274,13 @@ async function loadPlaythroughSheet() {
       k1: cell(11, col),
       k0: cell(12, col),
       note: cell(13, col),
-      noteDate: cell(13, col + 1)  
+      noteDate: cell(13, col + 1)
     };
-
-    
     const notes = [];
     for (let r = 14; r < rows.length; r++) {
       const value = cell(r, col);
       const caption = cell(r, col + 1);
       if (!value && !caption) {
-        
         const nVal = cell(r + 1, col);
         const nCap = cell(r + 1, col + 1);
         if (!nVal && !nCap) break;
@@ -258,42 +296,34 @@ async function loadPlaythroughSheet() {
         caption
       });
     }
-
+    const invalid = ['games', 'k4', 'k3', 'k2', 'k1', 'k0'].filter(key => String(fields[key] || '').trim() && validCount(fields[key]) === null);
+    if (invalid.length) {
+      invalid.forEach(key => warnings.push(name + ', ' + key + ': ' + fields[key]));
+      continue;
+    }
     out.push(buildPlayEntry(name, fields, [], notes, isDone, num));
   }
-
   return out;
 }
-
 function buildPlayEntry(name, fields, extras, details, isDone, num) {
   const typeRaw = normSafe(fields.type);
   let playType = 'challenge';
-  
-  if (
-    typeRaw === 'session' || typeRaw === 'sesja' || typeRaw === 'log' ||
-    typeRaw === 'session-killer' || typeRaw === 'session killer' ||
-    typeRaw === 'killer-session' || typeRaw === 'killer session'
-  ) playType = 'session';
-  
-  if (
-    typeRaw === 'survivor' || typeRaw === 'surv' || typeRaw === 'surw' ||
-    typeRaw === 'session-survivor' || typeRaw === 'session survivor' ||
-    typeRaw === 'survivor-session' || typeRaw === 'survivor session'
-  ) playType = 'survivor';
-
+  if (typeRaw === 'session' || typeRaw === 'sesja' || typeRaw === 'log' || typeRaw === 'session-killer' || typeRaw === 'session killer' || typeRaw === 'killer-session' || typeRaw === 'killer session') playType = 'session';
+  if (typeRaw === 'survivor' || typeRaw === 'surv' || typeRaw === 'surw' || typeRaw === 'session-survivor' || typeRaw === 'session survivor' || typeRaw === 'survivor-session' || typeRaw === 'survivor session') playType = 'survivor';
   const finished = isDone(fields.done);
   let g = num(fields.games);
-  let a4 = num(fields.k4), a3 = num(fields.k3), a2 = num(fields.k2), a1 = num(fields.k1), a0 = num(fields.k0);
+  let a4 = num(fields.k4),
+    a3 = num(fields.k3),
+    a2 = num(fields.k2),
+    a1 = num(fields.k1),
+    a0 = num(fields.k0);
   let avg = num(fields.avg);
   const note = (fields.note || '').trim();
   const noteDate = (fields.noteDate || '').trim();
-
-  
   const isSurv = playType === 'survivor';
   const escapes = isSurv ? a4 : 0;
   const deaths = isSurv ? a3 : 0;
-
-  const sortVal = isSurv ? (escapes || g) : (a4 || g || details.length);
+  const sortVal = isSurv ? escapes || g : a4 || g || details.length;
   return {
     image: '',
     name,
@@ -318,56 +348,73 @@ function buildPlayEntry(name, fields, extras, details, isDone, num) {
       extras: extras || [],
       details
     },
-    streaks: [{ category: note || playType, value: sortVal, active: !finished, tags: ['P'] }],
+    streaks: [{
+      category: note || playType,
+      value: sortVal,
+      active: !finished,
+      tags: ['P']
+    }],
     best: sortVal
   };
 }
-
 function normSafe(s) {
   return (s || '').trim().toLowerCase();
 }
-
-async function loadCharactersFromSheet() {
-  const [main, inne, play] = await Promise.all([
-    loadSheet(SHEET_MAIN_GID, 'main'),
-    loadSheet(SHEET_INNE_GID, 'inne'),
-    loadPlaythroughSheet()
-  ]);
-  
-  let inneFiltered = inne;
-  if (play.length) {
-    inneFiltered = inne.filter(c => !(c.tags && c.tags.length === 1 && c.tags[0] === 'P'));
-  }
-  return [...main, ...inneFiltered, ...play];
+async function loadCharactersFromSheet(signal) {
+  const sources = [{
+    key: 'main',
+    name: 'Killer streaks',
+    load: warnings => loadSheet(SHEET_MAIN_GID, 'main', signal, warnings)
+  }, {
+    key: 'other',
+    name: 'Other streaks',
+    load: warnings => loadSheet(SHEET_INNE_GID, 'inne', signal, warnings)
+  }, {
+    key: 'play',
+    name: 'Playthrough',
+    load: warnings => loadPlaythroughSheet(signal, warnings)
+  }];
+  const warnings = sources.map(() => []);
+  const results = await Promise.allSettled(sources.map((source, i) => source.load(warnings[i])));
+  const reports = sources.map((source, i) => ({
+    key: source.key,
+    name: source.name,
+    warnings: warnings[i],
+    status: results[i].status === 'rejected' ? 'error' : warnings[i].length ? 'warning' : 'ok',
+    error: results[i].status === 'rejected' ? results[i].reason?.name === 'AbortError' ? 'Request timed out or was cancelled.' : String(results[i].reason?.message || results[i].reason) : ''
+  }));
+  const data = results.map(result => result.status === 'fulfilled' ? result.value : []);
+  const [main, other, play] = data;
+  const filteredOther = play.length ? other.filter(c => !(c.tags && c.tags.length === 1 && c.tags[0] === 'P')) : other;
+  return {
+    characters: [...main, ...filteredOther, ...play],
+    reports
+  };
 }
-
-
-
-
-
-
-
-
 function groupStreaksByCategory(streaks) {
   const map = new Map();
   for (const s of streaks) {
     const key = (s.category || '').trim().toLowerCase();
     if (!key) continue;
     if (!map.has(key)) {
-      map.set(key, { category: s.category, attempts: [], tags: s.tags || [] });
+      map.set(key, {
+        category: s.category,
+        attempts: [],
+        tags: s.tags || []
+      });
     }
     const g = map.get(key);
     g.attempts.push(Object.assign({}, s));
-    (s.tags || []).forEach(t => { if (!g.tags.includes(t)) g.tags.push(t); });
+    (s.tags || []).forEach(t => {
+      if (!g.tags.includes(t)) g.tags.push(t);
+    });
   }
-
   const groups = [];
   for (const g of map.values()) {
     g.attempts.sort((a, b) => b.value - a.value);
     g.best = g.attempts[0].value;
     g.bestAttempt = g.attempts[0];
     g.isBestActive = !!(g.bestAttempt && g.bestAttempt.active);
-
     const lowerActives = g.attempts.filter(a => a.active && a.value < g.best);
     if (lowerActives.length) {
       lowerActives.sort((a, b) => b.value - a.value);
@@ -375,7 +422,6 @@ function groupStreaksByCategory(streaks) {
     } else {
       g.activeAttempt = null;
     }
-
     g.hasHistory = g.attempts.length > 1;
     g.attemptCount = g.attempts.length;
     groups.push(g);
@@ -383,12 +429,11 @@ function groupStreaksByCategory(streaks) {
   groups.sort((a, b) => b.best - a.best);
   return groups;
 }
-
 function prepareCharacters(characters) {
   characters.forEach(c => {
     if (c.play) {
       c.groups = groupStreaksByCategory(c.streaks || []);
-      c.best = c.best || (c.groups[0] && c.groups[0].best) || 0;
+      c.best = c.best || c.groups[0] && c.groups[0].best || 0;
       return;
     }
     c.groups = groupStreaksByCategory(c.streaks);
@@ -397,26 +442,19 @@ function prepareCharacters(characters) {
   characters.sort((a, b) => b.best - a.best);
   return characters;
 }
-
 function filterCharacters(characters) {
   const q = searchQuery.trim().toLowerCase();
   const visible = characters.map(c => {
     const nameMatch = !q || c.name.toLowerCase().includes(q);
-    const categoryFilters = (multipleAttemptsOnly || minimumScore)
-      ? new Set(groupStreaksByCategory(c.streaks)
-        .filter(group => (!multipleAttemptsOnly || group.attemptCount > 1) && (!minimumScore || group.best >= minimumScore))
-        .map(group => group.category.trim().toLowerCase()))
-      : null;
+    const categoryFilters = multipleAttemptsOnly || minimumScore ? new Set(groupStreaksByCategory(c.streaks).filter(group => (!multipleAttemptsOnly || group.attemptCount > 1) && (!minimumScore || group.best >= minimumScore)).map(group => group.category.trim().toLowerCase())) : null;
     const filteredStreaks = c.streaks.filter(s => {
-      const tags = (s.tags && s.tags.length) ? s.tags : ['K'];
+      const tags = s.tags && s.tags.length ? s.tags : ['K'];
       const isPlaythrough = c.type === 'playthrough' || c.play;
       if (!tags.some(t => enabledTags[t])) return false;
       if (activeOnly && !s.active) return false;
       if (categoryFilters && !categoryFilters.has((s.category || '').trim().toLowerCase())) return false;
       if (selectedWincons.size) {
-        const matchesWincon = isPlaythrough
-          ? selectedWincons.has('playthrough')
-          : selectedWincons.has((s.category || '').trim().toLowerCase());
+        const matchesWincon = isPlaythrough ? selectedWincons.has('playthrough') : selectedWincons.has((s.category || '').trim().toLowerCase());
         if (!matchesWincon) return false;
       }
       if (nameMatch) return true;
@@ -425,7 +463,11 @@ function filterCharacters(characters) {
     if (!filteredStreaks.length) return null;
     const groups = groupStreaksByCategory(filteredStreaks);
     if (!groups.length) return null;
-    return Object.assign({}, c, { streaks: filteredStreaks, groups, best: groups[0].best });
+    return Object.assign({}, c, {
+      streaks: filteredStreaks,
+      groups,
+      best: groups[0].best
+    });
   }).filter(Boolean);
   const compare = (a, b) => {
     if (sortMode === 'best-asc') return a.best - b.best || a.name.localeCompare(b.name, 'en');
@@ -441,7 +483,6 @@ function filterCharacters(characters) {
   const regular = visible.filter(c => c.type !== 'playthrough' && !c.play).sort(compare);
   return playthroughFirst ? [...playthrough, ...regular] : [...regular, ...playthrough];
 }
-
 function updateFilterSummary(characters) {
   const count = document.getElementById('filter-summary-count');
   const active = document.getElementById('filter-summary-active');
@@ -461,30 +502,24 @@ function updateFilterSummary(characters) {
   active.innerHTML = filters.map(label => `<span class="filter-summary-chip">${escapeHtml(label)}</span>`).join('');
   clear.hidden = filters.length === 0;
 }
-
 function updateWinconOptions(characters) {
   const options = document.getElementById('wincon-filter-options');
   if (!options) return;
   availableWincons = new Map();
   const winconCounts = new Map();
-  (characters || []).filter(character => character.type !== 'playthrough' && !character.play)
-    .forEach(character => (character.streaks || []).forEach(streak => {
-      const label = String(streak.category || '').trim();
-      const key = label.toLowerCase();
-      if (!label || key === 'playthrough') return;
-      if (!availableWincons.has(key)) availableWincons.set(key, label);
-      winconCounts.set(key, (winconCounts.get(key) || 0) + 1);
-    }));
-  const sortedWincons = [...availableWincons.entries()]
-    .sort(([keyA, labelA], [keyB, labelB]) =>
-      (winconCounts.get(keyB) - winconCounts.get(keyA)) || labelA.localeCompare(labelB, 'en'));
+  (characters || []).filter(character => character.type !== 'playthrough' && !character.play).forEach(character => (character.streaks || []).forEach(streak => {
+    const label = String(streak.category || '').trim();
+    const key = label.toLowerCase();
+    if (!label || key === 'playthrough') return;
+    if (!availableWincons.has(key)) availableWincons.set(key, label);
+    winconCounts.set(key, (winconCounts.get(key) || 0) + 1);
+  }));
+  const sortedWincons = [...availableWincons.entries()].sort(([keyA, labelA], [keyB, labelB]) => winconCounts.get(keyB) - winconCounts.get(keyA) || labelA.localeCompare(labelB, 'en'));
   availableWincons.set('playthrough', 'Playthrough');
-  options.innerHTML = sortedWincons.map(([, label]) => `<option value="${escapeHtml(label)}"></option>`).join('')
-    + '<option value="Playthrough"></option>';
+  options.innerHTML = sortedWincons.map(([, label]) => `<option value="${escapeHtml(label)}"></option>`).join('') + '<option value="Playthrough"></option>';
   selectedWincons = new Set([...selectedWincons].filter(key => availableWincons.has(key)));
   renderSelectedWincons();
 }
-
 function renderSelectedWincons() {
   const container = document.getElementById('wincon-filter-selected');
   if (!container) return;
@@ -493,7 +528,6 @@ function renderSelectedWincons() {
     return `<button type="button" class="wincon-filter-chip" data-remove-wincon="${escapeHtml(key)}" aria-label="Remove ${escapeHtml(label)} filter"><span>${escapeHtml(label)}</span><b aria-hidden="true">×</b></button>`;
   }).join('');
 }
-
 function addWinconFilter() {
   const input = document.getElementById('wincon-filter-input');
   if (!input) return;
@@ -505,9 +539,7 @@ function addWinconFilter() {
   renderCharacters();
   input.focus();
 }
-
 function updateStats(characters) {
-  
   const streakChars = characters.filter(c => c.type !== 'playthrough' && !c.play);
   const totalGroups = streakChars.reduce((sum, c) => sum + (c.groups ? c.groups.length : 0), 0);
   const activeCount = streakChars.reduce((sum, c) => {
@@ -515,7 +547,6 @@ function updateStats(characters) {
     return sum + c.groups.filter(g => g.isBestActive || g.activeAttempt).length;
   }, 0);
   const best = streakChars.length ? Math.max(...streakChars.map(c => c.best || 0)) : 0;
-
   const elChars = document.getElementById('total-characters');
   const elStreaks = document.getElementById('total-streaks');
   const elBest = document.getElementById('best-streak');
@@ -525,26 +556,38 @@ function updateStats(characters) {
   if (elBest) elBest.textContent = best;
   if (elActive) elActive.textContent = activeCount;
 }
-
-
 let steamExportRows = [];
 let steamExportSelected = new Set();
-
 function buildSteamExportRows(characters) {
   const rows = [];
   (characters || []).filter(c => !c.play && c.type !== 'playthrough').forEach(c => {
     const groups = groupStreaksByCategory(c.streaks || []);
     groups.forEach(g => {
-      const tags = g.tags && g.tags.length ? g.tags : (c.tags || ['K']);
-      rows.push({ id: `best-${rows.length}`, order: rows.length, name: c.name, category: g.category, value: g.best, active: g.isBestActive, tags });
+      const tags = g.tags && g.tags.length ? g.tags : c.tags || ['K'];
+      rows.push({
+        id: `best-${rows.length}`,
+        order: rows.length,
+        name: c.name,
+        category: g.category,
+        value: g.best,
+        active: g.isBestActive,
+        tags
+      });
       if (g.activeAttempt) {
-        rows.push({ id: `current-${rows.length}`, order: rows.length, name: c.name, category: g.category, value: g.activeAttempt.value, active: true, tags });
+        rows.push({
+          id: `current-${rows.length}`,
+          order: rows.length,
+          name: c.name,
+          category: g.category,
+          value: g.activeAttempt.value,
+          active: true,
+          tags
+        });
       }
     });
   });
   return rows;
 }
-
 function steamExportMatchesFilters(row) {
   const roles = [...document.querySelectorAll('.steam-export-role-filter input:checked')].map(input => input.value);
   const statuses = [...document.querySelectorAll('.steam-export-status-filter input:checked')].map(input => input.value);
@@ -560,11 +603,9 @@ function steamExportMatchesFilters(row) {
   if (query && !`${row.name} ${row.category}`.toLowerCase().includes(query)) return false;
   return true;
 }
-
 function steamExportFilteredRows() {
   return steamExportRows.filter(steamExportMatchesFilters);
 }
-
 function steamExportOrderedRows(rows) {
   const sort = document.getElementById('steam-export-sort').value;
   return rows.slice().sort((a, b) => {
@@ -576,7 +617,6 @@ function steamExportOrderedRows(rows) {
     return a.order - b.order;
   });
 }
-
 function steamExportText() {
   const selected = steamExportOrderedRows(steamExportRows.filter(row => steamExportSelected.has(row.id)));
   const format = document.getElementById('steam-export-format').value;
@@ -599,21 +639,17 @@ function steamExportText() {
   if (ongoing.length) text += `${completed.length ? '\n\n-----------------------------------------------------------------------------------------------------------\n\n' : '\n\n'}${ongoing.map(formatSteamProfileLine).join('\n')}`;
   return text;
 }
-
 function formatSteamProfileLine(row) {
   const title = `[b][u]${row.name} ${row.category} [/u][/b]`;
-  return row.active
-    ? `${title} - (still ongoing) [b]${row.value}[/b]`
-    : `${title} - [b]${row.value}[/b]`;
+  return row.active ? `${title} - (still ongoing) [b]${row.value}[/b]` : `${title} - [b]${row.value}[/b]`;
 }
-
 function updateSteamExport() {
   const list = document.getElementById('steam-export-list');
   const rowHtml = row => `
         <label class="steam-export-row ${row.active ? 'is-ongoing' : ''} ${steamExportMatchesFilters(row) ? '' : 'outside-filter'}" title="${escapeHtml(row.category)}">
           <input type="checkbox" data-export-id="${row.id}" ${steamExportSelected.has(row.id) ? 'checked' : ''}>
           <span class="steam-export-row-main"><strong>${escapeHtml(row.category)}</strong></span>
-          <span class="steam-export-row-result">${steamExportMatchesFilters(row) ? (row.active ? 'ONGOING · ' : '') : 'OUTSIDE FILTER · '}${row.value}</span>
+          <span class="steam-export-row-result">${steamExportMatchesFilters(row) ? row.active ? 'ONGOING · ' : '' : 'OUTSIDE FILTER · '}${row.value}</span>
         </label>`;
   const groupHtml = (rows, heading) => {
     if (!rows.length) return '';
@@ -631,36 +667,36 @@ function updateSteamExport() {
   const ordered = steamExportOrderedRows(steamExportRows);
   const matched = ordered.filter(steamExportMatchesFilters);
   const unmatched = ordered.filter(row => !steamExportMatchesFilters(row));
-  list.innerHTML = (matched.length ? groupHtml(matched, 'MATCHING FILTERS') : '<p class="steam-export-empty">No streaks match the current filters.</p>')
-    + groupHtml(unmatched, 'OUTSIDE FILTERS');
+  list.innerHTML = (matched.length ? groupHtml(matched, 'MATCHING FILTERS') : '<p class="steam-export-empty">No streaks match the current filters.</p>') + groupHtml(unmatched, 'OUTSIDE FILTERS');
   list.querySelectorAll('input[data-export-id]').forEach(input => {
     input.addEventListener('change', () => {
-      if (input.checked) steamExportSelected.add(input.dataset.exportId);
-      else steamExportSelected.delete(input.dataset.exportId);
+      if (input.checked) steamExportSelected.add(input.dataset.exportId);else steamExportSelected.delete(input.dataset.exportId);
       updateSteamExportPreview();
     });
   });
   updateSteamExportPreview();
 }
-
 function updateSteamExportPreview() {
   const text = steamExportText();
   document.getElementById('steam-export-preview').value = text;
   document.getElementById('steam-export-count').textContent = `${steamExportSelected.size} selected`;
   document.getElementById('steam-export-feedback').textContent = '';
 }
-
 function openSteamExport() {
   if (!cachedCharacters) return;
   steamExportRows = buildSteamExportRows(cachedCharacters);
   steamExportSelected = new Set(steamExportRows.map(row => row.id));
-  document.querySelectorAll('.steam-export-role-filter input').forEach(input => { input.checked = true; });
+  document.querySelectorAll('.steam-export-role-filter input').forEach(input => {
+    input.checked = true;
+  });
   document.getElementById('steam-export-min').value = '';
   document.getElementById('steam-export-max').value = '';
   document.getElementById('steam-export-search').value = '';
   document.getElementById('steam-export-sort').value = 'profile';
   document.getElementById('steam-export-format').value = 'profile';
-  document.querySelectorAll('.steam-export-status-filter input').forEach(input => { input.checked = true; });
+  document.querySelectorAll('.steam-export-status-filter input').forEach(input => {
+    input.checked = true;
+  });
   const characterOptions = document.getElementById('steam-export-character-options');
   const names = [...new Set(steamExportRows.map(row => row.name))].sort((a, b) => a.localeCompare(b));
   characterOptions.innerHTML = names.map(name => `<label><input type="checkbox" value="${escapeHtml(name)}" checked><span class="steam-character-name">${escapeHtml(name)}</span></label>`).join('');
@@ -669,33 +705,24 @@ function openSteamExport() {
   updateSteamExport();
   document.getElementById('steam-export-dialog').showModal();
 }
-
 function renderWinconBlock(g, idx, type) {
   const isActive = g.isBestActive;
   const hasCurrent = !!g.activeAttempt;
   const hasHistory = g.hasHistory;
   const role = typeClass(type).trim() || 'killer';
   const historyId = hasHistory ? `streak-history-${++historyIdCounter}` : '';
-  const mainBadge = isActive
-    ? '<span class="wc-badge active">ACTIVE</span>'
-    : '';
-
+  const mainBadge = isActive ? '<span class="wc-badge active">ACTIVE</span>' : '';
   const expandBtn = hasHistory ? `<button type="button" class="wc-history-toggle" aria-expanded="false" aria-label="Show previous attempts" aria-controls="${historyId}" title="Show previous attempts">
        <span class="wc-edge-arrow left" aria-hidden="true"></span>
        <span class="wc-history-summary">Previous runs</span>
        <span class="wc-edge-arrow right" aria-hidden="true"></span>
      </button>` : '';
-
   const currentLine = hasCurrent ? `
     <div class="wc-current">
       <span class="wc-badge active subtle">ACTIVE</span>
       <span class="wc-current-val">${g.activeAttempt.value}</span>
     </div>` : '';
-
-  const mainToggleAttrs = hasHistory
-    ? `role="button" tabindex="0" aria-expanded="false" aria-controls="${historyId}" aria-label="Show previous attempts"`
-    : '';
-
+  const mainToggleAttrs = hasHistory ? `role="button" tabindex="0" aria-expanded="false" aria-controls="${historyId}" aria-label="Show previous attempts"` : '';
   let historyPanel = '';
   if (hasHistory) {
     historyPanel = `
@@ -704,7 +731,7 @@ function renderWinconBlock(g, idx, type) {
           <div class="wc-hist-row ${a.active ? 'is-active' : ''} ${i === 0 ? 'is-top' : ''}">
             <span class="wc-hist-rank">${i === 0 ? 'BEST' : `ATTEMPT #${i}`}</span>
             <span class="wc-hist-val">${a.value}</span>
-            <span class="wc-hist-state ${a.active ? 'is-active' : (i === 0 ? 'is-best' : 'is-done')}">${a.active ? 'ACTIVE' : (i === 0 ? 'RECORD' : 'COMPLETED')}</span>
+            <span class="wc-hist-state ${a.active ? 'is-active' : i === 0 ? 'is-best' : 'is-done'}">${a.active ? 'ACTIVE' : i === 0 ? 'RECORD' : 'COMPLETED'}</span>
           </div>
         `).join('')}
         <button type="button" class="wc-history-collapse" aria-label="Collapse previous attempts">
@@ -713,7 +740,6 @@ function renderWinconBlock(g, idx, type) {
         </button>
       </div>`;
   }
-
   return `
     <div class="wc-block role-${role} ${isActive ? 'is-active' : ''} ${hasCurrent ? 'has-current' : ''}">
       <div class="wc-main ${hasHistory ? 'wc-main-expandable' : ''}" ${mainToggleAttrs}>
@@ -729,11 +755,9 @@ function renderWinconBlock(g, idx, type) {
       ${hasHistory ? `<div class="wc-drawer">${expandBtn}${historyPanel}</div>` : ''}
     </div>`;
 }
-
 function setDrawerOpen(panel, open) {
   const previous = drawerAnimations.get(panel);
   if (previous) previous.cancel();
-
   if (open) panel.removeAttribute('hidden');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reducedMotion || typeof panel.animate !== 'function') {
@@ -743,13 +767,15 @@ function setDrawerOpen(panel, open) {
     drawerAnimations.delete(panel);
     return;
   }
-
   panel.style.transformOrigin = 'top center';
   panel.style.overflow = 'hidden';
-  const animation = panel.animate([
-    { transform: open ? 'scaleY(0.96)' : 'scaleY(1)', opacity: open ? 0 : 1 },
-    { transform: open ? 'scaleY(1)' : 'scaleY(0.96)', opacity: open ? 1 : 0 }
-  ], {
+  const animation = panel.animate([{
+    transform: open ? 'scaleY(0.96)' : 'scaleY(1)',
+    opacity: open ? 0 : 1
+  }, {
+    transform: open ? 'scaleY(1)' : 'scaleY(0.96)',
+    opacity: open ? 1 : 0
+  }], {
     duration: 170,
     easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)'
   });
@@ -762,12 +788,11 @@ function setDrawerOpen(panel, open) {
     drawerAnimations.delete(panel);
   };
 }
-
 function bindExpanders(root) {
   root.querySelectorAll('.wc-history-toggle').forEach(btn => {
     if (btn.dataset.bound) return;
     btn.dataset.bound = '1';
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
       const block = btn.closest('.wc-block');
@@ -792,19 +817,17 @@ function bindExpanders(root) {
       btn.classList.toggle('open', open);
       btn.setAttribute('aria-label', open ? 'Hide previous attempts' : 'Show previous attempts');
     });
-
     const block = btn.closest('.wc-block');
     const mainToggle = block && block.querySelector('.wc-main-expandable');
     if (!mainToggle || mainToggle.dataset.bound) return;
     mainToggle.dataset.bound = '1';
     mainToggle.addEventListener('click', () => btn.click());
-    mainToggle.addEventListener('keydown', (event) => {
+    mainToggle.addEventListener('keydown', event => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
       btn.click();
     });
   });
-
   root.querySelectorAll('.wc-history-collapse').forEach(btn => {
     if (btn.dataset.bound) return;
     btn.dataset.bound = '1';
@@ -815,7 +838,6 @@ function bindExpanders(root) {
     });
   });
 }
-
 function parseResultTone(result) {
   const m = String(result || '').toLowerCase().match(/(\d)\s*k/);
   if (!m) return 'neutral';
@@ -826,28 +848,26 @@ function parseResultTone(result) {
   if (k === 1) return 'bad';
   return 'fail';
 }
-
-
 function parsePlayDate(raw) {
   if (!raw) return null;
   const s = String(raw).trim();
   let m = s.match(/^(\d{1,2})[./-](\d{1,2})(?:[./-](\d{2,4}))?$/);
   if (m) {
-    let d = parseInt(m[1], 10), mo = parseInt(m[2], 10) - 1, y = m[3] ? parseInt(m[3], 10) : null;
-    if (y === null) y = new Date().getFullYear();
-    else if (y < 100) y += 2000;
+    let d = parseInt(m[1], 10),
+      mo = parseInt(m[2], 10) - 1,
+      y = m[3] ? parseInt(m[3], 10) : null;
+    if (y === null) y = new Date().getFullYear();else if (y < 100) y += 2000;
     const dt = new Date(y, mo, d);
     return isNaN(dt.getTime()) ? null : dt;
   }
   m = s.match(/^(\d{4})[./-](\d{1,2})[./-](\d{1,2})$/);
   if (m) {
-    const dt = new Date(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10));
+    const dt = new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10));
     return isNaN(dt.getTime()) ? null : dt;
   }
   const t = Date.parse(s);
   return isNaN(t) ? null : new Date(t);
 }
-
 function formatTimeAgo(date) {
   if (!date) return '';
   const now = new Date();
@@ -871,22 +891,17 @@ function formatTimeAgo(date) {
   if (years === 1) return '1 year ago';
   return years + ' years ago';
 }
-
 function renderPlayCard(p, i) {
   const play = p.play || {};
   const details = play.details || [];
   const hasDetails = details.length > 0;
   const id = 'play-' + Math.random().toString(36).slice(2, 9);
   const isSurv = play.playType === 'survivor';
-
   const total = play.games || 0;
-  const wins = isSurv
-    ? (play.escapes || 0)
-    : ((play.k4 || 0) + (play.k3 || 0));
-  const winPct = total ? Math.round((wins / total) * 100) : 0;
-  const k4Pct = total ? Math.round(((play.k4 || 0) / total) * 100) : 0;
-  const escPct = total ? Math.round(((play.escapes || 0) / total) * 100) : 0;
-
+  const wins = isSurv ? play.escapes || 0 : (play.k4 || 0) + (play.k3 || 0);
+  const winPct = total ? Math.round(wins / total * 100) : 0;
+  const k4Pct = total ? Math.round((play.k4 || 0) / total * 100) : 0;
+  const escPct = total ? Math.round((play.escapes || 0) / total * 100) : 0;
   const chips = [];
   const addChip = (count, cls, label) => {
     if (!count) return;
@@ -907,31 +922,32 @@ function renderPlayCard(p, i) {
     if (/^best\s*map$/i.test(lab)) return;
     chips.push(`<span class="play-chip cextra"><span>${escapeHtml(lab)}</span><b>${escapeHtml(ex.value)}</b></span>`);
   });
-
   let detailHtml = '';
   if (hasDetails) {
     detailHtml = `
       <div class="play-details" id="${id}" hidden>
         <ul class="play-notes">
           ${details.map(d => {
-            const val = d.value || d.date || '';
-            const cap = d.caption || d.note || d.text || '';
-            return `
+      const val = d.value || d.date || '';
+      const cap = d.caption || d.note || d.text || '';
+      return `
             <li class="play-note-item">
               ${val ? `<span class="play-note-date">${escapeHtml(val)}</span>` : ''}
               <span class="play-note-text">${escapeHtml(cap)}</span>
             </li>`;
-          }).join('')}
+    }).join('')}
         </ul>
       </div>`;
   }
-
   const card = document.createElement('article');
-  card.className = 'play-card' + (play.playType === 'survivor' ? ' is-survivor' : (play.playType === 'session' ? ' is-session' : ' is-challenge'));
+  card.className = 'play-card' + (play.playType === 'survivor' ? ' is-survivor' : play.playType === 'session' ? ' is-session' : ' is-challenge');
   card.innerHTML = `
     <div class="play-top">
-      <div class="play-type-badge">${play.playType === 'survivor' ? 'SESSION-SURVIVOR' : (play.playType === 'session' ? 'SESSION-KILLER' : 'CHALLENGE')}</div>
-      ${play.note || play.noteDate ? `<div class="play-patch">${play.note ? `<span class="play-patch-note">${escapeHtml(play.note)}</span>` : ''}${(() => { const ago = formatTimeAgo(parsePlayDate(play.noteDate)); return ago ? `<span class="play-patch-ago">${escapeHtml(ago)}</span>` : (play.noteDate ? `<span class="play-patch-ago">${escapeHtml(play.noteDate)}</span>` : ''); })()}</div>` : ''}
+      <div class="play-type-badge">${play.playType === 'survivor' ? 'SESSION-SURVIVOR' : play.playType === 'session' ? 'SESSION-KILLER' : 'CHALLENGE'}</div>
+      ${play.note || play.noteDate ? `<div class="play-patch">${play.note ? `<span class="play-patch-note">${escapeHtml(play.note)}</span>` : ''}${(() => {
+    const ago = formatTimeAgo(parsePlayDate(play.noteDate));
+    return ago ? `<span class="play-patch-ago">${escapeHtml(ago)}</span>` : play.noteDate ? `<span class="play-patch-ago">${escapeHtml(play.noteDate)}</span>` : '';
+  })()}</div>` : ''}
     </div>
     <div class="play-title">${escapeHtml(p.name)}</div>
     <div class="play-score-row">
@@ -941,7 +957,7 @@ function renderPlayCard(p, i) {
       </div>
       <div class="play-score-sub">
         ${total ? `<div><b>${isSurv ? escPct : winPct}%</b> ${isSurv ? 'escape rate' : 'win rate'}</div>` : ''}
-        ${(!isSurv && total) ? `<div><b>${k4Pct}%</b> 4k rate</div>` : ''}
+        ${!isSurv && total ? `<div><b>${k4Pct}%</b> 4k rate</div>` : ''}
         ${play.highlight && play.highlight.value ? `<div class="play-hl"><b>${escapeHtml(play.highlight.value)}</b>${play.highlight.label ? ` <span>${escapeHtml(play.highlight.label)}</span>` : ''}</div>` : ''}
       </div>
     </div>
@@ -961,12 +977,11 @@ function renderPlayCard(p, i) {
   `;
   return card;
 }
-
 function bindPlayExpanders(root) {
   root.querySelectorAll('[data-play-expand]').forEach(btn => {
     if (btn.dataset.bound) return;
     btn.dataset.bound = '1';
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
       const id = btn.getAttribute('data-play-expand');
@@ -984,12 +999,10 @@ function bindPlayExpanders(root) {
     });
   });
 }
-
 function renderDefault(characters) {
   const grid = document.getElementById('streak-grid');
   grid.className = 'grid view-default';
   grid.innerHTML = '';
-
   const play = characters.filter(c => c.type === 'playthrough' && c.play);
   const rest = characters.filter(c => !(c.type === 'playthrough' && c.play));
   if (!characters.length) {
@@ -1003,17 +1016,15 @@ function renderDefault(characters) {
     grid.querySelector('.streak-empty-clear').addEventListener('click', clearFilters);
     return;
   }
-
   const appendStreakCards = () => rest.forEach((c, i) => {
     const card = document.createElement('article');
     const groups = c.groups || [];
     card.className = 'card' + typeClass(c.type) + (groups.length >= 5 ? ' streak-density-many' : '');
     const body = groups.map((g, idx) => renderWinconBlock(g, idx, c.type)).join('');
-
     card.innerHTML = `
       <div class="card-top">
         <div class="portrait">
-          <img src="${c.image}" alt="${escapeHtml(c.name)}" loading="lazy" onerror="this.src='${PLACEHOLDER_IMG}'">
+          <img src="${c.image}" alt="${escapeHtml(c.name)}" loading="lazy" onerror="if(this.dataset.fallback){this.onerror=null;this.hidden=true}else{this.dataset.fallback='1';this.src='${PLACEHOLDER_IMG}'}">
         </div>
         <div class="card-info">
           <div class="killer-name">${escapeHtml(c.name)}</div>
@@ -1029,7 +1040,6 @@ function renderDefault(characters) {
     grid.appendChild(card);
     bindExpanders(card);
   });
-
   const appendPlaythroughCards = () => play.forEach((c, i) => {
     const card = renderPlayCard(c, i);
     grid.appendChild(card);
@@ -1043,15 +1053,13 @@ function renderDefault(characters) {
   }
   if (play.length) bindPlayExpanders(grid);
 }
-
 function getVisibleCharacters() {
   if (!cachedCharacters) return [];
-  const prepared = prepareCharacters(
-    cachedCharacters.map(c => Object.assign({}, c, { streaks: c.streaks.slice() }))
-  );
+  const prepared = prepareCharacters(cachedCharacters.map(c => Object.assign({}, c, {
+    streaks: c.streaks.slice()
+  })));
   return filterCharacters(prepared);
 }
-
 function renderCharacters(characters) {
   if (characters) {
     cachedCharacters = characters;
@@ -1060,17 +1068,14 @@ function renderCharacters(characters) {
   const visible = getVisibleCharacters();
   updateStats(visible);
   updateFilterSummary(visible);
-
   renderDefault(visible);
   document.body.className = 'view-default';
   updateFilterButtons();
 }
-
 function toggleTag(tag) {
   enabledTags[tag] = !enabledTags[tag];
   renderCharacters();
 }
-
 function updateFilterButtons() {
   document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
     btn.classList.toggle('active', !!enabledTags[btn.dataset.tag]);
@@ -1092,27 +1097,22 @@ function updateFilterButtons() {
     playthroughFilter.setAttribute('aria-pressed', String(playthroughFirst));
   }
 }
-
 function togglePlaythroughPosition() {
   playthroughFirst = !playthroughFirst;
   renderCharacters();
 }
-
 function toggleActiveOnly() {
   activeOnly = !activeOnly;
   renderCharacters();
 }
-
 function toggleHistoryOnly() {
   multipleAttemptsOnly = !multipleAttemptsOnly;
   renderCharacters();
 }
-
 function setSearch(q) {
   searchQuery = q || '';
   renderCharacters();
 }
-
 function clearFilters() {
   enabledTags.K = true;
   enabledTags.S = true;
@@ -1129,20 +1129,46 @@ function clearFilters() {
   renderSelectedWincons();
   renderCharacters();
 }
-
 async function refreshData() {
+  const requestId = ++latestRefresh;
+  refreshController?.abort();
+  const controller = new AbortController();
+  refreshController = controller;
   const grid = document.getElementById('streak-grid');
-  if (grid) grid.innerHTML = '<p class="loading-msg">Loading data...</p>';
+  const host = document.getElementById('source-reports');
+  if (host) host.setAttribute('aria-busy', 'true');
+  if (!cachedCharacters && grid) grid.innerHTML = '<p class="loading-msg">Loading data...</p>';
   try {
-    const characters = await loadCharactersFromSheet();
-    renderCharacters(characters);
-  } catch (err) {
-    if (grid) grid.innerHTML = `<p class="error-msg">Unable to load data: ${escapeHtml(err.message)}</p>`;
-    console.error(err);
+    const result = await loadCharactersFromSheet(controller.signal);
+    if (requestId !== latestRefresh) return;
+    sourceReports = result.reports;
+    renderCharacters(result.characters);
+    renderSourceReports();
+  } catch (error) {
+    if (requestId !== latestRefresh) return;
+    if (grid) grid.innerHTML = '<p class="error-msg">Unable to load data: ' + escapeHtml(error.message) + '</p>';
+  } finally {
+    if (requestId === latestRefresh) {
+      if (host) host.setAttribute('aria-busy', 'false');
+      refreshController = null;
+    }
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    PORTRAIT_MAP = {
+      ...(await SharedCatalog.portraitMap()),
+      ...STREAKI_CONFIG.CUSTOM_PORTRAITS
+    };
+  } catch (error) {
+    console.error(error);
+    const message = document.createElement('p');
+    message.className = 'source-notice source-notice-error';
+    message.setAttribute('role', 'alert');
+    message.textContent = 'Shared definitions could not be loaded. Reload the page to try again.';
+    document.querySelector('main').prepend(message);
+    return;
+  }
   document.querySelectorAll('.tag-filter[data-tag]').forEach(btn => {
     btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
   });
@@ -1167,9 +1193,14 @@ document.addEventListener('DOMContentLoaded', () => {
       backToTop.setAttribute('aria-hidden', String(!visible));
       backToTop.tabIndex = visible ? 0 : -1;
     };
-    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    window.addEventListener('scroll', updateBackToTop, {
+      passive: true
+    });
     updateBackToTop();
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backToTop.addEventListener('click', () => window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    }));
   }
   const minScoreFilter = document.getElementById('streak-min-score');
   if (minScoreFilter) minScoreFilter.addEventListener('input', () => {
@@ -1227,9 +1258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!event.target.matches('input[type="checkbox"]')) return;
     const checked = document.querySelectorAll('.steam-export-character-options input:checked').length;
     const total = document.querySelectorAll('.steam-export-character-options input').length;
-    document.getElementById('steam-export-character-summary').textContent = checked === total
-      ? 'All characters'
-      : `${checked} of ${total} selected`;
+    document.getElementById('steam-export-character-summary').textContent = checked === total ? 'All characters' : `${checked} of ${total} selected`;
     steamExportSelected = new Set(steamExportFilteredRows().map(row => row.id));
     updateSteamExport();
   });
@@ -1262,6 +1291,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   refreshData();
 });
-
 window.refreshData = refreshData;
 window.toggleTag = toggleTag;

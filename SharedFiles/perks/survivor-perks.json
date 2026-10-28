@@ -1,0 +1,3054 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "S52P02",
+      "name": "A Place For Us",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "kwon-tae-young",
+      "characterName": "Kwon Tae-young",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_aPlaceForUs.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Ace_In_The_Hole",
+      "name": "Ace in the Hole",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ace-visconti",
+      "characterName": "Ace Visconti",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_aceInTheHole.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "Adrenaline",
+      "name": "Adrenaline",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "meg-thomas",
+      "characterName": "Meg Thomas",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_adrenaline.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation",
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Aftercare",
+      "name": "Aftercare",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jeff-johansen",
+      "characterName": "Jeff Johansen",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_aftercare.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "Alert",
+      "name": "Alert",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "feng-min",
+      "characterName": "Feng Min",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_alert.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "AnyMeansNecessary",
+      "name": "Any Means Necessary",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "yui-kimura",
+      "characterName": "Yui Kimura",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_anyMeansNecessary.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S47P01",
+      "name": "Apocalyptic Ingenuity",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "rick-grimes",
+      "characterName": "Rick Grimes",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_apocalypticIngenuity.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S24P01",
+      "name": "Appraisal",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "elodie-rakoto",
+      "characterName": "Élodie Rakoto",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_appraisal.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "Autodidact",
+      "name": "Autodidact",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "adam-francis",
+      "characterName": "Adam Francis",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_autodidact.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "Babysitter",
+      "name": "Babysitter",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "steve-harrington",
+      "characterName": "Steve Harrington",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_babysitter.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard",
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S36P01",
+      "name": "Background Player",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "renato-lyra",
+      "characterName": "Renato Lyra",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_backgroundPlayer.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S50P01",
+      "name": "Bada Bada Boom",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "dustin-henderson",
+      "characterName": "Dustin Henderson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_BadaBadaBoom.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Balanced_Landing",
+      "name": "Balanced Landing",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nea-karlsson",
+      "characterName": "Nea Karlsson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_balancedLanding.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S42P02",
+      "name": "Bardic Inspiration",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "aestri-yazar",
+      "characterName": "Aestri Yazar",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bardicInspiration.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S33P01",
+      "name": "Better Than New",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "rebecca-chambers",
+      "characterName": "Rebecca Chambers",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_betterThanNew.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "BetterTogether",
+      "name": "Better Together",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nancy-wheeler",
+      "characterName": "Nancy Wheeler",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_betterTogether.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S27P01",
+      "name": "Bite the Bullet",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Leon S. Kennedy",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_biteTheBullet.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "S26P03",
+      "name": "Blast Mine",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jill-valentine",
+      "characterName": "Jill Valentine",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_blastMine.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "BloodPact",
+      "name": "Blood Pact",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "cheryl-mason",
+      "characterName": "Cheryl Mason",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bloodPact.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception",
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "S36P02",
+      "name": "Blood Rush",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "renato-lyra",
+      "characterName": "Renato Lyra",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bloodRush.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "BoilOver",
+      "name": "Boil Over",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "kate-denson",
+      "characterName": "Kate Denson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_boilOver.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Bond",
+      "name": "Bond",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "dwight-fairfield",
+      "characterName": "Dwight Fairfield",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_bond.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S28P02",
+      "name": "Boon: Circle of Healing",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "mikaela-reid",
+      "characterName": "Mikaela Reid",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_boonCircleOfHealing.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S30P03",
+      "name": "Boon: Dark Theory",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "yoichi-asakawa",
+      "characterName": "Yoichi Asakawa",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_boonDarkTheory.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S29P03",
+      "name": "Boon: Exponential",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jonah-vasquez",
+      "characterName": "Jonah Vasquez",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_boonExponential.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S40P02",
+      "name": "Boon: Illumination",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "alan-wake",
+      "characterName": "Alan Wake",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_boonIllumination.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S28P03",
+      "name": "Boon: Shadow Step",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "mikaela-reid",
+      "characterName": "Mikaela Reid",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_boonShadowStep.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S54P03",
+      "name": "Boon: Steadfast",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "aurora-stardotter",
+      "characterName": "Aurora Stardotter",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_BoonSteadfast.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "BorrowedTime",
+      "name": "Borrowed Time",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "William \"Bill\" Overbeck",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_borrowedTime.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "Botany_Knowledge",
+      "name": "Botany Knowledge",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "claudette-morel",
+      "characterName": "Claudette Morel",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_botanyKnowledge.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "Breakdown",
+      "name": "Breakdown",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jeff-johansen",
+      "characterName": "Jeff Johansen",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_breakdown.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Breakout",
+      "name": "Breakout",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "yui-kimura",
+      "characterName": "Yui Kimura",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_breakout.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "BuckleUp",
+      "name": "Buckle Up",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Ashley J. Williams",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_buckleUp.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "BuiltToLast",
+      "name": "Built to Last",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "felix-richter",
+      "characterName": "Felix Richter",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_builtToLast.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Calm_Spirit",
+      "name": "Calm Spirit",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jake-park",
+      "characterName": "Jake Park",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_calmSpirit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Camaraderie",
+      "name": "Camaraderie",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "steve-harrington",
+      "characterName": "Steve Harrington",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_camaraderie.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S40P01",
+      "name": "Champion of Light",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "alan-wake",
+      "characterName": "Alan Wake",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_championOfLight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "S50P02",
+      "name": "Change of Plan",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "dustin-henderson",
+      "characterName": "Dustin Henderson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_ChangeOfPlan.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S39P02",
+      "name": "Chemical Trap",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ellen-ripley",
+      "characterName": "Ellen Ripley",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_chemicalTrap.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S28P01",
+      "name": "Clairvoyance",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "mikaela-reid",
+      "characterName": "Mikaela Reid",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_clairvoyance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S45P02",
+      "name": "Clean Break",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "taurie-cain",
+      "characterName": "Taurie Cain",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_cleanBreak.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S47P02",
+      "name": "Come and Get Me!",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "rick-grimes",
+      "characterName": "Rick Grimes",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_comeAndGetMe.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S48P01",
+      "name": "Conviction",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "michonne-grimes",
+      "characterName": "Michonne Grimes",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_conviction.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S29P02",
+      "name": "Corrective Action",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jonah-vasquez",
+      "characterName": "Jonah Vasquez",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_correctiveAction.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S26P01",
+      "name": "Counterforce",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jill-valentine",
+      "characterName": "Jill Valentine",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_counterforce.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S53P03",
+      "name": "Cross-Examination",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "shane-wiigwaas",
+      "characterName": "Shane Wiigwaas",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_CrossExamination.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S35P01",
+      "name": "Cut Loose",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "thalita-lyra",
+      "characterName": "Thalita Lyra",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_cutLoose.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Dance_with_me",
+      "name": "Dance With Me",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "kate-denson",
+      "characterName": "Kate Denson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_danceWithMe.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Dark_Sense",
+      "name": "Dark Sense",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_darkSense.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "DeadHard",
+      "name": "Dead Hard",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "david-king",
+      "characterName": "David King",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deadHard.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation",
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S40P03",
+      "name": "Deadline",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "alan-wake",
+      "characterName": "Alan Wake",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deadline.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S24P02",
+      "name": "Deception",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "elodie-rakoto",
+      "characterName": "Élodie Rakoto",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deception.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "DecisiveStrike",
+      "name": "Decisive Strike",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "laurie-strode",
+      "characterName": "Laurie Strode",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_decisiveStrike.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Deja_Vu",
+      "name": "Deja Vu",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_dejaVu.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "Deliverance",
+      "name": "Deliverance",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "adam-francis",
+      "characterName": "Adam Francis",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_deliverance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "DesperateMeasures",
+      "name": "Desperate Measures",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "felix-richter",
+      "characterName": "Felix Richter",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_desperateMeasures.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "DetectivesHunch",
+      "name": "Detective's Hunch",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "david-tapp",
+      "characterName": "Detective Tapp",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_detectivesHunch.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "Distortion",
+      "name": "Distortion",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jeff-johansen",
+      "characterName": "Jeff Johansen",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_distortion.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Diversion",
+      "name": "Diversion",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "adam-francis",
+      "characterName": "Adam Francis",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_diversion.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S46P01",
+      "name": "Do No Harm",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "orela-rose",
+      "characterName": "Orela Rose",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_DoNoHarm.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S38P01",
+      "name": "Dramaturgy",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nicolas-cage",
+      "characterName": "Nicolas Cage",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_dramaturgy.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S46P02",
+      "name": "Duty of Care",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "orela-rose",
+      "characterName": "Orela Rose",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_DutyOfCare.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S30P02",
+      "name": "Empathic Connection",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "yoichi-asakawa",
+      "characterName": "Yoichi Asakawa",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_empathicConnection.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Empathy",
+      "name": "Empathy",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "claudette-morel",
+      "characterName": "Claudette Morel",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_empathy.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S51P01",
+      "name": "Extrasensory Perception",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "eleven",
+      "characterName": "Eleven",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_ExtrasensoryPerception.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S44P02",
+      "name": "Exultation",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "trevor-belmont",
+      "characterName": "Trevor Belmont",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_Exultation.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S44P01",
+      "name": "Eyes of Belmont",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "trevor-belmont",
+      "characterName": "Trevor Belmont",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_EyesOfBelmont.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S25P01",
+      "name": "Fast Track",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Lee Yun-jin",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_fastTrack.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S43P01",
+      "name": "Finesse",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "lara-croft",
+      "characterName": "Lara Croft",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_finesse.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S52P03",
+      "name": "Five Moves Ahead",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "kwon-tae-young",
+      "characterName": "Kwon Tae-young",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_FiveMovesAhead.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Fixated",
+      "name": "Fixated",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nancy-wheeler",
+      "characterName": "Nancy Wheeler",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_fixated.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S27P02",
+      "name": "Flashbang",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Leon S. Kennedy",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_flashbang.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "FlipFlop",
+      "name": "Flip-Flop",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Ashley J. Williams",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_flip-Flop.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S52P01",
+      "name": "Flow State",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "kwon-tae-young",
+      "characterName": "Kwon Tae-young",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_FlowState.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S34P02",
+      "name": "Fogwise",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "vittorio-toscano",
+      "characterName": "Vittorio Toscano",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_fogwise.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "ForThePeople",
+      "name": "For the People",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "zarina-kassir",
+      "characterName": "Zarina Kassir",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_forThePeople.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "S35P02",
+      "name": "Friendly Competition",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "thalita-lyra",
+      "characterName": "Thalita Lyra",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_friendlyCompetition.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S54P01",
+      "name": "Fruits of Your Labor",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "aurora-stardotter",
+      "characterName": "Aurora Stardotter",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_FruitsOfYourLabor.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S49P03",
+      "name": "Ghost Notes",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "vee-boonyasak",
+      "characterName": "Vee Boonyasak",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_GhostNotes.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S43P02",
+      "name": "Hardened",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "lara-croft",
+      "characterName": "Lara Croft",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hardened.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "HeadOn",
+      "name": "Head On",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jane-romero",
+      "characterName": "Jane Romero",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_headOn.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Hope",
+      "name": "Hope",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hope.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S33P03",
+      "name": "Hyperfocus",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "rebecca-chambers",
+      "characterName": "Rebecca Chambers",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_hyperfocus.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S31P01",
+      "name": "Inner Focus",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "haddie-kaur",
+      "characterName": "Haddie Kaur",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_innerFocus.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "InnerStrength",
+      "name": "Inner Strength",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nancy-wheeler",
+      "characterName": "Nancy Wheeler",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_innerStrength.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S45P01",
+      "name": "Invocation: Treacherous Crows",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "taurie-cain",
+      "characterName": "Taurie Cain",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_invocationTreacherousCrows.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S41P01",
+      "name": "Invocation: Weaving Spiders",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "sable-ward",
+      "characterName": "Sable Ward",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_invocationWeavingSpiders.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Iron_Will",
+      "name": "Iron Will",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jake-park",
+      "characterName": "Jake Park",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_ironWill.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Kindred",
+      "name": "Kindred",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_kindred.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S48P02",
+      "name": "Last Stand",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "michonne-grimes",
+      "characterName": "Michonne Grimes",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_lastStand.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Leader",
+      "name": "Leader",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "dwight-fairfield",
+      "characterName": "Dwight Fairfield",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_leader.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy",
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "LeftBehind",
+      "name": "Left Behind",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "William \"Bill\" Overbeck",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_leftBehind.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy",
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S53P02",
+      "name": "Lend a Hand",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "shane-wiigwaas",
+      "characterName": "Shane Wiigwaas",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_LendaHand.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S39P03",
+      "name": "Light-footed",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ellen-ripley",
+      "characterName": "Ellen Ripley",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_light-Footed.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Lightweight",
+      "name": "Lightweight",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_lightweight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Lithe",
+      "name": "Lithe",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "feng-min",
+      "characterName": "Feng Min",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_lithe.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S32P03",
+      "name": "Low Profile",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ada-wong",
+      "characterName": "Ada Wong",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_lowProfile.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "LuckyBreak",
+      "name": "Lucky Break",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "yui-kimura",
+      "characterName": "Yui Kimura",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_luckyBreak.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S39P01",
+      "name": "Lucky Star",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ellen-ripley",
+      "characterName": "Ellen Ripley",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_luckyStar.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S37P02",
+      "name": "Made for This",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "gabriel-soma",
+      "characterName": "Gabriel Soma",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_madeForThis.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "TheMettleOfMan",
+      "name": "Mettle of Man",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Ashley J. Williams",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_mettleOfMan.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S42P01",
+      "name": "Mirrored Illusion",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "aestri-yazar",
+      "characterName": "Aestri Yazar",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_mirroredIllusion.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S44P03",
+      "name": "Moment of Glory",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "trevor-belmont",
+      "characterName": "Trevor Belmont",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_MomentOfGlory.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "NoMither",
+      "name": "No Mither",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "david-king",
+      "characterName": "David King",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_noMither.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation",
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "No_One_Left_Behind",
+      "name": "No One Left Behind",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_noOneLeftBehind.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "ObjectOfObsession",
+      "name": "Object of Obsession",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "laurie-strode",
+      "characterName": "Laurie Strode",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_objectOfObsession.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "OffTheRecord",
+      "name": "Off the Record",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "zarina-kassir",
+      "characterName": "Zarina Kassir",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_offTheRecord.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Open_Handed",
+      "name": "Open-Handed",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ace-visconti",
+      "characterName": "Ace Visconti",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_open-Handed.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support",
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S29P01",
+      "name": "Overcome",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jonah-vasquez",
+      "characterName": "Jonah Vasquez",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_overcome.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S31P03",
+      "name": "Overzealous",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "haddie-kaur",
+      "characterName": "Haddie Kaur",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_overzealous.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S30P01",
+      "name": "Parental Guidance",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "yoichi-asakawa",
+      "characterName": "Yoichi Asakawa",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_parentalGuidance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Pharmacy",
+      "name": "Pharmacy",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "quentin-smith",
+      "characterName": "Quentin Smith",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_pharmacy.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S38P03",
+      "name": "Plot Twist",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nicolas-cage",
+      "characterName": "Nicolas Cage",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_plotTwist.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Plunderers_Instinct",
+      "name": "Plunderer's Instinct",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_plunderersInstinct.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "Poised",
+      "name": "Poised",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jane-romero",
+      "characterName": "Jane Romero",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_poised.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S34P01",
+      "name": "Potential Energy",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "vittorio-toscano",
+      "characterName": "Vittorio Toscano",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_potentialEnergy.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S24P03",
+      "name": "Power Struggle",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "elodie-rakoto",
+      "characterName": "Élodie Rakoto",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_powerStruggle.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Premonition",
+      "name": "Premonition",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_premonition.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "Prove_Thyself",
+      "name": "Prove Thyself",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "dwight-fairfield",
+      "characterName": "Dwight Fairfield",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_proveThyself.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy",
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "QuickQuiet",
+      "name": "Quick & Quiet",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "meg-thomas",
+      "characterName": "Meg Thomas",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_quickAndQuiet.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation",
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S34P03",
+      "name": "Quick Gambit",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "vittorio-toscano",
+      "characterName": "Vittorio Toscano",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_quickGambit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S46P03",
+      "name": "Rapid Response",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "orela-rose",
+      "characterName": "Orela Rose",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_RapidResponse.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S32P02",
+      "name": "Reactive Healing",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ada-wong",
+      "characterName": "Ada Wong",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_reactiveHealing.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S33P02",
+      "name": "Reassurance",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "rebecca-chambers",
+      "characterName": "Rebecca Chambers",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_reassurance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "RedHerring",
+      "name": "Red Herring",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "zarina-kassir",
+      "characterName": "Zarina Kassir",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_redHerring.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "RepressedAlliance",
+      "name": "Repressed Alliance ",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "cheryl-mason",
+      "characterName": "Cheryl Mason",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_repressedAlliance.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S31P02",
+      "name": "Residual Manifest",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "haddie-kaur",
+      "characterName": "Haddie Kaur",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_residualManifest.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Resilience",
+      "name": "Resilience",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_resilience.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation",
+        "safeguard",
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S26P02",
+      "name": "Resurgence",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jill-valentine",
+      "characterName": "Jill Valentine",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_resurgence.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S49P01",
+      "name": "Road Life",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "vee-boonyasak",
+      "characterName": "Vee Boonyasak",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_RoadLife.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S27P03",
+      "name": "Rookie Spirit",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Leon S. Kennedy",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_rookieSpirit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "Saboteur",
+      "name": "Saboteur",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jake-park",
+      "characterName": "Jake Park",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_saboteur.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S37P03",
+      "name": "Scavenger",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "gabriel-soma",
+      "characterName": "Gabriel Soma",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scavenger.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S38P02",
+      "name": "Scene Partner",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nicolas-cage",
+      "characterName": "Nicolas Cage",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_scenePartner.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "SecondWind",
+      "name": "Second Wind",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "steve-harrington",
+      "characterName": "Steve Harrington",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_secondWind.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Self_Care",
+      "name": "Self-Care",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "claudette-morel",
+      "characterName": "Claudette Morel",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_self-Care.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S25P03",
+      "name": "Self-Preservation",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Lee Yun-jin",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_self-Preservation.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "S45P03",
+      "name": "Shoulder the Burden",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "taurie-cain",
+      "characterName": "Taurie Cain",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_shoulderTheBurden.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Slippery_Meat",
+      "name": "Slippery Meat",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_slipperyMeat.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Small_Game",
+      "name": "Small Game",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_smallGame.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S25P02",
+      "name": "Smash Hit",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "Lee Yun-jin",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_smashHit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "SoleSurvivor",
+      "name": "Sole Survivor",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "laurie-strode",
+      "characterName": "Laurie Strode",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_soleSurvivor.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment"
+      ],
+      "description": null
+    },
+    {
+      "id": "Solidarity",
+      "name": "Solidarity",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "jane-romero",
+      "characterName": "Jane Romero",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_solidarity.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "SoulGuard",
+      "name": "Soul Guard",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "cheryl-mason",
+      "characterName": "Cheryl Mason",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_soulGuard.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S43P03",
+      "name": "Specialist",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "lara-croft",
+      "characterName": "Lara Croft",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_specialist.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Spine_Chill",
+      "name": "Spine Chill",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_spineChill.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation",
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "Sprint_Burst",
+      "name": "Sprint Burst",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "meg-thomas",
+      "characterName": "Meg Thomas",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_sprintBurst.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "StakeOut",
+      "name": "Stake Out",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "david-tapp",
+      "characterName": "Detective Tapp",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_stakeOut.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S42P03",
+      "name": "Still Sight",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "aestri-yazar",
+      "characterName": "Aestri Yazar",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_stillSight.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Streetwise",
+      "name": "Streetwise",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nea-karlsson",
+      "characterName": "Nea Karlsson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_streetwise.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "S41P02",
+      "name": "Strength in Shadows",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "sable-ward",
+      "characterName": "Sable Ward",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_strengthInShadows.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "S36P03",
+      "name": "Teamwork: Collective Stealth",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "renato-lyra",
+      "characterName": "Renato Lyra",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_teamworkCollectiveStealth.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "S50P03",
+      "name": "Teamwork: Full Circuit",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "dustin-henderson",
+      "characterName": "Dustin Henderson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_TeamworkFullCircuit.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S35P03",
+      "name": "Teamwork: Power of Two",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "thalita-lyra",
+      "characterName": "Thalita Lyra",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_teamworkPowerOfTwo.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "S51P03",
+      "name": "Teamwork: Soft-Spoken",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "eleven",
+      "characterName": "Eleven",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_TeamworkSoftSpoken.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S48P03",
+      "name": "Teamwork: Throw Down",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "michonne-grimes",
+      "characterName": "Michonne Grimes",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_teamworkThrowDown.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S47P03",
+      "name": "Teamwork: Toughen Up",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "rick-grimes",
+      "characterName": "Rick Grimes",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_teamworkToughenUp.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "Technician",
+      "name": "Technician",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "feng-min",
+      "characterName": "Feng Min",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_technician.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "concealment",
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "Tenacity",
+      "name": "Tenacity",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "david-tapp",
+      "characterName": "Detective Tapp",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_tenacity.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation",
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "This_Is_Not_Happening",
+      "name": "This Is Not Happening",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_thisIsNotHappening.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard",
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S37P01",
+      "name": "Troubleshooter",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "gabriel-soma",
+      "characterName": "Gabriel Soma",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_troubleshooter.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "SelfSufficient",
+      "name": "Unbreakable",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": "William \"Bill\" Overbeck",
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_unbreakable.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "adaptation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Up_The_Ante",
+      "name": "Up the Ante",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ace-visconti",
+      "characterName": "Ace Visconti",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_upTheAnte.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "Urban_Evasion",
+      "name": "Urban Evasion",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "nea-karlsson",
+      "characterName": "Nea Karlsson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_urbanEvasion.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "navigation"
+      ],
+      "description": null
+    },
+    {
+      "id": "Vigil",
+      "name": "Vigil",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "quentin-smith",
+      "characterName": "Quentin Smith",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_vigil.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "Visionary",
+      "name": "Visionary",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "felix-richter",
+      "characterName": "Felix Richter",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_visionary.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "WakeUp",
+      "name": "Wake Up!",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "quentin-smith",
+      "characterName": "Quentin Smith",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_wakeUp.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception",
+        "strategy"
+      ],
+      "description": null
+    },
+    {
+      "id": "S51P02",
+      "name": "We See You",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "eleven",
+      "characterName": "Eleven",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconsPerks_WeSeeYou.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "WellMakeIt",
+      "name": "We'll make it",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_wellMakeIt.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "safeguard"
+      ],
+      "description": null
+    },
+    {
+      "id": "WereGonnaLiveForever",
+      "name": "We're Gonna Live Forever",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "david-king",
+      "characterName": "David King",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_wereGonnaLiveForever.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "support"
+      ],
+      "description": null
+    },
+    {
+      "id": "S41P03",
+      "name": "Wicked",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "sable-ward",
+      "characterName": "Sable Ward",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_wicked.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "S53P01",
+      "name": "Wide Open Throttle",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "shane-wiigwaas",
+      "characterName": "Shane Wiigwaas",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_WideOpenThrottle.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "WindowsOfOpportunity",
+      "name": "Windows of Opportunity",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "kate-denson",
+      "characterName": "Kate Denson",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_windowsOfOpportunity.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [
+        "perception"
+      ],
+      "description": null
+    },
+    {
+      "id": "S32P01",
+      "name": "Wiretap",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": "ada-wong",
+      "characterName": "Ada Wong",
+      "origin": "character",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_wiretap.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "survivor:one-two-three-four",
+      "name": "One-Two-Three-Four!",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/IconPerks_OneTwoThreeFour.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    },
+    {
+      "id": "survivor:salvation-s-cry",
+      "name": "Salvation's Cry",
+      "aliases": [],
+      "role": "survivor",
+      "characterId": null,
+      "characterName": null,
+      "origin": "unknown",
+      "image": {
+        "url": "https://deadbydaylight.wiki.gg/images/T_UI_iconsPerks_SalvationsCry.png",
+        "alternatives": [],
+        "local": null
+      },
+      "categories": [],
+      "description": null
+    }
+  ]
+}

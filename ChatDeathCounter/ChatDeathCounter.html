@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111219">
+  <title>Chat Death Counter</title>
+  <link rel="stylesheet" href="style.css?v=repo-update-1">
+</head>
+<body>
+  <main id="setup" class="setup" hidden>
+    <span class="eyebrow">CHAT DEATH COUNTER</span>
+    <h1>Set up your OBS overlay</h1>
+    <p>Enter your Twitch channel to read chat commands anonymously. The overlay cannot send messages to chat.</p>
+    <form id="setup-form">
+      <label for="channel-input">Twitch channel</label>
+      <input id="channel-input" name="channel" placeholder="your_channel" autocomplete="off" required>
+      <div class="setup-row"><button type="submit">Generate overlay link</button></div>
+    </form>
+    <div id="setup-output" class="setup-output" hidden></div>
+    <p class="setup-help">Paste the generated URL into an OBS Browser source. Anonymous Twitch chat access is undocumented and may stop working if Twitch changes its service.</p>
+  </main>
+
+  <section id="panel" class="panel" aria-live="polite" hidden>
+    <div class="counter-card">
+      <div class="row" id="deaths-row"><span class="label" id="deaths-label">Deaths</span><span class="number" id="deaths-value">0</span><span class="number timer" id="overall-time"></span></div>
+      <div class="row boss" id="boss-row"><span class="boss-name" id="boss-name"></span><span class="number" id="boss-deaths"></span><span class="number timer" id="boss-time"></span></div>
+      <div id="toast" role="status"></div>
+    </div>
+    <aside class="chat-window" aria-label="Twitch chat">
+      <div class="chat-heading"><span id="chat-channel">LIVE CHAT</span><span class="chat-live"><i></i> LIVE</span></div>
+      <div id="chat-messages" class="chat-messages" aria-live="polite"><div class="chat-empty">Waiting for chat messages…</div></div>
+    </aside>
+  </section>
+
+  <script src="app.js?v=repo-update-1"></script>
+</body>
+</html>

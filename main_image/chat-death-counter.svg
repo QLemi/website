@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Chat Death Counter">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#24171d"/><stop offset="1" stop-color="#0d1118"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff6572"/><stop offset="1" stop-color="#ac263c"/></linearGradient>
+    <filter id="glow" x="-.5" y="-.5" width="2" height="2"><feGaussianBlur stdDeviation="16"/></filter>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <circle cx="710" cy="255" r="145" fill="#e7435b" opacity=".18" filter="url(#glow)"/>
+  <g transform="translate(170 120)">
+    <rect x="0" y="0" width="580" height="300" rx="24" fill="#101318" stroke="#ffffff" stroke-opacity=".16" stroke-width="3"/>
+    <rect x="28" y="30" width="524" height="104" rx="16" fill="#1b2028"/>
+    <text x="55" y="96" fill="#e8e5e3" font-family="Arial,sans-serif" font-size="27" font-weight="700" letter-spacing="3">DEATHS</text>
+    <text x="505" y="103" text-anchor="end" fill="url(#accent)" font-family="Arial,sans-serif" font-size="66" font-weight="800">24</text>
+    <path d="M42 160h496" stroke="#ffffff" stroke-opacity=".13" stroke-width="2"/>
+    <text x="55" y="213" fill="#c9c5c4" font-family="Arial,sans-serif" font-size="22" font-weight="700">THE HUNTRESS</text>
+    <text x="505" y="213" text-anchor="end" fill="#ff6572" font-family="Arial,sans-serif" font-size="25" font-weight="800">7 ☠</text>
+    <text x="55" y="256" fill="#8f969f" font-family="Arial,sans-serif" font-size="18">BOSS TIME</text>
+    <text x="505" y="256" text-anchor="end" fill="#ff6572" font-family="monospace" font-size="23" font-weight="700">12:48</text>
+    <path d="M280 300v35m-95 0h190" stroke="#ffffff" stroke-opacity=".16" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <text x="480" y="492" text-anchor="middle" fill="#f1ecea" font-family="Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="4">CHAT DEATH COUNTER</text>
+</svg>

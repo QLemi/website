@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d1b">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Harmonogram · Dostęp chroniony</title>
+    <style>
+    :root{color-scheme:dark;--muted:#91a2bc}*{box-sizing:border-box}html,body{min-height:100%;margin:0}body{min-height:100vh;display:grid;place-items:center;padding:24px;color:#eef4ff;font-family:Inter,"Segoe UI",system-ui,sans-serif;background:radial-gradient(ellipse at 50% 0%,rgba(37,99,235,.22),transparent 42%),radial-gradient(circle at 12% 78%,rgba(14,165,233,.08),transparent 26%),linear-gradient(145deg,#070c15,#0c1524 55%,#090f1b)}.login-card{position:relative;overflow:hidden;width:min(100%,440px);padding:clamp(26px,6vw,42px);border:1px solid rgba(125,155,195,.28);border-radius:24px;background:linear-gradient(155deg,rgba(20,32,51,.97),rgba(12,21,36,.97));box-shadow:0 28px 80px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.05)}.login-card:before{position:absolute;inset:0 0 auto;height:3px;content:"";background:linear-gradient(90deg,#38bdf8,#3b82f6,#8b5cf6)}.brand-mark{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 20px;border:1px solid rgba(96,165,250,.35);border-radius:18px;color:#bfdbfe;background:linear-gradient(145deg,rgba(37,99,235,.28),rgba(14,165,233,.1));box-shadow:0 10px 30px rgba(37,99,235,.15);font-size:1.55rem}.kicker{margin:0 0 9px;color:#93c5fd;text-align:center;font-size:.7rem;font-weight:800;letter-spacing:.18em}.title{margin:0;color:#f8fafc;text-align:center;font-size:clamp(1.65rem,6vw,2rem);line-height:1.15;letter-spacing:-.035em}.subtitle{margin:11px 0 0;color:var(--muted);text-align:center;font-size:.94rem;line-height:1.5}form{margin-top:28px}.password-label{display:block;margin:0 0 8px;color:#dbe6f5;font-size:.82rem;font-weight:700}.password-field{position:relative;display:block}.password-field input{width:100%;height:52px;padding:0 48px 0 15px;border:1px solid #344761;border-radius:12px;outline:none;color:#f8fafc;background:#0a1220;font:500 1rem "Segoe UI",system-ui,sans-serif;transition:border-color .16s,box-shadow .16s,background .16s}.password-field input::placeholder{color:#71839e}.password-field input:focus{border-color:#60a5fa;background:#0b1525;box-shadow:0 0 0 4px rgba(96,165,250,.16)}.show-password{position:absolute;top:50%;right:14px;display:grid;place-items:center;width:26px;height:26px;transform:translateY(-50%);border:0;color:#9fb2cb;background:transparent;cursor:pointer}.show-password svg{width:19px;height:19px}.remember-row{display:flex;align-items:center;gap:9px;margin-top:15px;color:var(--muted);font-size:.85rem;cursor:pointer}.remember-row input{width:16px;height:16px;margin:0;accent-color:#3b82f6}.login-error{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(248,113,113,.35);border-radius:10px;color:#fecaca;background:rgba(127,29,29,.22);font-size:.84rem;line-height:1.4}.login-error[hidden]{display:none}.unlock-button{display:block;width:100%;min-height:50px;margin-top:16px;padding:12px 16px;border:1px solid rgba(147,197,253,.35);border-radius:12px;color:white;background:linear-gradient(110deg,#2563eb,#3b82f6 58%,#0ea5e9);box-shadow:0 10px 22px rgba(37,99,235,.22);font:750 .95rem "Segoe UI",system-ui,sans-serif;letter-spacing:.01em;cursor:pointer;transition:filter .15s,transform .15s,box-shadow .15s}.unlock-button:hover{filter:brightness(1.09);transform:translateY(-1px);box-shadow:0 14px 28px rgba(37,99,235,.3)}.unlock-button:disabled{opacity:.65;cursor:wait;transform:none}.login-footer{margin:22px 0 0;padding-top:17px;border-top:1px solid rgba(125,155,195,.16);color:#72839b;text-align:center;font-size:.75rem}.login-status{min-height:1.2em;margin:12px 0 0;color:#93c5fd;text-align:center;font-size:.78rem}.login-status[hidden]{display:none}.unlock-button:focus-visible,.show-password:focus-visible{outline:2px solid #93c5fd;outline-offset:3px}@media(max-width:480px){body{padding:16px}.login-card{border-radius:20px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+  <script src="encrypted_harmonogram.js?v=repo-update-1" defer></script>
+  <script src="unlock_harmonogram.js?v=repo-update-1" defer></script>
+</head>
+<body>
+  <main class="login-card" id="login-card">
+    <div class="brand-mark" aria-hidden="true">▦</div>
+    <p class="kicker">LEMI · DOSTĘP CHRONIONY</p>
+    <h1 class="title">Harmonogram</h1>
+    <p class="subtitle">Wprowadź hasło, aby otworzyć harmonogram.</p>
+    <form id="unlock-form">
+      <label class="password-label" for="password">Hasło dostępu</label>
+      <span class="password-field">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Wpisz hasło" required autofocus aria-describedby="login-error">
+        <button class="show-password" id="show-password" type="button" aria-label="Pokaż hasło" title="Pokaż hasło">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </span>
+      <p class="login-error" id="login-error" role="alert" hidden>Hasło jest nieprawidłowe. Spróbuj ponownie.</p>
+      <label class="remember-row"><input id="remember-me" type="checkbox"> Zapamiętaj mnie na tym urządzeniu przez tydzień</label>
+      <button class="unlock-button" id="unlock-button" type="submit">Otwórz harmonogram</button>
+      <p class="login-status" id="login-status" aria-live="polite" hidden></p>
+      <p class="login-footer">Dostęp chroniony hasłem</p>
+    </form>
+  </main>
+</body>
+</html>

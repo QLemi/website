@@ -152,7 +152,7 @@
       ]);
       render();
       if (draft) fillBaseline(false);
-      status(Object.keys(errors).length ? 'Some data could not be refreshed.' : 'Data refreshed.', !!Object.keys(errors).length);
+      status(Object.keys(errors).length ? 'Some data could not be refreshed.' : '', !!Object.keys(errors).length);
     } finally { $('sync').disabled = false; }
   }
   $('open-editor').onclick = () => {

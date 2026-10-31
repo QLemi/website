@@ -92,7 +92,7 @@ function avatar(character, className) {
   const name = character.name || '?';
   const initials = name.split(/\s+/).map(part => part[0] || '').slice(0, 2).join('').toUpperCase();
   const src = safeUrl(character.image);
-  return '<span class="avatar ' + className + '">' + '<span class="avatar-initials" aria-hidden="true">' + escapeHtml(initials) + '</span>' + (src ? '<img class="avatar-photo" src="' + escapeHtml(src) + '" alt="" loading="lazy">' : '') + '</span>';
+  return '<span class="avatar ' + className + (src ? ' has-photo' : '') + '">' + '<span class="avatar-initials" aria-hidden="true">' + escapeHtml(initials) + '</span>' + (src ? '<img class="avatar-photo" src="' + escapeHtml(src) + '" alt="" loading="lazy">' : '') + '</span>';
 }
 function categoryColor(category) {
   const colors = CONFIG.CATEGORY_COLORS || {};
@@ -648,7 +648,7 @@ async function init() {
     renderTotals();
   });
   document.addEventListener('error', event => {
-    if (event.target instanceof HTMLImageElement) event.target.hidden = true;
+    if (event.target instanceof HTMLImageElement) { event.target.hidden = true; if (event.target.classList.contains('avatar-photo')) event.target.closest('.avatar')?.classList.remove('has-photo'); }
   }, true);
   document.addEventListener('load', event => {
     if (event.target instanceof HTMLImageElement && event.target.classList.contains('avatar-photo')) {

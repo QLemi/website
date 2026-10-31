@@ -1,3 +1,17 @@
+const profileLink = document.querySelector('.steam-chip');
+if (profileLink) {
+  const profileUrl = STREAKI_CONFIG.PROFILE_URL?.trim();
+  const profileLabel = STREAKI_CONFIG.PROFILE_LABEL?.trim();
+  if (profileUrl && profileLabel && /^https?:\/\//i.test(profileUrl)) {
+    profileLink.hidden = false;
+    profileLink.href = profileUrl;
+    profileLink.title = 'Steam — ' + profileLabel;
+    profileLink.querySelector('.steam-chip-txt').textContent = profileLabel;
+  } else {
+    profileLink.hidden = true;
+    profileLink.removeAttribute('href');
+  }
+}
 let latestRefresh = 0;
 let refreshController = null;
 let sourceReports = [];
@@ -1069,7 +1083,7 @@ function renderCharacters(characters) {
   updateStats(visible);
   updateFilterSummary(visible);
   renderDefault(visible);
-  document.body.className = 'view-default';
+  document.body.classList.add('view-default');
   updateFilterButtons();
 }
 function toggleTag(tag) {

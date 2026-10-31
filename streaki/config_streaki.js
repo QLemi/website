@@ -1,4 +1,6 @@
 const STREAKI_CONFIG = {
+  "PROFILE_URL": "https://steamcommunity.com/id/qlemi/",
+  "PROFILE_LABEL": "Lemi",
   "SHEET_ID": "1WrJPj5Pdms2lFV59NCVPm7eU5eLz2-eSp55MFk4qNGg",
   "SHEET_MAIN_GID": "0",
   "SHEET_INNE_GID": "2135936810",

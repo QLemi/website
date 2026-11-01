@@ -117,8 +117,8 @@
   "statistics": [
     {
       "id": "prestiz",
-      "name": "Prestiż",
-      "aliases": [],
+      "name": "Prestige",
+      "aliases": ["Prestiż"],
       "color": "#6b7280",
       "image": {
         "url": null,
@@ -131,8 +131,8 @@
     },
     {
       "id": "strimersy",
-      "name": "Strimersy",
-      "aliases": [],
+      "name": "Bloody Party Streamers",
+      "aliases": ["Strimersy"],
       "color": "#22c55e",
       "offeringId": "strimersy",
       "itemId": null,
@@ -140,8 +140,8 @@
     },
     {
       "id": "puddingi",
-      "name": "Puddingi",
-      "aliases": [],
+      "name": "Puddings",
+      "aliases": ["Puddingi"],
       "color": "#86efac",
       "offeringId": "puddingi",
       "itemId": null,
@@ -149,8 +149,8 @@
     },
     {
       "id": "muszle",
-      "name": "Muszle",
-      "aliases": [],
+      "name": "Hollow Shell",
+      "aliases": ["Muszle"],
       "color": "#4ade80",
       "offeringId": "muszle",
       "itemId": null,
@@ -158,8 +158,8 @@
     },
     {
       "id": "cake",
-      "name": "Cake",
-      "aliases": [],
+      "name": "Cakes",
+      "aliases": ["Cake"],
       "color": "#fde047",
       "offeringId": "cake",
       "itemId": null,
@@ -256,8 +256,8 @@
     },
     {
       "id": "masquerade-flashlight-twisted-masquerade",
-      "name": "Masquerade Flashlight (Twisted Masquerade )",
-      "aliases": [],
+      "name": "Masquerade Flashlight (Twisted Masquerade)",
+      "aliases": ["Masquerade Flashlight (Twisted Masquerade )"],
       "color": "#ea580c",
       "offeringId": null,
       "itemId": "Item_Camper_Flashlight_Anniversary2022",
@@ -319,8 +319,8 @@
     },
     {
       "id": "red-envelope-chinski-nowy-rok",
-      "name": "Red Envelope (Chinski nowy rok)",
-      "aliases": [],
+      "name": "Red Envelope (Lunar New Year)",
+      "aliases": ["Red Envelope (Chinski nowy rok)"],
       "color": "#eab308",
       "offeringId": "red-envelope-chinski-nowy-rok",
       "itemId": null,
@@ -328,8 +328,8 @@
     },
     {
       "id": "chinese-firecracker-chinski-nowy-rok",
-      "name": "Chinese Firecracker (Chinski nowy rok)",
-      "aliases": [],
+      "name": "Chinese Firecracker (Lunar New Year)",
+      "aliases": ["Chinese Firecracker (Chinski nowy rok)"],
       "color": "#facc15",
       "offeringId": null,
       "itemId": "Item_Camper_Firecracker_Chinese",
@@ -337,8 +337,8 @@
     },
     {
       "id": "festive-toolbox-chinski-nowy-rok",
-      "name": "Festive Toolbox (Chinski nowy rok)",
-      "aliases": [],
+      "name": "Festive Toolbox (Lunar New Year)",
+      "aliases": ["Festive Toolbox (Chinski nowy rok)"],
       "color": "#fbbf24",
       "offeringId": null,
       "itemId": "Item_Camper_LunarToolbox",
@@ -461,9 +461,9 @@
     }
   ],
   "offeringPoolCategories": [
-    "Strimersy",
-    "Cake",
-    "Puddingi",
-    "Muszle"
+    "Bloody Party Streamers",
+    "Cakes",
+    "Puddings",
+    "Hollow Shell"
   ]
 }

@@ -5,7 +5,7 @@
   const labels = {temporary: 'Temporary', general: 'General', 'short-term': 'Short-term', 'long-term': 'Long-term'};
   let characters = [], published = [], draft = null, snapshots = {}, editingId = null, loaded = false, dirty = false, formDirty = false;
   const errors = {};
-  const summaryCategories = new Set(categories);
+  const summaryCategories = new Set(categories.filter(category => category !== 'long-term'));
   const priorityChanges = new Set();
   let expirySignature = "";
   const find = id => characters.find(c => c.id === id);

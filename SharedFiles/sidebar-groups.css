@@ -1,0 +1,6 @@
+.preview-nav .sidebar-group-label{position:relative;display:flex;align-items:center;min-height:28px;width:210px;padding:8px 12px 4px;color:#a9a0a7;font:700 10px/1.3 Roboto,'Segoe UI',sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity .12s}
+.preview-nav .sidebar-group-label::after{content:'';height:1px;flex:1;margin-left:10px;background:linear-gradient(90deg,#ba4d5e,transparent)}
+.preview-nav:hover .sidebar-group-label,.preview-nav:focus-within .sidebar-group-label,.nav-pinned .preview-nav .sidebar-group-label{opacity:1}
+.preview-nav{overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#75414b #101013}
+@media(max-width:800px){.preview-nav .sidebar-group-label{opacity:1}}
+@media(prefers-reduced-motion:reduce){.preview-nav .sidebar-group-label{transition:none}}

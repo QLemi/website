@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+body.dbd-layout.page-guess{--bg:#0a0a0c;--panel:#111114;--panel-2:#1b1b1e;--line:#303034;--text:#eee;--muted:#aaa5aa;--red:#df3e50;--radius:10px;background:#0a0a0c;color:#eee;font-family:Roboto,'Segoe UI',sans-serif}
+.page-guess .app-shell{width:min(1350px,calc(100% - 64px))}
+.page-guess .topbar{width:min(1350px,calc(100% - 64px));min-height:64px;background:transparent;border-bottom:1px solid #303034}
+.page-guess .brand{font-family:Roboto,'Segoe UI',sans-serif;letter-spacing:.08em;font-size:13px}
+.page-guess .brand-mark{border-radius:8px;width:32px;height:32px;color:#f16c79;background:#261b1e}
+body.dbd-layout.page-guess #hero{padding:30px 0 8px}
+body.dbd-layout.page-guess #hero h1{font:700 26px/1.2 Roboto,'Segoe UI',sans-serif;letter-spacing:-.02em;text-transform:none}
+body.page-guess .home-dashboard{gap:14px;grid-template-columns:minmax(0,1fr) minmax(270px,310px);padding-top:18px}
+body.page-guess .home-dashboard> .create-panel,body.page-guess .home-dashboard> .join-panel,body.page-guess .home-dashboard> .how-panel{padding:22px}
+.page-guess :is(.panel,.board-panel,.turn-panel,.player-card,.game-action-card,.queue-panel,.question-box,.rematch-setup){background:#111114;border:1px solid #303034;border-radius:10px;box-shadow:none}
+.page-guess :is(.panel,.board-panel,.turn-panel)::before{border-color:#d63f50}
+.page-guess :is(.section-heading h2,.join-panel-title h2,.board-heading h2,.turn-panel h2){font-family:Roboto,'Segoe UI',sans-serif;letter-spacing:0}
+.page-guess .home-dashboard .eyebrow{display:block;color:#df7885;font-size:10px;letter-spacing:.12em;margin-bottom:6px}
+.page-guess .host-setup-grid{gap:20px}
+.page-guess :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:#0b0b0e;color:#eee;border:1px solid #454147;border-radius:7px;min-height:43px}
+.page-guess :is(input,select,textarea):focus-visible{outline:2px solid #df3e50;outline-offset:2px}
+.page-guess :is(.choice-card,.lobby-choice,.streamer-toggle){border-radius:8px;background:#1b1b1e;border-color:#403a3e}
+.page-guess :is(.choice-card.selected,.lobby-choice:has(input:checked)){background:#302126;border-color:#d34959;box-shadow:inset 2px 0 #d34959}
+.page-guess :is(.primary-button,.secondary-button,.soft-button,.danger-button){border-radius:8px;min-height:40px;font-family:Roboto,'Segoe UI',sans-serif;font-weight:700}
+.page-guess .primary-button{background:#d83d4e;border:1px solid #e35766;color:#fff}
+.page-guess .primary-button:hover:not(:disabled){background:#ed5868}
+.page-guess :is(.secondary-button,.soft-button){background:#202023;border:1px solid #48464a;color:#e4e1e3}
+.page-guess :is(.secondary-button,.soft-button):hover:not(:disabled){background:#302126;border-color:#a65a65}
+.page-guess :is(button,a):focus-visible{outline:2px solid #ff99a4;outline-offset:3px}
+.page-guess .steps-list li{border-bottom:1px solid #302c30;padding-bottom:12px}
+.page-guess .steps-list li:last-child{border-bottom:0;padding-bottom:0}
+.page-guess .steps-list li>span{border-radius:8px;background:#261b1e;border:1px solid #68343c;color:#f16c79}
+.page-guess :is(.room-view,.game-layout,.room-grid,.character-grid){min-width:0}
+.page-guess :is(.character-card,.queue-player,.question-history,.game-action-card){border-radius:8px}
+.page-guess .notice{border-radius:8px}
+@media(max-width:850px){body.page-guess .home-dashboard{grid-template-columns:1fr;grid-template-areas:'create' 'join' 'how'}.page-guess .app-shell,.page-guess .topbar{width:calc(100% - 32px)}}
+@media(max-width:600px){body.dbd-layout.page-guess #hero{padding-top:22px}.page-guess .host-setup-grid{grid-template-columns:1fr}.page-guess .app-shell,.page-guess .topbar{width:calc(100% - 24px)}body.page-guess .home-dashboard> .create-panel,body.page-guess .home-dashboard> .join-panel,body.page-guess .home-dashboard> .how-panel{padding:16px}}
+@media(prefers-reduced-motion:reduce){.page-guess *, .page-guess *::before,.page-guess *::after{scroll-behavior:auto;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.preview-nav{position:fixed;inset:0 auto 0 0;width:70px;z-index:200;background:#101013;border-right:1px solid #39393e;overflow:hidden;transition:width .2s;display:flex;flex-direction:column;padding:18px 10px;box-shadow:0 0 20px #0004}.preview-nav:hover,.preview-nav:focus-within,.nav-pinned .preview-nav{width:230px}.nav-title{display:flex;align-items:center;gap:12px;min-height:44px;white-space:nowrap}.nav-mark{flex:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid #a73a49;border-radius:9px;color:#ef8b99;text-decoration:none}.nav-steam-icon{width:24px;height:24px}.nav-title .nav-text{font-weight:700;letter-spacing:.1em}.nav-title small{display:block;color:#898489;font-size:10px}.nav-text,.nav-label,.nav-pin{opacity:0;transition:opacity .12s;white-space:nowrap}.preview-nav:hover :is(.nav-text,.nav-label,.nav-pin),.preview-nav:focus-within :is(.nav-text,.nav-label,.nav-pin),.nav-pinned .preview-nav :is(.nav-text,.nav-label,.nav-pin){opacity:1}.nav-pin,.nav-close{margin-left:auto;background:transparent;border:0;color:#b8afb1;font-size:19px;cursor:pointer}.nav-pin[aria-pressed=true]{color:#df3e50}.nav-label{font-size:10px;color:#898489;letter-spacing:.14em;margin:28px 12px 8px}.nav-links{display:grid;gap:4px}.preview-link{display:flex;align-items:center;gap:12px;width:210px;padding:9px 0;color:#b5afb2;text-decoration:none;border-radius:7px}.preview-link:hover{background:#222226;color:#fff}.preview-link[aria-current]{color:#fff;background:#292024;box-shadow:inset 2px 0 #df3e50;animation:navpulse 3s infinite}.nav-icon{width:50px;flex:none;text-align:center;font-size:20px;color:#d27a86}.menu-open,.nav-close,.nav-backdrop{display:none}@keyframes navpulse{50%{box-shadow:inset 3px 0 #ff7785}}
+body.dbd-layout.page-guess{padding-left:70px}body.nav-pinned.page-guess{padding-left:230px}
+@media(max-width:760px){body.dbd-layout.page-guess,body.nav-pinned.page-guess{padding-left:0}.preview-nav,.preview-nav:hover,.preview-nav:focus-within{width:230px;transform:translateX(-100%);transition:transform .2s}.nav-open .preview-nav{transform:translateX(0)}.preview-nav :is(.nav-text,.nav-label){opacity:1}.nav-pin{display:none}.nav-close{display:block}.menu-open{display:block;position:fixed;z-index:180;bottom:16px;left:16px;width:48px;height:48px;border:1px solid #a94352;border-radius:12px;background:#21171b;color:#fff;font-size:22px;box-shadow:0 4px 20px #0009}.nav-open .nav-backdrop{display:block;position:fixed;inset:0;z-index:190;background:#000a}.nav-backdrop[hidden]{display:none!important}}
+.page-guess .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 0}
+.page-guess .topbar .brand{position:static;transform:none;display:flex;align-items:center;gap:10px;min-width:0;font:500 12px/1.4 Roboto,'Segoe UI',sans-serif;letter-spacing:0}
+.page-guess .header-section,.page-guess .header-divider{color:#898489}.page-guess .header-current{color:#eee;font-weight:700}
+.page-guess .connection-status{flex:none;margin-left:auto;display:inline-flex;align-items:center;gap:7px;font:500 12px/1.4 Roboto,'Segoe UI',sans-serif}
+.page-guess .connection-status::before{content:'';width:7px;height:7px;border-radius:50%;background:#dc7781}.page-guess .connection-status[data-connected=true]::before{background:#83c99a}
+body.dbd-layout.page-guess #hero h1::after{display:none}
+@media(max-width:600px){.page-guess .topbar{min-height:56px;gap:8px}.page-guess .topbar .brand,.page-guess .connection-status{font-size:11px}body.dbd-layout.page-guess #hero{padding:22px 0 4px}}
+body.dbd-layout.page-guess #room-view>.room-panel{padding:24px;min-width:0}
+.page-guess .room-top{align-items:center;gap:16px;padding:0 0 18px;border-bottom:1px solid #303034}
+.page-guess .room-top>div{min-width:0}
+.page-guess .room-top h2{font:700 22px/1.25 Roboto,'Segoe UI',sans-serif;margin:6px 0 8px;overflow-wrap:anywhere}
+.page-guess .room-top .eyebrow{color:#d68b96;letter-spacing:.08em;font-size:10px}
+.page-guess .room-top .room-code{display:inline-block}
+.page-guess #join-form{width:min(100%,620px);display:grid;gap:0}
+.page-guess #join-form .field-label{margin:16px 0 7px}
+.page-guess #join-form :is(input:not([type=checkbox]),select){width:100%;min-width:0}
+.page-guess #join-form .streamer-toggle{margin-top:16px;width:fit-content;max-width:100%}
+.page-guess #join-form .full-button{justify-self:start;margin-top:20px}
+.page-guess .room-grid{gap:12px;margin-top:16px}
+.page-guess .player-card{padding:16px;border-radius:8px}
+.page-guess .game-layout{gap:16px;margin-top:16px;align-items:start}
+body.dbd-layout.page-guess :is(.board-panel,.turn-panel){min-width:0;padding:18px;border:1px solid #303034;border-radius:10px;background:#111114}
+.page-guess .board-heading{gap:16px;flex-wrap:wrap}
+.page-guess .board-heading h3{font:700 22px/1.25 Roboto,'Segoe UI',sans-serif}
+.page-guess .board-legend{margin-bottom:14px}
+.page-guess .character-grid{grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.page-guess .character-card{min-width:0;border-radius:7px;overflow:hidden}
+.page-guess .character-card span{overflow-wrap:anywhere}
+.page-guess .turn-panel{display:grid;gap:14px;overflow:visible}
+.page-guess .turn-overview,.page-guess .turn-actions{padding:0;background:none;border:0}
+.page-guess .turn-actions{padding-top:14px;border-top:1px solid #303034}
+.page-guess .game-action-card{padding:13px;border-radius:8px}
+.page-guess .turn-panel>.round-stats{padding:14px 0 0;background:none}
+@media(max-width:900px){.page-guess .game-layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){body.dbd-layout.page-guess #room-view>.room-panel{padding:16px}.page-guess .room-top{align-items:flex-start}.page-guess .room-top h2{font-size:20px}.page-guess .room-grid{grid-template-columns:1fr}body.dbd-layout.page-guess :is(.board-panel,.turn-panel){padding:14px}.page-guess .character-grid{grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:8px}.page-guess .board-heading>.board-counts{justify-content:flex-start}}
+.page-guess .character-card.incorrect-guess::before{top:8px;left:7px;right:auto;bottom:auto;width:auto;height:auto;transform:none;box-shadow:none;line-height:1.2;white-space:nowrap}
+.page-guess .character-card.incorrect-guess::after{inset:auto;top:0;left:0;right:auto;bottom:auto;width:100%;height:auto;aspect-ratio:1.2 / 1;transform:none;box-shadow:none;line-height:1;pointer-events:none}
+.page-guess .character-card.eliminated::after{inset:auto;top:8%;left:10%;right:auto;width:80%;height:auto;aspect-ratio:1.13/1;transform:none;background:linear-gradient(150deg,transparent calc(50% - 2px),#f0a64b calc(50% - 2px),#f0a64b calc(50% + 2px),transparent calc(50% + 2px));box-shadow:none;pointer-events:none}
+@media(max-width:800px){.page-guess .character-card.eliminated::after{aspect-ratio:1.08/1}}

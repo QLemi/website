@@ -144,7 +144,8 @@
       "id": "Item_Camper_LunarToolbox",
       "name": "Festive Toolbox",
       "aliases": [
-        "Festive Toolbox (Chinski nowy rok)"
+        "Festive Toolbox (Chinski nowy rok)",
+        "Festive Toolbox (Lunar New Year)"
       ],
       "type": "toolbox",
       "rarity": "common",
@@ -544,7 +545,8 @@
       "id": "Item_Camper_Firecracker_Chinese",
       "name": "Chinese Firecracker",
       "aliases": [
-        "Chinese Firecracker (Chinski nowy rok)"
+        "Chinese Firecracker (Chinski nowy rok)",
+        "Chinese Firecracker (Lunar New Year)"
       ],
       "type": "firecracker",
       "rarity": "common",

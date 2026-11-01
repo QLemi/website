@@ -47,7 +47,7 @@
     if (!rows[0] || !prestigeRow) throw new Error('No prestige row found in the statistics sheet.');
     const records = {};
     rows[0].forEach((name, col) => { if (!col) return; const character = characters.find(c => c.role === role && [c.name, ...(c.aliases || [])].some(alias => normalize(alias) === normalize(name))); const raw = (prestigeRow[col] || '').trim(); if (character && /^\d+$/.test(raw) && integer(Number(raw))) records[character.id] = Number(raw); });
-    if (!Object.keys(records).length) throw new Error('No matching characters with a valid prestige (0–100).');
+    if (!Object.keys(records).length) throw new Error('No matching characters with a valid prestige (0-100).');
     return {values:records, time:Date.now()};
   }
   window.DBDTools = Object.freeze({$, html, normalize, image, status, read, save, download, exportJSON, fileJSON, integer, recover, random, sample, confirmAction, csv, prestiges});

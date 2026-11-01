@@ -5,7 +5,7 @@ if (profileLink) {
   if (profileUrl && profileLabel && /^https?:\/\//i.test(profileUrl)) {
     profileLink.hidden = false;
     profileLink.href = profileUrl;
-    profileLink.title = 'Steam — ' + profileLabel;
+    profileLink.title = 'Steam - ' + profileLabel;
     profileLink.querySelector('.steam-chip-txt').textContent = profileLabel;
   } else {
     profileLink.hidden = true;
@@ -636,7 +636,7 @@ function steamExportText() {
   const format = document.getElementById('steam-export-format').value;
   const header = '[h2]You can check my streaks [url=https://qlemi.github.io/website/streaki/streaki.html] HERE [/url][/h2]';
   if (format === 'compact') {
-    return selected.map(row => `${row.name} — ${row.category}: ${row.value}${row.active ? ' [ONGOING]' : ''}`).join('\n');
+    return selected.map(row => `${row.name} - ${row.category}: ${row.value}${row.active ? ' [ONGOING]' : ''}`).join('\n');
   }
   if (format === 'role') {
     const roles = [['K', 'KILLER'], ['S', 'SURVIVOR'], ['O', 'BOTH']];
@@ -966,7 +966,7 @@ function renderPlayCard(p, i) {
     <div class="play-title">${escapeHtml(p.name)}</div>
     <div class="play-score-row">
       <div class="play-score">
-        <span class="play-score-num">${wins}</span><span class="play-score-sep">/</span><span class="play-score-den">${total || '—'}</span>
+        <span class="play-score-num">${wins}</span><span class="play-score-sep">/</span><span class="play-score-den">${total || '-'}</span>
         <span class="play-score-lab">${isSurv ? 'escapes' : 'wins'}</span>
       </div>
       <div class="play-score-sub">
@@ -1292,7 +1292,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!text) return;
     try {
       await navigator.clipboard.writeText(text);
-      document.getElementById('steam-export-feedback').textContent = 'Copied — ready to paste into Steam.';
+      document.getElementById('steam-export-feedback').textContent = 'Copied - ready to paste into Steam.';
     } catch (_) {
       const preview = document.getElementById('steam-export-preview');
       preview.focus();

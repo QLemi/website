@@ -259,3 +259,17 @@ a:focus-visible, summary:focus-visible {
   height: 100%;
   object-fit: cover;
 }
+.group-title {
+  grid-column: 1 / -1;
+  margin: .7rem 0 0;
+  padding: 0 0 .8rem;
+  color: #dceaff;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #79bbff 0, rgba(121,187,255,.55) 22%, transparent 65%) left bottom / min(100%, 650px) 1px no-repeat;
+}
+.group-title:not(:first-child) {
+  margin-top: 1.1rem;
+}

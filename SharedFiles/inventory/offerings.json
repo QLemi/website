@@ -3,8 +3,8 @@
   "entries": [
     {
       "id": "strimersy",
-      "name": "Strimersy",
-      "aliases": [],
+      "name": "Bloody Party Streamers",
+      "aliases": ["Strimersy"],
       "roles": null,
       "rarity": null,
       "eventId": null,
@@ -18,8 +18,8 @@
     },
     {
       "id": "puddingi",
-      "name": "Puddingi",
-      "aliases": [],
+      "name": "Puddings",
+      "aliases": ["Puddingi"],
       "roles": null,
       "rarity": null,
       "eventId": null,
@@ -33,8 +33,8 @@
     },
     {
       "id": "muszle",
-      "name": "Muszle",
-      "aliases": [],
+      "name": "Hollow Shell",
+      "aliases": ["Muszle"],
       "roles": null,
       "rarity": null,
       "eventId": null,
@@ -48,8 +48,8 @@
     },
     {
       "id": "cake",
-      "name": "Cake",
-      "aliases": [],
+      "name": "Cakes",
+      "aliases": ["Cake"],
       "roles": null,
       "rarity": null,
       "eventId": null,
@@ -168,8 +168,8 @@
     },
     {
       "id": "red-envelope-chinski-nowy-rok",
-      "name": "Red Envelope (Chinski nowy rok)",
-      "aliases": [],
+      "name": "Red Envelope (Lunar New Year)",
+      "aliases": ["Red Envelope (Chinski nowy rok)"],
       "roles": null,
       "rarity": null,
       "eventId": null,

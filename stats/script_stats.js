@@ -47,6 +47,7 @@ const state = {
   prestigePlus: null,
   detailSearch: '',
   totalsSearch: '',
+  showZeroValues: false,
   totalsMode: 'killers'
 };
 const $ = id => document.getElementById(id);
@@ -60,11 +61,11 @@ const escapeHtml = value => String(value == null ? '' : value).replace(/[&<>"']/
 })[c]);
 const fmt = value => nf.format(Number(value) || 0);
 const modeName = mode => mode === 'survivors' ? 'Survivors' : 'Killers';
-const isPrestige = category => normalize(category).startsWith('prestiz');
+const isPrestige = category => /^(prestiz|prestige)/.test(normalize(category));
 const isBonusOffering = category => {
   const name = normalize(category);
   if (CONFIG.BONUS_OFFERINGS?.has(name)) return true;
-  return name.includes('strimers') || name.includes('streamer') || name.includes('pudding') || /\b(cake|ciasto|ciasta|flan|terrormisu|cobbler|scream pie|torte)\b/.test(name);
+  return name.includes('strimers') || name.includes('streamer') || name.includes('pudding') || /\b(cakes?|ciasto|ciasta|flan|terrormisu|cobbler|scream pie|torte)\b/.test(name);
 };
 function readStorage(key, fallback) {
   try {
@@ -295,7 +296,7 @@ function renderTabs() {
     tab.classList.toggle('active', active);
     tab.setAttribute('aria-selected', String(active));
     tab.tabIndex = active ? 0 : -1;
-    $('tab-' + mode + '-count').textContent = state.data[mode].length || '—';
+    $('tab-' + mode + '-count').textContent = state.data[mode].length || '-';
   }
   $('explorer').setAttribute('aria-labelledby', 'tab-' + state.mode);
 }
@@ -306,7 +307,7 @@ function renderOverview() {
   const totalOfferings = offeringsTotal(characters);
   $('stat-chars').textContent = fmt(characters.length);
   $('stat-total-prestige').textContent = fmt(sum);
-  $('stat-avg-prestige').textContent = characters.length ? fmt(Math.round(sum / characters.length)) + ' / ' + fmt(median(levels)) : '—';
+  $('stat-avg-prestige').textContent = characters.length ? fmt(Math.round(sum / characters.length)) + ' / ' + fmt(median(levels)) : '-';
   $('stat-p100').textContent = fmt(levels.filter(value => value >= 100).length);
   $('stat-p10').textContent = fmt(levels.filter(value => value >= 10).length);
   $('stat-p25').textContent = fmt(levels.filter(value => value >= 25).length);
@@ -320,7 +321,7 @@ function renderCombinedOverview() {
   const totalOfferings = offeringsTotal(characters);
   $('combined-chars').textContent = fmt(characters.length);
   $('combined-prestige').textContent = fmt(totalPrestige);
-  $('combined-average').textContent = characters.length ? fmt(Math.round(totalPrestige / characters.length)) + ' / ' + fmt(median(levels)) : '—';
+  $('combined-average').textContent = characters.length ? fmt(Math.round(totalPrestige / characters.length)) + ' / ' + fmt(median(levels)) : '-';
   $('combined-p100').textContent = fmt(levels.filter(level => level >= 100).length);
   $('combined-p10').textContent = fmt(levels.filter(level => level >= 10).length);
   $('combined-p25').textContent = fmt(levels.filter(level => level >= 25).length);
@@ -413,13 +414,13 @@ function renderDetail() {
 }
 function renderDetailRows(character) {
   const query = normalize(state.detailSearch.trim());
-  const stats = character.stats.filter(item => !isPrestige(item.category) && (!query || normalize(item.category).includes(query)));
+  const stats = character.stats.filter(item => !isPrestige(item.category) && (state.showZeroValues || item.value !== 0) && (!query || normalize(item.category).includes(query)));
   $('detail-stats').innerHTML = stats.length ? stats.map(item => {
     const color = categoryColor(item.category);
     const percent = item.value > 0 ? Math.max(1, Math.min(100, isPrestige(item.category) ? item.value : Math.round(item.value / maxForCategory(item.category) * 100))) : 0;
     const right = '<strong class="stat-value">' + fmt(item.value) + '</strong>';
     return '<div class="stat-row"><div class="stat-icon" style="--category-color:' + color + '">' + categoryIcon(item.category, item.value) + '</div><div class="stat-main"><div class="stat-name">' + escapeHtml(item.category) + '</div><div class="stat-track"><span style="width:' + percent + '%;background:' + color + '"></span></div></div><div class="stat-number">' + right + '</div></div>';
-  }).join('') : '<div class="empty-state">No Matching Categories Found.</div>';
+  }).join('') : '<div class="empty-state">No matching categories. Enable Show zero values to include empty categories.</div>';
   syncExplorerListHeight();
 }
 function roleCategoryTotals(mode) {
@@ -453,9 +454,9 @@ function renderTotals() {
     categories = [...totals.values()].map(item => [item.category, item.total]);
   }
   const query = normalize(state.totalsSearch.trim());
-  const items = categories.filter(([category]) => !query || normalize(category).includes(query)).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pl'));
+  const items = categories.filter(([category, total]) => (state.showZeroValues || total !== 0) && (!query || normalize(category).includes(query))).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pl'));
   $('totals-count').textContent = items.length + ' Categories';
-  $('footer-totals').innerHTML = items.length ? items.map(([category, total], index) => '<div class="total-card"><span class="total-rank">' + String(index + 1).padStart(2, '0') + '</span><span class="total-icon" style="--category-color:' + categoryColor(category) + '">' + categoryIcon(category) + '</span><span class="total-name">' + escapeHtml(category) + '</span><strong>' + fmt(total) + '</strong></div>').join('') : '<div class="empty-state">No Categories Match This Search.</div>';
+  $('footer-totals').innerHTML = items.length ? items.map(([category, total], index) => '<div class="total-card"><span class="total-rank">' + String(index + 1).padStart(2, '0') + '</span><span class="total-icon" style="--category-color:' + categoryColor(category) + '">' + categoryIcon(category) + '</span><span class="total-name">' + escapeHtml(category) + '</span><strong>' + fmt(total) + '</strong></div>').join('') : '<div class="empty-state">No matching categories. Enable Show zero values to include empty categories.</div>';
 }
 function renderAll() {
   renderTabs();
@@ -578,6 +579,11 @@ async function init() {
   applyHash();
   renderAll();
   window.addEventListener('resize', syncExplorerListHeight);
+  $('show-zero-values').addEventListener('change', event => {
+    state.showZeroValues = event.target.checked;
+    renderDetail();
+    renderTotals();
+  });
   $('refresh-button').addEventListener('click', refreshData);
   document.querySelectorAll('.role-tab').forEach(button => button.addEventListener('click', () => switchMode(button.dataset.mode)));
   document.querySelector('.role-switch').addEventListener('keydown', event => {

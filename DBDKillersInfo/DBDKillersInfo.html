@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DBD Build Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Orbitron:wght@500;600;700&family=Chakra+Petch:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=shared-1">
+    <link rel="stylesheet" href="builds-layout.css?v=1">
+    <script defer src="builds-layout.js?v=1"></script>
     <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
   <link rel="stylesheet" href="../SharedFiles/navigation.css?v=dbd-nav-1">
 <script defer src="../SharedFiles/navigation.js?v=dbd-nav-1"></script>
+<link rel="stylesheet" href="../SharedFiles/page-readiness.css?v=1">
+<script defer src="../SharedFiles/page-readiness.js?v=2"></script>
+<link rel="stylesheet" href="../SharedFiles/sidebar-groups.css?v=1">
 </head>
-  <body>
+  <body class="page-builds">
+<dialog id="page-readiness" class="page-readiness-dialog" aria-labelledby="page-readiness-title" aria-describedby="page-readiness-message"><h2 id="page-readiness-title">Please note</h2><p id="page-readiness-message">This page may be incomplete or out of date.</p><button type="button">Continue</button></dialog>
+
 
 
 
     <a class="skip-link" href="#main-content">Skip to content</a>
-<nav class="dbd-site-nav" aria-label="DBD tools"><div class="dbd-site-inner"><a class="dbd-site-home" href="../index.html"><span aria-hidden="true">←</span><span>All tools</span></a><div class="dbd-site-desktop"><a class="dbd-site-link" href="../streaki/streaki.html">Streaks</a><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><span class="dbd-site-link" aria-current="page">Builds &amp; Info</span><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><a class="dbd-site-link" href="../loadout/loadout.html">Loadout Checker</a></div><details class="dbd-site-menu"><summary aria-label="DBD pages: Builds &amp; Info"><span class="dbd-site-current">Builds &amp; Info</span><span class="dbd-site-chevron" aria-hidden="true"></span></summary><div class="dbd-site-mobile-links"><a class="dbd-site-link" href="../streaki/streaki.html">Streaks</a><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><span class="dbd-site-link" aria-current="page">Builds &amp; Info</span><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><a class="dbd-site-link" href="../loadout/loadout.html">Loadout Checker</a></div></details></div></nav>
+<button class="menu-open" type="button" aria-controls="preview-nav" aria-expanded="false" aria-label="Open navigation">☰</button><div class="nav-backdrop" hidden></div><nav id="preview-nav" class="preview-nav" aria-label="DBD tools"><div class="nav-title"><a class="nav-mark" href="https://steamcommunity.com/id/qlemi/" target="_blank" rel="noopener noreferrer" aria-label="Lemi - Steam Profile"><svg class="nav-steam-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0ZM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015s1.35 3.015 3.015 3.015c1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266s-1.017 2.265-2.266 2.265c-1.253 0-2.265-1.014-2.265-2.265z"/>
+        </svg></a><span class="nav-text">LEMI <small>DBD TOOLS</small></span><button class="nav-pin" type="button" aria-pressed="false" aria-label="Pin navigation">⌖</button><button class="nav-close" type="button" aria-label="Close navigation">×</button></div><div class="nav-label">NAVIGATION</div><div class="preview-links"><a href="../index.html" class="preview-link" aria-label="All tools"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-text">All tools</span></a><div class="sidebar-group-label">For Everyone</div><a href="../streaki/streaki.html" class="preview-link" aria-label="Streaks"><span class="nav-icon" aria-hidden="true">◈</span><span class="nav-text">Streaks</span></a><a href="../stats/stats.html" class="preview-link" aria-label="Account Stats"><span class="nav-icon" aria-hidden="true">▥</span><span class="nav-text">Account Stats</span></a><a href="../prestige-planner/index.html" class="preview-link" aria-label="Prestige Planner"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-text">Prestige Planner</span></a><span aria-current="page" class="preview-link" aria-label="Builds & Info"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-text">Builds & Info</span></span><a href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html" class="preview-link" aria-label="Guess Who"><span class="nav-icon" aria-hidden="true">?</span><span class="nav-text">Guess Who</span></a><a href="../fortune-wheel/index.html" class="preview-link" aria-label="Randomizer"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-text">Randomizer</span></a><a href="../player-card-creator/index.html" class="preview-link" aria-label="Player Cards"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-text">Player Cards</span></a><a href="../loadout/loadout.html" class="preview-link" aria-label="Loadout Checker"><span class="nav-icon" aria-hidden="true">☷</span><span class="nav-text">Loadout Checker</span></a><div class="sidebar-group-label">Personal &amp; Community</div><a href="../tierlista_widzów/tierlista_widzów.html" class="preview-link" aria-label="Viewer Tier List (De_Destru)"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-text">Viewer Tier List</span></a></div></nav>
+
 
 <div id="app">
       <nav class="navbar">
@@ -52,10 +65,10 @@
                   <option value="9+">≥ 9</option>
                   <option value="7+">≥ 7</option>
                   <option value="5+">≥ 5</option>
-                  <option value="7-10">7 – 10</option>
-                  <option value="5-6.9">5 – 6.9</option>
-                  <option value="3-4.9">3 – 4.9</option>
-                  <option value="0-2.9">0 – 2.9</option>
+                  <option value="7-10">7 - 10</option>
+                  <option value="5-6.9">5 - 6.9</option>
+                  <option value="3-4.9">3 - 4.9</option>
+                  <option value="0-2.9">0 - 2.9</option>
                 </select>
                 <select id="filter-skill" onchange="renderKillers()">
                   <option value="">Skill</option>
@@ -63,7 +76,7 @@
                   <option value="ceil8+">Ceiling ≥ 8</option>
                   <option value="ceil7+">Ceiling ≥ 7</option>
                   <option value="ceil5+">Ceiling ≥ 5</option>
-                  <option value="ceil3-6">Ceiling 3–6</option>
+                  <option value="ceil3-6">Ceiling 3-6</option>
                   <option value="floor7+">Floor ≥ 7</option>
                   <option value="floor5+">Floor ≥ 5</option>
                   <option value="floor3+">Floor ≥ 3</option>
@@ -80,8 +93,8 @@
                 <select id="sort-by" onchange="renderKillers()">
                   <option value="releaseDate">Release date (oldest)</option>
                   <option value="releaseDesc">Release date (newest)</option>
-                  <option value="name">Name A–Z</option>
-                  <option value="nameDesc">Name Z–A</option>
+                  <option value="name">Name A-Z</option>
+                  <option value="nameDesc">Name Z-A</option>
                   <option value="tier">Tier rank</option>
                   <option value="skillCeiling">Skill ceiling (high)</option>
                   <option value="skillFloor">Skill floor (high)</option>
@@ -120,7 +133,7 @@
             </div>
             <div class="filters build-library-filters">
               <input type="text" id="build-search" placeholder="Search builds, perks, tags..." oninput="renderBuilds()">
-              <select id="build-sort" onchange="renderBuilds()"><option value="name">Name A–Z</option><option value="nameDesc">Name Z–A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
+              <select id="build-sort" onchange="renderBuilds()"><option value="name">Name A-Z</option><option value="nameDesc">Name Z-A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
               <div class="perk-filter" data-perk-filter="builds"><div class="perk-filter-chips" id="builds-perk-chips"></div><input id="builds-perk-search" placeholder="Filter by perks…" autocomplete="off" onclick="renderPerkFilterSuggestions('builds',null,true)" oninput="renderPerkFilterSuggestions('builds')"><div class="chip-dropdown" id="builds-perk-dropdown"></div></div>
               <select id="build-killer-filter" onchange="renderBuilds()">
                 <option value="">All killers</option>
@@ -153,7 +166,7 @@
           <h1>Data Editor</h1>
           <div id="editor-unsaved-banner" class="editor-unsaved-banner" hidden></div>
           <p class="hint">
-            SharedFiles supplies read-only game definitions. Local tags and rankings belong in <code>config.js</code>; ratings, notes and builds belong in <code>data.js</code>. Otz data stays in its own file.
+            SharedFiles supplies read-only game definitions. Tags belong to this page and are saved with ratings, notes and builds in <code>data.js</code>. Local settings and fallback tags remain in <code>config.js</code>. Otz data stays in its own file.
           </p>
           <div class="editor-tabs">
             <button class="editor-tab active" data-editor="killers">Killers</button>
@@ -171,8 +184,8 @@
               <span class="hint">Characters are read from SharedFiles. Edit their local ratings and notes below.</span>
               <input type="text" id="ed-killer-search" placeholder="Search killers…" oninput="renderEditor()" class="editor-search">
               <select id="ed-killer-sort" onchange="renderEditor()">
-                <option value="name">Name A–Z</option>
-                <option value="nameDesc">Name Z–A</option>
+                <option value="name">Name A-Z</option>
+                <option value="nameDesc">Name Z-A</option>
                 <option value="tier">Tier (S+ first)</option>
                 <option value="difficulty">Difficulty (easy first)</option>
                 <option value="difficultyDesc">Difficulty (hard first)</option>
@@ -195,8 +208,8 @@
               <button class="btn btn-primary" onclick="openBuildModal()">+ New build</button>
               <input type="text" id="ed-build-search" placeholder="Search builds…" oninput="renderEditor()" class="editor-search">
               <select id="ed-build-sort" onchange="renderEditor()">
-                <option value="name">Name A–Z</option>
-                <option value="nameDesc">Name Z–A</option>
+                <option value="name">Name A-Z</option>
+                <option value="nameDesc">Name Z-A</option>
                 <option value="patch">Patch (oldest)</option>
                 <option value="patchDesc">Patch (newest)</option>
                 <option value="killer">Killer name A-Z</option>
@@ -235,7 +248,7 @@
             <div id="editor-sperks-list"></div>
           </div>
           <div class="editor-actions">
-            <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js (killers & builds)</button>
+            <button class="btn btn-primary" onclick="generateConfigCode()">📋 Generate data.js (killers, builds & tags)</button>
             <button class="btn btn-primary" onclick="downloadGeneratedDataJs()">⬇ Download data.js</button>
             <button class="btn" onclick="downloadGeneratedConfigJs()">Download config.js (local tags &amp; settings)</button>
           </div>
@@ -267,8 +280,8 @@
             <div class="settings-box">
               <h3>Where to save</h3>
               <ul class="settings-list">
-                <li>Local tags and item rankings → Editor → Download <code>config.js</code></li>
-                <li>Local ratings, notes and builds → Editor → Download <code>data.js</code></li>
+                <li>Local settings and item rankings → Editor → Download <code>config.js</code></li>
+                <li>Local tags, ratings, notes and builds → Editor → Download <code>data.js</code></li>
                 <li>Otz addons → form below → <code>data/otz-addons.js</code></li>
               </ul>
             </div>
@@ -345,7 +358,7 @@
     <script src="data/otz-addons.js?v=shared-1"></script>
     <script src="data/data.js?v=shared-1"></script>
     <script src="js/shared-data.js?v=shared-1"></script>
-  <script src="js/app.js?v=shared-1"></script>
+  <script src="js/app.js?v=readiness-20261101"></script>
     <script src="js/survivors.js?v=shared-1"></script>
   </body>
 </html>

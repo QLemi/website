@@ -1010,20 +1010,4990 @@ const INITIAL_DATA = {
     }
   ],
   "builds": [
+
+
+      {
+        "id": "hens_artist_7",
+        "name": "Unique Artist - Stagger Shot Artist",
+        "killerIds": [
+          "artist"
+        ],
+        "tags": [
+          "Hens",
+          "AuraReading",
+          "GenRegression",
+          "Info"
+        ],
+        "addons": [
+          "Severed Hands",
+          "Thick Tar"
+        ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.1.2",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Discordance",
+          "K22P02",
+          "Surveillance",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "hens_cenobite_19",
+        "name": "Unique Cenobite - Infinite Chainhunt Pinhead",
+        "killerIds": [
+          "cenobite"
+        ],
+        "tags": [
+          "Hens",
+          "AuraReading",
+          "AntiHeal",
+          "GenRegression",
+          "Hex",
+          "Info"
+        ],
+        "addons": [
+          "Frank's Heart",
+          "Larry's Blood"
+        ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.1.2",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "killer:barbecue-chilli",
+          "K24P01",
+          "Sloppy_Butcher"
+        ]
+      },
+      {
+        "id": "hens_executioner_47",
+        "name": "Unique Executioner - Jumpscare One Shot Pyramid Head",
+        "killerIds": [
+          "executioner"
+        ],
+        "tags": [
+          "Hens",
+          "AuraReading",
+          "Stealth",
+          "Exposed",
+          "Chase",
+          "Info"
+        ],
+        "addons": [
+          "Obsidian Goblet",
+          "Crimson Ceremony Book"
+        ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.1.2",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Mindbreaker",
+          "killer:dragon-s-grip",
+          "TrailofTorment",
+          "NurseCalling"
+        ]
+      },
+
+      {
+        "id": "otzdarva_trapper_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "trapper"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Whispers",
+          "Agitation",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_wraith_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "wraith"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "Whispers",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_hillbilly_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "hillbilly"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Stealth",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Tinkerer",
+          "Enduring",
+          "Whispers"
+        ]
+      },
+      {
+        "id": "otzdarva_nurse_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "nurse"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "NurseCalling",
+          "Spies_From_The_Shadows",
+          "K25P03"
+        ]
+      },
+      {
+        "id": "otzdarva_shape_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "shape"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K25P03",
+          "Whispers",
+          "K25P02"
+        ]
+      },
+      {
+        "id": "otzdarva_hag_1",
+        "name": "Generic",
+        "killerIds": [
+          "hag"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K25P01",
+          "Unrelenting",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_hag_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "hag"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "GenRegression",
+        "AntiHeal",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Hex_Ruin",
+          "Sloppy_Butcher",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_doctor_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "doctor"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "Unrelenting",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_huntress_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "huntress"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Hex_HuntressLullaby",
+          "Bitter_Murmur",
+          "Spies_From_The_Shadows"
+        ]
+      },
+      {
+        "id": "otzdarva_cannibal_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "cannibal"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K25P02",
+          "killer:barbecue-chilli",
+          "Spies_From_The_Shadows"
+        ]
+      },
+      {
+        "id": "otzdarva_nightmare_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "nightmare"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Obsession",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "RememberMe",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_pig_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "pig"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "K25P02",
+          "Spies_From_The_Shadows"
+        ]
+      },
+      {
+        "id": "otzdarva_clown_3",
+        "name": "Scourge Slowdown",
+        "killerIds": [
+          "clown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P03",
+          "K38P02",
+          "K26P02",
+          "Surge"
+        ]
+      },
+      {
+        "id": "otzdarva_clown_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "clown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "GenRegression",
+        "AntiHeal",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "pop_goes_the_weasel",
+          "K25P01",
+          "Sloppy_Butcher",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_spirit_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "spirit"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Spies_From_The_Shadows",
+          "Sloppy_Butcher",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_legion_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "legion"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Discordance",
+          "K25P03",
+          "Monstrous_Shrine"
+        ]
+      },
+      {
+        "id": "otzdarva_plague_3",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "plague"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Chase",
+        "Haste",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K25P01",
+          "Spies_From_The_Shadows",
+          "Play_With_Your_Food"
+        ]
+      },
+      {
+        "id": "otzdarva_ghostface_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "ghostface"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "ThrillingTremors",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_demogorgon_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "demogorgon"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Surge",
+          "K25P02",
+          "Whispers"
+        ]
+      },
+      {
+        "id": "otzdarva_oni_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "oni"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "ZanshinTactics",
+          "K25P02",
+          "K25P03"
+        ]
+      },
+      {
+        "id": "otzdarva_deathslinger_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "deathslinger"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "killer:dead-man-s-switch",
+          "Gearhead",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_executioner_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "executioner"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "TrailofTorment",
+          "Spies_From_The_Shadows",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_blight_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "blight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "killer:dragon-s-grip",
+          "HexUndying",
+          "K25P02"
+        ]
+      },
+      {
+        "id": "otzdarva_twins_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "twins"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "K22P03",
+          "K25P02"
+        ]
+      },
+      {
+        "id": "otzdarva_trickster_3",
+        "name": "Stealth Gen",
+        "killerIds": [
+          "trickster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "ThrillingTremors",
+          "K42P01",
+          "K42P02",
+          "K25P01"
+        ]
+      },
+      {
+        "id": "otzdarva_trickster_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "trickster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Spies_From_The_Shadows",
+          "No_One_Escapes_Death",
+          "K23P03"
+        ]
+      },
+      {
+        "id": "otzdarva_nemesis_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "nemesis"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K24P03",
+          "K24P01",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_cenobite_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "cenobite"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K25P02",
+          "Sloppy_Butcher",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_onryo_3",
+        "name": "Endgame",
+        "killerIds": [
+          "onryo"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K25P01",
+          "No_One_Escapes_Death",
+          "K22P03"
+        ]
+      },
+      {
+        "id": "otzdarva_onryo_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "onryo"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "K27P01",
+          "K27P03"
+        ]
+      },
+      {
+        "id": "otzdarva_dredge_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "dredge"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "K28P02",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_mastermind_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "mastermind"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K25P03",
+          "K25P02",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_knight_2",
+        "name": "Aggressive Info",
+        "killerIds": [
+          "knight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Info",
+        "Stealth",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Discordance",
+          "Tinkerer",
+          "K22P03",
+          "K25P01"
+        ]
+      },
+      {
+        "id": "otzdarva_knight_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "knight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K30P01",
+          "Sloppy_Butcher",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_skullmerchant_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "skullmerchant"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K31P03",
+          "K25P03",
+          "K25P02"
+        ]
+      },
+      {
+        "id": "otzdarva_singularity_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "singularity"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Spies_From_The_Shadows",
+          "Sloppy_Butcher",
+          "Unrelenting"
+        ]
+      },
+      {
+        "id": "otzdarva_xenomorph_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "xenomorph"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Spies_From_The_Shadows",
+          "Unrelenting",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_goodguy_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "goodguy"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Obsession",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "killer:friends-til-the-end",
+          "K25P03",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_lich_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "lich"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "Unrelenting",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_darklord_3",
+        "name": "Simple Flow",
+        "killerIds": [
+          "darklord"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Info",
+        "Slugging"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "InTheDark",
+          "K26P01",
+          "K25P01",
+          "Spies_From_The_Shadows"
+        ]
+      },
+      {
+        "id": "otzdarva_darklord_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "darklord"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K37P01",
+          "K37P03",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_houndmaster_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "houndmaster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K38P02",
+          "Sloppy_Butcher",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_ghoul_1",
+        "name": "Generic",
+        "killerIds": [
+          "ghoul"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K38P02",
+          "Monstrous_Shrine",
+          "K25P03"
+        ]
+      },
+      {
+        "id": "otzdarva_ghoul_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "ghoul"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "K39P02",
+          "K25P02"
+        ]
+      },
+      {
+        "id": "otzdarva_animatronic_1",
+        "name": "Generic",
+        "killerIds": [
+          "animatronic"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Discordance",
+          "K42P01",
+          "ThrillingTremors",
+          "K25P01"
+        ]
+      },
+      {
+        "id": "otzdarva_animatronic_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "animatronic"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Sloppy_Butcher",
+          "K40P01",
+          "Bitter_Murmur"
+        ]
+      },
+      {
+        "id": "otzdarva_krasue_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "krasue"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Info",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K25P03",
+          "K25P02",
+          "Spies_From_The_Shadows"
+        ]
+      },
+      {
+        "id": "otzdarva_first_3",
+        "name": "Chest Radar",
+        "killerIds": [
+          "first"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K37P02",
+          "K22P01",
+          "CorruptIntervention",
+          "K25P01"
+        ]
+      },
+      {
+        "id": "otzdarva_first_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "first"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "GenRegression",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K42P02",
+          "K42P03",
+          "K42P01"
+        ]
+      },
+      {
+        "id": "otzdarva_slasher_1",
+        "name": "Generic",
+        "killerIds": [
+          "slasher"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K38P02",
+          "pop_goes_the_weasel",
+          "K25P03"
+        ]
+      },
+      {
+        "id": "otzdarva_slasher_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "slasher"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AntiHeal",
+        "Stealth",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "K43P02",
+          "K25P03",
+          "K25P02"
+        ]
+      },
+      {
+        "id": "otzdarva_judgment_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "judgment"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Slugging",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K25P01",
+          "Deerstalker",
+          "Bitter_Murmur",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_trapper_1",
+        "name": "Generic",
+        "killerIds": [
+          "trapper"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K26P02",
+          "killer:dead-man-s-switch",
+          "Agitation"
+        ]
+      },
+      {
+        "id": "otzdarva_trapper_2",
+        "name": "Compromised",
+        "killerIds": [
+          "trapper"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K40P01",
+          "K32P03",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_trapper_3",
+        "name": "Stealth Gen Block",
+        "killerIds": [
+          "trapper"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K42P02",
+          "ThrillingTremors",
+          "K42P01"
+        ]
+      },
+      {
+        "id": "otzdarva_wraith_1",
+        "name": "Generic",
+        "killerIds": [
+          "wraith"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "killer:barbecue-chilli",
+          "K26P02",
+          "K42P01",
+          "Sloppy_Butcher"
+        ]
+      },
+      {
+        "id": "otzdarva_wraith_2",
+        "name": "Gen-Kick",
+        "killerIds": [
+          "wraith"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K40P01",
+          "K32P03",
+          "killer:dragon-s-grip",
+          "K44P03"
+        ]
+      },
+      {
+        "id": "otzdarva_wraith_3",
+        "name": "Hex-Oriented",
+        "killerIds": [
+          "wraith"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "killer:hex-blood-favour",
+          "killer:barbecue-chilli",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_hillbilly_1",
+        "name": "Generic",
+        "killerIds": [
+          "hillbilly"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K42P01",
+          "Tinkerer",
+          "Bamboozle"
+        ]
+      },
+      {
+        "id": "otzdarva_hillbilly_2",
+        "name": "Info & Slowdown",
+        "killerIds": [
+          "hillbilly"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "pop_goes_the_weasel",
+          "K34P01"
+        ]
+      },
+      {
+        "id": "otzdarva_hillbilly_3",
+        "name": "All-Hex Control",
+        "killerIds": [
+          "hillbilly"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K42P03",
+          "HexUndying",
+          "K23P02"
+        ]
+      },
+      {
+        "id": "otzdarva_nurse_1",
+        "name": "Generic",
+        "killerIds": [
+          "nurse"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "pop_goes_the_weasel",
+          "K44P03"
+        ]
+      },
+      {
+        "id": "otzdarva_nurse_2",
+        "name": "Scourge",
+        "killerIds": [
+          "nurse"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K27P01",
+          "K38P02",
+          "K26P01"
+        ]
+      },
+      {
+        "id": "otzdarva_nurse_3",
+        "name": "Hex Control",
+        "killerIds": [
+          "nurse"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K42P03",
+          "Hex_Ruin",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_shape_1",
+        "name": "Generic",
+        "killerIds": [
+          "shape"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K42P03",
+          "Hex_Ruin",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_shape_2",
+        "name": "Gen Surveillance",
+        "killerIds": [
+          "shape"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K42P01",
+          "Surveillance",
+          "Bamboozle"
+        ]
+      },
+      {
+        "id": "otzdarva_shape_3",
+        "name": "Obsession Roulette",
+        "killerIds": [
+          "shape"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Chase",
+        "Haste",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "killer:friends-til-the-end",
+          "FurtiveChase",
+          "Nemesis",
+          "SpiritFury"
+        ]
+      },
+      {
+        "id": "otzdarva_hag_2",
+        "name": "Hex-Oriented",
+        "killerIds": [
+          "hag"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "killer:hex-blood-favour",
+          "HexUndying",
+          "Sloppy_Butcher"
+        ]
+      },
+      {
+        "id": "otzdarva_hag_3",
+        "name": "Instadown Starstruck",
+        "killerIds": [
+          "hag"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Exposed"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Agitation",
+          "K26P02",
+          "K23P01",
+          "K26P01"
+        ]
+      },
+
+      {
+        "id": "otzdarva_doctor_2",
+        "name": "Gen Damage",
+        "killerIds": [
+          "doctor"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Surge",
+          "ThrillingTremors",
+          "K42P01",
+          "Discordance"
+        ]
+      },
+      {
+        "id": "otzdarva_doctor_3",
+        "name": "Hex Skillcheck",
+        "killerIds": [
+          "doctor"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K42P03",
+          "Hex_HuntressLullaby",
+          "K27P03"
+        ]
+      },
+      {
+        "id": "otzdarva_huntress_1",
+        "name": "Generic",
+        "killerIds": [
+          "huntress"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K28P02",
+          "K30P01",
+          "K44P03"
+        ]
+      },
+      {
+        "id": "otzdarva_huntress_2",
+        "name": "Reliable Scourge",
+        "killerIds": [
+          "huntress"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K38P02",
+          "K26P02",
+          "K27P01",
+          "K42P01"
+        ]
+      },
+      {
+        "id": "otzdarva_huntress_3",
+        "name": "Aura",
+        "killerIds": [
+          "huntress"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AuraReading",
+        "Info",
+        "Endgame"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "Gearhead",
+          "K23P03"
+        ]
+      },
+      {
+        "id": "otzdarva_cannibal_1",
+        "name": "Generic",
+        "killerIds": [
+          "cannibal"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K42P01",
+          "killer:barbecue-chilli",
+          "Bamboozle"
+        ]
+      },
+      {
+        "id": "otzdarva_cannibal_2",
+        "name": "Gen-Kick Stealth",
+        "killerIds": [
+          "cannibal"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K35P02",
+          "K30P01",
+          "K44P03",
+          "Bamboozle"
+        ]
+      },
+      {
+        "id": "otzdarva_cannibal_3",
+        "name": "Hex Based",
+        "killerIds": [
+          "cannibal"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K23P02",
+          "HexUndying",
+          "K37P03"
+        ]
+      },
+      {
+        "id": "otzdarva_nightmare_1",
+        "name": "Generic",
+        "killerIds": [
+          "nightmare"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "ThrillingTremors",
+          "K42P01",
+          "Surge",
+          "K22P03"
+        ]
+      },
+      {
+        "id": "otzdarva_nightmare_2",
+        "name": "Pallet Removal",
+        "killerIds": [
+          "nightmare"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "Brutal_Strength",
+          "FireUp",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_nightmare_3",
+        "name": "Aggressive Scourge",
+        "killerIds": [
+          "nightmare"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "Monstrous_Shrine",
+          "K38P02",
+          "K33P02"
+        ]
+      },
+      {
+        "id": "otzdarva_pig_1",
+        "name": "Generic",
+        "killerIds": [
+          "pig"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "pop_goes_the_weasel",
+          "K40P01",
+          "Tinkerer"
+        ]
+      },
+      {
+        "id": "otzdarva_pig_2",
+        "name": "Chase & Slowdown Mix",
+        "killerIds": [
+          "pig"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K26P02",
+          "K22P03",
+          "Enduring"
+        ]
+      },
+      {
+        "id": "otzdarva_pig_3",
+        "name": "Strong Hex",
+        "killerIds": [
+          "pig"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K42P03",
+          "K30P02",
+          "Hex_Ruin",
+          "K37P03"
+        ]
+      },
+      {
+        "id": "otzdarva_clown_1",
+        "name": "Generic",
+        "killerIds": [
+          "clown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K26P02",
+          "K22P03",
+          "K33P02"
+        ]
+      },
+      {
+        "id": "otzdarva_clown_2",
+        "name": "Compromised Gen",
+        "killerIds": [
+          "clown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K40P01",
+          "K32P03",
+          "CorruptIntervention",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_spirit_1",
+        "name": "Generic",
+        "killerIds": [
+          "spirit"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "pop_goes_the_weasel",
+          "K44P03",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_spirit_2",
+        "name": "Aggressive Instadown",
+        "killerIds": [
+          "spirit"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Exposed"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K23P01",
+          "K26P02",
+          "Agitation",
+          "Surge"
+        ]
+      },
+      {
+        "id": "otzdarva_spirit_3",
+        "name": "Full-Hex",
+        "killerIds": [
+          "spirit"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_HauntedGround",
+          "Hex_Ruin",
+          "HexUndying",
+          "K42P03"
+        ]
+      },
+      {
+        "id": "otzdarva_legion_1",
+        "name": "Generic",
+        "killerIds": [
+          "legion"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Surge",
+          "Hex_Ruin",
+          "K26P02",
+          "Surveillance"
+        ]
+      },
+      {
+        "id": "otzdarva_legion_2",
+        "name": "Gen-Focused",
+        "killerIds": [
+          "legion"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K22P03",
+          "K40P01",
+          "K44P03",
+          "Discordance"
+        ]
+      },
+      {
+        "id": "otzdarva_legion_3",
+        "name": "Accessible Simple",
+        "killerIds": [
+          "legion"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "ThrillingTremors",
+          "pop_goes_the_weasel",
+          "Bamboozle",
+          "ImAllEars"
+        ]
+      },
+      {
+        "id": "otzdarva_plague_1",
+        "name": "Generic",
+        "killerIds": [
+          "plague"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K42P01",
+          "K26P02",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_plague_2",
+        "name": "Hex",
+        "killerIds": [
+          "plague"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K42P03",
+          "HexUndying",
+          "HexRetribution"
+        ]
+      },
+      {
+        "id": "otzdarva_plague_4",
+        "name": "leth",
+        "killerIds": [
+          "plague"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K27P01",
+          "K26P02",
+          "K38P02"
+        ]
+      },
+      {
+        "id": "otzdarva_ghostface_1",
+        "name": "Generic",
+        "killerIds": [
+          "ghostface"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K42P01",
+          "ThrillingTremors",
+          "Surge"
+        ]
+      },
+      {
+        "id": "otzdarva_ghostface_2",
+        "name": "Super Simple Chase",
+        "killerIds": [
+          "ghostface"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AuraReading",
+        "Info",
+        "Endgame",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Enduring",
+          "SpiritFury",
+          "killer:barbecue-chilli",
+          "K23P03"
+        ]
+      },
+      {
+        "id": "otzdarva_ghostface_3",
+        "name": "Gen-Info",
+        "killerIds": [
+          "ghostface"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K26P02",
+          "Surge",
+          "Surveillance"
+        ]
+      },
+      {
+        "id": "otzdarva_demogorgon_1",
+        "name": "Generic",
+        "killerIds": [
+          "demogorgon"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Stealth",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K44P03",
+          "K32P03",
+          "K22P03"
+        ]
+      },
+      {
+        "id": "otzdarva_demogorgon_2",
+        "name": "Simple Well-Rounded",
+        "killerIds": [
+          "demogorgon"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "killer:barbecue-chilli",
+          "Enduring",
+          "K42P01"
+        ]
+      },
+      {
+        "id": "otzdarva_demogorgon_3",
+        "name": "Hybrid Hex",
+        "killerIds": [
+          "demogorgon"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K42P03",
+          "K42P01",
+          "Hex_Devour_Hope",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_oni_1",
+        "name": "Generic",
+        "killerIds": [
+          "oni"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "Tinkerer",
+          "pop_goes_the_weasel",
+          "K35P02"
+        ]
+      },
+      {
+        "id": "otzdarva_oni_2",
+        "name": "Constant Stealth",
+        "killerIds": [
+          "oni"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K42P02",
+          "CorruptIntervention",
+          "ThrillingTremors",
+          "K35P03"
+        ]
+      },
+      {
+        "id": "otzdarva_oni_3",
+        "name": "Scourge Hook",
+        "killerIds": [
+          "oni"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K26P02",
+          "killer:barbecue-chilli",
+          "K26P01"
+        ]
+      },
+      {
+        "id": "otzdarva_deathslinger_1",
+        "name": "Generic",
+        "killerIds": [
+          "deathslinger"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Endgame"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K44P03",
+          "K40P01",
+          "K23P03"
+        ]
+      },
+      {
+        "id": "otzdarva_deathslinger_2",
+        "name": "Disruption",
+        "killerIds": [
+          "deathslinger"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "killer:friends-til-the-end",
+          "K26P01",
+          "killer:dead-man-s-switch",
+          "K42P02"
+        ]
+      },
+      {
+        "id": "otzdarva_deathslinger_3",
+        "name": "Instadown",
+        "killerIds": [
+          "deathslinger"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Exposed"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Agitation",
+          "K23P01",
+          "ThrillingTremors",
+          "K26P02"
+        ]
+      },
+      {
+        "id": "otzdarva_executioner_1",
+        "name": "Generic",
+        "killerIds": [
+          "executioner"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Endgame"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K44P03",
+          "K30P01",
+          "K23P03"
+        ]
+      },
+      {
+        "id": "otzdarva_executioner_2",
+        "name": "Hex & Aura",
+        "killerIds": [
+          "executioner"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "HexUndying",
+          "HexRetribution",
+          "K24P01"
+        ]
+      },
+      {
+        "id": "otzdarva_executioner_3",
+        "name": "Aggressive Aura",
+        "killerIds": [
+          "executioner"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "ZanshinTactics",
+          "K26P02",
+          "K27P01"
+        ]
+      },
+      {
+        "id": "otzdarva_blight_1",
+        "name": "Generic",
+        "killerIds": [
+          "blight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K24P01",
+          "K42P01",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_blight_2",
+        "name": "Aggressive Aura",
+        "killerIds": [
+          "blight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "K44P03",
+          "K30P01"
+        ]
+      },
+      {
+        "id": "otzdarva_blight_3",
+        "name": "Heavy Slowdown",
+        "killerIds": [
+          "blight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K26P02",
+          "K44P03",
+          "pop_goes_the_weasel"
+        ]
+      },
+      {
+        "id": "otzdarva_twins_1",
+        "name": "Generic",
+        "killerIds": [
+          "twins"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K42P01",
+          "K31P03",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_twins_2",
+        "name": "Full Scourge",
+        "killerIds": [
+          "twins"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K38P02",
+          "Monstrous_Shrine",
+          "HangmansTrick"
+        ]
+      },
+      {
+        "id": "otzdarva_twins_3",
+        "name": "Hex",
+        "killerIds": [
+          "twins"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K22P03",
+          "Hex_Ruin",
+          "K37P01",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_trickster_1",
+        "name": "Generic",
+        "killerIds": [
+          "trickster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "Hex_Ruin",
+          "HexUndying",
+          "K42P03"
+        ]
+      },
+      {
+        "id": "otzdarva_trickster_2",
+        "name": "Scourge",
+        "killerIds": [
+          "trickster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K38P02",
+          "K27P01",
+          "Agitation"
+        ]
+      },
+      {
+        "id": "otzdarva_nemesis_1",
+        "name": "Generic",
+        "killerIds": [
+          "nemesis"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K42P03",
+          "HexUndying",
+          "K37P03"
+        ]
+      },
+      {
+        "id": "otzdarva_nemesis_2",
+        "name": "Easy & Accessible",
+        "killerIds": [
+          "nemesis"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K24P01",
+          "K24P03",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_nemesis_3",
+        "name": "Multipurpose",
+        "killerIds": [
+          "nemesis"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K31P02",
+          "K26P02",
+          "killer:dead-man-s-switch",
+          "Agitation"
+        ]
+      },
+      {
+        "id": "otzdarva_cenobite_1",
+        "name": "Generic",
+        "killerIds": [
+          "cenobite"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K42P01",
+          "killer:barbecue-chilli",
+          "K33P02"
+        ]
+      },
+      {
+        "id": "otzdarva_cenobite_2",
+        "name": "Info & Regression",
+        "killerIds": [
+          "cenobite"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "Surge",
+          "K26P02",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_cenobite_3",
+        "name": "Agressive Chase",
+        "killerIds": [
+          "cenobite"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K33P02",
+          "Surge",
+          "K22P03",
+          "Discordance"
+        ]
+      },
+      {
+        "id": "otzdarva_artist_1",
+        "name": "Generic",
+        "killerIds": [
+          "artist"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K26P02",
+          "killer:dead-man-s-switch",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_artist_2",
+        "name": "Aura Focused",
+        "killerIds": [
+          "artist"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "Predator",
+          "killer:barbecue-chilli",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_artist_3",
+        "name": "All-Hex",
+        "killerIds": [
+          "artist"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K42P03",
+          "HexUndying",
+          "K37P01"
+        ]
+      },
+      {
+        "id": "otzdarva_artist_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "artist"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K26P01",
+          "Bitter_Murmur",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_onryo_1",
+        "name": "Generic",
+        "killerIds": [
+          "onryo"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "HexUndying",
+          "Hex_HauntedGround",
+          "K37P03"
+        ]
+      },
+      {
+        "id": "otzdarva_onryo_2",
+        "name": "Gen-Kick",
+        "killerIds": [
+          "onryo"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Exposed"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K44P03",
+          "killer:dragon-s-grip",
+          "K22P02",
+          "Discordance"
+        ]
+      },
+      {
+        "id": "otzdarva_dredge_1",
+        "name": "Generic",
+        "killerIds": [
+          "dredge"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AntiHeal"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "Sloppy_Butcher",
+          "pop_goes_the_weasel",
+          "K42P01"
+        ]
+      },
+      {
+        "id": "otzdarva_dredge_2",
+        "name": "Aggressive Regression",
+        "killerIds": [
+          "dredge"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K33P02",
+          "ThrillingTremors",
+          "K42P01",
+          "K26P02"
+        ]
+      },
+      {
+        "id": "otzdarva_dredge_3",
+        "name": "Stacked Hex",
+        "killerIds": [
+          "dredge"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K42P03",
+          "HexUndying",
+          "K37P03"
+        ]
+      },
+      {
+        "id": "otzdarva_mastermind_1",
+        "name": "Generic",
+        "killerIds": [
+          "mastermind"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "Brutal_Strength",
+          "K26P02",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_mastermind_2",
+        "name": "Gen Stealth",
+        "killerIds": [
+          "mastermind"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K42P02",
+          "CorruptIntervention",
+          "ThrillingTremors",
+          "K35P03"
+        ]
+      },
+      {
+        "id": "otzdarva_mastermind_3",
+        "name": "Gen-Kick Based",
+        "killerIds": [
+          "mastermind"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K35P02",
+          "pop_goes_the_weasel",
+          "K32P03",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_knight_1",
+        "name": "Generic",
+        "killerIds": [
+          "knight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "Surge",
+          "K26P02",
+          "Surveillance"
+        ]
+      },
+      {
+        "id": "otzdarva_knight_3",
+        "name": "Gen-Focused",
+        "killerIds": [
+          "knight"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Stealth",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "ThrillingTremors",
+          "K32P03",
+          "K40P01",
+          "pop_goes_the_weasel"
+        ]
+      },
+      {
+        "id": "otzdarva_skullmerchant_1",
+        "name": "Generic",
+        "killerIds": [
+          "skullmerchant"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Slugging"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K42P01",
+          "killer:barbecue-chilli",
+          "InTheDark"
+        ]
+      },
+      {
+        "id": "otzdarva_skullmerchant_2",
+        "name": "Heavy Slowdown",
+        "killerIds": [
+          "skullmerchant"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K44P03",
+          "K24P03",
+          "K22P03"
+        ]
+      },
+      {
+        "id": "otzdarva_skullmerchant_3",
+        "name": "Obsession Roulette",
+        "killerIds": [
+          "skullmerchant"
+        ],
+        "tags": [
+        "Otzdarva",
+        "Exposed",
+        "Endgame",
+        "Chase",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Save_The_Best_For_Last",
+          "K44P01",
+          "Nemesis",
+          "Rancor"
+        ]
+      },
+      {
+        "id": "otzdarva_singularity_1",
+        "name": "Generic",
+        "killerIds": [
+          "singularity"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K44P03",
+          "pop_goes_the_weasel",
+          "K33P02"
+        ]
+      },
+      {
+        "id": "otzdarva_singularity_2",
+        "name": "Simple Flexible",
+        "killerIds": [
+          "singularity"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Unrelenting",
+          "Bamboozle",
+          "Surge",
+          "CorruptIntervention"
+        ]
+      },
+      {
+        "id": "otzdarva_singularity_3",
+        "name": "Endgame",
+        "killerIds": [
+          "singularity"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AntiHeal",
+        "Stealth",
+        "Endgame",
+        "Haste",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K32P03",
+          "K29P03",
+          "K23P03",
+          "RememberMe"
+        ]
+      },
+      {
+        "id": "otzdarva_xenomorph_1",
+        "name": "Generic",
+        "killerIds": [
+          "xenomorph"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K42P01",
+          "Unrelenting",
+          "ThrillingTremors",
+          "K26P02"
+        ]
+      },
+      {
+        "id": "otzdarva_xenomorph_2",
+        "name": "Hex",
+        "killerIds": [
+          "xenomorph"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "HexUndying",
+          "K42P03",
+          "K37P03"
+        ]
+      },
+      {
+        "id": "otzdarva_xenomorph_3",
+        "name": "Gen-Control",
+        "killerIds": [
+          "xenomorph"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Discordance",
+          "Tinkerer",
+          "K24P03",
+          "pop_goes_the_weasel"
+        ]
+      },
+      {
+        "id": "otzdarva_goodguy_1",
+        "name": "Generic",
+        "killerIds": [
+          "goodguy"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K26P02",
+          "K42P01",
+          "Spies_From_The_Shadows"
+        ]
+      },
+      {
+        "id": "otzdarva_goodguy_2",
+        "name": "Hex Control",
+        "killerIds": [
+          "goodguy"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AntiHeal",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "HexUndying",
+          "K42P03",
+          "K31P03"
+        ]
+      },
+      {
+        "id": "otzdarva_goodguy_3",
+        "name": "Scourge Aura",
+        "killerIds": [
+          "goodguy"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Endgame"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K26P02",
+          "K27P01",
+          "K23P03"
+        ]
+      },
+      {
+        "id": "otzdarva_unknown_1",
+        "name": "Generic",
+        "killerIds": [
+          "unknown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "K24P03",
+          "pop_goes_the_weasel"
+        ]
+      },
+      {
+        "id": "otzdarva_unknown_2",
+        "name": "Overwhelming Aura",
+        "killerIds": [
+          "unknown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "Gearhead",
+          "pop_goes_the_weasel"
+        ]
+      },
+      {
+        "id": "otzdarva_unknown_3",
+        "name": "Ambush",
+        "killerIds": [
+          "unknown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Stealth"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "NurseCalling",
+          "K24P03",
+          "K35P02",
+          "K26P02"
+        ]
+      },
+      {
+        "id": "otzdarva_unknown_4",
+        "name": "Beginner Perks Only",
+        "killerIds": [
+          "unknown"
+        ],
+        "tags": [
+        "Otzdarva",
+        "BeginnerFriendly",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K35P03",
+          "K35P02",
+          "Bitter_Murmur",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_lich_1",
+        "name": "Generic",
+        "killerIds": [
+          "lich"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Chase",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "killer:barbecue-chilli",
+          "K33P02",
+          "K40P01",
+          "K32P03"
+        ]
+      },
+      {
+        "id": "otzdarva_lich_2",
+        "name": "Hex-Oriented",
+        "killerIds": [
+          "lich"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "killer:hex-blood-favour",
+          "Hex_Ruin",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_lich_3",
+        "name": "Instadown & Stealth",
+        "killerIds": [
+          "lich"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Exposed",
+        "Endgame",
+        "Haste",
+        "Obsession",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "killer:friends-til-the-end",
+          "FurtiveChase",
+          "Surge",
+          "No_One_Escapes_Death"
+        ]
+      },
+      {
+        "id": "otzdarva_darklord_1",
+        "name": "Generic",
+        "killerIds": [
+          "darklord"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K26P02",
+          "K42P01",
+          "killer:barbecue-chilli"
+        ]
+      },
+      {
+        "id": "otzdarva_darklord_2",
+        "name": "Heavy Slowdown",
+        "killerIds": [
+          "darklord"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "ThrillingTremors",
+          "pop_goes_the_weasel",
+          "K44P03",
+          "FireUp"
+        ]
+      },
+      {
+        "id": "otzdarva_houndmaster_1",
+        "name": "Generic",
+        "killerIds": [
+          "houndmaster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "killer:barbecue-chilli",
+          "Surge",
+          "K42P01"
+        ]
+      },
+      {
+        "id": "otzdarva_houndmaster_2",
+        "name": "Scourge",
+        "killerIds": [
+          "houndmaster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K38P02",
+          "K27P01",
+          "K24P01"
+        ]
+      },
+      {
+        "id": "otzdarva_houndmaster_3",
+        "name": "Instadown",
+        "killerIds": [
+          "houndmaster"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Exposed"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "K23P01",
+          "Agitation",
+          "Surge"
+        ]
+      },
+      {
+        "id": "otzdarva_ghoul_2",
+        "name": "Hex",
+        "killerIds": [
+          "ghoul"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "HexUndying",
+          "K42P03",
+          "K26P03"
+        ]
+      },
+      {
+        "id": "otzdarva_ghoul_3",
+        "name": "Simple Aura",
+        "killerIds": [
+          "ghoul"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K33P03",
+          "killer:dead-man-s-switch",
+          "K26P01"
+        ]
+      },
+      {
+        "id": "otzdarva_animatronic_2",
+        "name": "Compromised",
+        "killerIds": [
+          "animatronic"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Stealth",
+        "Haste",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K44P03",
+          "K32P03",
+          "K40P01",
+          "K42P03"
+        ]
+      },
+      {
+        "id": "otzdarva_animatronic_3",
+        "name": "Breaking Speed",
+        "killerIds": [
+          "animatronic"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Chase"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K30P01",
+          "K24P03",
+          "FireUp"
+        ]
+      },
+      {
+        "id": "otzdarva_krasue_1",
+        "name": "Generic",
+        "killerIds": [
+          "krasue"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K26P02",
+          "Hex_Ruin",
+          "HexUndying",
+          "K26P03"
+        ]
+      },
+      {
+        "id": "otzdarva_krasue_2",
+        "name": "Info & Slowdown",
+        "killerIds": [
+          "krasue"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K24P01",
+          "K26P02",
+          "K42P01",
+          "K38P02"
+        ]
+      },
+      {
+        "id": "otzdarva_krasue_3",
+        "name": "Oppressive Endgame",
+        "killerIds": [
+          "krasue"
+        ],
+        "tags": [
+        "Otzdarva",
+        "AuraReading",
+        "Info",
+        "Exposed",
+        "Endgame",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K23P03",
+          "RememberMe",
+          "Rancor",
+          "Bitter_Murmur"
+        ]
+      },
+      {
+        "id": "otzdarva_first_1",
+        "name": "Generic",
+        "killerIds": [
+          "first"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "K38P02",
+          "K26P02",
+          "killer:dead-man-s-switch",
+          "K27P01"
+        ]
+      },
+      {
+        "id": "otzdarva_first_2",
+        "name": "Gen Kick",
+        "killerIds": [
+          "first"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Stealth",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "CorruptIntervention",
+          "K44P03",
+          "K32P03",
+          "K30P01"
+        ]
+      },
+      {
+        "id": "otzdarva_slasher_2",
+        "name": "Ruin-Focused",
+        "killerIds": [
+          "slasher"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "HexUndying",
+          "K26P03",
+          "K42P03"
+        ]
+      },
+      {
+        "id": "otzdarva_slasher_3",
+        "name": "Gen-Control",
+        "killerIds": [
+          "slasher"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "Info",
+        "Stealth",
+        "Haste"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Discordance",
+          "Tinkerer",
+          "pop_goes_the_weasel",
+          "K32P03"
+        ]
+      },
+      {
+        "id": "otzdarva_judgment_1",
+        "name": "Generic",
+        "killerIds": [
+          "judgment"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Gearhead",
+          "NurseCalling",
+          "Hex_Ruin",
+          "HexUndying"
+        ]
+      },
+      {
+        "id": "otzdarva_judgment_2",
+        "name": "Hex Trap",
+        "killerIds": [
+          "judgment"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenRegression",
+        "AuraReading",
+        "Info",
+        "Hex"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Hex_Ruin",
+          "K37P01",
+          "K26P03",
+          "HexRetribution"
+        ]
+      },
+      {
+        "id": "otzdarva_judgment_3",
+        "name": "Obsession-Reveal",
+        "killerIds": [
+          "judgment"
+        ],
+        "tags": [
+        "Otzdarva",
+        "GenBlocking",
+        "AuraReading",
+        "Info",
+        "Obsession"
+      ],
+        "addonImages": [],
+        "description": "",
+        "patch": "10.2.0",
+        "version": "",
+        "favorite": false,
+        "currentlyUsing": false,
+        "changes": "",
+        "perkIds": [
+          "Nemesis",
+          "K44P01",
+          "K24P01",
+          "CorruptIntervention"
+        ]
+      },
     {
-      "name": "Build Without Limitations",
+      "name": "Without Limitations",
       "killerIds": [
         "trapper"
       ],
       "tags": [
         "GenRegression",
-        "GenBlocking"
+        "GenBlocking",
+        "Hens"
       ],
       "addonImages": [
-        "https://otz-addon-tierlist.pages.dev/public/addons/trapper/iridescentstone.png",
-        "https://otz-addon-tierlist.pages.dev/public/addons/trapper/bloodycoil.png"
+        "https://otz-addon-tierlist.pages.dev/public/addons/trapper/bloodycoil.png",
+        "https://otz-addon-tierlist.pages.dev/public/addons/trapper/iridescentstone.png"
       ],
-      "description": "A fairly typical build with no chase perks, so winning consistently may be difficult. Still, it is a solid build with generator regression and Agitation, designed to play near the basement and secure a win.",
+      "description": "A fairly typical build with no chase perks, so winning consistently may be difficult. Still, it is a solid build with generator regression and Agitation, designed to play near the basement and secure a win.\n\nAlso listed as: Best Trapper Without Limitations.",
       "patch": "10.1.2",
       "version": "",
       "favorite": false,
@@ -1035,6 +6005,10 @@ const INITIAL_DATA = {
         "CorruptIntervention",
         "Agitation",
         "K42P01"
+      ],
+      "addons": [
+        "Bloody Coil",
+        "Iridescent Stone"
       ]
     },
     {
@@ -1226,36 +6200,7 @@ const INITIAL_DATA = {
         "K25P02"
       ]
     },
-    {
-      "id": "hens_artist_7",
-      "name": "Unique Artist — Stagger Shot Artist",
-      "killerIds": [
-        "artist"
-      ],
-      "tags": [
-        "Hens",
-        "AuraReading",
-        "GenRegression",
-        "Info"
-      ],
-      "addons": [
-        "Severed Hands",
-        "Thick Tar"
-      ],
-      "addonImages": [],
-      "description": "",
-      "patch": "10.1.2",
-      "version": "",
-      "favorite": false,
-      "currentlyUsing": false,
-      "changes": "",
-      "perkIds": [
-        "Discordance",
-        "K22P02",
-        "Surveillance",
-        "killer:barbecue-chilli"
-      ]
-    },
+
     {
       "id": "hens_blight_8",
       "name": "Best Blight Without Limitations",
@@ -1348,7 +6293,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_blight_11",
-      "name": "Unique Blight — Stealth Blight",
+      "name": "Unique Blight - Stealth Blight",
       "killerIds": [
         "blight"
       ],
@@ -1471,7 +6416,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_cannibal_15",
-      "name": "Unique Cannibal — Snowball Bubba",
+      "name": "Unique Cannibal - Snowball Bubba",
       "killerIds": [
         "cannibal"
       ],
@@ -1594,38 +6539,7 @@ const INITIAL_DATA = {
         "K25P03"
       ]
     },
-    {
-      "id": "hens_cenobite_19",
-      "name": "Unique Cenobite — Infinite Chainhunt Pinhead",
-      "killerIds": [
-        "cenobite"
-      ],
-      "tags": [
-        "Hens",
-        "AuraReading",
-        "AntiHeal",
-        "GenRegression",
-        "Hex",
-        "Info"
-      ],
-      "addons": [
-        "Frank's Heart",
-        "Larry's Blood"
-      ],
-      "addonImages": [],
-      "description": "",
-      "patch": "10.1.2",
-      "version": "",
-      "favorite": false,
-      "currentlyUsing": false,
-      "changes": "",
-      "perkIds": [
-        "Hex_Ruin",
-        "killer:barbecue-chilli",
-        "K24P01",
-        "Sloppy_Butcher"
-      ]
-    },
+
     {
       "id": "hens_clown_20",
       "name": "Best Clown Without Limitations",
@@ -1721,7 +6635,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_clown_23",
-      "name": "Unique Clown — Speed Clown",
+      "name": "Unique Clown - Speed Clown",
       "killerIds": [
         "clown"
       ],
@@ -1844,7 +6758,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_darklord_27",
-      "name": "Unique Dark Lord — Wolf Dracula",
+      "name": "Unique Dark Lord - Wolf Dracula",
       "killerIds": [
         "darklord"
       ],
@@ -1971,7 +6885,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_deathslinger_31",
-      "name": "Unique Deathslinger — 0 Terror Radius Deathslinger",
+      "name": "Unique Deathslinger - 0 Terror Radius Deathslinger",
       "killerIds": [
         "deathslinger"
       ],
@@ -2093,7 +7007,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_demogorgon_35",
-      "name": "Unique Demogorgon — Devour Demogorgon",
+      "name": "Unique Demogorgon - Devour Demogorgon",
       "killerIds": [
         "demogorgon"
       ],
@@ -2166,15 +7080,17 @@ const INITIAL_DATA = {
         "Chase",
         "GenRegression",
         "GenBlocking",
-        "Haste"
+        "Haste",
+        "Otzdarva",
+        "Info"
       ],
       "addons": [
         "\"Discipline\" - Carter's Notes",
         "\"Discipline\" - Class II"
       ],
       "addonImages": [],
-      "description": "",
-      "patch": "10.1.2",
+      "description": "Also listed as: Generic Build (Otzdarva), patch 10.2.0. Funny Doctor (Hens), patch 10.1.2.",
+      "patch": "10.2.0",
       "version": "",
       "favorite": true,
       "currentlyUsing": false,
@@ -2219,7 +7135,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_doctor_39",
-      "name": "Unique Doctor — Terror Radius Doctor",
+      "name": "Unique Doctor - Terror Radius Doctor",
       "killerIds": [
         "doctor"
       ],
@@ -2341,7 +7257,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_dredge_43",
-      "name": "Unique Dredge — One Shot Dredge",
+      "name": "Unique Dredge - One Shot Dredge",
       "killerIds": [
         "dredge"
       ],
@@ -2466,38 +7382,7 @@ const INITIAL_DATA = {
         "K25P03"
       ]
     },
-    {
-      "id": "hens_executioner_47",
-      "name": "Unique Executioner — Jumpscare One Shot Pyramid Head",
-      "killerIds": [
-        "executioner"
-      ],
-      "tags": [
-        "Hens",
-        "AuraReading",
-        "Stealth",
-        "Exposed",
-        "Chase",
-        "Info"
-      ],
-      "addons": [
-        "Obsidian Goblet",
-        "Crimson Ceremony Book"
-      ],
-      "addonImages": [],
-      "description": "",
-      "patch": "10.1.2",
-      "version": "",
-      "favorite": false,
-      "currentlyUsing": false,
-      "changes": "",
-      "perkIds": [
-        "Mindbreaker",
-        "killer:dragon-s-grip",
-        "TrailofTorment",
-        "NurseCalling"
-      ]
-    },
+
     {
       "id": "hens_first_48",
       "name": "Best First Without Limitations",
@@ -2629,7 +7514,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_ghostface_52",
-      "name": "Unique Ghost Face — Jumpscare License Ghostface",
+      "name": "Unique Ghost Face - Jumpscare License Ghostface",
       "killerIds": [
         "ghostface"
       ],
@@ -2723,7 +7608,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_ghoul_55",
-      "name": "Unique Ghoul — Endgame Kaneki",
+      "name": "Unique Ghoul - Endgame Kaneki",
       "killerIds": [
         "ghoul"
       ],
@@ -2887,7 +7772,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_goodguy_60",
-      "name": "Unique Good Guy — Infinite Dash Chucky",
+      "name": "Unique Good Guy - Infinite Dash Chucky",
       "killerIds": [
         "goodguy"
       ],
@@ -3011,7 +7896,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_hag_64",
-      "name": "Unique Hag — Chase Hag",
+      "name": "Unique Hag - Chase Hag",
       "killerIds": [
         "hag"
       ],
@@ -3133,7 +8018,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_hillbilly_68",
-      "name": "Unique Hillbilly — Jumpscare Billy",
+      "name": "Unique Hillbilly - Jumpscare Billy",
       "killerIds": [
         "hillbilly"
       ],
@@ -3347,7 +8232,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_huntress_75",
-      "name": "Unique Huntress — Jump Scare Melee Huntress",
+      "name": "Unique Huntress - Jump Scare Melee Huntress",
       "killerIds": [
         "huntress"
       ],
@@ -3470,7 +8355,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_knight_79",
-      "name": "Unique Knight — Languid Spies Knight",
+      "name": "Unique Knight - Languid Spies Knight",
       "killerIds": [
         "knight"
       ],
@@ -3691,7 +8576,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_legion_86",
-      "name": "Unique Legion — 150% Speed Legion",
+      "name": "Unique Legion - 150% Speed Legion",
       "killerIds": [
         "legion"
       ],
@@ -3821,7 +8706,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_lich_90",
-      "name": "Unique Lich — Sneak Fake Chest Vecna",
+      "name": "Unique Lich - Sneak Fake Chest Vecna",
       "killerIds": [
         "lich"
       ],
@@ -3946,7 +8831,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_mastermind_94",
-      "name": "Unique Mastermind — Throw Wesker",
+      "name": "Unique Mastermind - Throw Wesker",
       "killerIds": [
         "mastermind"
       ],
@@ -4073,7 +8958,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_nemesis_98",
-      "name": "Unique Nemesis — Speed Zombie Nemesis",
+      "name": "Unique Nemesis - Speed Zombie Nemesis",
       "killerIds": [
         "nemesis"
       ],
@@ -4199,7 +9084,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_nightmare_102",
-      "name": "Unique Nightmare — Skillcheck Freddy",
+      "name": "Unique Nightmare - Skillcheck Freddy",
       "killerIds": [
         "nightmare"
       ],
@@ -4319,7 +9204,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_nurse_106",
-      "name": "Unique Nurse — 5 Blink Nurse",
+      "name": "Unique Nurse - 5 Blink Nurse",
       "killerIds": [
         "nurse"
       ],
@@ -4443,7 +9328,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_oni_110",
-      "name": "Unique Oni — All Seeing Oni",
+      "name": "Unique Oni - All Seeing Oni",
       "killerIds": [
         "oni"
       ],
@@ -4570,7 +9455,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_onryo_114",
-      "name": "Unique Onryo — Infinite Teleport Onryo",
+      "name": "Unique Onryo - Infinite Teleport Onryo",
       "killerIds": [
         "onryo"
       ],
@@ -4695,7 +9580,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_pig_118",
-      "name": "Unique Pig — Scream Pig",
+      "name": "Unique Pig - Scream Pig",
       "killerIds": [
         "pig"
       ],
@@ -4818,7 +9703,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_plague_122",
-      "name": "Unique Plague — Speed Plague",
+      "name": "Unique Plague - Speed Plague",
       "killerIds": [
         "plague"
       ],
@@ -4943,7 +9828,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_shape_126",
-      "name": "Unique Shape — Speed Vault Wallhack Myers",
+      "name": "Unique Shape - Speed Vault Wallhack Myers",
       "killerIds": [
         "shape"
       ],
@@ -5070,7 +9955,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_singularity_130",
-      "name": "Unique Singularity — Speed Singularity",
+      "name": "Unique Singularity - Speed Singularity",
       "killerIds": [
         "singularity"
       ],
@@ -5193,7 +10078,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_skullmerchant_134",
-      "name": "Unique Skull Merchant — Wall Beam Skull Merchant",
+      "name": "Unique Skull Merchant - Wall Beam Skull Merchant",
       "killerIds": [
         "skullmerchant"
       ],
@@ -5319,7 +10204,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_spirit_138",
-      "name": "Unique Spirit — One Shot Spirit",
+      "name": "Unique Spirit - One Shot Spirit",
       "killerIds": [
         "spirit"
       ],
@@ -5345,35 +10230,7 @@ const INITIAL_DATA = {
         "Enduring"
       ]
     },
-    {
-      "id": "hens_trapper_139",
-      "name": "Best Trapper Without Limitations",
-      "killerIds": [
-        "trapper"
-      ],
-      "tags": [
-        "Hens",
-        "GenRegression",
-        "GenBlocking"
-      ],
-      "addons": [
-        "Bloody Coil",
-        "Iridescent Stone"
-      ],
-      "addonImages": [],
-      "description": "",
-      "patch": "10.1.2",
-      "version": "",
-      "favorite": false,
-      "currentlyUsing": false,
-      "changes": "",
-      "perkIds": [
-        "CorruptIntervention",
-        "Agitation",
-        "K26P02",
-        "K42P01"
-      ]
-    },
+
     {
       "id": "hens_trapper_140",
       "name": "Funny Trapper",
@@ -5436,7 +10293,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_trapper_142",
-      "name": "Unique Trapper — Small Room Trapper",
+      "name": "Unique Trapper - Small Room Trapper",
       "killerIds": [
         "trapper"
       ],
@@ -5562,7 +10419,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_trickster_146",
-      "name": "Unique Trickster — Main Event Trickster",
+      "name": "Unique Trickster - Main Event Trickster",
       "killerIds": [
         "trickster"
       ],
@@ -5688,7 +10545,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_twins_150",
-      "name": "Unique Twins — Insidious Twins",
+      "name": "Unique Twins - Insidious Twins",
       "killerIds": [
         "twins"
       ],
@@ -5813,7 +10670,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_unknown_154",
-      "name": "Unique Unknown — Fake Illusion Unknown",
+      "name": "Unique Unknown - Fake Illusion Unknown",
       "killerIds": [
         "unknown"
       ],
@@ -5852,7 +10709,8 @@ const INITIAL_DATA = {
         "Hens",
         "AntiHeal",
         "Chase",
-        "GenRegression"
+        "GenRegression",
+        "Fun"
       ],
       "addons": [
         "\"Shadow Dance\" - Blood",
@@ -5862,7 +10720,7 @@ const INITIAL_DATA = {
         "https://otz-addon-tierlist.pages.dev/public/addons/wraith/shadowdanceblood.png",
         "https://otz-addon-tierlist.pages.dev/public/addons/wraith/swifthuntblood.png"
       ],
-      "description": "",
+      "description": "Also listed as: Funny Wraith.",
       "patch": "10.1.2",
       "version": "",
       "favorite": false,
@@ -5875,40 +10733,7 @@ const INITIAL_DATA = {
         "Bamboozle"
       ]
     },
-    {
-      "id": "hens_wraith_156",
-      "name": "Funny Wraith",
-      "killerIds": [
-        "wraith"
-      ],
-      "tags": [
-        "Hens",
-        "Fun",
-        "AntiHeal",
-        "Chase",
-        "GenRegression"
-      ],
-      "addons": [
-        "\"Swift Hunt\" - Blood",
-        "\"Shadow Dance\" - Blood"
-      ],
-      "addonImages": [
-        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/swifthuntblood.png",
-        "https://otz-addon-tierlist.pages.dev/public/addons/wraith/shadowdanceblood.png"
-      ],
-      "description": "",
-      "patch": "10.1.2",
-      "version": "",
-      "favorite": false,
-      "currentlyUsing": false,
-      "changes": "",
-      "perkIds": [
-        "Bamboozle",
-        "Sloppy_Butcher",
-        "K24P03",
-        "K26P02"
-      ]
-    },
+
     {
       "id": "hens_wraith_157",
       "name": "Best Beginner Wraith",
@@ -5946,7 +10771,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_wraith_158",
-      "name": "Unique Wraith — Dissolution Wraith",
+      "name": "Unique Wraith - Dissolution Wraith",
       "killerIds": [
         "wraith"
       ],
@@ -6073,7 +10898,7 @@ const INITIAL_DATA = {
     },
     {
       "id": "hens_xenomorph_162",
-      "name": "Unique Xenomorph — One Shot Xenomorph",
+      "name": "Unique Xenomorph - One Shot Xenomorph",
       "killerIds": [
         "xenomorph"
       ],

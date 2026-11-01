@@ -181,6 +181,11 @@ const CONFIG = {
       "id": "info",
       "name": "Info",
       "color": "#f4a9c3"
+    },
+    {
+      "id": "otzdarva",
+      "name": "Otzdarva",
+      "color": "#f78922"
     }
   ],
   "itemOrder": {},

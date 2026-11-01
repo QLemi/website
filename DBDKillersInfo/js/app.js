@@ -57,7 +57,7 @@ async function chooseStartupData() {
     fileButton.type = 'button';
     fileButton.className = 'btn btn-danger';
     fileButton.id = 'startup-use-file';
-    fileButton.textContent = 'Dane z plików strony — nadpisz zapis';
+    fileButton.textContent = 'Dane z plików strony - nadpisz zapis';
     const browserButton = document.createElement('button');
     browserButton.type = 'button';
     browserButton.className = 'btn btn-primary';
@@ -124,8 +124,10 @@ function configForFile() {
 }
 let STARTER_CORE_CONFIG = coreConfigSnapshot(STARTER_CONFIG);
 function applyCoreConfigDraft() {
-  const draft = state._coreConfig || state;
-  for (const key of CORE_CONFIG_KEYS) if (draft[key] !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(draft[key]));
+  for (const key of CORE_CONFIG_KEYS) {
+    const value = state._coreConfig?.[key] ?? state[key] ?? (key === 'killerTags' ? state.tags : undefined);
+    if (value !== undefined) CONFIG[key] = JSON.parse(JSON.stringify(value));
+  }
   SharedDbd.applyConfig();
 }
 function applyCoreConfigToDraft() {
@@ -195,7 +197,7 @@ function tierRankValue(t) {
   return TIER_SORT_ORDER[key] !== undefined ? TIER_SORT_ORDER[key] : 99;
 }
 function formatReleaseDate(iso) {
-  if (!iso || iso === "—") return "—";
+  if (!iso || iso === "-") return "-";
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (m) return m[3] + "." + m[2] + "." + m[1];
   return String(iso);
@@ -255,9 +257,9 @@ function formatToolbarHTML(textareaId) {
       <li><code>__underline__</code></li>
       <li><code>~~strike~~</code></li>
       <li><code># Big heading</code> / <code>## Medium</code> / <code>### Small</code></li>
-      <li><code>[visible text](https://url)</code> — link hides under text</li>
-      <li><code>[red]colored[/red]</code> — colors: red, orange, yellow, green, blue, purple, pink, cyan, gray, white</li>
-      <li><code>||spoiler||</code> — hidden until click</li>
+      <li><code>[visible text](https://url)</code> - link hides under text</li>
+      <li><code>[red]colored[/red]</code> - colors: red, orange, yellow, green, blue, purple, pink, cyan, gray, white</li>
+      <li><code>||spoiler||</code> - hidden until click</li>
       <li><code>&gt; quote</code> · <code>- list item</code> · <code>\`code\`</code></li>
     </ul>
   </div>`;
@@ -291,7 +293,7 @@ function toggleFmtHelp(id) {
   if (h) h.hidden = !h.hidden;
 }
 function tierBadgeHTML(tier) {
-  if (!tier) return `<span class="tier-badge tier-none">—</span>`;
+  if (!tier) return `<span class="tier-badge tier-none">-</span>`;
   const t = String(tier).toUpperCase();
   const letter = t.charAt(0);
   return `<span class="tier-badge tier-${letter}">${escapeHtml(t)}</span>`;
@@ -359,6 +361,7 @@ async function init() {
       }
     } catch {}
     ensureOtzOnWindow();
+    if (window.pageReadinessClosed) await window.pageReadinessClosed;
     await chooseStartupData();
     SharedDbd.applyConfig();
     SharedDbd.hydrate(state);
@@ -427,9 +430,7 @@ function loadData(saved) {
           }
         }
       });
-      if (!state.killerTags) state.killerTags = [];
-      if (!state.buildTags) state.buildTags = [];
-      if (state.tags && state.tags.length && !state.killerTags.length && !state.buildTags.length) {
+      if (state.tags && state.tags.length && !state.killerTags && !state._coreConfig?.killerTags) {
         state.killerTags = JSON.parse(JSON.stringify(state.tags));
       }
     } catch (e) {
@@ -451,8 +452,6 @@ function seedInitial() {
       builds: []
     };
   }
-  if (!state.killerTags) state.killerTags = [];
-  if (!state.buildTags) state.buildTags = [];
   if (!state.perks) state.perks = [];
   if (!state.builds) state.builds = [];
   if (!state.killers) state.killers = [];
@@ -572,10 +571,10 @@ function isLocalOnlyTag(kind, t) {
   return !arr.some(x => x.id === t.id || x.name === t.name);
 }
 function unsavedBadge(title) {
-  return `<span class="unsaved-badge" title="${escapeAttr(title || "Not saved to data.js / config.js yet — local only")}">💾?</span>`;
+  return `<span class="unsaved-badge" title="${escapeAttr(title || "Not saved to data.js / config.js yet - local only")}">💾?</span>`;
 }
 function dirtyBadge(title) {
-  return `<span class="dirty-badge" title="${escapeAttr(title || "Changed locally — export to data.js")}">●</span>`;
+  return `<span class="dirty-badge" title="${escapeAttr(title || "Changed locally - export to data.js")}">●</span>`;
 }
 function updateEditorUnsavedBanner() {
   const el = document.getElementById("editor-unsaved-banner");
@@ -599,7 +598,7 @@ function updateEditorUnsavedBanner() {
   el.innerHTML = `
     <strong>Unsaved to files</strong>
     <span>${localK ? localK + " new killer(s) " : ""}${dirtyK ? dirtyK + " edited killer(s) " : ""}${localB ? localB + " new build(s) " : ""}${dirtyB ? dirtyB + " edited build(s) " : ""}${localP ? localP + " new perk(s) " : ""}${dirtyP ? dirtyP + " edited perk icon(s) " : ""}${removedP ? removedP + " removed perk(s) " : ""}${coreDirty ? "core catalog changes (config.js)" : ""}</span>
-    <span class="hint-inline">Shared definitions come from SharedFiles. Download config.js for local tags and rankings, and data.js for local ratings, notes and builds.</span>
+    <span class="hint-inline">Shared definitions come from SharedFiles. Download data.js for local tags, ratings, notes and builds, and config.js for local settings and rankings.</span>
   `;
 }
 function applyOwnerUiVisibility() {
@@ -883,8 +882,8 @@ function renderKillers() {
     const src = getKillerPortrait(k.name);
     const sf = Number(k.skillFloor) || 0,
       sc = Number(k.skillCeiling) || 0;
-    const skillShow = sf > 0 || sc > 0 ? `${sf.toFixed(1)}–${sc.toFixed(1)}` : "—";
-    const funShow = (Number(k.fun2play) || 0) > 0 ? Number(k.fun2play).toFixed(1) : "—";
+    const skillShow = sf > 0 || sc > 0 ? `${sf.toFixed(1)}-${sc.toFixed(1)}` : "-";
+    const funShow = (Number(k.fun2play) || 0) > 0 ? Number(k.fun2play).toFixed(1) : "-";
     const allTags = k.tags || [];
     const tagList = showAllKillerTags ? allTags : allTags.slice(0, 3);
     const moreN = showAllKillerTags ? 0 : Math.max(0, allTags.length - tagList.length);
@@ -899,7 +898,7 @@ function renderKillers() {
           <img src="${src}" alt="${escapeAttr(k.name)}" loading="lazy">
           <div class="killer-card-overlay">
             <span class="kc-tier">${tierBadgeHTML(k.tier)}</span>
-            <span class="kc-diff">${escapeHtml(k.difficulty || "—")}</span>
+            <span class="kc-diff">${escapeHtml(k.difficulty || "-")}</span>
           </div>
         </div>
         <div class="killer-card-body">
@@ -921,11 +920,11 @@ function openKillerDetail(id) {
   window._currentKillerDetailId = id;
   const killerPatches = [...new Set(killerBuilds.map(b => (b.patch || "").trim()).filter(Boolean))].sort(comparePatchVersions);
   const src = getKillerPortrait(k.name);
-  const releaseStr = k.releaseDate ? `${formatReleaseDate(k.releaseDate)}${k.chapter ? " · " + k.chapter : ""}${k.update ? " · Update " + k.update : ""}` : "—";
+  const releaseStr = k.releaseDate ? `${formatReleaseDate(k.releaseDate)}${k.chapter ? " · " + k.chapter : ""}${k.update ? " · Update " + k.update : ""}` : "-";
   const sf = Number(k.skillFloor) || 0,
     sc = Number(k.skillCeiling) || 0;
-  const skillStr = sf > 0 || sc > 0 ? `${sf.toFixed(1)} – ${sc.toFixed(1)}` : "—";
-  const funStr = (Number(k.fun2play) || 0) > 0 ? Number(k.fun2play).toFixed(1) : "—";
+  const skillStr = sf > 0 || sc > 0 ? `${sf.toFixed(1)} - ${sc.toFixed(1)}` : "-";
+  const funStr = (Number(k.fun2play) || 0) > 0 ? Number(k.fun2play).toFixed(1) : "-";
   let otzList = [];
   if (typeof getOtzAddonsForKiller === "function") {
     otzList = getOtzAddonsForKiller(k.name) || [];
@@ -962,7 +961,7 @@ function openKillerDetail(id) {
         <div class="release-line">Release: <strong>${escapeHtml(releaseStr)}</strong></div>
         ${k.patch ? `<span class="patch-badge">Notes current for: ${escapeHtml(k.patch)}</span>` : ""}
         <div class="profile-meta profile-meta-strong" style="margin-top:0.75rem">
-          <span class="profile-stat">Difficulty <strong>${k.difficulty || "—"}</strong></span>
+          <span class="profile-stat">Difficulty <strong>${k.difficulty || "-"}</strong></span>
           <span class="profile-stat">Tier ${tierBadgeHTML(k.tier)}</span>
           <span class="profile-stat">Skill <strong>${skillStr}</strong></span>
           <span class="profile-stat">Fun to Play <strong>${funStr}</strong></span>
@@ -1011,7 +1010,7 @@ function openKillerDetail(id) {
       <h3>Builds (${killerBuilds.length})</h3>
       <div class="filters killer-profile-build-filters">
         <input id="killer-profile-build-search" placeholder="Search builds…" oninput="renderKillerProfileBuilds()">
-        <select id="killer-profile-build-sort" onchange="renderKillerProfileBuilds()"><option value="name">Name A–Z</option><option value="nameDesc">Name Z–A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
+        <select id="killer-profile-build-sort" onchange="renderKillerProfileBuilds()"><option value="name">Name A-Z</option><option value="nameDesc">Name Z-A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
         <div class="perk-filter" data-perk-filter="killer-profile"><div class="perk-filter-chips" id="killer-profile-perk-chips"></div><input id="killer-profile-perk-search" placeholder="Filter by perks…" autocomplete="off" onclick="renderPerkFilterSuggestions('killer-profile','killer',true)" oninput="renderPerkFilterSuggestions('killer-profile','killer')"><div class="chip-dropdown" id="killer-profile-perk-dropdown"></div></div>
         <div class="patch-filter-group" title="Filter builds by patch"><select id="killer-profile-patch-op" onchange="renderKillerProfileBuilds()"><option value="=">=</option><option value=">">&gt;</option><option value=">=">&gt;=</option><option value="<">&lt;</option><option value="<=">&lt;=</option></select>
         <select id="killer-profile-patch-value" onchange="renderKillerProfileBuilds()"><option value="">Patch</option>${killerPatches.map(p => `<option value="${escapeAttr(p)}">${escapeHtml(p)}</option>`).join("")}</select></div>
@@ -1097,7 +1096,7 @@ function renderComboBoxes(killerName) {
   const list = getComboOtzList();
   window._comboOtzPool = list;
   if (hint) {
-    hint.textContent = list.length ? "Name each combo and pick up to 2 addons (click again to remove)." : "No Otz addons for this killer — check killer.id matches OTZ_ADDONS key.";
+    hint.textContent = list.length ? "Name each combo and pick up to 2 addons (click again to remove)." : "No Otz addons for this killer - check killer.id matches OTZ_ADDONS key.";
   }
   container.innerHTML = formSelectedCombos.map((combo, ci) => {
     const selected = (combo.addons || []).map(x => String(x).toLowerCase());
@@ -1342,7 +1341,6 @@ function renderPerkFilterSuggestions(scope, role, openOnClick = false) {
   const input = document.getElementById(`${scope}-perk-search`);
   const drop = document.getElementById(`${scope}-perk-dropdown`);
   if (!input || !drop) return;
-  if (!openOnClick && !drop.classList.contains("open")) return;
   const side = document.getElementById("build-side")?.value || "killer";
   const pool = role === "killer-profile" || scope === "builds" && side === "killer" ? (CONFIG.killerPerks || []).map(p => p.name) : role === "survivor" || side === "survivor" ? (CONFIG.survivorPerks || []).map(p => p.name) : [...(CONFIG.killerPerks || []), ...(CONFIG.survivorPerks || [])].map(p => p.name);
   const selected = buildPerkFilters[scope] || [];
@@ -1368,6 +1366,27 @@ function renderPerkFilterSuggestions(scope, role, openOnClick = false) {
   });
   drop.classList.add("open");
 }
+function closePerkFilterSuggestions(except = null) {
+  document.querySelectorAll(".perk-filter .chip-dropdown.open").forEach(drop => {
+    if (except && except.contains(drop)) return;
+    drop.classList.remove("open");
+    drop.innerHTML = "";
+  });
+}
+document.addEventListener("click", event => {
+  closePerkFilterSuggestions(event.target.closest(".perk-filter"));
+});
+document.addEventListener("focusin", event => {
+  closePerkFilterSuggestions(event.target.closest(".perk-filter"));
+});
+document.addEventListener("keydown", event => {
+  if (event.key !== "Escape") return;
+  const filter = event.target.closest(".perk-filter");
+  if (!filter?.querySelector(".chip-dropdown.open")) return;
+  closePerkFilterSuggestions();
+  event.preventDefault();
+  event.stopPropagation();
+});
 function renderPerkFilterChips(scope) {
   const host = document.getElementById(`${scope}-perk-chips`);
   if (!host) return;
@@ -1571,7 +1590,7 @@ function refreshBuildAddonPool() {
 function updateAddonPickerHint(count) {
   const hint = document.getElementById("addon-picker-hint");
   if (!hint) return;
-  if (count === 1) hint.textContent = "Otz addons for selected killer — click to add (max 2)";else if (count === 0) hint.textContent = "Select exactly 1 killer to load Otz addons";else hint.textContent = "Multiple killers selected — addons optional / universal";
+  if (count === 1) hint.textContent = "Otz addons for selected killer - click to add (max 2)";else if (count === 0) hint.textContent = "Select exactly 1 killer to load Otz addons";else hint.textContent = "Multiple killers selected - addons optional / universal";
 }
 function renderAddonPickerGrid() {
   const grid = document.getElementById("form-addon-grid");
@@ -1969,7 +1988,7 @@ function refreshKillerEditPreview() {
   const box = document.getElementById("killer-edit-preview-body");
   if (!box) return;
   const name = document.getElementById("k-name")?.value?.trim() || "Killer name";
-  const difficulty = document.getElementById("k-difficulty")?.value || "—";
+  const difficulty = document.getElementById("k-difficulty")?.value || "-";
   const tier = document.getElementById("k-tier")?.value || "";
   const sf = document.getElementById("k-skill-floor")?.value || "0";
   const sc = document.getElementById("k-skill-ceiling")?.value || "0";
@@ -1994,7 +2013,7 @@ function refreshKillerEditPreview() {
         <span>${escapeHtml(n)}</span>
       </div>`;
     }).join("");
-    return `<div class="my-combo-box"><h4>${escapeHtml(combo.name || "Combo " + (ci + 1))}</h4><div class="my-combo-row">${items || "—"}</div></div>`;
+    return `<div class="my-combo-box"><h4>${escapeHtml(combo.name || "Combo " + (ci + 1))}</h4><div class="my-combo-row">${items || "-"}</div></div>`;
   }).join("");
   box.innerHTML = `
     <div style="display:flex;gap:0.75rem;align-items:flex-start">
@@ -2005,7 +2024,7 @@ function refreshKillerEditPreview() {
           ${tierBadgeHTML(tier)}
         </div>
         <div style="font-size:0.8rem;color:#b0a0a8">
-          ${escapeHtml(difficulty)} · Skill ${escapeHtml(sf)}–${escapeHtml(sc)} · Fun ${escapeHtml(fun)}
+          ${escapeHtml(difficulty)} · Skill ${escapeHtml(sf)}-${escapeHtml(sc)} · Fun ${escapeHtml(fun)}
           ${patch ? " · Patch " + escapeHtml(patch) : ""}
           ${release ? " · " + escapeHtml(formatReleaseDate(release) || release) : ""}
           ${chapter ? " · Ch. " + escapeHtml(chapter) : ""}
@@ -2108,7 +2127,7 @@ function openDetailedKillerForm(editId = null) {
             </div>
             <div class="form-group"><label>Tier</label>
               <select id="k-tier" onchange="schedulePreviewRefresh()">
-                ${TIER_RANKS.map(t => `<option value="${t}" ${(k?.tier || "") === t ? "selected" : ""}>${t || "— unranked"}</option>`).join("")}
+                ${TIER_RANKS.map(t => `<option value="${t}" ${(k?.tier || "") === t ? "selected" : ""}>${t || "- unranked"}</option>`).join("")}
               </select>
             </div>
             <div class="form-group"><label>Notes for patch</label>
@@ -2274,8 +2293,8 @@ function renderEditor() {
       <div class="editor-item">
         <img src="${getKillerPortrait(k.name)}" style="width:40px;height:40px;border-radius:6px;object-fit:cover">
         <strong style="min-width:140px">${escapeHtml(k.name)}</strong>
-        <span style="font-size:0.78rem;color:var(--text-dim)">${k.difficulty} • ${k.skillFloor ?? 0}–${k.skillCeiling ?? 0} • Fun ${k.fun2play ?? 0} • ${tierBadgeHTML(k.tier)}</span>
-        ${isLocalOnlyKiller(k) ? unsavedBadge("New killer — not in data.js") : isDirtyKiller(k) ? dirtyBadge("Edited — export to data.js") : ""}
+        <span style="font-size:0.78rem;color:var(--text-dim)">${k.difficulty} • ${k.skillFloor ?? 0}-${k.skillCeiling ?? 0} • Fun ${k.fun2play ?? 0} • ${tierBadgeHTML(k.tier)}</span>
+        ${isLocalOnlyKiller(k) ? unsavedBadge("New killer - not in data.js") : isDirtyKiller(k) ? dirtyBadge("Edited - export to data.js") : ""}
         <button class="btn btn-sm" style="margin-left:auto" onclick="openDetailedKillerForm(${inlineArgument(k.id)})">Edit</button>
       </div>
     `).join("") || "<p style='color:var(--text-dim)'>None</p>";
@@ -2312,8 +2331,8 @@ function renderEditor() {
       return `
         <div class="editor-item">
           <strong style="min-width:140px">${escapeHtml(b.name)}</strong>
-          <span style="font-size:0.78rem;color:var(--text-dim)">${escapeHtml(names) || "—"} ${b.patch ? "· " + escapeHtml(b.patch) : ""}</span>
-          ${isLocalOnlyBuild(b) ? unsavedBadge("New build — not in data.js") : isDirtyBuild(b) ? dirtyBadge("Edited — export to data.js") : ""}
+          <span style="font-size:0.78rem;color:var(--text-dim)">${escapeHtml(names) || "-"} ${b.patch ? "· " + escapeHtml(b.patch) : ""}</span>
+          ${isLocalOnlyBuild(b) ? unsavedBadge("New build - not in data.js") : isDirtyBuild(b) ? dirtyBadge("Edited - export to data.js") : ""}
           <button class="btn btn-sm" style="margin-left:auto" onclick="openBuildModal(${inlineArgument(b.id)})">Edit</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBuild(${inlineArgument(b.id)})">X</button>
         </div>
@@ -2380,7 +2399,7 @@ function tagEditRowHTML(kind, t, i) {
         onclick="toggleTagLock(${inlineArgument(kind)},${i})">${locked ? "🔒" : "🔓"}</button>
       <input type="color" value="${t.color}" ${locked ? "disabled" : ""} onchange="updateTagField(${inlineArgument(kind)},${i},'color',this.value)" title="Color">
       <input type="text" class="tag-name-input" value="${escapeAttr(t.name)}" ${locked ? "readonly" : ""} onchange="updateTagField(${inlineArgument(kind)},${i},'name',this.value)">
-      ${isLocalOnlyTag(kind, t) ? unsavedBadge("New tag — not in config.js") : ""}
+      ${isLocalOnlyTag(kind, t) ? unsavedBadge("New tag - download data.js to publish") : ""}
       <button class="btn btn-sm btn-danger" ${locked ? "disabled" : ""} onclick="deleteEditorTag(${inlineArgument(kind)},${i})">Del</button>
     </div>`;
 }
@@ -2484,8 +2503,8 @@ function normalizeDataShape(d) {
   return {
     killers: Array.isArray(d.killers) ? d.killers.slice() : [],
     builds: Array.isArray(d.builds) ? d.builds.slice() : [],
-    killerTags: Array.isArray(d.killerTags) ? d.killerTags.slice() : Array.isArray(d.tags) ? d.tags.slice() : [],
-    buildTags: Array.isArray(d.buildTags) ? d.buildTags.slice() : [],
+    killerTags: (d._coreConfig?.killerTags || d.killerTags || d.tags || []).slice(),
+    buildTags: (d._coreConfig?.buildTags || d.buildTags || []).slice(),
     perks: Array.isArray(d.perks) ? d.perks.slice() : []
   };
 }
@@ -2577,10 +2596,10 @@ function mergeDataSets(a, b) {
 const KILLER_DIFF_KEYS = ["name", "tier", "difficulty", "skillFloor", "skillCeiling", "fun2play", "addonNotes", "patch", "tags", "chapter", "releaseDate", "releaseOrder", "recommendedCombos"];
 const BUILD_DIFF_KEYS = ["name", "description", "perks", "addons", "tags", "patch", "killerIds"];
 function shortVal(v) {
-  if (v == null) return "—";
+  if (v == null) return "-";
   if (typeof v === "string") {
     const t = v.trim();
-    if (!t || t === "placeholder") return "—";
+    if (!t || t === "placeholder") return "-";
     return t.length > 80 ? t.slice(0, 77) + "…" : t;
   }
   if (typeof v === "number" || typeof v === "boolean") return String(v);
@@ -2800,9 +2819,9 @@ function renderMergeReportHTML(r) {
   }).join("") + "</ul>";
   html += `<h4>Tags / perks only in one source</h4>`;
   html += `<ul class="merge-side">`;
-  html += `<li><strong>Killer tags:</strong> ${r.tagsNew.length ? r.tagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
-  html += `<li><strong>Build tags:</strong> ${r.buildTagsNew.length ? r.buildTagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
-  html += `<li><strong>Perks:</strong> ${r.perksNew.length ? r.perksNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "—"}</li>`;
+  html += `<li><strong>Killer tags:</strong> ${r.tagsNew.length ? r.tagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "-"}</li>`;
+  html += `<li><strong>Build tags:</strong> ${r.buildTagsNew.length ? r.buildTagsNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "-"}</li>`;
+  html += `<li><strong>Perks:</strong> ${r.perksNew.length ? r.perksNew.map(x => escapeHtml(x.name) + " <span class='ch-src'>(" + escapeHtml(x.src.join(", ")) + ")</span>").join(", ") : "-"}</li>`;
   html += `</ul>`;
   return html;
 }
@@ -2903,7 +2922,7 @@ async function runDataMerge() {
     const btnDl = document.getElementById("btn-merge-download");
     if (btnDl) btnDl.disabled = false;
     const r = _lastMergeReport;
-    setMergeStatus(notes.join("<br>") + "<br><strong>Result:</strong> " + merged.killers.length + " killers, " + merged.builds.length + " builds, " + merged.killerTags.length + " killer tags, " + merged.buildTags.length + " build tags, " + merged.perks.length + " perks." + "<br><span class=\"ch-add\">+" + r.killersAdded.length + " killers</span>, " + "<span class=\"ch-mod\">~" + r.killersModified.length + " killers changed</span>, " + "<span class=\"ch-add\">+" + r.buildsAdded.length + " builds</span> — click <strong>Show changes</strong> for details.");
+    setMergeStatus(notes.join("<br>") + "<br><strong>Result:</strong> " + merged.killers.length + " killers, " + merged.builds.length + " builds, " + merged.killerTags.length + " killer tags, " + merged.buildTags.length + " build tags, " + merged.perks.length + " perks." + "<br><span class=\"ch-add\">+" + r.killersAdded.length + " killers</span>, " + "<span class=\"ch-mod\">~" + r.killersModified.length + " killers changed</span>, " + "<span class=\"ch-add\">+" + r.buildsAdded.length + " builds</span> - click <strong>Show changes</strong> for details.");
     showToast("Merge done");
   } catch (err) {
     console.error(err);
@@ -2925,7 +2944,7 @@ function applyMergedToLive() {
     renderAll();
     renderEditor();
     showToast("Applied merge to page");
-    setMergeStatus((document.getElementById("merge-status").innerHTML || "") + "<br>Applied locally. Download config.js for merged tags and data.js for killer/build content.");
+    setMergeStatus((document.getElementById("merge-status").innerHTML || "") + "<br>Applied locally. Download data.js for merged tags and killer/build content. Download config.js for local settings.");
   });
 }
 function copyMergedDataJs() {
@@ -2959,7 +2978,11 @@ async function mergeAndDownload() {
 }
 function dynamicDataForFile(source) {
   const data = SharedDbd.serialize(source);
-  ['_coreConfig', 'killerTags', 'buildTags', 'tags', 'perks', 'addons', 'itemOrder', 'addonOrder', '_perkIcons', '_customPerks', '_removedPerks', '_pendingPerkIcons'].forEach(key => delete data[key]);
+  for (const key of ['killerTags', 'buildTags']) {
+    const tags = source._coreConfig?.[key] ?? source[key] ?? (key === 'killerTags' ? source.tags : undefined);
+    if (tags !== undefined) data[key] = JSON.parse(JSON.stringify(tags));
+  }
+  ['_coreConfig', 'tags', 'perks', 'addons', 'itemOrder', 'addonOrder', '_perkIcons', '_customPerks', '_removedPerks', '_pendingPerkIcons'].forEach(key => delete data[key]);
   (data.killers || []).forEach(k => ['notes', 'guide', 'vsNotes', 'contentSections'].forEach(key => delete k[key]));
   return data;
 }
@@ -2981,7 +3004,7 @@ function generateConfigCode() {
     behavior: "smooth",
     block: "center"
   });
-  showToast("Code generated — Copy or Download");
+  showToast("Code generated - Copy or Download");
 }
 function copyGeneratedCode() {
   const ta = document.getElementById("generated-code");

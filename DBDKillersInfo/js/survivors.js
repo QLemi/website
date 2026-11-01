@@ -119,8 +119,8 @@ function renderSurvivorDetail(randomizePortrait = false) {
         <div class="release-line">${escapeHtml(info.note || "Shared Survivor hub")}</div>
         ${info.patch ? `<span class="patch-badge">${escapeHtml(info.patch)}</span>` : ""}
         <div class="profile-meta profile-meta-strong" style="margin-top:.75rem">
-          <span class="profile-stat">Survivors <strong>${escapeHtml(info.count || "—")}</strong></span>
-          <span class="profile-stat">Perks <strong>${escapeHtml(info.perkCount || "—")}</strong></span>
+          <span class="profile-stat">Survivors <strong>${escapeHtml(info.count || "-")}</strong></span>
+          <span class="profile-stat">Perks <strong>${escapeHtml(info.perkCount || "-")}</strong></span>
           <span class="profile-stat">Items <strong>${(CONFIG.items || []).length}</strong></span>
         </div>
       </div>
@@ -131,7 +131,7 @@ function renderSurvivorDetail(randomizePortrait = false) {
     <h2 style="margin-top:1.1rem">Buildy</h2>
     <div class="filters survivor-build-filters">
       <input id="sbuild-search" placeholder="Search builds, perks, tags..." oninput="renderSurvivorBuilds()">
-      <select id="sbuild-sort" onchange="renderSurvivorBuilds()"><option value="name">Name A–Z</option><option value="nameDesc">Name Z–A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
+      <select id="sbuild-sort" onchange="renderSurvivorBuilds()"><option value="name">Name A-Z</option><option value="nameDesc">Name Z-A</option><option value="patchDesc">Patch newest</option><option value="patch">Patch oldest</option></select>
       <div class="perk-filter" data-perk-filter="survivor-hub"><div class="perk-filter-chips" id="survivor-hub-perk-chips"></div><input id="survivor-hub-perk-search" placeholder="Filter by perks…" autocomplete="off" onclick="renderPerkFilterSuggestions('survivor-hub','survivor',true)" oninput="renderPerkFilterSuggestions('survivor-hub','survivor')"><div class="chip-dropdown" id="survivor-hub-perk-dropdown"></div></div>
       <div class="patch-filter-group" title="Filter by build patch"><select id="sbuild-patch-op" onchange="renderSurvivorBuilds()"><option value="=">=</option><option value=">">&gt;</option><option value=">=">&gt;=</option><option value="<">&lt;</option><option value="<=">&lt;=</option></select><select id="sbuild-patch-value" onchange="renderSurvivorBuilds()"><option value="">Patch</option>${patches.sort(comparePatchVersions).map(p => `<option value="${escapeAttr(p)}">${escapeHtml(p)}</option>`).join("")}</select></div>
       <button class="btn btn-sm" onclick="document.getElementById('sbuild-search').value='';document.getElementById('sbuild-patch-op').value='=';document.getElementById('sbuild-patch-value').value='';document.getElementById('sbuild-sort').value='name';buildPerkFilters['survivor-hub']=[];renderPerkFilterChips('survivor-hub');renderSurvivorBuilds()">↺ Reset</button>

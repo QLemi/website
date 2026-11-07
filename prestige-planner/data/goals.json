@@ -43,29 +43,9 @@
       "note": ""
     },
     {
-      "id": "7c4fafee-ba30-4a33-a158-eb2f5c12f6f8",
-      "character": "gabriel-soma",
-      "category": "long-term",
-      "start": 20,
-      "target": 100,
-      "priority": 5,
-      "expires": null,
-      "note": ""
-    },
-    {
-      "id": "d141e61f-4c6d-4d7e-9c53-0b7c1f335839",
-      "character": "kwon-tae-young",
-      "category": "long-term",
-      "start": 21,
-      "target": 100,
-      "priority": 5,
-      "expires": null,
-      "note": ""
-    },
-    {
       "id": "2af55c27-d92a-44b8-b7f8-42094c322d02",
       "character": "goodguy",
-      "category": "long-term",
+      "category": "milestones",
       "start": 22,
       "target": 51,
       "priority": 6,
@@ -75,7 +55,7 @@
     {
       "id": "51596b03-36dd-4541-97bd-2a26f9253572",
       "character": "slasher",
-      "category": "long-term",
+      "category": "milestones",
       "start": 32,
       "target": 51,
       "priority": 4,
@@ -85,7 +65,7 @@
     {
       "id": "35e9c7fc-5979-4c4d-8c9d-2af2c2de5d25",
       "character": "nightmare",
-      "category": "long-term",
+      "category": "milestones",
       "start": 22,
       "target": 51,
       "priority": 6,
@@ -95,7 +75,7 @@
     {
       "id": "9be02008-b4a3-4803-b47b-603257bea00c",
       "character": "pig",
-      "category": "long-term",
+      "category": "milestones",
       "start": 21,
       "target": 51,
       "priority": 5,
@@ -175,20 +155,10 @@
     {
       "id": "94fadc41-c5bc-4c24-9d22-cbb8f7d6758a",
       "character": "plague",
-      "category": "long-term",
+      "category": "milestones",
       "start": 22,
       "target": 51,
       "priority": 5,
-      "expires": null,
-      "note": ""
-    },
-    {
-      "id": "7cd9d144-d098-441a-81a0-b46032abf9a7",
-      "character": "spirit",
-      "category": "long-term",
-      "start": 53,
-      "target": 100,
-      "priority": 4,
       "expires": null,
       "note": ""
     },
@@ -215,7 +185,7 @@
     {
       "id": "237db398-56c4-48d1-b97a-04c6185fef0a",
       "character": "demogorgon",
-      "category": "long-term",
+      "category": "milestones",
       "start": 16,
       "target": 51,
       "priority": 6,
@@ -235,7 +205,7 @@
     {
       "id": "04679c08-5308-45a9-b479-d094dc6d9f57",
       "character": "shape",
-      "category": "long-term",
+      "category": "milestones",
       "start": 21,
       "target": 51,
       "priority": 5,
@@ -245,7 +215,7 @@
     {
       "id": "058f7253-2181-4932-a86a-92a8ead25298",
       "character": "darklord",
-      "category": "long-term",
+      "category": "milestones",
       "start": 25,
       "target": 51,
       "priority": 4,
@@ -259,26 +229,6 @@
       "start": 14,
       "target": 16,
       "priority": 4,
-      "expires": null,
-      "note": ""
-    },
-    {
-      "id": "cc791bef-c185-4c45-beff-98357f74ffb1",
-      "character": "vee-boonyasak",
-      "category": "long-term",
-      "start": 3,
-      "target": 21,
-      "priority": 3,
-      "expires": null,
-      "note": ""
-    },
-    {
-      "id": "2bb6d9fe-d4b6-4293-a321-2c91cfbd703b",
-      "character": "taurie-cain",
-      "category": "long-term",
-      "start": 4,
-      "target": 21,
-      "priority": 3,
       "expires": null,
       "note": ""
     },
@@ -308,6 +258,336 @@
       "category": "general",
       "start": 22,
       "target": 31,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "6d45540b-fbe0-4c08-9f8f-395a705ffd76",
+      "character": "wraith",
+      "category": "road-to-p100",
+      "start": 18,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "572684bb-56f5-42c3-90ba-5bd67712dd0b",
+      "character": "nurse",
+      "category": "road-to-p100",
+      "start": 14,
+      "target": 100,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "4fe2634b-976d-44e6-ab49-797263839c83",
+      "character": "shape",
+      "category": "road-to-p100",
+      "start": 21,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "cb7b35d5-7400-4242-830b-8ed8768f4119",
+      "character": "nightmare",
+      "category": "road-to-p100",
+      "start": 22,
+      "target": 100,
+      "priority": 8,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "8b0bde69-110a-46e4-b7c9-788cb1ff8226",
+      "character": "pig",
+      "category": "road-to-p100",
+      "start": 21,
+      "target": 100,
+      "priority": 8,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "99d87763-e4df-4a6e-856d-a4cd29e9a5f4",
+      "character": "clown",
+      "category": "road-to-p100",
+      "start": 17,
+      "target": 100,
+      "priority": 7,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "d8b9339b-8ac2-4adc-9531-90a0838c7055",
+      "character": "spirit",
+      "category": "road-to-p100",
+      "start": 53,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "d9a0ff94-eaae-4c96-b499-70778c539c8e",
+      "character": "legion",
+      "category": "road-to-p100",
+      "start": 24,
+      "target": 100,
+      "priority": 8,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "6059a3ec-960a-46d2-81d7-5a4c75e684f2",
+      "character": "plague",
+      "category": "road-to-p100",
+      "start": 22,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "2b2a94ad-3c49-4824-a5a1-d0739cedf253",
+      "character": "demogorgon",
+      "category": "road-to-p100",
+      "start": 18,
+      "target": 100,
+      "priority": 7,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "eeb7d0d2-0333-422e-b915-f2613a04915e",
+      "character": "oni",
+      "category": "road-to-p100",
+      "start": 17,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "3640a4a0-dd9e-40bc-bfc2-8ab3471a9c05",
+      "character": "goodguy",
+      "category": "road-to-p100",
+      "start": 22,
+      "target": 100,
+      "priority": 7,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "a4d5ba92-b642-4a2c-a752-ab10b86f0401",
+      "character": "darklord",
+      "category": "road-to-p100",
+      "start": 25,
+      "target": 100,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "babc903f-3218-4ee8-806d-9fc5224ac111",
+      "character": "trapper",
+      "category": "road-to-p100",
+      "start": 14,
+      "target": 100,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "edf19da1-db63-45fa-93d9-c12057adab6b",
+      "character": "singularity",
+      "category": "road-to-p100",
+      "start": 15,
+      "target": 100,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "5bc97ee8-d159-4857-a8db-2fd308d7b6a1",
+      "character": "slasher",
+      "category": "road-to-p100",
+      "start": 32,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "3f21b58d-c744-41f3-923c-d81816d42663",
+      "character": "unknown",
+      "category": "road-to-p100",
+      "start": 26,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "efe9fa69-86d9-43bf-a345-450bde900cf2",
+      "character": "xenomorph",
+      "category": "road-to-p100",
+      "start": 14,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "b70af465-86cd-4bb3-8bd4-b636a6bf8eef",
+      "character": "dwight-fairfield",
+      "category": "road-to-p100",
+      "start": 5,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "8ae3ac7f-d9c9-4ee6-9286-a2056c92636a",
+      "character": "kate-denson",
+      "category": "road-to-p100",
+      "start": 9,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "04eebb91-4064-4e44-9d0c-a6802dd488c1",
+      "character": "kwon-tae-young",
+      "category": "road-to-p100",
+      "start": 24,
+      "target": 100,
+      "priority": 8,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "f109ef38-7cc5-4603-9d69-673e6bfc8e48",
+      "character": "vee-boonyasak",
+      "category": "road-to-p100",
+      "start": 3,
+      "target": 100,
+      "priority": 7,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "29b6d0aa-68a6-4fbe-aef4-8eacbb5468b6",
+      "character": "taurie-cain",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "fb1134c0-2405-4a43-8e01-95a0ab04b7ea",
+      "character": "gabriel-soma",
+      "category": "road-to-p100",
+      "start": 22,
+      "target": 100,
+      "priority": 7,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "681b91ce-74c9-41f1-b1de-828826137793",
+      "character": "ace-visconti",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "f29b0378-1bdc-474f-a88d-e02a8a197127",
+      "character": "lara-croft",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "7d6855f1-7f38-45fd-9fee-98c79a502224",
+      "character": "thalita-lyra",
+      "category": "road-to-p100",
+      "start": 3,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "31f3544d-cd20-489c-b2d9-0e68ed59e582",
+      "character": "ada-wong",
+      "category": "road-to-p100",
+      "start": 3,
+      "target": 100,
+      "priority": 4,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "9e177773-db47-472e-be50-1a047fa8bbe8",
+      "character": "jake-park",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "3cd5bfba-e4af-421c-97de-63a66f8f0a96",
+      "character": "claudette-morel",
+      "category": "road-to-p100",
+      "start": 7,
+      "target": 100,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "65ec28db-e108-47c5-9379-8f0e80941277",
+      "character": "quentin-smith",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
+      "priority": 2,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "0c15ec64-05c5-4a3d-a984-cfaefd37b467",
+      "character": "adam-francis",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
+      "priority": 3,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "cc78c7af-f23e-4b35-9a63-0f248bdaf31d",
+      "character": "cheryl-mason",
+      "category": "road-to-p100",
+      "start": 4,
+      "target": 100,
       "priority": 5,
       "expires": null,
       "note": ""

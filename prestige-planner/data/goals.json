@@ -38,7 +38,7 @@
       "category": "general",
       "start": 22,
       "target": 26,
-      "priority": 6,
+      "priority": 7,
       "expires": null,
       "note": ""
     },
@@ -68,7 +68,7 @@
       "category": "milestones",
       "start": 22,
       "target": 51,
-      "priority": 6,
+      "priority": 7,
       "expires": null,
       "note": ""
     },
@@ -298,7 +298,7 @@
       "category": "road-to-p100",
       "start": 22,
       "target": 100,
-      "priority": 8,
+      "priority": 9,
       "expires": null,
       "note": ""
     },
@@ -589,6 +589,116 @@
       "start": 4,
       "target": 100,
       "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "283a4c87-f937-49dd-942b-99067e358c5a",
+      "character": "first",
+      "category": "short-term",
+      "start": 14,
+      "target": 16,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "ea64195f-c300-4e54-bb9a-48150c8ea8c6",
+      "character": "nightmare",
+      "category": "long-term",
+      "start": 22,
+      "target": 31,
+      "priority": 6,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "611d867a-0307-4eec-ba7d-d66487bc7b07",
+      "character": "clown",
+      "category": "long-term",
+      "start": 17,
+      "target": 21,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "16063c9a-1111-4900-b470-a18f485db25a",
+      "character": "spirit",
+      "category": "long-term",
+      "start": 53,
+      "target": 71,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "e721a7bd-2162-489b-acb7-f7847d01ab73",
+      "character": "legion",
+      "category": "milestones",
+      "start": 24,
+      "target": 41,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "c3f717cb-da2a-4ff5-8fde-f5c784612294",
+      "character": "demogorgon",
+      "category": "long-term",
+      "start": 19,
+      "target": 41,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "7b9373be-9279-4dab-829f-b7af07eb4419",
+      "character": "oni",
+      "category": "long-term",
+      "start": 17,
+      "target": 31,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "397dd468-3e42-4ce6-a7a4-6d63b1feedfe",
+      "character": "blight",
+      "category": "long-term",
+      "start": 14,
+      "target": 21,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "7385858d-dd1b-4955-94de-1baeabee0525",
+      "character": "singularity",
+      "category": "general",
+      "start": 15,
+      "target": 21,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "bbd3120f-f7f6-4faf-9792-81f8579cd309",
+      "character": "xenomorph",
+      "category": "general",
+      "start": 14,
+      "target": 21,
+      "priority": 5,
+      "expires": null,
+      "note": ""
+    },
+    {
+      "id": "a6c9b667-4b4b-45eb-843d-8ae7c50f8026",
+      "character": "first",
+      "category": "general",
+      "start": 14,
+      "target": 21,
+      "priority": 6,
       "expires": null,
       "note": ""
     }

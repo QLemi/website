@@ -1,1 +1,1576 @@
-
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "coal-tower",
+      "name": "Coal Tower",
+      "aliases": [],
+      "realm": {
+        "id": "the-macmillan-estate",
+        "name": "The MacMillan Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ind_CoalTower.png/320px-IconMap_Ind_CoalTower.png?52447f"
+      },
+      "offering": {
+        "name": "MacMillan's Phalanx Bone",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_macMillansPhalanxBone.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 132,
+            "squareMeters": 8448
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/CoalTowerOutline.png/200px-CoalTowerOutline.png?93d600",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/CoalTower%282v8%29Outline.png/200px-CoalTower%282v8%29Outline.png?1371b9",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Coal_Tower"
+    },
+    {
+      "id": "groaning-storehouse",
+      "name": "Groaning Storehouse",
+      "aliases": [],
+      "realm": {
+        "id": "the-macmillan-estate",
+        "name": "The MacMillan Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ind_Storehouse.png/320px-IconMap_Ind_Storehouse.png?cac315"
+      },
+      "offering": {
+        "name": "MacMillan's Phalanx Bone",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_macMillansPhalanxBone.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/GroaningStorehouseOutline.png/200px-GroaningStorehouseOutline.png?88299a",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Groaning_Storehouse"
+    },
+    {
+      "id": "ironworks-of-misery",
+      "name": "Ironworks of Misery",
+      "aliases": [],
+      "realm": {
+        "id": "the-macmillan-estate",
+        "name": "The MacMillan Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ind_Foundry.png/320px-IconMap_Ind_Foundry.png?bc212d"
+      },
+      "offering": {
+        "name": "MacMillan's Phalanx Bone",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_macMillansPhalanxBone.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 160,
+            "squareMeters": 10240
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/IronworksOfMiseryOutline.png/200px-IronworksOfMiseryOutline.png?bb4587",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Ironworks_of_Misery"
+    },
+    {
+      "id": "shelter-woods",
+      "name": "Shelter Woods",
+      "aliases": [],
+      "realm": {
+        "id": "the-macmillan-estate",
+        "name": "The MacMillan Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ind_Forest.png/320px-IconMap_Ind_Forest.png?3f3f5c"
+      },
+      "offering": {
+        "name": "MacMillan's Phalanx Bone",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_macMillansPhalanxBone.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 176,
+            "squareMeters": 11264
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/ShelterWoodsOutline.png/200px-ShelterWoodsOutline.png?818083",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/ShelterWoods%282v8%29Outline.png/200px-ShelterWoods%282v8%29Outline.png?1f169c",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Shelter_Woods"
+    },
+    {
+      "id": "suffocation-pit",
+      "name": "Suffocation Pit",
+      "aliases": [],
+      "realm": {
+        "id": "the-macmillan-estate",
+        "name": "The MacMillan Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ind_Mine.png/320px-IconMap_Ind_Mine.png?97408e"
+      },
+      "offering": {
+        "name": "MacMillan's Phalanx Bone",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_macMillansPhalanxBone.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 160,
+            "squareMeters": 10240
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/SuffocationPitOutline.png/200px-SuffocationPitOutline.png?807a44",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 184,
+            "squareMeters": 11776
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/SuffocationPit%282v8%29Outline.png/200px-SuffocationPit%282v8%29Outline.png?4c4d50",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Suffocation_Pit"
+    },
+    {
+      "id": "azarovs-resting-place",
+      "name": "Azarov's Resting Place",
+      "aliases": [],
+      "realm": {
+        "id": "autohaven-wreckers",
+        "name": "Autohaven Wreckers"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Jnk_Office.png/320px-IconMap_Jnk_Office.png?bfa408"
+      },
+      "offering": {
+        "name": "Azarov's Key",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_azarovsKey.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 176,
+            "squareMeters": 11264
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/AzarovsRestingPlaceOutline.png/200px-AzarovsRestingPlaceOutline.png?2678d6",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 184,
+            "squareMeters": 11776
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/AzarovsRestingPlace%282v8%29Outline.png/200px-AzarovsRestingPlace%282v8%29Outline.png?e00649",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Azarov%27s_Resting_Place"
+    },
+    {
+      "id": "blood-lodge",
+      "name": "Blood Lodge",
+      "aliases": [],
+      "realm": {
+        "id": "autohaven-wreckers",
+        "name": "Autohaven Wreckers"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Jnk_Lodge.png/320px-IconMap_Jnk_Lodge.png?56a299"
+      },
+      "offering": {
+        "name": "Azarov's Key",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_azarovsKey.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/BloodLodgeOutline.png/200px-BloodLodgeOutline.png?8a321d",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Blood_Lodge"
+    },
+    {
+      "id": "gas-heaven",
+      "name": "Gas Heaven",
+      "aliases": [],
+      "realm": {
+        "id": "autohaven-wreckers",
+        "name": "Autohaven Wreckers"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Jnk_GasStation.png/320px-IconMap_Jnk_GasStation.png?2d111d"
+      },
+      "offering": {
+        "name": "Azarov's Key",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_azarovsKey.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/GasHeavenOutline.png/200px-GasHeavenOutline.png?209956",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 184,
+            "squareMeters": 11776
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/GasHeaven%282v8%29Outline.png/200px-GasHeaven%282v8%29Outline.png?f0bd43",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Gas_Heaven"
+    },
+    {
+      "id": "wreckers-yard",
+      "name": "Wreckers' Yard",
+      "aliases": [],
+      "realm": {
+        "id": "autohaven-wreckers",
+        "name": "Autohaven Wreckers"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Jnk_Scrapyard.png/320px-IconMap_Jnk_Scrapyard.png?405905"
+      },
+      "offering": {
+        "name": "Azarov's Key",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_azarovsKey.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 144,
+            "squareMeters": 9216
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/WreckersYardOutline.png/200px-WreckersYardOutline.png?d9b568",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 176,
+            "squareMeters": 11264
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/WreckersYard%282v8%29Outline.png/200px-WreckersYard%282v8%29Outline.png?fa6392",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Wreckers%27_Yard"
+    },
+    {
+      "id": "wretched-shop",
+      "name": "Wretched Shop",
+      "aliases": [],
+      "realm": {
+        "id": "autohaven-wreckers",
+        "name": "Autohaven Wreckers"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Jnk_Garage.png/320px-IconMap_Jnk_Garage.png?838630"
+      },
+      "offering": {
+        "name": "Azarov's Key",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_azarovsKey.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 164,
+            "squareMeters": 10496
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/WretchedShopOutline.png/200px-WretchedShopOutline.png?3010a6",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Wretched_Shop"
+    },
+    {
+      "id": "fractured-cowshed",
+      "name": "Fractured Cowshed",
+      "aliases": [],
+      "realm": {
+        "id": "coldwind-farm",
+        "name": "Coldwind Farm"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Frm_Barn.png/320px-IconMap_Frm_Barn.png?466918"
+      },
+      "offering": {
+        "name": "Heart Locket",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_heartLocket.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 152,
+            "squareMeters": 9728
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FracturedCowshedOutline.png/200px-FracturedCowshedOutline.png?cade2d",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Fractured_Cowshed"
+    },
+    {
+      "id": "rancid-abattoir",
+      "name": "Rancid Abattoir",
+      "aliases": [],
+      "realm": {
+        "id": "coldwind-farm",
+        "name": "Coldwind Farm"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Frm_Slaughterhouse.png/320px-IconMap_Frm_Slaughterhouse.png?24a801"
+      },
+      "offering": {
+        "name": "Heart Locket",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_heartLocket.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 140,
+            "squareMeters": 8960
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/RancidAbattoirOutline.png/200px-RancidAbattoirOutline.png?3c6e31",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 192,
+            "squareMeters": 12288
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/RancidAbattoir%282v8%29Outline.png/200px-RancidAbattoir%282v8%29Outline.png?80f4d0",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Rancid_Abattoir"
+    },
+    {
+      "id": "rotten-fields",
+      "name": "Rotten Fields",
+      "aliases": [],
+      "realm": {
+        "id": "coldwind-farm",
+        "name": "Coldwind Farm"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Frm_Cornfield.png/320px-IconMap_Frm_Cornfield.png?e818d4"
+      },
+      "offering": {
+        "name": "Heart Locket",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_heartLocket.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 160,
+            "squareMeters": 10240
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/RottenFieldsOutline.png/200px-RottenFieldsOutline.png?95fd6f",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Rotten_Fields"
+    },
+    {
+      "id": "the-thompson-house",
+      "name": "The Thompson House",
+      "aliases": [],
+      "realm": {
+        "id": "coldwind-farm",
+        "name": "Coldwind Farm"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Frm_Farmhouse.png/320px-IconMap_Frm_Farmhouse.png?5717c1"
+      },
+      "offering": {
+        "name": "Heart Locket",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_heartLocket.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 152,
+            "squareMeters": 9728
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheThompsonHouseOutline.png/200px-TheThompsonHouseOutline.png?8d1831",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheThompsonHouse%282v8%29Outline.png/200px-TheThompsonHouse%282v8%29Outline.png?755c69",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/The_Thompson_House"
+    },
+    {
+      "id": "torment-creek",
+      "name": "Torment Creek",
+      "aliases": [],
+      "realm": {
+        "id": "coldwind-farm",
+        "name": "Coldwind Farm"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Frm_Silo.png/320px-IconMap_Frm_Silo.png?e4ae15"
+      },
+      "offering": {
+        "name": "Heart Locket",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_heartLocket.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TormentCreekOutline.png/200px-TormentCreekOutline.png?c3e37a",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TormentCreek%282v8%29Outline.png/200px-TormentCreek%282v8%29Outline.png?92db4d",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Torment_Creek"
+    },
+    {
+      "id": "disturbed-ward",
+      "name": "Disturbed Ward",
+      "aliases": [],
+      "realm": {
+        "id": "crotus-prenn-asylum",
+        "name": "Crotus Prenn Asylum"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Asy_Asylum.png/320px-IconMap_Asy_Asylum.png?a919e7"
+      },
+      "offering": {
+        "name": "Charred Wedding Photograph",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_charredWeddingPhotograph.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 152,
+            "squareMeters": 9728
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/DisturbedWardOutline.png/200px-DisturbedWardOutline.png?52c9b1",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 188,
+            "squareMeters": 12032
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/DisturbedWard%282v8%29Outline.png/200px-DisturbedWard%282v8%29Outline.png?745b15",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Disturbed_Ward"
+    },
+    {
+      "id": "father-campbells-chapel",
+      "name": "Father Campbell's Chapel",
+      "aliases": [],
+      "realm": {
+        "id": "crotus-prenn-asylum",
+        "name": "Crotus Prenn Asylum"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Asy_Chapel.png/320px-IconMap_Asy_Chapel.png?eb0181"
+      },
+      "offering": {
+        "name": "Charred Wedding Photograph",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_charredWeddingPhotograph.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 140,
+            "squareMeters": 8960
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FatherCampbellsChapelOutline.png/200px-FatherCampbellsChapelOutline.png?51c2d0",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FatherCampbellsChapel%282v8%29Outline.png/200px-FatherCampbellsChapel%282v8%29Outline.png?84de29",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Father_Campbell%27s_Chapel"
+    },
+    {
+      "id": "lampkin-lane",
+      "name": "Lampkin Lane",
+      "aliases": [],
+      "realm": {
+        "id": "haddonfield",
+        "name": "Haddonfield"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Sub_Street.png/320px-IconMap_Sub_Street.png?517984"
+      },
+      "offering": null,
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 132,
+            "squareMeters": 8448
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/LampkinLaneOutline.png/200px-LampkinLaneOutline.png?10a97c",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Lampkin_Lane"
+    },
+    {
+      "id": "the-pale-rose",
+      "name": "The Pale Rose",
+      "aliases": [],
+      "realm": {
+        "id": "backwater-swamp",
+        "name": "Backwater Swamp"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Swp_ThePaleRose.png/320px-IconMap_Swp_ThePaleRose.png?56f1d5"
+      },
+      "offering": {
+        "name": "Grandma's Cookbook",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_granmasCookbook.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 161,
+            "squareMeters": 10304
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/ThePaleRoseOutline.png/200px-ThePaleRoseOutline.png?b7b827",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/The_Pale_Rose"
+    },
+    {
+      "id": "grim-pantry",
+      "name": "Grim Pantry",
+      "aliases": [],
+      "realm": {
+        "id": "backwater-swamp",
+        "name": "Backwater Swamp"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Swp_GrimPantry.png/320px-IconMap_Swp_GrimPantry.png?f474d9"
+      },
+      "offering": {
+        "name": "Grandma's Cookbook",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_granmasCookbook.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 168,
+            "squareMeters": 10752
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/GrimPantryOutline.png/200px-GrimPantryOutline.png?9f7646",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Grim_Pantry"
+    },
+    {
+      "id": "treatment-theatre",
+      "name": "Treatment Theatre",
+      "aliases": [],
+      "realm": {
+        "id": "lerys-memorial-institute",
+        "name": "Léry's Memorial Institute"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Hos_Treatment.png/320px-IconMap_Hos_Treatment.png?3f0e48"
+      },
+      "offering": {
+        "name": "Shattered Glasses",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_shatteredGlasses.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 98,
+            "squareMeters": 6272
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TreatmentTheatreOutline.png/200px-TreatmentTheatreOutline.png?eded9c",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Treatment_Theatre"
+    },
+    {
+      "id": "mothers-dwelling",
+      "name": "Mother's Dwelling",
+      "aliases": [],
+      "realm": {
+        "id": "red-forest",
+        "name": "Red Forest"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Brl_MadHouse.png/320px-IconMap_Brl_MadHouse.png?920106"
+      },
+      "offering": {
+        "name": "The Last Mask",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_theLastMask.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 152,
+            "squareMeters": 9728
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/MothersDwellingOutline.png/200px-MothersDwellingOutline.png?1e64a1",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 200,
+            "squareMeters": 12800
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/MothersDwelling%282v8%29Outline.png/200px-MothersDwelling%282v8%29Outline.png?fb775f",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Mother%27s_Dwelling"
+    },
+    {
+      "id": "the-temple-of-purgation",
+      "name": "The Temple of Purgation",
+      "aliases": [],
+      "realm": {
+        "id": "red-forest",
+        "name": "Red Forest"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Brl_Temple.png/320px-IconMap_Brl_Temple.png?6d805e"
+      },
+      "offering": {
+        "name": "The Last Mask",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_theLastMask.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 136,
+            "squareMeters": 8704
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheTempleOfPurgationOutline.png/200px-TheTempleOfPurgationOutline.png?38cc5b",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/The_Temple_of_Purgation"
+    },
+    {
+      "id": "badham-preschool",
+      "name": "Badham Preschool",
+      "aliases": [],
+      "realm": {
+        "id": "springwood",
+        "name": "Springwood"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Eng_Elmstreet.png/320px-IconMap_Eng_Elmstreet.png?fd146e"
+      },
+      "offering": {
+        "name": "The Pied Piper",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_thePiedPiper.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 144,
+            "squareMeters": 9216
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/BadhamPreschoolOutline.png/200px-BadhamPreschoolOutline.png?eb7601",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Badham_Preschool"
+    },
+    {
+      "id": "the-game",
+      "name": "The Game",
+      "aliases": [],
+      "realm": {
+        "id": "gideon-meat-plant",
+        "name": "Gideon Meat Plant"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Fin_TheGame.png/320px-IconMap_Fin_TheGame.png?f6b6a8"
+      },
+      "offering": {
+        "name": "Jigsaw Piece",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_jigsawPiece.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 142,
+            "squareMeters": 9088
+          },
+          "outline": null,
+          "levels": [
+            {
+              "name": "UpperFloor",
+              "size": {
+                "tiles": 76,
+                "squareMeters": 4864
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheGameOutline_UpperFloor.png/200px-TheGameOutline_UpperFloor.png?9afa2f"
+            },
+            {
+              "name": "LowerFloor",
+              "size": {
+                "tiles": 66,
+                "squareMeters": 4224
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheGameOutline_LowerFloor.png/200px-TheGameOutline_LowerFloor.png?654de3"
+            }
+          ]
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/The_Game"
+    },
+    {
+      "id": "family-residence",
+      "name": "Family Residence",
+      "aliases": [],
+      "realm": {
+        "id": "yamaoka-estate",
+        "name": "Yamaoka Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Hti_Manor.png/320px-IconMap_Hti_Manor.png?56e50e"
+      },
+      "offering": {
+        "name": "Yamaoka Family Crest",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_yamaokaFamilyCrest.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FamilyResidenceOutline.png/200px-FamilyResidenceOutline.png?d9f691",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 184,
+            "squareMeters": 11776
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FamilyResidence%282v8%29Outline.png/200px-FamilyResidence%282v8%29Outline.png?c23a67",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Family_Residence"
+    },
+    {
+      "id": "sanctum-of-wrath",
+      "name": "Sanctum of Wrath",
+      "aliases": [],
+      "realm": {
+        "id": "yamaoka-estate",
+        "name": "Yamaoka Estate"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Hti_Shrine.png/320px-IconMap_Hti_Shrine.png?1247db"
+      },
+      "offering": {
+        "name": "Yamaoka Family Crest",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_yamaokaFamilyCrest.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/SanctumOfWrathOutline.png/200px-SanctumOfWrathOutline.png?9a27da",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 192,
+            "squareMeters": 12288
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/SanctumOfWrath%282v8%29Outline.png/200px-SanctumOfWrath%282v8%29Outline.png?db2bcb",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Sanctum_of_Wrath"
+    },
+    {
+      "id": "mount-ormond-resort",
+      "name": "Mount Ormond Resort",
+      "aliases": [],
+      "realm": {
+        "id": "ormond",
+        "name": "Ormond"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Kny_Cottage.png/320px-IconMap_Kny_Cottage.png?d84613"
+      },
+      "offering": {
+        "name": "Damaged Photo",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_damagedPhoto.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 156,
+            "squareMeters": 9984
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/MountOrmondResortOutline.png/200px-MountOrmondResortOutline.png?3025b6",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/MountOrmondResort%282v8%29Outline.png/200px-MountOrmondResort%282v8%29Outline.png?1ced53",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Mount_Ormond_Resort"
+    },
+    {
+      "id": "ormond-lake-mine",
+      "name": "Ormond Lake Mine",
+      "aliases": [],
+      "realm": {
+        "id": "ormond",
+        "name": "Ormond"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Kny_Gelatolevel01.png/320px-IconMap_Kny_Gelatolevel01.png?4d001f"
+      },
+      "offering": {
+        "name": "Damaged Photo",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_damagedPhoto.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 132,
+            "squareMeters": 8448
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/OrmondLakeMineOutline.png/200px-OrmondLakeMineOutline.png?65d0f4",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Ormond_Lake_Mine"
+    },
+    {
+      "id": "the-underground-complex",
+      "name": "The Underground Complex",
+      "aliases": [],
+      "realm": {
+        "id": "hawkins-national-laboratory",
+        "name": "Hawkins National Laboratory"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Qat_Laboratory.png/320px-IconMap_Qat_Laboratory.png?ee4b93"
+      },
+      "offering": {
+        "name": "Hawkins National Laboratory ID",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_hawkinsNationalLaboratoryID.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 138,
+            "squareMeters": 8832
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheUndergroundComplexOutline.png/200px-TheUndergroundComplexOutline.png?b48519",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/The_Underground_Complex"
+    },
+    {
+      "id": "dead-dawg-saloon",
+      "name": "Dead Dawg Saloon",
+      "aliases": [],
+      "realm": {
+        "id": "grave-of-glenvale",
+        "name": "Grave of Glenvale"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ukr_Saloon.png/320px-IconMap_Ukr_Saloon.png?85f881"
+      },
+      "offering": {
+        "name": "Shattered Bottle",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_shatteredBottle.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 136,
+            "squareMeters": 8704
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/DeadDawgSaloonOutline.png/200px-DeadDawgSaloonOutline.png?836302",
+          "levels": []
+        },
+        "2v8": {
+          "size": {
+            "tiles": 180,
+            "squareMeters": 11520
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/DeadDawgSaloon%282v8%29Outline.png/200px-DeadDawgSaloon%282v8%29Outline.png?a5f181",
+          "levels": []
+        }
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Dead_Dawg_Saloon"
+    },
+    {
+      "id": "midwich-elementary-school",
+      "name": "Midwich Elementary School",
+      "aliases": [],
+      "realm": {
+        "id": "silent-hill",
+        "name": "Silent Hill"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Wal_Level01.png/320px-IconMap_Wal_Level01.png?bf4eec"
+      },
+      "offering": {
+        "name": "Mary's Letter",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_marysLetter.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 113.5,
+            "squareMeters": 7264.0
+          },
+          "outline": null,
+          "levels": [
+            {
+              "name": "LowerFloor",
+              "size": {
+                "tiles": 64,
+                "squareMeters": 4096
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/MidwichElementarySchoolOutline_LowerFloor.png/200px-MidwichElementarySchoolOutline_LowerFloor.png?e145cb"
+            },
+            {
+              "name": "UpperFloors",
+              "size": {
+                "tiles": 49.5,
+                "squareMeters": 3168.0
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/MidwichElementarySchoolOutline_UpperFloors.png/200px-MidwichElementarySchoolOutline_UpperFloors.png?40fe78"
+            }
+          ]
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Midwich_Elementary_School"
+    },
+    {
+      "id": "raccoon-city-police-station",
+      "name": "Raccoon City Police Station",
+      "aliases": [],
+      "realm": {
+        "id": "raccoon-city",
+        "name": "Raccoon City"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ecl_Eclipselevel01.png/320px-IconMap_Ecl_Eclipselevel01.png?e8974c"
+      },
+      "offering": {
+        "name": "RPD Badge",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_rpdBadge.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": null,
+            "squareMeters": null
+          },
+          "outline": null,
+          "levels": [
+            {
+              "name": "LowerFloor",
+              "size": {
+                "tiles": null,
+                "squareMeters": null
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/RaccoonCityPoliceStationOutline_LowerFloor.png/200px-RaccoonCityPoliceStationOutline_LowerFloor.png?9360de"
+            },
+            {
+              "name": "UpperFloor",
+              "size": {
+                "tiles": null,
+                "squareMeters": null
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/RaccoonCityPoliceStationOutline_UpperFloor.png/200px-RaccoonCityPoliceStationOutline_UpperFloor.png?cd33a9"
+            }
+          ]
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Raccoon_City_Police_Station"
+    },
+    {
+      "id": "raccoon-city-police-station-east-wing",
+      "name": "Raccoon City Police Station East Wing",
+      "aliases": [],
+      "realm": {
+        "id": "raccoon-city",
+        "name": "Raccoon City"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ecl_Eclipselevel01.png/320px-IconMap_Ecl_Eclipselevel01.png?e8974c"
+      },
+      "offering": {
+        "name": "RPD Badge",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_rpdBadge.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": null,
+            "squareMeters": null
+          },
+          "outline": null,
+          "levels": [
+            {
+              "name": "LowerFloor",
+              "size": {
+                "tiles": null,
+                "squareMeters": null
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/RaccoonCityPoliceStationEastWingOutline_LowerFloor.png/200px-RaccoonCityPoliceStationEastWingOutline_LowerFloor.png?aab62e"
+            },
+            {
+              "name": "UpperFloor",
+              "size": {
+                "tiles": null,
+                "squareMeters": null
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/RaccoonCityPoliceStationEastWingOutline_UpperFloor.png/200px-RaccoonCityPoliceStationEastWingOutline_UpperFloor.png?23701a"
+            }
+          ]
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Raccoon_City_Police_Station_East_Wing"
+    },
+    {
+      "id": "raccoon-city-police-station-west-wing",
+      "name": "Raccoon City Police Station West Wing",
+      "aliases": [],
+      "realm": {
+        "id": "raccoon-city",
+        "name": "Raccoon City"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ecl_Orionlevel01.png/320px-IconMap_Ecl_Orionlevel01.png?ae3bec"
+      },
+      "offering": {
+        "name": "RPD Badge",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_rpdBadge.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": null,
+            "squareMeters": null
+          },
+          "outline": null,
+          "levels": [
+            {
+              "name": "LowerFloor",
+              "size": {
+                "tiles": null,
+                "squareMeters": null
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/RaccoonCityPoliceStationWestWingOutline_LowerFloor.png/200px-RaccoonCityPoliceStationWestWingOutline_LowerFloor.png?3bfa42"
+            },
+            {
+              "name": "UpperFloor",
+              "size": {
+                "tiles": null,
+                "squareMeters": null
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/RaccoonCityPoliceStationWestWingOutline_UpperFloor.png/200px-RaccoonCityPoliceStationWestWingOutline_UpperFloor.png?f112e0"
+            }
+          ]
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Raccoon_City_Police_Station_West_Wing"
+    },
+    {
+      "id": "eyrie-of-crows",
+      "name": "Eyrie of Crows",
+      "aliases": [],
+      "realm": {
+        "id": "forsaken-boneyard",
+        "name": "Forsaken Boneyard"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ion_Ionlevel01.png/320px-IconMap_Ion_Ionlevel01.png?b48bf3"
+      },
+      "offering": {
+        "name": "Crow's Eye",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_crowsEye.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 148,
+            "squareMeters": 9472
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/EyrieOfCrowsOutline.png/200px-EyrieOfCrowsOutline.png?cb3833",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Eyrie_of_Crows"
+    },
+    {
+      "id": "dead-sands",
+      "name": "Dead Sands",
+      "aliases": [],
+      "realm": {
+        "id": "forsaken-boneyard",
+        "name": "Forsaken Boneyard"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Ice_Level01.png/320px-IconMap_Ice_Level01.png?c0c476"
+      },
+      "offering": {
+        "name": "Crow's Eye",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_crowsEye.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 140,
+            "squareMeters": 8960
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/DeadSandsOutline.png/200px-DeadSandsOutline.png?d2bf0f",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Dead_Sands"
+    },
+    {
+      "id": "garden-of-joy",
+      "name": "Garden of Joy",
+      "aliases": [],
+      "realm": {
+        "id": "withered-isle",
+        "name": "Withered Isle"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Meteor_Meteorlevel01.png/320px-IconMap_Meteor_Meteorlevel01.png?e27eaa"
+      },
+      "offering": {
+        "name": "Ichorous Loam",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_ichorousLoam.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 164,
+            "squareMeters": 10496
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/GardenOfJoyOutline.png/200px-GardenOfJoyOutline.png?99bc2a",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Garden_of_Joy"
+    },
+    {
+      "id": "greenville-square",
+      "name": "Greenville Square",
+      "aliases": [],
+      "realm": {
+        "id": "withered-isle",
+        "name": "Withered Isle"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Meteor_Applepielevel01.png/320px-IconMap_Meteor_Applepielevel01.png?efbe83"
+      },
+      "offering": {
+        "name": "Ichorous Loam",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_ichorousLoam.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 160,
+            "squareMeters": 10240
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/GreenvilleSquareOutline.png/200px-GreenvilleSquareOutline.png?2496df",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Greenville_Square"
+    },
+    {
+      "id": "freddy-fazbears-pizza",
+      "name": "Freddy Fazbear's Pizza",
+      "aliases": [],
+      "realm": {
+        "id": "withered-isle",
+        "name": "Withered Isle"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Meteor_Applepielevel02.png/320px-IconMap_Meteor_Applepielevel02.png?9c3c1a"
+      },
+      "offering": {
+        "name": "Ichorous Loam",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_ichorousLoam.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 148,
+            "squareMeters": 9472
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FreddyFazbearsPizzaOutline.png/200px-FreddyFazbearsPizzaOutline.png?6ed7e4",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Freddy_Fazbear%27s_Pizza"
+    },
+    {
+      "id": "fallen-refuge",
+      "name": "Fallen Refuge",
+      "aliases": [],
+      "realm": {
+        "id": "withered-isle",
+        "name": "Withered Isle"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Meteor_Applepielevel03.png/320px-IconMap_Meteor_Applepielevel03.png?268247"
+      },
+      "offering": {
+        "name": "Ichorous Loam",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_ichorousLoam.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 128,
+            "squareMeters": 8192
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/FallenRefugeOutline.png/200px-FallenRefugeOutline.png?f3aa4a",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Fallen_Refuge"
+    },
+    {
+      "id": "the-shattered-square",
+      "name": "The Shattered Square",
+      "aliases": [],
+      "realm": {
+        "id": "the-decimated-borgo",
+        "name": "The Decimated Borgo"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Qtm_Quantumlevel01.png/320px-IconMap_Qtm_Quantumlevel01.png?2b6b5b"
+      },
+      "offering": {
+        "name": "Beef Tallow Mixture",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_beefTallowMixture.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 144,
+            "squareMeters": 9216
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TheShatteredSquareOutline.png/200px-TheShatteredSquareOutline.png?c4282b",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/The_Shattered_Square"
+    },
+    {
+      "id": "forgotten-ruins",
+      "name": "Forgotten Ruins",
+      "aliases": [],
+      "realm": {
+        "id": "the-decimated-borgo",
+        "name": "The Decimated Borgo"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Qtm_Churroslevel01.png/320px-IconMap_Qtm_Churroslevel01.png?aca637"
+      },
+      "offering": {
+        "name": "Beef Tallow Mixture",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_beefTallowMixture.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 132,
+            "squareMeters": 8448
+          },
+          "outline": null,
+          "levels": [
+            {
+              "name": "Surface",
+              "size": {
+                "tiles": 92,
+                "squareMeters": 5888
+              },
+              "outline": "https://deadbydaylight.wiki.gg/images/thumb/ForgottenRuinsOutline_Surface.png/200px-ForgottenRuinsOutline_Surface.png?de415c"
+            },
+            {
+              "name": "Dungeon",
+              "size": {
+                "tiles": 40,
+                "squareMeters": 2560
+              },
+              "outline": null
+            }
+          ]
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Forgotten_Ruins"
+    },
+    {
+      "id": "toba-landing",
+      "name": "Toba Landing",
+      "aliases": [],
+      "realm": {
+        "id": "dvarka-deepwood",
+        "name": "Dvarka Deepwood"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Uba_Umbralevel01.png/320px-IconMap_Uba_Umbralevel01.png?5f67b2"
+      },
+      "offering": {
+        "name": "Alien Flora",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_alienFlora.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 136,
+            "squareMeters": 8704
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/TobaLandingOutline.png/200px-TobaLandingOutline.png?c9c18f",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Toba_Landing"
+    },
+    {
+      "id": "nostromo-wreckage",
+      "name": "Nostromo Wreckage",
+      "aliases": [],
+      "realm": {
+        "id": "dvarka-deepwood",
+        "name": "Dvarka Deepwood"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_Uba_Wormholelevel01.png/320px-IconMap_Uba_Wormholelevel01.png?e13d8b"
+      },
+      "offering": {
+        "name": "Airlock Doors",
+        "image": "https://deadbydaylight.wiki.gg/images/IconFavors_airlockDoors.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": 152,
+            "squareMeters": 9728
+          },
+          "outline": "https://deadbydaylight.wiki.gg/images/thumb/NostromoWreckageOutline.png/200px-NostromoWreckageOutline.png?3206bd",
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Nostromo_Wreckage"
+    },
+    {
+      "id": "tricksters-delusion",
+      "name": "Trickster's Delusion",
+      "aliases": [],
+      "realm": {
+        "id": "sleepless-district",
+        "name": "Sleepless District"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/IconMap_QuiLevel01.png/320px-IconMap_QuiLevel01.png?c22b21"
+      },
+      "offering": {
+        "name": "VIP Wristband",
+        "image": "https://deadbydaylight.wiki.gg/images/IconsFavors_vipWristband.png"
+      },
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": null,
+            "squareMeters": null
+          },
+          "outline": null,
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Trickster%27s_Delusion"
+    },
+    {
+      "id": "hartshorne-mall",
+      "name": "Hartshorne Mall",
+      "aliases": [],
+      "realm": {
+        "id": "the-subdivisions",
+        "name": "The Subdivisions"
+      },
+      "tags": [],
+      "images": {
+        "preview": "https://deadbydaylight.wiki.gg/images/thumb/T_UI_iconMap_Lm_Liminal.png/320px-T_UI_iconMap_Lm_Liminal.png?54d9c0"
+      },
+      "offering": null,
+      "versions": {
+        "standard": {
+          "size": {
+            "tiles": null,
+            "squareMeters": null
+          },
+          "outline": null,
+          "levels": []
+        },
+        "2v8": null
+      },
+      "source": "https://deadbydaylight.wiki.gg/wiki/Hartshorne_Mall"
+    }
+  ]
+}

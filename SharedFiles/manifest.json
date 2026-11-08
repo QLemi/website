@@ -17,6 +17,7 @@
     "chapters": "metadata/chapters.json",
     "events": "metadata/events.json",
     "categories": "metadata/categories.json",
-    "prestige": "metadata/prestige.json"
+    "prestige": "metadata/prestige.json",
+    "maps": "maps/maps.json"
   }
 }

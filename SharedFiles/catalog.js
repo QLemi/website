@@ -48,7 +48,7 @@
     }
     function rememberImages(value) {
       if (!value || typeof value !== 'object') return;
-      if (Object.hasOwn(value, 'image') && value.image) {
+      if (Object.hasOwn(value, 'image') && value.image && typeof value.image === 'object') {
         const record = value.image;
         if (record.url !== null && typeof record.url !== 'string') throw new Error('Invalid image definition.');
         if (!Array.isArray(record.alternatives) || record.alternatives.some(url => typeof url !== 'string')) throw new Error('Invalid image alternatives.');

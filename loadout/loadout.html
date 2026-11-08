@@ -7,13 +7,17 @@
   <link rel="stylesheet" href="style_loadout.css?v=shared-1">
 <link rel="stylesheet" href="../SharedFiles/navigation.css?v=dbd-nav-1">
 <script defer src="../SharedFiles/navigation.js?v=dbd-nav-1"></script>
+<link rel="stylesheet" href="../SharedFiles/page-readiness.css?v=1">
+<script defer src="../SharedFiles/page-readiness.js?v=2"></script>
 </head>
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "13025904a55346ff8201f3e4a9a4eb5e"}'></script>
 <body>
+<dialog id="page-readiness" class="page-readiness-dialog" aria-labelledby="page-readiness-title" aria-describedby="page-readiness-message"><h2 id="page-readiness-title">Uwaga</h2><p id="page-readiness-message">Ta strona może nie być jeszcze ukończona lub może być przestarzała.</p><button type="button">Rozumiem</button></dialog>
+
 
 
 <a class="dbd-site-skip" href="#dbd-main">Skip to content</a>
-<nav class="dbd-site-nav" aria-label="DBD tools"><div class="dbd-site-inner"><a class="dbd-site-home" href="../index.html"><span aria-hidden="true">←</span><span>All tools</span></a><div class="dbd-site-desktop"><a class="dbd-site-link" href="../streaki/streaki.html">Streaks</a><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><a class="dbd-site-link" href="../DBDKillersInfo/DBDKillersInfo.html">Builds &amp; Info</a><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><span class="dbd-site-link" aria-current="page">Loadout Checker</span></div><details class="dbd-site-menu"><summary aria-label="DBD pages: Loadout Checker"><span class="dbd-site-current">Loadout Checker</span><span class="dbd-site-chevron" aria-hidden="true"></span></summary><div class="dbd-site-mobile-links"><a class="dbd-site-link" href="../streaki/streaki.html">Streaks</a><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><a class="dbd-site-link" href="../DBDKillersInfo/DBDKillersInfo.html">Builds &amp; Info</a><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><span class="dbd-site-link" aria-current="page">Loadout Checker</span></div></details></div></nav>
+<nav class="dbd-site-nav" aria-label="DBD tools"><div class="dbd-site-inner"><a class="dbd-site-home" href="../index.html"><span aria-hidden="true">←</span><span>All tools</span></a><div class="dbd-site-desktop"><a class="dbd-site-link" href="../streaki/streaki.html">Streaks</a><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><a class="dbd-site-link" href="../klipy/index.html">Clips</a><a class="dbd-site-link" href="../DBDKillersInfo/DBDKillersInfo.html">Builds &amp; Info</a><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><span class="dbd-site-link" aria-current="page">Loadout Checker</span></div><details class="dbd-site-menu"><summary aria-label="DBD pages: Loadout Checker"><span class="dbd-site-current">Loadout Checker</span><span class="dbd-site-chevron" aria-hidden="true"></span></summary><div class="dbd-site-mobile-links"><a class="dbd-site-link" href="../streaki/streaki.html">Streaks</a><a class="dbd-site-link" href="../stats/stats.html">Account Stats</a><a class="dbd-site-link" href="../prestige-planner/index.html">Prestige Planner</a><a class="dbd-site-link" href="../klipy/index.html">Clips</a><a class="dbd-site-link" href="../DBDKillersInfo/DBDKillersInfo.html">Builds &amp; Info</a><a class="dbd-site-link" href="../fortune-wheel/index.html">Randomizer</a><a class="dbd-site-link" href="../GraZgadnijKtoTo/GraZgadnijKtoTo.html">Guess Who</a><a class="dbd-site-link" href="../player-card-creator/index.html">Player Cards</a><span class="dbd-site-link" aria-current="page">Loadout Checker</span></div></details></div></nav>
 
 <main id="dbd-main" class="container">
     <h1>DBD Inventory Reader</h1>
@@ -31,11 +35,11 @@
       <div class="info-grid">
         <div class="info-card">
           <span>Killer</span>
-          <strong id="killerName">—</strong>
+          <strong id="killerName">-</strong>
         </div>
         <div class="info-card">
           <span>Ekwipunek</span>
-          <strong id="pageName">—</strong>
+          <strong id="pageName">-</strong>
         </div>
       </div>
 

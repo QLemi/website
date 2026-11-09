@@ -8,6 +8,9 @@
   const failures = {};
   let channelNames = {};
   const usingBackup = {};
+  const hasData = { twitch: false, youtube: false };
+  const loadingSource = { twitch: false, youtube: false };
+  const cacheKey = source => 'clips-sheet-cache-v1-' + source;
   let activeSource = 'twitch';
   let visible = [];
   let current = null;
@@ -84,7 +87,7 @@
           const table = response.table;
           const rows = [table.cols.map(c => c.label || '')];
           for (const row of table.rows || []) rows.push((row.c || []).map(cell => cell == null ? '' : String(cell.f ?? cell.v ?? '')));
-          finish(null, parseRows(rows, source));
+          finish(null, { ...parseRows(rows, source), rows });
         } catch (error) { finish(error); }
       };
       script.onerror = () => finish(new Error('Could not connect to the spreadsheet.'));
@@ -96,7 +99,7 @@
     });
   }
   function status() {
-    const lines = Object.keys(sources).filter(s => failures[s]).map(s => sources[s].label + ': ' + failures[s]);
+    const lines = Object.keys(sources).map(s => failures[s] ? sources[s].label + ': ' + failures[s] : loadingSource[s] && usingBackup[s] ? sources[s].label + ': Showing saved clips while checking for updates.' : '').filter(Boolean);
     elements.status.textContent = lines.join(' ');
   }
   function gameOptions() {
@@ -128,7 +131,7 @@
     elements.list.replaceChildren();
     const fragment = document.createDocumentFragment();
     visible.forEach(item => {
-      const row = document.createElement('div'); row.className = 'clip-row';
+      const row = document.createElement('div'); row.className = 'clip-row'; row.dataset.key = item.key;
       const button = document.createElement('button'); button.type = 'button'; button.className = 'clip-play';
       const selected = current?.key === item.key; row.classList.toggle('selected', selected); if (selected) button.setAttribute('aria-current', 'true');
       const icon = document.createElement('span'); icon.className = 'clip-icon'; icon.setAttribute('aria-hidden', 'true'); icon.textContent = '▷';
@@ -154,8 +157,17 @@
     });
     elements.list.append(fragment);
     elements.state.hidden = visible.length > 0;
-    elements.state.textContent = failures[activeSource] && !data[activeSource].length ? 'Could not load the data. Try refreshing.' : data[activeSource].length ? 'No results. Try changing the search or filters.' : 'No clips in this tab.';
+    elements.state.textContent = !hasData[activeSource] && loadingSource[activeSource] ? 'Loading clips…' : failures[activeSource] && !data[activeSource].length && !hasData[activeSource] ? 'Could not load the data. Try refreshing.' : data[activeSource].length ? 'No results. Try changing the search or filters.' : 'No clips in this tab.';
     elements.random.disabled = !visible.length;
+    updateControls();
+  }
+  function updateSelection() {
+    elements.list.querySelectorAll('.clip-row').forEach(row => {
+      const selected = row.dataset.key === current?.key;
+      row.classList.toggle('selected', selected);
+      const button = row.querySelector('.clip-play');
+      if (selected) button.setAttribute('aria-current', 'true'); else button.removeAttribute('aria-current');
+    });
     updateControls();
   }
   function updateControls() {
@@ -193,7 +205,7 @@
     }
     elements.player.dataset.source = item.source; elements.player.replaceChildren(frame, loading); elements.player.hidden = false; elements.empty.hidden = true;
     updateNowPlaying(item);
-    render();
+    updateSelection();
     if (matchMedia('(max-width: 1000px)').matches) document.querySelector('.player-shell').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function switchSource(source) {
@@ -202,38 +214,67 @@
     document.querySelectorAll('.source-tab').forEach(button => { const selected = button.dataset.source === source; button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected)); });
     $('author-wrap').hidden = source !== 'twitch'; gameOptions(); channelOptions(); render();
   }
-  async function load() {
-    const run = ++request; controller?.abort(); controller = new AbortController();
-    $('refresh').disabled = true; elements.status.textContent = 'Loading clips…';
-    const [results, channelResult] = await Promise.all([
-      Promise.allSettled(Object.keys(sources).map(s => fetchSource(s, controller.signal))),
-      fetch('kanaly.json', { signal: controller.signal }).then(response => response.ok ? response.json() : {}).catch(() => ({}))
-    ]);
-    channelNames = channelResult;
-    if (run !== request) return;
-    let backup = null;
-    if (results.some((result, i) => result.status === 'rejected' && !data[Object.keys(sources)[i]].length)) {
-      try { const response = await fetch('materialy-zapasowe.json', { signal: controller.signal }); if (response.ok) backup = await response.json(); } catch {}
-    }
-    if (run !== request) return;
-    Object.keys(sources).forEach((source, i) => {
-      const result = results[i];
-      if (result.status === 'fulfilled') { data[source] = result.value.result.map(item => ({ ...item, channel: item.channel || channelNames[item.key] || '' })); usingBackup[source] = false; failures[source] = result.value.skipped ? `Skipped ${result.value.skipped} invalid links.` : ''; }
-      else if (!data[source].length && backup?.[source]) {
-        try { data[source] = parseRows(backup[source], source).result; usingBackup[source] = true; } catch {}
-        failures[source] = data[source].length ? 'Could not connect to the spreadsheet. Showing a backup list that may be out of date.' : 'Could not load the data. Check access to the spreadsheet and try again.';
-      } else failures[source] = data[source].length ? (usingBackup[source] ? 'Could not connect to the spreadsheet. Showing a backup list that may be out of date.' : 'Could not refresh; showing previously loaded data.') : 'Could not load the data. Check access to the spreadsheet and try again.';
-      $('count-' + source).textContent = data[source].length;
-    });
-    if (current) { const updated = data[current.source].find(item => item.key === current.key); if (updated) { current = updated; updateNowPlaying(current); } }
-    $('refresh').disabled = false; status(); gameOptions(); channelOptions(); render();
-    if (pendingSharedClip) {
+  function updateSourceView(source) {
+    $('count-' + source).textContent = hasData[source] ? data[source].length : '—';
+    if (current?.source === source) { const updated = data[source].find(item => item.key === current.key); if (updated) { current = updated; updateNowPlaying(current); } }
+    status();
+    if (activeSource === source) { gameOptions(); channelOptions(); render(); }
+    if (pendingSharedClip?.source === source) {
       const shared = pendingSharedClip;
-      const item = data[shared.source].find(x => x.id === shared.id && (shared.source !== 'youtube' || (x.start || 0) === shared.start));
-      if (item) { switchSource(shared.source); play(item, true); }
-      else $('share-status').textContent = 'The shared clip was not found. Refresh to try again.';
+      const item = data[source].find(x => x.id === shared.id && (source !== 'youtube' || (x.start || 0) === shared.start));
+      if (item) { switchSource(source); play(item, true); }
+      else if (!loadingSource[source]) $('share-status').textContent = 'The shared clip was not found. Refresh to try again.';
     }
   }
+  function applySavedRows(source, rows) {
+    if (hasData[source]) return;
+    try { data[source] = parseRows(rows, source).result; hasData[source] = true; usingBackup[source] = true; updateSourceView(source); } catch {}
+  }
+  async function load() {
+    const run = ++request; controller?.abort(); controller = new AbortController();
+    const signal = controller.signal;
+    $('refresh').disabled = true;
+    for (const source of Object.keys(sources)) {
+      loadingSource[source] = true; failures[source] = '';
+      if (!hasData[source]) { try { const cached = JSON.parse(localStorage.getItem(cacheKey(source))); if (Array.isArray(cached)) applySavedRows(source, cached); } catch {} }
+    }
+    status(); render();
+    fetch('kanaly.json', { signal }).then(response => response.ok ? response.json() : {}).then(names => {
+      if (run !== request) return;
+      channelNames = names;
+      for (const source of Object.keys(sources)) {
+        data[source] = data[source].map(item => ({ ...item, channel: item.channel || channelNames[item.key] || '' }));
+        if (hasData[source]) updateSourceView(source);
+      }
+    }).catch(() => {});
+    fetch('materialy-zapasowe.json', { signal }).then(response => response.ok ? response.json() : null).then(backup => {
+      if (run !== request || !backup) return;
+      for (const source of Object.keys(sources)) {
+        if (Array.isArray(backup[source])) applySavedRows(source, backup[source]);
+        if (!loadingSource[source] && usingBackup[source]) { failures[source] = 'Could not connect to the spreadsheet. Showing a backup list that may be out of date.'; updateSourceView(source); }
+      }
+    }).catch(() => {});
+    await Promise.all(Object.keys(sources).map(async source => {
+      try {
+        const result = await fetchSource(source, signal);
+        if (run !== request) return;
+        data[source] = result.result.map(item => ({ ...item, channel: item.channel || channelNames[item.key] || '' }));
+        hasData[source] = true; usingBackup[source] = false;
+        failures[source] = result.skipped ? `Skipped ${result.skipped} invalid links.` : '';
+        try { localStorage.setItem(cacheKey(source), JSON.stringify(result.rows)); } catch {}
+      } catch {
+        if (run !== request) return;
+        failures[source] = hasData[source] ? (usingBackup[source] ? 'Could not connect to the spreadsheet. Showing a backup list that may be out of date.' : 'Could not refresh; showing previously loaded data.') : 'Could not load the data. Check access to the spreadsheet and try again.';
+      }
+      loadingSource[source] = false;
+      updateSourceView(source);
+    }));
+    if (run === request) $('refresh').disabled = false;
+  }
+  function updateConnectionWarning() { $('connection-warning').hidden = navigator.onLine !== false; }
+  window.addEventListener('online', updateConnectionWarning);
+  window.addEventListener('offline', updateConnectionWarning);
+  updateConnectionWarning();
   try { $('autoplay').checked = localStorage.getItem('clips-autoplay') === 'true'; } catch {}
   $('autoplay').addEventListener('change', () => { try { localStorage.setItem('clips-autoplay', String($('autoplay').checked)); } catch {} });
   document.querySelectorAll('.source-tab').forEach(button => button.addEventListener('click', () => switchSource(button.dataset.source)));
